@@ -58,10 +58,35 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\bootstrap-theme.css" />
+    <Content Include="assets\css\bootstrap-theme.min.css" />
+    <Content Include="assets\css\bootstrap.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\Site.css" />
+    <Content Include="assets\css\stylesheet-2016-02-23.css" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\js\bootstrap.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\npm.js" />
     <Content Include="Pages\Pickup\Customer.aspx" />
     <Content Include="Pages\Pickup\Customer.css" />
     <Content Include="Pages\Pickup\Customer02.aspx" />
     <Content Include="Pages\Pickup\Customer02.css" />
+    <Content Include="packages.config" />
+    <Content Include="assets\css\bootstrap-theme.css.map" />
+    <Content Include="assets\css\bootstrap-theme.min.css.map" />
+    <Content Include="assets\css\bootstrap.css.map" />
+    <Content Include="assets\css\bootstrap.min.css.map" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Scripts\jquery-3.1.0.intellisense.js" />
+    <Content Include="Pages\Pickup\Customer03.aspx" />
+    <Content Include="Scripts\jquery-3.1.0.js" />
+    <Content Include="Scripts\jquery-3.1.0.min.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -88,16 +113,31 @@
     <Compile Include="Pages\Pickup\Customer02.aspx.designer.cs">
       <DependentUpon>Customer02.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Pickup\Customer03.aspx.cs">
+      <DependentUpon>Customer03.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Pickup\Customer03.aspx.designer.cs">
+      <DependentUpon>Customer03.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Master.Master" />
+    <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Pages\Pickup\App_LocalResources\Customer.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

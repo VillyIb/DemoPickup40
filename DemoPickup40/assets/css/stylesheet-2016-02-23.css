@@ -1,0 +1,1025 @@
+/* Base CSS file 
+ * 1 - Resets
+ * 2 - Typography
+ * 3 - Tables
+ * 4 - Forms
+ * 5 - Layout
+ * 6 - Media queries
+ * 7 - JS Datepicker
+ */
+
+/* Defaults and resets */
+
+img {
+max-width: 100%; /* Prevent overflows */
+vertical-align: middle; /* Fix "descenders" gap */
+}
+
+/* Typography */
+body {
+font-size: 12px;
+}
+h1,
+h2,
+h3,
+h2 > span.h2,
+h4,
+h5 {
+font-weight: bold;
+}
+
+h1 {
+font-size: 225%;
+margin-top: 0;
+}
+h2,
+h2 > span.h2 {
+font-size: 162.5%;
+margin-top: 0;
+}
+h3 {
+font-size: 150%;
+padding: 15px 0 10px;
+}
+h4 {
+font-size: 118.75%;
+margin-top: 0;
+}
+h5 {
+font-size:112.5%;
+line-height: 1.4;
+}
+.section-title,
+.section-title > span {
+font-size: 112.5% !important;
+margin-top: 0;
+font-weight: bold;
+}
+h6 {
+font-size: 114.2857142857143%;
+line-height: 1.6;
+}
+
+p {
+font-size: 106.25%;
+line-height: 1.4;
+margin-bottom: 20px;
+}
+
+
+p a {
+text-decoration: underline;
+}
+
+ul {
+margin-bottom: 20px;
+}
+
+
+li {
+font-size: 90%;
+line-height: 1.4;
+}
+.form-area span.small {
+   font-size: 90%;
+}
+.big {
+	font-size:140%;
+}    
+
+
+
+/* Tables */
+
+table.table {
+margin-bottom: 30px;
+}
+
+.table-form {
+width: 100%;
+}
+.table-small {
+font-size: 92.30769230769231% !important;
+padding: 4px !important;
+}
+
+
+/* Style nested tables */
+.table.table-striped > tbody > tr > td > table,
+.table.table-striped > tbody > tr > td > table td {
+width: 100%;
+font-size: 100%;
+}
+
+.tablesorter th {
+cursor: pointer;
+}
+
+.tablesorter th.headerSortDown:after {
+content: " \2193"; /* Unicode down arrow */
+font-weight: 800;
+}
+.tablesorter th.headerSortUp:after {
+content: " \2191"; /* Unicode up arrow */
+font-weight: 800;
+}
+th.blank:after {
+content: "" !important;
+}
+
+/* Forms */
+
+.checkbox-label {
+font-weight: normal;
+cursor: pointer;
+display: block;
+padding-left: 18px;
+text-indent: -18px;
+line-height: 1.42857;
+font-size: 100% ;
+}
+
+.checkbox-label > span {
+line-height: 1.42857;
+font-size: 100% !important;
+}
+
+.checkbox-label > input {
+width: 13px; height: 13px;
+padding: 0;
+margin: 0 4px 0 1px;
+vertical-align: bottom;
+position: relative;
+top: -4px;
+*overflow: hidden;
+}
+
+input[type="checkbox"] {
+margin: 3px 3px 3px 3px;
+}
+
+
+input {
+border-radius: 0 !important;
+}
+
+.form-area {
+width: 100%;
+
+margin-bottom: 20px;
+}
+
+.form-area span {
+font-size: 100%;
+margin-left: 1px;
+}
+
+.form-area span.form-control {
+border-radius: 0;
+}
+
+.form-control {
+margin: 2px;
+padding: 2px;
+height: 26px;
+font-size: 100%;
+}
+
+select.form-control {
+padding: 4px 0;
+border-radius: 0;
+}
+
+
+input[type="file"].form-control {
+padding: 0;
+}
+
+
+
+
+/* Layout */
+
+.row {
+margin-left: 0;
+margin-right: 0;
+}
+.no-padding {
+padding: 0;
+}
+
+.collapse-top-margin {
+margin-top: 0 !important;
+}
+
+/* Override ajaxToolkit default style */
+.ajax__tab_header {
+height: 23px !important;
+}
+.ajax__tab_inner {
+line-height: 16px !important;
+}
+a.ajax__tab_tab {
+height: 23px !important;
+}
+.ajax__tab_tab > span {
+font-size: 100% !important;
+padding: 0 4px !important;
+}
+.ajax__tab_xp .ajax__tab_header {
+background-image: none !important;
+}
+
+
+
+.btn-inline {
+padding: 4px 0 5px !important;
+margin: 0 !important;
+line-height: 1 !important;
+}
+
+.form-button{
+width: 100% !important;
+font-size: 107.1428571428571% !important;
+}
+
+.form-toggle {
+float: right;
+padding-right: 0;
+margin-top: -2px;
+min-width: 160px;
+}
+
+.system-message {
+text-align: center;
+width: 100%;
+padding: 10px 0;
+margin-bottom: 20px;
+border-radius: 4px;
+}
+
+.line-space {
+width: 100%;
+margin-top: 50px;
+}
+
+.outline {
+padding: 8px 6px 5px 6px;
+border-radius: 2px;
+margin: 5px 5px 10px;
+}
+
+.truncate {
+height: 22px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.limit-line-length {
+width: 100%;
+max-width: 960px;
+}
+
+.scroll-box {
+max-height: 575px;
+overflow-y: scroll;
+}
+
+.padding {
+padding: 30px;
+}
+
+#logo,
+#main-menu {
+width: 100%;
+}
+
+#MainContent {
+padding: 10px 10px 0;
+}
+
+#UserMenu {
+float: right;
+width: 20%;
+padding: 0 0 15px 0;
+border-bottom-left-radius: 12px;
+margin: 0 0 20px 0;
+}
+
+#UserMenu .block {
+width: 100%;
+padding: 10px 0;
+font-size: 185.7142857142857%;
+font-weight: bold;
+text-align: center;
+margin-bottom: 10px;
+}
+#UserMenu  .form-control {
+margin: 0 3% 3%;
+width: 94%;
+}
+#UserMenu h3,
+#UserMenu p {
+margin: 0 10px;
+}
+
+.navbar-right {
+margin-right: -2px;
+}
+
+.menu-section {
+width: 100%;
+padding: 3px 10px;
+font-size: 112.5%;
+font-weight: bold;
+cursor: pointer;
+}
+.menu-link {
+width: 100%;
+padding: 4px 10px;
+}
+.menu-link a {
+font-size: 112.5%;
+}
+.menu-link a:hover {
+text-decoration: underline;
+}
+
+.btn-primary {
+text-transform: uppercase;
+font-weight: bold;
+background-image: none;
+background-color: #428bca;
+outline: 0;
+  -webkit-box-shadow: none;
+ box-shadow:none;
+  width: 99%
+}
+
+.btn-logout {
+border-radius: 4px !important;
+}
+
+.nav > li > a,
+.btn-logout {
+padding: 7px 12px 5px;
+margin-right: 2px;
+}
+
+/* Embedded Google Maps */
+.map-border {
+margin-bottom: 30px;
+width: 60%;
+max-width: 730px;
+overflow: hidden;
+}
+/* Center the map when it is 
+larger than its placeholder */
+.map-holder {
+display: inline-block;
+position: relative;
+right: -50%;
+}
+.map-embedded {
+width: 730px;
+max-width: 730px;
+height: 360px;
+position: relative;
+left: -50%;
+}
+
+/* Toggle the logo image based
+on the available screen width */
+.large-logo {
+display: none;
+}
+.medium-logo {
+display: block;
+
+}
+.small-logo {
+display: none;
+}
+
+.footer-box {
+padding-top: 10px;
+padding-bottom: 10px;
+}
+.footer-box:nth-child(4) {
+text-align: right;
+}
+.footer-box a {
+text-decoration: underline;
+}
+
+/* Multi-level dropdown menus */
+.dropdown-menu > li {	
+position:relative;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
+cursor:pointer;
+}
+
+.dropdown-menu .sub-menu {
+left: 100%;
+top: 0;
+position: absolute;
+display: none;
+margin-top: -1px;
+border-top-left-radius: 0;
+border-bottom-left-radius: 0;
+box-shadow: none;
+}
+.right-caret:after,
+.left-caret:after {
+content: "";
+border-bottom: 5px solid transparent;
+border-top: 5px solid transparent;
+display: inline-block;
+height: 0;
+vertical-align: middle;
+width: 0;
+margin-left: 5px;
+}
+
+.current-status {
+padding: 8px 0 6px;
+text-align: center;
+margin: 0 0 2px 0;
+font-size: 114.2857142857143%;
+}
+.current-status > span {
+font-size: 114.2857142857143%;
+}
+.tooltip-inner {
+width: 280px;
+max-width: 280px;
+}
+
+
+
+
+
+/* Target screens of 1600+ pixels */
+@media all and (min-width: 1600px) {
+
+	
+	.col-xl-1  {
+	width: 8.333333333333%;
+	margin-right: 0%;
+	}
+	.col-xl-2  {
+	width: 16%;
+	margin-right: 0%;
+	}
+	.col-xl-3  {
+	width: 24%;
+	margin-right: 0%;
+	}
+	.col-xl-4  {
+	width: 33.3333333%;
+	}
+	.col-xl-6  {
+	width: 48%;
+	xmargin-right: 2%;
+	}
+	.col-xl-8  {
+	width: 66.6666666%;
+	}
+
+	.clear-1600 {
+	clear: none;
+	}
+
+} /* 1600+ MQ ends */
+
+
+/* Target screens of 0-1000 pixels */
+@media all and (max-width: 1000px) {
+
+	body {
+		font-size: 11px;
+	}
+    .outline {
+	
+	border: solid 0 #FFF;
+	outline: solid 0 #FFF;
+	}
+
+	.footer-box,
+	.footer-box:nth-child(4) {
+	text-align: center;
+	}
+
+} /* 0-1000 MQ ends */
+
+/* Target screens of 0-800 pixels */
+@media all and (max-width: 800px) {
+
+	/* Remove outer gutters */
+	.container {
+	padding: 0;
+	}
+	
+	ul {
+	padding: 12px;
+	}
+
+	#logo {
+	border-top: solid 0 #FFF !important;
+	}
+
+	#footer-text {
+	border-bottom: solid 0 #FFF !important;
+	}
+
+	#UserMenu {
+	width: 100%;
+	border-radius: 0;
+	margin: 0;
+	}
+
+	#MainContent {
+	width: 100%;
+	padding: 25px 10px 15px;
+	}
+
+	.padding {
+	padding: 0;
+	}
+    
+	.nav.nav-pills {
+	float: left;
+	}
+	.navbar-right {
+	display: inline;
+	}
+	.menu-section {
+	padding: 8px 10px;
+	}
+	.menu-link {
+	padding: 5px 10px;
+	}
+
+	.map-border {
+	width: 100%;
+	}
+
+	.login-box,
+	.info-box {
+	width: 100%;
+	float: left;
+	}
+
+	.contact-box {
+	display: none;
+	}
+
+	#UserMenu .form-control {
+	margin: 0 2% 3%;
+	width: 96%;
+	}
+
+	.banner-bubble {
+	display: none;
+	}
+
+	/* Toggle the logo image based
+	on the available screen width */
+	.large-logo {
+	display: none;
+	}
+	.medium-logo {
+	display: none;
+	}
+	.small-logo {
+	display: block;
+	width: 100%;
+	}
+
+} /* 0-800 MQ ends */
+
+/* Target screens of 0-480 pixels */
+@media all and (max-width: 480px) {
+
+	body {
+		font-size:10px;
+	}
+
+	.br-480 {
+	display: block;
+	}
+
+	.login-box,
+	.info-box {
+	width: 100%;
+	}
+
+	.gtx-logo {
+	display: none;
+	}
+
+	
+
+	.col-xs-6,
+	.col-xs-4,
+	.col-xs-3 {
+	width: 100%;
+	}
+
+} /* 0-480 MQ ends */
+
+/* Datepicker for Bootstrap
+ * Copyright 2012 Stefan Petre
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+.datepicker {
+top: 0;
+left: 0;
+padding: 4px;
+margin-top: 1px;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+.datepicker:before {
+content: '';
+display: inline-block;
+border-left: 7px solid transparent;
+border-right: 7px solid transparent;
+border-bottom: 7px solid #CCC;
+border-bottom-color: rgba(0, 0, 0, 0.2);
+position: absolute;
+top: -7px;
+left: 6px;
+}
+.datepicker:after {
+content: '';
+display: inline-block;
+border-left: 6px solid transparent;
+border-right: 6px solid transparent;
+border-bottom: 6px solid #FFF;
+position: absolute;
+top: -6px;
+left: 7px;
+}
+.datepicker > div {
+display: none;
+}
+.datepicker table {
+width: 100%;
+margin: 0;
+}
+.datepicker td,
+.datepicker th {
+text-align: center;
+width: 20px;
+height: 20px;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+.datepicker td.day:hover {
+background: #EEE;
+cursor: pointer;
+}
+.datepicker td.day.disabled {
+color: #EEE;
+}
+.datepicker td.old,
+.datepicker td.new {
+color: #999;
+}
+
+.datepicker td span {
+display: block;
+width: 47px;
+height: 54px;
+line-height: 54px;
+float: left;
+margin: 2px;
+cursor: pointer;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+.datepicker td span:hover {
+background: #EEE;
+}
+
+.datepicker td span.old {
+color: #999;
+}
+.datepicker th.switch {
+width: 145px;
+}
+.datepicker th.next,
+.datepicker th.prev {
+font-size: 150%;
+}
+.datepicker thead tr:first-child th {
+cursor: pointer;
+}
+.datepicker thead tr:first-child th:hover {
+background: #EEE;
+}
+.input-append.date .add-on i,
+.input-prepend.date .add-on i {
+display: block;
+cursor: pointer;
+width: 16px;
+height: 16px;
+}
+
+.tab {
+	margin-top:0px;
+}
+.nav-tabs {
+	padding-left:5px;
+}
+
+
+table.collitb td {
+   vertical-align: top;
+  
+}
+
+.floatright{
+    float:right;
+}
+.floatleft{
+    float:left;
+    margin:4px;
+}
+.split-2  {
+	width:48%;
+	float:left;
+}
+
+/* front colors */
+.red{
+	color: #d9534f;
+}
+.green{
+	 color: #7B9151;
+}
+.yellow {
+    color: yellow;
+}
+.gray {
+    color: gray;
+}
+.blue {
+    color:blue;
+}
+
+
+/* background-colors*/
+.bg-red{
+    background-color: #d9534f;
+}
+.bg-green{
+	 background-color: #7B9151;
+}
+.bg-yellow {
+    background-color: yellow;
+}
+.bg-gray {
+    background-color: gray;
+}
+.bg-blue {
+    background-color: blue;
+}
+
+.brand-danger {
+	color:  #d9534f;
+}
+
+.fullwidth {
+	width:100%;
+}
+.label {
+	font-size: 100%;
+}
+
+span.big{
+	font-size: 160%;
+}
+.total{
+	padding-right: 3px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 3px;
+}
+tbody.trow td  {
+	padding-right:4px;
+
+}
+thead th{
+padding-left:4px;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+	padding-right: 8px;
+	padding-left: 8px;
+}
+.connect-left{
+	padding-left: 0px;
+}
+.connect-right{
+ 
+	padding-right: 0px;
+}
+
+
+
+.ui-autocomplete {
+	max-height: 150px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+	
+  }
+  /* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+  * html .ui-autocomplete {
+	height: 150px;
+  }
+	
+
+ 
+
+
+html, body, .container, .content {
+	height: 100%;
+}
+
+
+
+
+
+label.mark{
+	
+	padding-left: 6px;
+	margin-left: 3px;
+	padding-right: 6px;
+	height: 26px;
+	padding-top: 4px;
+	
+} 
+
+
+
+
+@media (min-width: 768px) {
+  .modal-xl {
+	width: 90%;
+   max-width:1200px;
+  }
+}
+
+
+.glyphicon-refresh-animate {
+	-animation: spin .7s infinite linear;
+	-webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+	from { -webkit-transform: rotate(0deg);}
+	to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+	from { transform: scale(1) rotate(0deg);}
+	to { transform: scale(1) rotate(360deg);}
+}
+.btn label{
+	margin-left:4px;
+}
+
+
+.clickable tbody tr:hover{
+    cursor:pointer;
+}
+
+.country select{
+       width: 86.66%;
+    display: inline;
+    margin-right: 0px;
+}
+.country input{
+       width: 10%;
+    display: inline;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+table.table-form td {
+    padding: 4px;
+}
+.locked{
+    display:none;
+}
+
+.row-height {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+}
+
+.insite_full_height {
+ height: 100%;
+ 
+}
+
+input.form-control.icon{
+    width:90%;
+}
+
+span.icon{
+    float:left;margin-right:6px;
+}
+.btn.btn-primary.notActiv {
+    background-color: lightgray;
+}
+
+.focus{
+  outline: thin dotted;
+  outline: 4px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+a.activate:focus,a.activate:focus label, label.focus{
+
+  color: #0094ff;
+  outline: none;
+ 
+}
+table > tbody > tr > td.disabled {
+    background-color: #DEDEDE;
+}
+
+.uploadlabel{
+    margin-left:6px;
+}
+div.jtable-main-container table.jtable tbody > tr > td .jtable-delete-command-button{
+   background-image: none;
+}
+div.jtable-main-container table.jtable tbody > tr > td .jtable-delete-command-button:before {
+    
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 200%;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color:red;
+    content: "\e088";
+    margin-right:20px;
+
+}
+span.warning {
+    color: red;
+}
+
+/* puts a red border around text boxes */
+input[type=text].warning {
+    border: 2px red solid;
+}
+
+
+/* Layout */
+
+.hidden {
+    display: none;
+}
+
+.right {
+    text-align: right;
+}
+.center{
+     text-align: center;
+}
+
+table.widegroup {
+    width: 100%;
+}
+
+.HeadlineOverlayText {
+    float: right;
+    padding-right: 5px;
+    padding-top: 7px;
+}
+
+.modal-content{
+    z-index:1050;
+}
+.modal-header{
+    height:60px;
+}
