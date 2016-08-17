@@ -209,4 +209,7 @@
   <data name="XtStatusCode_Undefined.TextIcon" xml:space="preserve">
     <value>Request pickup</value>
   </data>
+  <data name="XuImpShipments.Text" xml:space="preserve">
+    <value>Import selected shipments</value>
+  </data>
 </root>

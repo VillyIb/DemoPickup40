@@ -27,9 +27,8 @@
                 runat="server"
                 AutoGenerateColumns="False"
                 ShowHeaderWhenEmpty="True"
-                CssClass="FirstGrid" 
-                OnRowCommand="Xu001_RowCommand"
-                >
+                CssClass="FirstGrid"
+                OnRowCommand="Xu001_RowCommand">
 
                 <HeaderStyle CssClass="HeaderStyleLevel1" />
                 <RowStyle CssClass="RowStyleLevel1" />
@@ -40,7 +39,7 @@
                 <Columns>
 
                     <%--Column #0--%>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="Expand">
 
                         <HeaderTemplate>
                             <asp:Label ID="Xu002" runat="server" Text="&nbsp;" />
@@ -55,7 +54,7 @@
 
 
                     <%--Column #1--%>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="Address">
 
                         <HeaderTemplate>
                             <asp:Label ID="Xu0011" runat="server" Text="Address" />
@@ -69,7 +68,7 @@
 
 
                     <%--Column #2--%>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="Pickup">
 
                         <HeaderTemplate>
                             <asp:Label ID="Xu0021" runat="server" Text="Pickup" />
@@ -83,7 +82,7 @@
 
 
                     <%--Column #3--%>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="Note">
 
                         <HeaderTemplate>
                             <asp:Label ID="Xu0031" runat="server" Text="Note" />
@@ -97,7 +96,7 @@
 
 
                     <%--Column #4 'Status'--%>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="Status">
 
                         <HeaderTemplate>
                             <asp:Label ID="Xu0041" runat="server" Text="Status" />
@@ -113,26 +112,22 @@
                                 ID="Label2"
                                 runat="server"
                                 Text='<%# GetLocalResourceObject(Eval("StatusCodeLocalizeKey") + ".Text") %>' />
-                            <asp:HyperLink 
-                                ID="HyperLink1" 
-                                NavigateUrl= '<%# "Customer.aspx?PickupId="+ Eval("PickupId") + "&Operation=" + Eval("ActionCode") %>'
-                                runat="server">
 
-                                <i title='<%# GetLocalResourceObject(Eval("StatusCodeLocalizeKey") + ".TextIcon") %>' class='<%# "glyphicon glyphicon-" + GetLocalResourceObject(Eval("StatusCodeLocalizeKey") + ".GlyphIcon") + " big" %>'></i>
-                            </asp:HyperLink>
+                            <asp:LinkButton ID="LinkButton12" runat="server" CausesValidation="false" CommandName="XcCmd01" CommandArgument='<%# Eval("StatusCodeText") + "." + Eval("PickupId") %>' Text='<%# GetLocalResourceObject(Eval("StatusCodeLocalizeKey") + ".TextIcon") %>'></asp:LinkButton>
+
                         </ItemTemplate>
 
                     </asp:TemplateField>
 
 
-                    <%--Column #5 Action  --%><asp:TemplateField>
+                    <%--Column #5 Action  --%><asp:TemplateField HeaderText="Move">
 
                         <HeaderTemplate>
                             <asp:Label ID="Xu0051" runat="server" Text="Action" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <i title="Importer markerede forsendelser" class='<%# "glyphicon glyphicon-" + Eval("ActionCodeGlyphIcon") + " big" %>'></i>
+                            <asp:LinkButton ID="LinkButton13" ToolTip="TT" CommandArgument='<%# Eval("PickupId") %>'  runat="server" CausesValidation="false" CommandName="XcCmd02" Text='<%# GetLocalResourceObject("XuImpShipments.Text") %>   '></asp:LinkButton>
                         </ItemTemplate>
 
 
@@ -155,96 +150,61 @@
 
                     <%--Column #N--%>
                     <asp:TemplateField>
-
                         <HeaderTemplate>
-                            <asp:Label ID="Xu0091" runat="server" Text="&nbsp" />
+                            <asp:Label ID="Xu0091" runat="server" Text="&nbsp;" />
                         </HeaderTemplate>
-
                         <ItemTemplate>
-
                             <%--NOTE! this Column is mapped to a new row.--%>
-
                             <tr>
                                 <td colspan="100%">
-
-                                    <asp:GridView
-                                        ID="Xu100"
-                                        runat="server"
-                                        AutoGenerateColumns="False"
-                                        DataSource='<%# Bind("Shipmentlist") %>'>
-
+                                    <asp:GridView ID="Xu100" runat="server" AutoGenerateColumns="False" DataSource='<%# Bind("Shipmentlist") %>'>
                                         <HeaderStyle CssClass="HeaderStyleLevel2" />
                                         <RowStyle CssClass="RowStyleLevel2" />
-
                                         <Columns>
-
                                             <%--Column #0--%>
                                             <asp:TemplateField>
-
                                                 <HeaderTemplate>
                                                     <asp:Label ID="Xu00A1" runat="server" Text="&nbsp;" />
                                                 </HeaderTemplate>
-
                                                 <ItemTemplate>
-                                                    <asp:Label ID="XuShipmentId" class="hidden" runat="server" text='<%# Eval("ShipmentId") %>'></asp:Label>
+                                                    <asp:HiddenField ID="XuShipmentId" runat="server"  Value='<%# Eval("ShipmentId") %>'></asp:HiddenField>
                                                     <asp:CheckBox ID="XuSelected" runat="server" />
                                                 </ItemTemplate>
-
                                             </asp:TemplateField>
-
                                             <%--Column #1--%>
                                             <asp:TemplateField>
-
                                                 <HeaderTemplate>
                                                     <asp:Label ID="Xu102" runat="server" Text="Waybillnumber" />
                                                 </HeaderTemplate>
-
                                                 <ItemTemplate>
                                                     <asp:Label ID="Xu104" runat="server" Text='<%# Bind("Waybillnumber") %>' />
                                                 </ItemTemplate>
-
                                             </asp:TemplateField>
-
-
                                             <%--Column #2--%>
                                             <asp:TemplateField>
-
                                                 <HeaderTemplate>
                                                     <asp:Label ID="Xu1022" runat="server" Text="Weight" />
                                                 </HeaderTemplate>
-
                                                 <ItemTemplate>
                                                     <asp:Label ID="Xu1023" runat="server" Text='<%# Bind("Weight") %>' />
                                                 </ItemTemplate>
-
                                             </asp:TemplateField>
-
-
                                             <%--Column #2--%>
                                             <asp:TemplateField>
-
                                                 <HeaderTemplate>
                                                     <asp:Label ID="Xu1031" runat="server" Text="Dimensions" />
                                                 </HeaderTemplate>
-
                                                 <ItemTemplate>
                                                     <asp:Label ID="Xu1032" runat="server" Text='<%# Bind("Dimensions") %>' />
                                                 </ItemTemplate>
-
                                             </asp:TemplateField>
-
                                         </Columns>
-
                                     </asp:GridView>
                                 </td>
                             </tr>
-
                         </ItemTemplate>
-
-                        <ItemStyle CssClass="hidden" />
                         <HeaderStyle CssClass="hidden" />
-
-
+                        <ItemStyle CssClass="hidden" />
                     </asp:TemplateField>
 
                 </Columns>

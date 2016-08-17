@@ -39,7 +39,7 @@ namespace DemoPickup40.Pages.Pickup
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!(IsCallback))
+            if (!(IsPostBack))
             {
                 if (ClientQueryString.Contains("PickupId"))
                 {
@@ -186,6 +186,50 @@ namespace DemoPickup40.Pages.Pickup
 
         }
 
+
+
+        /// <summary>
+        /// Cmd01: Operate on status of Customer Pickup
+        /// </summary>
+        private void XcCmd01(string commandArgument)
+        {
+            // Expected CommandArgument Syntax: {StatusCode}{.}{CustomerPickupId}
+
+        }
+
+
+        private List<Control> FindSubControl(Control top, string id)
+        {
+            var result = new List<Control>();
+
+            if (top.ID != null && top.ID.IndexOf(id, StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                result.Add(top);
+            }
+
+            foreach (Control control in top.Controls)
+            {
+                result.AddRange(FindSubControl(control, id));
+            }
+
+            return result;
+            
+        }
+     
+
+
+        private void XcCmd02(string commandArgument, GridView source)
+        {
+            // Expected CommandArgument Syntax: {CustomerPickupId}
+
+            // scan for rows wher checkbox are selected.
+
+            var rowCheckboxList = FindSubControl(Xu001, "XuSelected");
+
+            var t1 = rowCheckboxList;
+        }
+
+
         protected void Xu001_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             var Argument = e.CommandArgument;
@@ -193,11 +237,32 @@ namespace DemoPickup40.Pages.Pickup
             var source = e.CommandSource;
 
 
-            int index = Convert.ToInt32(e.CommandArgument);
+            switch (e.CommandName)
+            {
+                case "XcCmd01":
+                {
+                    XcCmd01(e.CommandArgument as string);
+                }
+                    break;
 
-            GridViewRow row = Xu001.Rows[index];
+                case "XcCmd02":
+                {
+                    XcCmd02(e.CommandArgument as string, sender as GridView);
+                }
+                    break;
 
-            var dd = row.Cells[0];
+                default:
+                    break;
+            }
+
+
+
+
+            //int index = Convert.ToInt32(e.CommandArgument);
+
+            //GridViewRow row = Xu001.Rows[index];
+
+            //var dd = row.Cells[0];
 
             //long BacthId = Int32.Parse(dd.Text);
 
