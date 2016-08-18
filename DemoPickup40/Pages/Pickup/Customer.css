@@ -1,16 +1,44 @@
 ﻿body {
 }
 
-.RowStyleLevel1
-{
+.RowStyleLevel1 {
     /*display:none;*/
 }
 
-.RowStyleLevel2
-{
+.RowStyleLevel2 {
     /*display: none;*/
 }
 
-.HeaderStyleLevel2{
+.HeaderStyleLevel2 {
     display: /*none*/;
+}
+
+.XuMove {
+    width: 50px;
+}
+
+/*ROWS*/
+
+.XuShipmentDetails {
+    width: 100%;
+}
+
+.XuShipmentDetailsRow {
+    width: 100%;
+}
+
+.XuWaybillnumber {
+    width: auto;
+}
+
+.XuWeight {
+    width:10%
+}
+
+.XuDimension {
+    width:20%;    
+}
+
+.XuSelect {
+    width: 50px;
 }

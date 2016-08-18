@@ -31,12 +31,12 @@ namespace DemoPickup40.Pages.Pickup {
         protected global::System.Web.UI.UpdatePanel XuUpdatePanel1;
         
         /// <summary>
-        /// Xu001 control.
+        /// XuCustomerPickup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView Xu001;
+        protected global::System.Web.UI.WebControls.GridView XuCustomerPickup;
     }
 }

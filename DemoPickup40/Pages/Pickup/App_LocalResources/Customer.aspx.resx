@@ -117,133 +117,185 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="XuImpShipments.Text" xml:space="preserve">
-    <value>Import selected shipments</value>
+  <data name="XuAddressHeader.Text" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="XuDimensionHead.Text" xml:space="preserve">
+    <value>Dimension</value>
   </data>
   <data name="XuMove-Icon_StatusCode-CustCan.Glyphicon" xml:space="preserve">
     <value>glyphicon-download-alt</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuMove-Icon_StatusCode-CustCan.ToolTip" xml:space="preserve">
     <value>Move selected Shipments</value>
   </data>
   <data name="XuMove-Icon_StatusCode-CustHand.Glyphicon" xml:space="preserve">
     <value>glyphicon-download-alt</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuMove-Icon_StatusCode-CustHand.ToolTip" xml:space="preserve">
     <value>Move selected Shipments</value>
   </data>
   <data name="XuMove-Icon_StatusCode-CustWait.Glyphicon" xml:space="preserve">
     <value>glyphicon-download-alt</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuMove-Icon_StatusCode-CustWait.ToolTip" xml:space="preserve">
     <value>Move selected Shipments</value>
   </data>
   <data name="XuMove-Icon_StatusCode-ForwSched.Glyphicon" xml:space="preserve">
     <value>glyphicon-none</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuMove-Icon_StatusCode-ForwSched.ToolTip" xml:space="preserve">
     <value>Locked</value>
   </data>
   <data name="XuMove-Icon_StatusCode-ForwWait.Glyphicon" xml:space="preserve">
     <value>glyphicon-download-alt</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuMove-Icon_StatusCode-ForwWait.ToolTip" xml:space="preserve">
     <value>Move selected Shipments</value>
   </data>
   <data name="XuMove-Icon_StatusCode-Undefined.Glyphicon" xml:space="preserve">
     <value>glyphicon-question-sign</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuMove-Icon_StatusCode-Undefined.ToolTip" xml:space="preserve">
     <value>None</value>
   </data>
+  <data name="XuMoveHeader.Text" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="XuMoveItem.ToolTip" xml:space="preserve">
+    <value>Import selected shipments</value>
+  </data>
+  <data name="XuNoteHeader.Text" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="XuPickupHeader.Text" xml:space="preserve">
+    <value>Pickup</value>
+  </data>
   <data name="XuSelected-Icon_StatusCode-CustCan.Enabled" xml:space="preserve">
     <value />
+    <comment>Do not localize</comment>
   </data>
   <data name="XuSelected-Icon_StatusCode-CustHand.Enabled" xml:space="preserve">
     <value />
+    <comment>Do not localize</comment>
   </data>
   <data name="XuSelected-Icon_StatusCode-CustWait.Enabled" xml:space="preserve">
     <value />
+    <comment>Do not localize</comment>
   </data>
   <data name="XuSelected-Icon_StatusCode-ForwSched.Enabled" xml:space="preserve">
     <value>disabled</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuSelected-Icon_StatusCode-ForwWait.Enabled" xml:space="preserve">
     <value />
+    <comment>Do not localize</comment>
   </data>
   <data name="XuSelected-Icon_StatusCode-Undefined.Enabled" xml:space="preserve">
     <value>disabled</value>
+    <comment>Do not localize</comment>
+  </data>
+  <data name="XuSelectHeader.Text" xml:space="preserve">
+    <value>&amp;nbsp;</value>
+    <comment>Leave blank</comment>
   </data>
   <data name="XuStatus-Icon_StatusCode-CustCan.Glyphicon" xml:space="preserve">
     <value>glyphicon-send gray</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Icon_StatusCode-CustCan.ToolTip" xml:space="preserve">
     <value>Send</value>
   </data>
   <data name="XuStatus-Icon_StatusCode-CustHand.Glyphicon" xml:space="preserve">
     <value>glyphicon-send gray</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Icon_StatusCode-CustHand.ToolTip" xml:space="preserve">
     <value>Send</value>
   </data>
   <data name="XuStatus-Icon_StatusCode-CustWait.Glyphicon" xml:space="preserve">
     <value>glyphicon-send gray</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Icon_StatusCode-CustWait.ToolTip" xml:space="preserve">
     <value>Send</value>
   </data>
   <data name="XuStatus-Icon_StatusCode-ForwSched.Glyphicon" xml:space="preserve">
     <value>glyphicon-none</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Icon_StatusCode-ForwSched.ToolTip" xml:space="preserve">
     <value>Locked</value>
   </data>
   <data name="XuStatus-Icon_StatusCode-ForwWait.Glyphicon" xml:space="preserve">
     <value>glyphicon-remove red</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Icon_StatusCode-ForwWait.ToolTip" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="XuStatus-Icon_StatusCode-Undefined.Glyphicon" xml:space="preserve">
     <value>glyphicon-question-sign</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Icon_StatusCode-Undefined.ToolTip" xml:space="preserve">
     <value>None</value>
   </data>
   <data name="XuStatus-Text_StatusCode-CustCan.Color" xml:space="preserve">
     <value>gray</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Text_StatusCode-CustCan.Text" xml:space="preserve">
     <value>Cancelled</value>
   </data>
   <data name="XuStatus-Text_StatusCode-CustHand.Color" xml:space="preserve">
     <value>gray</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Text_StatusCode-CustHand.Text" xml:space="preserve">
     <value>No Pickup</value>
   </data>
   <data name="XuStatus-Text_StatusCode-CustWait.Color" xml:space="preserve">
     <value>yellow</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Text_StatusCode-CustWait.Text" xml:space="preserve">
     <value>Pending on Customer</value>
   </data>
   <data name="XuStatus-Text_StatusCode-ForwSched.Color" xml:space="preserve">
     <value>blue</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Text_StatusCode-ForwSched.Text" xml:space="preserve">
     <value>Scheduled by Forwarder</value>
   </data>
   <data name="XuStatus-Text_StatusCode-ForwWait.Color" xml:space="preserve">
     <value>green</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Text_StatusCode-ForwWait.Text" xml:space="preserve">
     <value>Pending on Forwarder</value>
   </data>
   <data name="XuStatus-Text_StatusCode-Undefined.Color" xml:space="preserve">
     <value>red</value>
+    <comment>Do not localize</comment>
   </data>
   <data name="XuStatus-Text_StatusCode-Undefined.Text" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="XuStatusHeader.Text" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="XuWaybillnumberHead.Text" xml:space="preserve">
+    <value>Waybill Number</value>
+  </data>
+  <data name="XuWeightHeader.Text" xml:space="preserve">
+    <value>Weight</value>
   </data>
 </root>

@@ -46,7 +46,7 @@ namespace DemoPickup40.Pages.Pickup
                 {
                     // parse sub-grid rows.
 
-                    var control = FindControl(Controls, "XuSelected");
+                    var control = FindControl(Controls, "XuSelectItem");
 
                 }
 
@@ -59,8 +59,8 @@ namespace DemoPickup40.Pages.Pickup
                         {
                             ActionCode = "Req",
                             ActionCodeGlyphIcon = "download-alt",
-                            Address = "Stavnsholt Gydevej 70",
-                            FullAddress = "Global Transport Xpress, Stavnsholt Gydevej 70, DK 3460 Birkerød",
+                            Address = "Stavnsholt Gydevej 71",
+                            FullAddress = "Global Transport Xpress, Stavnsholt Gydevej 71, DK 3460 Birkerød",
                             Pickup = "2016-08-12 from 12:10 to 14:50",
                             Note = "Henvendelse på den 'Gule gård'",
                             PickupId = 012,
@@ -99,8 +99,8 @@ namespace DemoPickup40.Pages.Pickup
                         {
                             ActionCode = "Req",
                             ActionCodeGlyphIcon = "download-alt",
-                            Address = "Stavnsholt Gydevej 70",
-                            FullAddress = "Global Transport Xpress, Stavnsholt Gydevej 70, DK 3460 Birkerød",
+                            Address = "Stavnsholt Gydevej 72",
+                            FullAddress = "Global Transport Xpress, Stavnsholt Gydevej 72, DK 3460 Birkerød",
                             Pickup = "2016-08-12 from 12:10 to 14:50",
                             Note = "Henvendelse på den 'Gule gård'",
                             PickupId = 123,
@@ -139,8 +139,8 @@ namespace DemoPickup40.Pages.Pickup
                         {
                             ActionCode = "Can",
                             ActionCodeGlyphIcon = "none",
-                            Address = "Stavnsholt Gydevej 70",
-                            FullAddress = "Global Transport Xpress, Stavnsholt Gydevej 70, DK 3460 Birkerød",
+                            Address = "Stavnsholt Gydevej 73",
+                            FullAddress = "Global Transport Xpress, Stavnsholt Gydevej 73, DK 3460 Birkerød",
                             Pickup = "2016-08-12 from 12:10 to 14:50",
                             Note = "Henvendelse på den 'Gule gård'",
                             PickupId = 234,
@@ -179,8 +179,8 @@ namespace DemoPickup40.Pages.Pickup
                         {
                             ActionCode = "Can",
                             ActionCodeGlyphIcon = "none",
-                            Address = "Stavnsholt Gydevej 70",
-                            FullAddress = "Global Transport Xpress, Stavnsholt Gydevej 70, DK 3460 Birkerød",
+                            Address = "Stavnsholt Gydevej 74",
+                            FullAddress = "Global Transport Xpress, Stavnsholt Gydevej 74, DK 3460 Birkerød",
                             Pickup = "2016-08-12 from 12:10 to 14:50",
                             Note = "Henvendelse på den 'Gule gård'",
                             PickupId = 235,
@@ -217,14 +217,18 @@ namespace DemoPickup40.Pages.Pickup
 
                     };
 
-                    //foreach (var row in XpPrimaryRowList)
-                    //{
-                    //    row.StatusCodeLocalizeKey = string.Format("{0:G}", row.StatusCodeText);
-                    //}
+                    foreach (var pickup in XpPrimaryRowList)
+                    {
+                        foreach (var shipment in pickup.Shipmentlist)
+                        {
+                            shipment.FullAddress = pickup.FullAddress;
+                            shipment.StatusCodeText = pickup.StatusCodeText;
+                        }
+                    }
 
                 }
-                Xu001.DataSource = XpPrimaryRowList;
-                Xu001.DataBind();
+                XuCustomerPickup.DataSource = XpPrimaryRowList;
+                XuCustomerPickup.DataBind();
             }
 
 
@@ -275,8 +279,16 @@ namespace DemoPickup40.Pages.Pickup
                 }
             }
 
-            Xu001.DataSource = XpPrimaryRowList;
-            Xu001.DataBind();
+            foreach (var pickup in XpPrimaryRowList)
+            {
+                foreach (var shipment in pickup.Shipmentlist)
+                {
+                    shipment.StatusCodeText = pickup.StatusCodeText;
+                }
+            }
+
+            XuCustomerPickup.DataSource = XpPrimaryRowList;
+            XuCustomerPickup.DataBind();
 
         }
 
@@ -307,7 +319,7 @@ namespace DemoPickup40.Pages.Pickup
 
             // scan for rows wher checkbox are selected.
 
-            var rowCheckboxList = FindSubControl(source, "XuSelected");
+            var rowCheckboxList = FindSubControl(source, "XuSelectItem");
 
             var t1 = rowCheckboxList;
 
@@ -347,13 +359,21 @@ namespace DemoPickup40.Pages.Pickup
                 }
             }
 
-            Xu001.DataSource = XpPrimaryRowList;
-            Xu001.DataBind();
+            foreach (var pickup in XpPrimaryRowList)
+            {
+                foreach (var shipment in pickup.Shipmentlist)
+                {
+                    shipment.StatusCodeText = pickup.StatusCodeText;
+                }
+            }
+
+            XuCustomerPickup.DataSource = XpPrimaryRowList;
+            XuCustomerPickup.DataBind();
 
         }
 
 
-        protected void Xu001_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void XuGridCustomerPickup_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             var Argument = e.CommandArgument;
             var name = e.CommandName;
@@ -487,6 +507,8 @@ namespace DemoPickup40.Pages.Pickup
         public int ShipmentId { get; set; }
 
         public string StatusCodeText { get; set; }
+
+        public string FullAddress { get; set; }
 
 
     }
