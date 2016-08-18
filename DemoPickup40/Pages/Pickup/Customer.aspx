@@ -111,27 +111,47 @@
                             <asp:Label
                                 ID="Label2"
                                 runat="server"
-                                Text='<%# GetLocalResourceObject(Eval("StatusCodeLocalizeKey") + ".Text") %>' />
+                                Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("StatusCodeText") + ".Text") %>' />
 
-                            <asp:LinkButton ID="LinkButton12" runat="server" CausesValidation="false" CommandName="XcCmd01" CommandArgument='<%# Eval("StatusCodeText") + "." + Eval("PickupId") %>' Text='<%# GetLocalResourceObject(Eval("StatusCodeLocalizeKey") + ".TextIcon") %>'></asp:LinkButton>
+                            <%--Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("StatusCodeText") + ".Text") %>'--%>
+                            <%--ToolTip='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("StatusCodeText") + ".ToolTip") %>'--%>
+
+                            <asp:LinkButton
+                                ID="LinkButton12"
+                                runat="server"
+                                CausesValidation="false"
+                                CommandName="XcCmd01"
+                                CommandArgument='<%# Eval("StatusCodeText") + "." + Eval("PickupId") %>'>
+                                <span 
+                                    class='<%# "glyphicon " + GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("StatusCodeText") + ".Glyphicon") %>' 
+                                    title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("StatusCodeText") + ".ToolTip") %>' 
+                                    />
+                            </asp:LinkButton>
 
                         </ItemTemplate>
 
                     </asp:TemplateField>
 
 
-                    <%--Column #5 Action  --%><asp:TemplateField HeaderText="Move">
+                    <%--Column #5 Action  --%>
+                    <asp:TemplateField HeaderText="Move">
 
                         <HeaderTemplate>
                             <asp:Label ID="Xu0051" runat="server" Text="Action" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:LinkButton ID="LinkButton13" ToolTip="TT" CommandArgument='<%# Eval("PickupId") %>'  runat="server" CausesValidation="false" CommandName="XcCmd02" Text='<%# GetLocalResourceObject("XuImpShipments.Text") %>   '></asp:LinkButton>
+                            <asp:LinkButton ID="LinkButton13" CommandArgument='<%# Eval("PickupId") %>' runat="server" CausesValidation="false" CommandName="XcCmd02" ToolTip='<%# GetLocalResourceObject("XuImpShipments.Text") %>   '>
+                                <span 
+                                    class='<%# "glyphicon " + GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("StatusCodeText") + ".Glyphicon") %>' 
+                                    title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("StatusCodeText") + ".ToolTip") %>' 
+                                    />
+                            </asp:LinkButton>
                         </ItemTemplate>
 
 
                     </asp:TemplateField>
+
 
 
                     <%--Column #6--%>
@@ -167,8 +187,7 @@
                                                     <asp:Label ID="Xu00A1" runat="server" Text="&nbsp;" />
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <asp:HiddenField ID="XuShipmentId" runat="server"  Value='<%# Eval("ShipmentId") %>'></asp:HiddenField>
-                                                    <asp:CheckBox ID="XuSelected" runat="server" />
+                                                    <input type="checkbox" runat="server" id="XuSelected" disabled='<%# "ForwSched".Equals( Eval("StatusCodeText")) %>' value='<%# Eval("ShipmentId") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <%--Column #1--%>
@@ -217,14 +236,6 @@
         </ContentTemplate>
 
     </asp:UpdatePanel>
-
-
-
-    <asp:Button ID="XuPickupStatus" runat="server" Text="Button" OnClick="XuPickupStatus_Click" />
-
-
-
-    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Pages/Pickup/Customer.aspx">HyperLink</asp:HyperLink>
 
 
 

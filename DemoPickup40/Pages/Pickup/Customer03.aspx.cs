@@ -86,10 +86,10 @@ namespace DemoPickup40.Pages.Pickup
             }
 
 
-            foreach (var row in XpPrimaryRowList)
-            {
-                row.StatusCodeLocalizeKey = string.Format("XtStatusCode_{0}", row.StatusCodeText);
-            }
+            //foreach (var row in XpPrimaryRowList)
+            //{
+            //    row.StatusCodeLocalizeKey = string.Format("{0:G}", row.StatusCodeText);
+            //}
 
             //Xu001.DataSource = XpPrimaryRowList;
             Xu001.DataBind();

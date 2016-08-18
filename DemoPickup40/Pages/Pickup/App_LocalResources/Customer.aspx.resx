@@ -117,99 +117,133 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="XtStatusCode_CustCan.Text" xml:space="preserve">
-    <value>Cancelled</value>
-  </data>
-  <data name="XtStatusCode_CustCan.Color" xml:space="preserve">
-    <value>Cancelled</value>
-  </data>
-  <data name="XtStatusCode_CustHand.Text" xml:space="preserve">
-    <value>No Pickp</value>
-  </data>
-  <data name="XtStatusCode_CustHand.Color" xml:space="preserve">
-    <value>gray</value>
-  </data>
-  <data name="XtStatusCode_CustWait.Text" xml:space="preserve">
-    <value>Pending on Customer</value>
-  </data>
-  <data name="XtStatusCode_CustWait.Color" xml:space="preserve">
-    <value>yellow</value>
-  </data>
-  <data name="XtStatusCode_ForwSched.Text" xml:space="preserve">
-    <value>Scheduled by Forwarder</value>
-  </data>
-  <data name="XtStatusCode_ForwSched.Color" xml:space="preserve">
-    <value>blue</value>
-  </data>
-  <data name="XtStatusCode_ForwWait.Text" xml:space="preserve">
-    <value>Pending on Forwarder</value>
-  </data>
-  <data name="XtStatusCode_ForwWait.Color" xml:space="preserve">
-    <value>green</value>
-  </data>
-  <data name="XtStatusCode_Undefined.Text" xml:space="preserve">
-    <value>StatusCode-Undefined</value>
-  </data>
-  <data name="XtStatusCode_Undefined.Color" xml:space="preserve">
-    <value>red</value>
-  </data>
-  <data name="XtStatusCode_CustCan" xml:space="preserve">
-    <value>CustCan</value>
-  </data>
-  <data name="XtStatusCode_CustHand" xml:space="preserve">
-    <value>CustHand</value>
-  </data>
-  <data name="XtStatusCode_CustWait" xml:space="preserve">
-    <value>CustWait</value>
-  </data>
-  <data name="XtStatusCode_ForwSched" xml:space="preserve">
-    <value>ForwSched</value>
-  </data>
-  <data name="XtStatusCode_ForwWait" xml:space="preserve">
-    <value>ForwWait</value>
-  </data>
-  <data name="XtStatusCode_Undefined.Glyphicon" xml:space="preserve">
-    <value>Undefined red</value>
-  </data>
-  <data name="XtStatusCode_CustCan.GlyphIcon" xml:space="preserve">
-    <value>send gray</value>
-  </data>
-  <data name="XtStatusCode_CustHand.GlyphIcon" xml:space="preserve">
-    <value>send gray</value>
-  </data>
-  <data name="XtStatusCode_CustWait.GlyphIcon" xml:space="preserve">
-    <value>send green</value>
-  </data>
-  <data name="XtStatusCode_ForwSched.GlyphIcon" xml:space="preserve">
-    <value>none</value>
-  </data>
-  <data name="XtStatusCode_ForwWait.GlyphIcon" xml:space="preserve">
-    <value>remove red</value>
-  </data>
-  <data name="XtStatusCode_Undefined..GlyphIcon" xml:space="preserve">
-    <value>send</value>
-  </data>
-  <data name="XtStatusCode_CustCan.TextIcon" xml:space="preserve">
-    <value>Request Pickup</value>
-  </data>
-  <data name="XtStatusCode_CustHand.TextIcon" xml:space="preserve">
-    <value>Request Pickup</value>
-  </data>
-  <data name="XtStatusCode_CustWait.TextIcon" xml:space="preserve">
-    <value>Request Pickup</value>
-  </data>
-  <data name="XtStatusCode_ForwSched.TextIcon" xml:space="preserve">
-    <value>Locked</value>
-    <comment>locked</comment>
-  </data>
-  <data name="XtStatusCode_ForwWait.TextIcon" xml:space="preserve">
-    <value>Cancel Pickup</value>
-    <comment>Cansel Pickup</comment>
-  </data>
-  <data name="XtStatusCode_Undefined.TextIcon" xml:space="preserve">
-    <value>Request pickup</value>
-  </data>
   <data name="XuImpShipments.Text" xml:space="preserve">
     <value>Import selected shipments</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-CustCan.Glyphicon" xml:space="preserve">
+    <value>glyphicon-download-alt</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-CustCan.ToolTip" xml:space="preserve">
+    <value>Move selected Shipments</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-CustHand.Glyphicon" xml:space="preserve">
+    <value>glyphicon-download-alt</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-CustHand.ToolTip" xml:space="preserve">
+    <value>Move selected Shipments</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-CustWait.Glyphicon" xml:space="preserve">
+    <value>glyphicon-download-alt</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-CustWait.ToolTip" xml:space="preserve">
+    <value>Move selected Shipments</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-ForwSched.Glyphicon" xml:space="preserve">
+    <value>glyphicon-none</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-ForwSched.ToolTip" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-ForwWait.Glyphicon" xml:space="preserve">
+    <value>glyphicon-download-alt</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-ForwWait.ToolTip" xml:space="preserve">
+    <value>Move selected Shipments</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-Undefined.Glyphicon" xml:space="preserve">
+    <value>glyphicon-question-sign</value>
+  </data>
+  <data name="XuMove-Icon_StatusCode-Undefined.ToolTip" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="XuSelected-Icon_StatusCode-CustCan.Enabled" xml:space="preserve">
+    <value />
+  </data>
+  <data name="XuSelected-Icon_StatusCode-CustHand.Enabled" xml:space="preserve">
+    <value />
+  </data>
+  <data name="XuSelected-Icon_StatusCode-CustWait.Enabled" xml:space="preserve">
+    <value />
+  </data>
+  <data name="XuSelected-Icon_StatusCode-ForwSched.Enabled" xml:space="preserve">
+    <value>disabled</value>
+  </data>
+  <data name="XuSelected-Icon_StatusCode-ForwWait.Enabled" xml:space="preserve">
+    <value />
+  </data>
+  <data name="XuSelected-Icon_StatusCode-Undefined.Enabled" xml:space="preserve">
+    <value>disabled</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-CustCan.Glyphicon" xml:space="preserve">
+    <value>glyphicon-send gray</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-CustCan.ToolTip" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-CustHand.Glyphicon" xml:space="preserve">
+    <value>glyphicon-send gray</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-CustHand.ToolTip" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-CustWait.Glyphicon" xml:space="preserve">
+    <value>glyphicon-send gray</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-CustWait.ToolTip" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-ForwSched.Glyphicon" xml:space="preserve">
+    <value>glyphicon-none</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-ForwSched.ToolTip" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-ForwWait.Glyphicon" xml:space="preserve">
+    <value>glyphicon-remove red</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-ForwWait.ToolTip" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-Undefined.Glyphicon" xml:space="preserve">
+    <value>glyphicon-question-sign</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-Undefined.ToolTip" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-CustCan.Color" xml:space="preserve">
+    <value>gray</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-CustCan.Text" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-CustHand.Color" xml:space="preserve">
+    <value>gray</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-CustHand.Text" xml:space="preserve">
+    <value>No Pickup</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-CustWait.Color" xml:space="preserve">
+    <value>yellow</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-CustWait.Text" xml:space="preserve">
+    <value>Pending on Customer</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-ForwSched.Color" xml:space="preserve">
+    <value>blue</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-ForwSched.Text" xml:space="preserve">
+    <value>Scheduled by Forwarder</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-ForwWait.Color" xml:space="preserve">
+    <value>green</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-ForwWait.Text" xml:space="preserve">
+    <value>Pending on Forwarder</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-Undefined.Color" xml:space="preserve">
+    <value>red</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-Undefined.Text" xml:space="preserve">
+    <value>Error</value>
   </data>
 </root>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace DemoPickup40.Pages.Pickup
@@ -62,6 +63,46 @@ namespace DemoPickup40.Pages.Pickup
                             FullAddress = "Global Transport Xpress, Stavnsholt Gydevej 70, DK 3460 Birkerød",
                             Pickup = "2016-08-12 from 12:10 to 14:50",
                             Note = "Henvendelse på den 'Gule gård'",
+                            PickupId = 012,
+                            StatusCodeText = "CustHand",
+                            RowNumber = 1,
+                            Shipmentlist = new List<GudData2>
+                            {
+                                new GudData2
+                                {
+                                    Dimensions = "50 x 37 x 22",
+                                    ShipmentId = 34576,
+                                    Waybillnumber = "901015378166987332598",
+                                    Weight = 0.5m,
+                                    StatusCodeText = "CustHand"
+                                },
+                                new GudData2
+                                {
+                                    Dimensions = "50 x 37 x 22",
+                                    ShipmentId = 34577,
+                                    Waybillnumber = "902015378166987332605",
+                                    Weight = 0.4m,
+                                    StatusCodeText = "CustHand"
+                                },
+                                new GudData2
+                                {
+                                    Dimensions = "50 x 37 x 22",
+                                    ShipmentId = 34578,
+                                    Waybillnumber = "903015378166987332618",
+                                    Weight = 0.3m,
+                                    StatusCodeText = "CustHand"
+                                }
+                            }
+                        },
+
+                        new GuiData1
+                        {
+                            ActionCode = "Req",
+                            ActionCodeGlyphIcon = "download-alt",
+                            Address = "Stavnsholt Gydevej 70",
+                            FullAddress = "Global Transport Xpress, Stavnsholt Gydevej 70, DK 3460 Birkerød",
+                            Pickup = "2016-08-12 from 12:10 to 14:50",
+                            Note = "Henvendelse på den 'Gule gård'",
                             PickupId = 123,
                             StatusCodeText = "CustWait",
                             RowNumber = 1,
@@ -71,22 +112,25 @@ namespace DemoPickup40.Pages.Pickup
                                 {
                                     Dimensions = "50 x 37 x 22",
                                     ShipmentId = 34567,
-                                    Waybillnumber = "920015378166987332598",
-                                    Weight = 0.5m
+                                    Waybillnumber = "911015378166987332598",
+                                    Weight = 0.5m,
+                                    StatusCodeText = "CustWait"
                                 },
                                 new GudData2
                                 {
                                     Dimensions = "50 x 37 x 22",
                                     ShipmentId = 34568,
-                                    Waybillnumber = "920015378166987332605",
-                                    Weight = 0.4m
+                                    Waybillnumber = "912015378166987332605",
+                                    Weight = 0.4m,
+                                    StatusCodeText = "CustWait"
                                 },
                                 new GudData2
                                 {
                                     Dimensions = "50 x 37 x 22",
                                     ShipmentId = 34569,
-                                    Waybillnumber = "920015378166987332618",
-                                    Weight = 0.3m
+                                    Waybillnumber = "913015378166987332618",
+                                    Weight = 0.3m,
+                                    StatusCodeText = "CustWait"
                                 }
                             }
                         },
@@ -108,22 +152,25 @@ namespace DemoPickup40.Pages.Pickup
                                 {
                                     Dimensions = "50 x 37 x 22",
                                     ShipmentId = 34570,
-                                    Waybillnumber = "920015378166987332598",
-                                    Weight = 0.5m
+                                    Waybillnumber = "921015378166987332598",
+                                    Weight = 0.5m,
+                                    StatusCodeText = "ForwWait"
                                 },
                                 new GudData2
                                 {
                                     Dimensions = "50 x 37 x 22",
                                     ShipmentId = 34571,
-                                    Waybillnumber = "920015378166987332605",
-                                    Weight = 0.4m
+                                    Waybillnumber = "922015378166987332605",
+                                    Weight = 0.4m,
+                                    StatusCodeText = "ForwWait"
                                 },
                                 new GudData2
                                 {
                                     Dimensions = "50 x 37 x 22",
                                     ShipmentId = 34572,
-                                    Waybillnumber = "920015378166987332618",
-                                    Weight = 0.3m
+                                    Waybillnumber = "923015378166987332618",
+                                    Weight = 0.3m,
+                                    StatusCodeText = "ForwWait"
                                 }
                             }
                         },
@@ -145,32 +192,35 @@ namespace DemoPickup40.Pages.Pickup
                                 {
                                     Dimensions = "50 x 37 x 22",
                                     ShipmentId = 34573,
-                                    Waybillnumber = "920015378166987332598",
-                                    Weight = 0.5m
+                                    Waybillnumber = "931015378166987332598",
+                                    Weight = 0.5m,
+                                    StatusCodeText = "ForwSched"
                                 },
                                 new GudData2
                                 {
                                     Dimensions = "50 x 37 x 22",
                                     ShipmentId = 34574,
-                                    Waybillnumber = "920015378166987332605",
-                                    Weight = 0.4m
+                                    Waybillnumber = "932015378166987332605",
+                                    Weight = 0.4m,
+                                    StatusCodeText = "ForwSched"
                                 },
                                 new GudData2
                                 {
                                     Dimensions = "50 x 37 x 22",
                                     ShipmentId = 34575,
-                                    Waybillnumber = "920015378166987332618",
-                                    Weight = 0.3m
+                                    Waybillnumber = "933015378166987332618",
+                                    Weight = 0.3m,
+                                    StatusCodeText = "ForwSched"
                                 }
                             }
                         }
 
                     };
 
-                    foreach (var row in XpPrimaryRowList)
-                    {
-                        row.StatusCodeLocalizeKey = string.Format("XtStatusCode_{0}", row.StatusCodeText);
-                    }
+                    //foreach (var row in XpPrimaryRowList)
+                    //{
+                    //    row.StatusCodeLocalizeKey = string.Format("{0:G}", row.StatusCodeText);
+                    //}
 
                 }
                 Xu001.DataSource = XpPrimaryRowList;
@@ -195,6 +245,39 @@ namespace DemoPickup40.Pages.Pickup
         {
             // Expected CommandArgument Syntax: {StatusCode}{.}{CustomerPickupId}
 
+            var t1 = commandArgument.Split(new [] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            if (t1.Length == 2)
+            {
+                var statusCode = t1[0];
+                int pickupId;
+                if (int.TryParse(t1[1], out pickupId))
+                {
+                    var targetCustomerPickup = XpPrimaryRowList.FirstOrDefault(t => t.PickupId == pickupId);
+                    if (targetCustomerPickup != null)
+                    {
+                        switch (statusCode)
+                        {
+                            case "CustWait":
+                            case "CustCan":
+                            case "CustHand":
+                                {
+                                    targetCustomerPickup.StatusCodeText = "ForwWait";
+                                }
+                                break;
+
+                            case "ForwWait":
+                                {
+                                    targetCustomerPickup.StatusCodeText = "CustCan";
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+
+            Xu001.DataSource = XpPrimaryRowList;
+            Xu001.DataBind();
+
         }
 
 
@@ -213,9 +296,9 @@ namespace DemoPickup40.Pages.Pickup
             }
 
             return result;
-            
+
         }
-     
+
 
 
         private void XcCmd02(string commandArgument, GridView source)
@@ -224,9 +307,49 @@ namespace DemoPickup40.Pages.Pickup
 
             // scan for rows wher checkbox are selected.
 
-            var rowCheckboxList = FindSubControl(Xu001, "XuSelected");
+            var rowCheckboxList = FindSubControl(source, "XuSelected");
 
             var t1 = rowCheckboxList;
+
+            int pickupId;
+            if (int.TryParse(commandArgument, out pickupId))
+            {
+                var targetCustomerPickup = XpPrimaryRowList.FirstOrDefault(t => t.PickupId == pickupId);
+
+                if (targetCustomerPickup != null)
+                {
+                    foreach (var row in rowCheckboxList)
+                    {
+                        var checkbox = row as HtmlInputCheckBox;
+
+                        if (checkbox == null) { continue; }
+
+                        if (!(checkbox.Checked)) { continue; }
+
+                        int shipmentId;
+                        if (int.TryParse(checkbox.Value, out shipmentId))
+                        {
+                            var sourceCustomerPickup =
+                                XpPrimaryRowList.FirstOrDefault(t => t.Shipmentlist.Any(r => r.ShipmentId == shipmentId));
+
+                            if (sourceCustomerPickup != null)
+                            {
+                                var shipment =
+                                    sourceCustomerPickup.Shipmentlist.FirstOrDefault(t => t.ShipmentId == shipmentId);
+                                if (shipment != null)
+                                {
+                                    sourceCustomerPickup.Shipmentlist.Remove(shipment);
+                                    targetCustomerPickup.Shipmentlist.Add(shipment);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            Xu001.DataSource = XpPrimaryRowList;
+            Xu001.DataBind();
+
         }
 
 
@@ -240,15 +363,15 @@ namespace DemoPickup40.Pages.Pickup
             switch (e.CommandName)
             {
                 case "XcCmd01":
-                {
-                    XcCmd01(e.CommandArgument as string);
-                }
+                    {
+                        XcCmd01(e.CommandArgument as string);
+                    }
                     break;
 
                 case "XcCmd02":
-                {
-                    XcCmd02(e.CommandArgument as string, sender as GridView);
-                }
+                    {
+                        XcCmd02(e.CommandArgument as string, sender as GridView);
+                    }
                     break;
 
                 default:
@@ -338,10 +461,10 @@ namespace DemoPickup40.Pages.Pickup
 
         public int PickupId { get; set; }
 
-        /// <summary>
-        /// Key to lookup into Localization table.
-        /// </summary>
-        public string StatusCodeLocalizeKey { get; set; }
+        ///// <summary>
+        ///// Key to lookup into Localization table.
+        ///// </summary>
+        //public string StatusCodeLocalizeKey { get; set; }
 
 
         public string FullAddress { get; set; }
@@ -362,6 +485,8 @@ namespace DemoPickup40.Pages.Pickup
         public decimal Weight { get; set; }
 
         public int ShipmentId { get; set; }
+
+        public string StatusCodeText { get; set; }
 
 
     }
