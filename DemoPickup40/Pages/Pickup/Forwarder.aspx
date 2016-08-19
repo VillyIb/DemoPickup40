@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Customer.aspx.cs" Inherits="DemoPickup40.Pages.Pickup.Customer" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Forwarder.aspx.cs" Inherits="DemoPickup40.Pages.Pickup.Forwarder" %>
 
 
 
@@ -9,7 +9,7 @@
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../assets/css/Site.css" rel="stylesheet" />
     <link href="../../assets/css/stylesheet-2016-02-23.css" rel="stylesheet" />
-    <link href="Customer.css" rel="stylesheet" />
+    <link href="Forwarder.css" rel="stylesheet" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -23,15 +23,15 @@
 
             <%--First level GridView--%>
             <asp:GridView
-                ID="XuCustomerPickup"
+                ID="XuForwarderPickup"
                 runat="server"
                 AutoGenerateColumns="False"
                 ShowHeaderWhenEmpty="True"
                 CssClass=""
-                OnRowCommand="XuGridCustomerPickup_RowCommand">
+                OnRowCommand="XuGridForwarderPickup_RowCommand">
 
-                <HeaderStyle CssClass="XuCustomerPickupHeader" />
-                <RowStyle CssClass="XuCustomerPickupRow" />
+                <HeaderStyle CssClass="XuForwarderPickupHeader" />
+                <RowStyle CssClass="XuForwarderPickupRow" />
 
                 <Columns>
 
@@ -58,7 +58,7 @@
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuAddressItem" runat="server" ToolTip='<%# Bind("FullAddress") %>' Text='<%# Bind("Address") %>' />
+                            <asp:Label ID="XuAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Bind("Address.Street1") %>' />
                         </ItemTemplate>
 
                     </asp:TemplateField>
@@ -72,7 +72,9 @@
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuPickupItem" runat="server" Text='<%# Bind("Pickup") %>' />
+                            <%--<asp:Label ID="XuPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
+                            <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuPickupItem.Format"), Eval("PickupDate"), Eval("ReadyOpen"), Eval("ReadyClose")) %>'></asp:Label>
+
                         </ItemTemplate>
 
                     </asp:TemplateField>
@@ -108,20 +110,20 @@
                             <asp:Label
                                 ID="XuStatusItem"
                                 runat="server"
-                                Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("StatusCodeText") + ".Text") %>' />
+                                Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusText") + ".Text") %>' />
 
-                            <%--Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("StatusCodeText") + ".Text") %>'--%>
-                            <%--ToolTip='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("StatusCodeText") + ".ToolTip") %>'--%>
+                            <%--Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusText") + ".Text") %>'--%>
+                            <%--ToolTip='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>'--%>
 
                             <asp:LinkButton
                                 ID="LinkButton12"
                                 runat="server"
                                 CausesValidation="false"
                                 CommandName="XcCmd01"
-                                CommandArgument='<%# Eval("StatusCodeText") + "." + Eval("PickupId") %>'>
+                                CommandArgument='<%# Eval("PickupStatusText") + "." + Eval("Id") %>'>
                                 <span 
-                                    class='<%# "glyphicon " + GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("StatusCodeText") + ".Glyphicon") %>' 
-                                    title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("StatusCodeText") + ".ToolTip") %>' 
+                                    class='<%# "glyphicon " + GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusText") + ".Glyphicon") %>' 
+                                    title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>' 
                                     />
                             </asp:LinkButton>
 
@@ -138,21 +140,21 @@
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:LinkButton ID="XuMoveItem" CommandArgument='<%# Eval("PickupId") %>' runat="server" CausesValidation="false" CommandName="XcCmd02" ToolTip='<%# GetLocalResourceObject("XuMoveItem.ToolTip") %>   '>
+                            <asp:LinkButton ID="XuMoveItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd02" ToolTip='<%# GetLocalResourceObject("XuMoveItem.ToolTip") %>   '>
                                 <span 
-                                    class='<%# "glyphicon " + GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("StatusCodeText") + ".Glyphicon") %>' 
-                                    title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("StatusCodeText") + ".ToolTip") %>' 
+                                    class='<%# "glyphicon " + GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".Glyphicon") %>' 
+                                    title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>' 
                                     />
                             </asp:LinkButton>
-                            
-                           
+
+
                         </ItemTemplate>
                         <HeaderStyle CssClass="XuMove" />
                         <ItemStyle CssClass="XuMove" />
 
                     </asp:TemplateField>
 
-                    
+
                     <%--Column #N Shipment Details--%>
                     <asp:TemplateField HeaderText="XuShipmentDetails">
                         <HeaderTemplate>
@@ -160,17 +162,16 @@
                         </HeaderTemplate>
                         <ItemTemplate>
                             <%--NOTE! this Column is mapped to a new row.--%>
-                            <tr >
+                            <tr>
                                 <td colspan="7">
-                                    
-                                    <asp:GridView 
-                                        ID="XuShipmentDetails" 
-                                        runat="server" 
-                                        AutoGenerateColumns="False" 
+
+                                    <asp:GridView
+                                        ID="XuShipmentDetails"
+                                        runat="server"
+                                        AutoGenerateColumns="False"
                                         DataSource='<%# Bind("Shipmentlist") %>'
-                                        CssClass="XuShipmentDetails"
-                                        >
-                                        
+                                        CssClass="XuShipmentDetails">
+
                                         <HeaderStyle CssClass="XuShipmentDetailsHead" />
                                         <RowStyle CssClass="XuShipmentDetailsRow" />
 
@@ -178,10 +179,10 @@
                                             <%--Column #1--%>
                                             <asp:TemplateField HeaderText="XuWaybillnumber">
                                                 <HeaderTemplate>
-                                                    <asp:Label ID="XuWaybillnumberHead" runat="server" Text="Waybillnumber"  meta:resourcekey="XuWaybillnumberHead"/>
+                                                    <asp:Label ID="XuWaybillnumberHead" runat="server" Text="Waybillnumber" meta:resourcekey="XuWaybillnumberHead" />
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <asp:Label ID="XuWaybillnumberItem" runat="server" Text='<%# Bind("Waybillnumber") %>' ToolTip='<%# Bind("FullAddress") %>'/>
+                                                    <asp:Label ID="XuWaybillnumberItem" runat="server" Text='<%# Bind("Waybillnumber") %>' ToolTip='<%# Bind("Address.FullAddress") %>' />
                                                 </ItemTemplate>
 
                                                 <HeaderStyle CssClass="XuWaybillnumber" />
@@ -218,12 +219,12 @@
                                             </asp:TemplateField>
 
                                             <%--Column #0--%>
-                                            <asp:TemplateField HeaderText="XuSelect" >
+                                            <asp:TemplateField HeaderText="XuSelect">
                                                 <HeaderTemplate>
                                                     <asp:Label ID="XuSelectHeader" runat="server" Text="&nbsp;" meta:resourcekey="XuSelectHeader" />
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <input id="XuSelectItem" type="checkbox" runat="server"  disabled='<%# "ForwSched".Equals( Eval("StatusCodeText")) %>' value='<%# Eval("ShipmentId") %>' />
+                                                    <input id="XuSelectItem" type="checkbox" runat="server" disabled='<%# "ForwSched".Equals( Eval("PickupStatusText")) %>' value='<%# Eval("Id") %>' />
                                                 </ItemTemplate>
 
                                                 <HeaderStyle CssClass="XuSelect" />
@@ -236,7 +237,7 @@
                                 </td>
                             </tr>
                         </ItemTemplate>
-                        
+
                         <%--Do not show this as the last Column--%>
                         <HeaderStyle CssClass="hidden" />
                         <ItemStyle CssClass="hidden" />

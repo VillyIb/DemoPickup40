@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using DemoPickup40.Util;
+using AppCode.Util;
 
-namespace DemoPickup40.Pages.Pickup
+namespace AppCode.Pages.Pickup
 {
     public static class PickupData
     {
@@ -102,11 +102,11 @@ namespace DemoPickup40.Pages.Pickup
 
             result.Waybillnumber = result.Waybillnumber.Substring(0, result.Waybillnumber.Length - 2) + result.Id;
 
-            return new GuiShipment();
+            return result;
         }
 
 
-        public static GuiCustomerPickup GetGuiCustomerPickup(int option, GuiCustomerPickup seed)
+        public static GuiCustomerPickup GetGuiCustomerPickup(int option, GuiCustomerPickup seed = null)
         {
             GuiCustomerPickup result;
 
@@ -144,6 +144,37 @@ namespace DemoPickup40.Pages.Pickup
 
             switch (option)
             {
+                case 1:
+                    {
+                        result.PickupStatusText = "CustHand";
+                    }
+                    break;
+
+                case 2:
+                    {
+                        result.PickupStatusText = "CustWait";
+                    }
+                    break;
+
+                case 3:
+                    { 
+                        result.PickupStatusText = "CustCan";
+                    }
+                    break;
+
+                case 4:
+                    {
+                        result.PickupStatusText = "ForwWait";
+                    }
+                    break;
+
+                case 5:
+                    {
+                        result.PickupStatusText = "ForwSched";
+                    }
+                    break;
+
+
             }
 
             return result;
