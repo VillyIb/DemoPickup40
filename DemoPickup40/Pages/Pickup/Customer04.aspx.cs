@@ -20,23 +20,6 @@ namespace DemoPickup40.Pages.Pickup
         }
 
 
-        //private Control FindControl(ControlCollection list, string name)
-        //{
-        //    if (list == null) return null;
-
-        //    foreach (Control control in list)
-        //    {
-        //        if (control.ID != null && control.ID.Contains(name))
-        //        {
-        //            return control;
-        //        }
-        //        return FindControl(control.Controls, name);
-        //    }
-
-        //    return null;
-        //}
-
-
         private void BindPage()
         {
             var carrierNameList = new List<string>();

@@ -308,4 +308,7 @@
   <data name="XuShCarrierHeader.Text" xml:space="preserve">
     <value>Carrier</value>
   </data>
+  <data name="XuAddressHeader.Text1" xml:space="preserve">
+    <value>Address</value>
+  </data>
 </root>

@@ -35,7 +35,7 @@
 
                 <Columns>
 
-                    <%--Column #0--%>
+                    <%--Column Expand --%>
                     <asp:TemplateField HeaderText="XuExpand">
 
                         <HeaderTemplate>
@@ -50,7 +50,7 @@
                     </asp:TemplateField>
 
 
-                    <%--Column #1--%>
+                    <%--Column Address --%>
                     <asp:TemplateField HeaderText="XuAddress">
 
                         <HeaderTemplate>
@@ -64,7 +64,7 @@
                     </asp:TemplateField>
 
 
-                    <%--Column #2 Pickup Window --%>
+                    <%--Column Pickup Window --%>
                     <asp:TemplateField HeaderText="XuPickup">
 
                         <HeaderTemplate>
@@ -80,7 +80,21 @@
                     </asp:TemplateField>
 
 
-                    <%--Column #3 Note --%>
+                    <%--Column Carrier --%>
+                    <asp:TemplateField HeaderText="XuCarrier">
+
+                        <HeaderTemplate>
+                            <asp:Label ID="XuCarrierHeader" runat="server" Text="XuCarrierHeader" meta:resourcekey="XuCarrierHeader" />
+                        </HeaderTemplate>
+
+                        <ItemTemplate>
+                            <asp:Label ID="XuCarrierItem" runat="server" Text='<%# Bind("CarrierNameList") %>' />
+                        </ItemTemplate>
+
+                    </asp:TemplateField>
+
+
+                    <%--Column Note --%>
                     <asp:TemplateField HeaderText="XuNote">
 
                         <HeaderTemplate>
@@ -94,7 +108,7 @@
                     </asp:TemplateField>
 
 
-                    <%--Column #4 'Status'--%>
+                    <%--Column Status --%>
                     <asp:TemplateField HeaderText="XuStatus">
 
                         <HeaderTemplate>
@@ -132,7 +146,7 @@
                     </asp:TemplateField>
 
 
-                    <%--Column #5 Move  --%>
+                    <%--Column Move --%>
                     <asp:TemplateField HeaderText="XuMove">
 
                         <HeaderTemplate>
@@ -155,7 +169,7 @@
                     </asp:TemplateField>
 
 
-                    <%--Column #N Shipment Details--%>
+                    <%--Column Shipment Details--%>
                     <asp:TemplateField HeaderText="XuShipmentDetails">
                         <HeaderTemplate>
                             <asp:Label runat="server" Text="&nbsp;" />
@@ -176,7 +190,7 @@
                                         <RowStyle CssClass="XuShipmentDetailsRow" />
 
                                         <Columns>
-                                            <%--Column #1--%>
+                                            <%--Column Waybill number --%>
                                             <asp:TemplateField HeaderText="XuWaybillnumber">
                                                 <HeaderTemplate>
                                                     <asp:Label ID="XuWaybillnumberHead" runat="server" Text="Waybillnumber" meta:resourcekey="XuWaybillnumberHead" />
@@ -189,8 +203,24 @@
                                                 <ItemStyle CssClass="XuWaybillnumber" />
 
                                             </asp:TemplateField>
+                                            
 
-                                            <%--Column #2--%>
+                                            <%--Column Carrier --%>
+                                            <asp:TemplateField HeaderText="XuShCarrier">
+                                                <HeaderTemplate>
+                                                    <asp:Label ID="XuShCarrierHeader" runat="server" Text="XuShCarrierHeader" meta:resourcekey="XuShCarrierHeader" />
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <asp:Label ID="XuShCarrierItem" runat="server" Text='<%# Bind("CarrierName") %>' />
+                                                </ItemTemplate>
+
+                                                <HeaderStyle CssClass="XuShCarrier" />
+                                                <ItemStyle CssClass="XuShCarrier" />
+
+                                            </asp:TemplateField>
+
+
+                                            <%--Column Weight --%>
                                             <asp:TemplateField HeaderText="XuWeight">
                                                 <HeaderTemplate>
                                                     <asp:Label ID="XuWeightHeader" runat="server" Text="XuWeightHeader" meta:resourcekey="XuWeightHeader" />
@@ -203,8 +233,9 @@
                                                 <ItemStyle CssClass="XuWeight" />
 
                                             </asp:TemplateField>
+                                            
 
-                                            <%--Column #2--%>
+                                            <%--Column Dimension --%>
                                             <asp:TemplateField HeaderText="XuDimension">
                                                 <HeaderTemplate>
                                                     <asp:Label ID="XuDimensionHead" runat="server" Text="XuDimensionHead" meta:resourcekey="XuDimensionHead" />
@@ -217,8 +248,9 @@
                                                 <ItemStyle CssClass="XuDimension" />
 
                                             </asp:TemplateField>
+                                            
 
-                                            <%--Column #0--%>
+                                            <%--Column Select --%>
                                             <asp:TemplateField HeaderText="XuSelect">
                                                 <HeaderTemplate>
                                                     <asp:Label ID="XuSelectHeader" runat="server" Text="&nbsp;" meta:resourcekey="XuSelectHeader" />
@@ -231,6 +263,7 @@
                                                 <ItemStyle CssClass="XuSelect" />
 
                                             </asp:TemplateField>
+                                            
 
                                         </Columns>
                                     </asp:GridView>
