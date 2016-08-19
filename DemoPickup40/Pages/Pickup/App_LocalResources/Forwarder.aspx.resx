@@ -308,4 +308,19 @@
   <data name="XuShCarrierHeader.Text" xml:space="preserve">
     <value>Carrier</value>
   </data>
+  <data name="XuFwAddressHeader.Text" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="XuFwCarrierHeader.Text" xml:space="preserve">
+    <value>Carrier list</value>
+  </data>
+  <data name="XuFwNoteHeader.Text" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="XuFwPickupHeader.Text" xml:space="preserve">
+    <value>Pickup Window</value>
+  </data>
+  <data name="XuFwStatusHeader.Text" xml:space="preserve">
+    <value>Status</value>
+  </data>
 </root>

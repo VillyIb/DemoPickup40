@@ -13,32 +13,56 @@ namespace DemoPickup40.Pages.Pickup
     {
         private const string XpPrimaryRowListKey = "PrimaryRowList";
 
-        private List<GuiCustomerPickup> XpPrimaryRowList
+        private List<GuiForwarderPickup> XpPrimaryRowList
         {
-            get { return Session[XpPrimaryRowListKey] as List<GuiCustomerPickup>; }
+            get { return Session[XpPrimaryRowListKey] as List<GuiForwarderPickup>; }
             set { Session[XpPrimaryRowListKey] = value; }
+        }
+
+        private List<GuiCustomerPickup> XpAllCustomerPickupList
+        {
+            get
+            {
+                var result = new List<GuiCustomerPickup>();
+
+                foreach (var forwarder in XpPrimaryRowList)
+                {
+                    result.AddRange(forwarder.CustomerPickupList);
+                }
+
+                return result;
+            }
         }
 
 
         private void BindPage()
         {
-            foreach (var pickup in XpPrimaryRowList)
+            foreach (var forwarder in XpPrimaryRowList)
             {
-                var t1 = pickup.Shipmentlist.Select(t => t.CarrierName).Distinct().OrderBy(t => t);
+                var t3 = new List<string>();
 
-                var t2 = t1.Aggregate((current, next) => current + ", " + next);
-
-                pickup.CarrierNameList = t2;
-
-                foreach (var shipment in pickup.Shipmentlist)
+                foreach (var pickup in forwarder.CustomerPickupList)
                 {
-                    shipment.PickupStatusText = pickup.PickupStatusText;
-                }
-            }
+                    var t1 = pickup.Shipmentlist.Select(t => t.CarrierName).Distinct().OrderBy(t => t);
+                    t3.AddRange(t1);
 
+                    var t2 = t1.Aggregate((current, next) => current + ", " + next);
+
+                    pickup.CarrierNameList = t2;
+
+                    foreach (var shipment in pickup.Shipmentlist)
+                    {
+                        shipment.PickupStatusText = pickup.PickupStatusText;
+                    }
+                }
+
+                var t4 = t3.Distinct().OrderBy(t => t);
+                var t5 = t4.Aggregate((current, next) => current + ", " + next);
+
+                forwarder.CarrierNameList = t5;
+            }
             XuForwarderPickup.DataSource = XpPrimaryRowList;
             XuForwarderPickup.DataBind();
-
         }
 
 
@@ -49,13 +73,13 @@ namespace DemoPickup40.Pages.Pickup
 
                 if (XpPrimaryRowList == null)
                 {
-                    XpPrimaryRowList = new List<GuiCustomerPickup>
+                    XpPrimaryRowList = new List<GuiForwarderPickup>
                     {
-                        PickupData.GetGuiCustomerPickup(1),
-                        PickupData.GetGuiCustomerPickup(2),
-                        PickupData.GetGuiCustomerPickup(3),
-                        PickupData.GetGuiCustomerPickup(4),
-                        PickupData.GetGuiCustomerPickup(5)
+                        PickupData.GetGuiForwarderPickup(1),
+                        PickupData.GetGuiForwarderPickup(2),
+                        PickupData.GetGuiForwarderPickup(3),
+                        PickupData.GetGuiForwarderPickup(4),
+                        PickupData.GetGuiForwarderPickup(5)
                     };
                 }
 
@@ -84,7 +108,7 @@ namespace DemoPickup40.Pages.Pickup
                 int pickupId;
                 if (int.TryParse(t1[1], out pickupId))
                 {
-                    var targetForwarderPickup = XpPrimaryRowList.FirstOrDefault(t => t.Id == pickupId);
+                    var targetForwarderPickup = XpAllCustomerPickupList.FirstOrDefault(t => t.Id == pickupId);
                     if (targetForwarderPickup != null)
                     {
                         switch (statusCode)
@@ -160,25 +184,25 @@ namespace DemoPickup40.Pages.Pickup
                         }
 
                         int shipmentId;
-                        if (int.TryParse(checkbox.Value, out shipmentId))
-                        {
-                            var sourceForwarderPickup = XpPrimaryRowList.FirstOrDefault(
-                                t =>
-                                t.Shipmentlist.Any(r => r.Id == shipmentId)
-                            );
+                        //if (int.TryParse(checkbox.Value, out shipmentId))
+                        //{
+                        //    var sourceForwarderPickup = XpPrimaryRowList.FirstOrDefault(
+                        //        t =>
+                        //        t.Shipmentlist.Any(r => r.Id == shipmentId)
+                        //    );
 
-                            if (sourceForwarderPickup == null) { continue; }
+                        //    if (sourceForwarderPickup == null) { continue; }
 
-                            var shipment = sourceForwarderPickup.Shipmentlist.FirstOrDefault(
-                                t =>
-                                t.Id == shipmentId
-                                );
+                        //    var shipment = sourceForwarderPickup.Shipmentlist.FirstOrDefault(
+                        //        t =>
+                        //        t.Id == shipmentId
+                        //        );
 
-                            if (shipment == null) { continue; }
+                        //    if (shipment == null) { continue; }
 
-                            sourceForwarderPickup.Shipmentlist.Remove(shipment);
-                            targetForwarderPickup.Shipmentlist.Add(shipment);
-                        }
+                        //    sourceForwarderPickup.Shipmentlist.Remove(shipment);
+                        //    targetForwarderPickup.Shipmentlist.Add(shipment);
+                        //}
                     }
                 }
             }
@@ -196,7 +220,7 @@ namespace DemoPickup40.Pages.Pickup
             return "0" + customerPickupId;
         }
 
-        protected void XuGridForwarderPickup_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void XuGridCustomerPickup_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             var Argument = e.CommandArgument;
             var name = e.CommandName;
@@ -221,6 +245,11 @@ namespace DemoPickup40.Pages.Pickup
                     break;
             }
 
+        }
+
+        protected void XuGridForwarderPicup_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 

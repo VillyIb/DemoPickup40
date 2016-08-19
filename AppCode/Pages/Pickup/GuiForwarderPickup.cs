@@ -11,6 +11,9 @@ namespace AppCode.Pages.Pickup
         public GuiAddress Address { get; set; }
 
 
+        public string CarrierNameList { get; set; }
+
+
         public string Note { get; set; }
 
 

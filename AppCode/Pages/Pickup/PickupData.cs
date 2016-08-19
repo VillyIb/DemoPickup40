@@ -218,6 +218,38 @@ namespace AppCode.Pages.Pickup
         }
 
 
+        public static GuiForwarderPickup GetGuiForwarderPickup(int option, GuiForwarderPickup seed = null)
+        {
+            GuiForwarderPickup result;
+
+            if (seed != null)
+            {
+                seed.Convert(out result);
+                result.Id = CurrentId++;
+            }
+            else
+            {
+                result = new GuiForwarderPickup
+                {
+                    Address = GetAddress(option),
+                    CustomerPickupList = new List<GuiCustomerPickup>(),
+                    Id = CurrentId++,
+                    Note = "Flere afhentninger på samme adresse",
+                    PickupDate = new DateTime(2016 - 08 - 19),
+                    PickupStatusText = "ForwWait",
+                    ReadyClose = new TimeSpan(15, 15, 0),
+                    ReadyOpen = new TimeSpan(12, 12, 13)
+                };
+
+                result.CustomerPickupList.Add(GetGuiCustomerPickup(option));
+                result.CustomerPickupList.Add(GetGuiCustomerPickup(option));
+                result.CustomerPickupList.Add(GetGuiCustomerPickup(option));
+            }
+
+            return result;
+        }
+
+
         static PickupData()
         {
             CurrentId = 37;
