@@ -39,13 +39,23 @@ namespace DemoPickup40.Pages.Pickup
 
         private void BindPage()
         {
+            var carrierNameList = new List<string>();
+
             foreach (var pickup in XpPrimaryRowList)
             {
+                var t1 = pickup.Shipmentlist.Select(t => t.CarrierName).Distinct().OrderBy(t=>t);
+
+                var t2 = t1.Aggregate((current, next) => current + ", " + next);
+
+                pickup.CarrierNameList = t2;
+
                 foreach (var shipment in pickup.Shipmentlist)
                 {
                     shipment.PickupStatusText = pickup.PickupStatusText;
                 }
             }
+
+
 
             XuCustomer04Pickup.DataSource = XpPrimaryRowList;
             XuCustomer04Pickup.DataBind();

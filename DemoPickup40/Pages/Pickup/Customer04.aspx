@@ -80,6 +80,20 @@
                     </asp:TemplateField>
 
 
+                    <%--Column #3.B Note --%>
+                    <asp:TemplateField HeaderText="XuCarrier">
+
+                        <HeaderTemplate>
+                            <asp:Label ID="XuCarrierHeader" runat="server" Text="XuCarrierHeader" meta:resourcekey="XuCarrierHeader" />
+                        </HeaderTemplate>
+
+                        <ItemTemplate>
+                            <asp:Label ID="XuCarrierItem" runat="server" Text='<%# Bind("CarrierNameList") %>' />
+                        </ItemTemplate>
+
+                    </asp:TemplateField>
+
+
                     <%--Column #3 Note --%>
                     <asp:TemplateField HeaderText="XuNote">
 
@@ -189,6 +203,21 @@
                                                 <ItemStyle CssClass="XuWaybillnumber" />
 
                                             </asp:TemplateField>
+
+                                            <%--Column #2.b--%>
+                                            <asp:TemplateField HeaderText="XuShCarrier">
+                                                <HeaderTemplate>
+                                                    <asp:Label ID="XuShCarrierHeader" runat="server" Text="XuShCarrierHeader" meta:resourcekey="XuShCarrierHeader" />
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <asp:Label ID="XuShCarrierItem" runat="server" Text='<%# Bind("CarrierName") %>' />
+                                                </ItemTemplate>
+
+                                                <HeaderStyle CssClass="XuShCarrier" />
+                                                <ItemStyle CssClass="XuShCarrier" />
+
+                                            </asp:TemplateField>
+
 
                                             <%--Column #2--%>
                                             <asp:TemplateField HeaderText="XuWeight">

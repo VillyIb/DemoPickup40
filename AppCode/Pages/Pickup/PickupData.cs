@@ -87,6 +87,7 @@ namespace AppCode.Pages.Pickup
             {
                 result = new GuiShipment
                 {
+                    CarrierName = "DHL",
                     Dimensions = "50 x 40 x 20",
                     Id = CurrentId++,
                     Address = GetAddress(option),
@@ -98,6 +99,42 @@ namespace AppCode.Pages.Pickup
 
             switch (option)
             {
+            }
+
+            var t1 = result.Id%5 + 1;
+
+            switch(t1)
+            { 
+            case 1:
+                    {
+                        result.CarrierName = "Post Nord";
+                    }
+                    break;
+
+                case 2:
+                    {
+                        result.CarrierName = "DHL Express";
+                    }
+                    break;
+
+                case 3:
+                    {
+                        result.CarrierName = "GLS";
+                    }
+                    break;
+
+                case 4:
+                    {
+                        result.CarrierName = "FedEx";
+                    }
+                    break;
+
+                case 5:
+                    {
+                        result.CarrierName = "DHL Freight";
+                    }
+                    break;
+
             }
 
             result.Waybillnumber = result.Waybillnumber.Substring(0, result.Waybillnumber.Length - 2) + result.Id;
@@ -157,7 +194,7 @@ namespace AppCode.Pages.Pickup
                     break;
 
                 case 3:
-                    { 
+                    {
                         result.PickupStatusText = "CustCan";
                     }
                     break;

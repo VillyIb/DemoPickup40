@@ -11,6 +11,9 @@
         public GuiAddress Address { get; set; }
 
 
+        public string CarrierName { get; set; }
+
+
         /// <summary>
         /// Displayed on screen as a concatenation of Length x Width x Height
         /// </summary>
