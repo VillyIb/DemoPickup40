@@ -46,7 +46,7 @@
                             <%--<i class="glyphicon glyphicon-triangle-top big"></i>--%>
                             &nbsp;&nbsp;&nbsp;
                         </ItemTemplate>
-                        
+
                         <HeaderStyle CssClass="XuFwExpand" />
                         <ItemStyle CssClass="XuFwExpand" />
 
@@ -76,7 +76,17 @@
                         <ItemTemplate>
                             <%--<asp:Label ID="XuFwPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
                             <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuPickupItem.Format"), Eval("PickupDate"), Eval("ReadyOpen"), Eval("ReadyClose")) %>'></asp:Label>
-
+                            <asp:LinkButton
+                                ID="XuFwdPickupX1"
+                                runat="server"
+                                CausesValidation="false"
+                                CommandName="XcCmd03"
+                                CommandArgument='<%# Eval("Id") %>'>
+                                <span
+                                    class="glyphicon glyphicon-refresh"
+                                    title="Recalculate smallest window for Open/Close"
+                                    />
+                            </asp:LinkButton>
                         </ItemTemplate>
 
                     </asp:TemplateField>
@@ -136,10 +146,10 @@
                                 ID="LinkButton12"
                                 runat="server"
                                 CausesValidation="false"
-                                CommandName="XcCmd01"
-                                CommandArgument='<%# Eval("PickupStatusText") + "." + Eval("Id") %>'>
+                                CommandName="XcCmd04"
+                                CommandArgument='<%# Eval("Id") %>'>
                                 <span 
-                                    class='<%# "glyphicon " + GetLocalResourceObject("XuFwStatus-Icon_StatusCode-" + Eval("PickupStatusText") + ".Glyphicon") %>' 
+                                    class='<%# "glyphicon " + GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusText") + ".Glyphicon") %>' 
                                     title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>' 
                                     />
                             </asp:LinkButton>
@@ -148,8 +158,52 @@
 
                     </asp:TemplateField>
 
-                    <%--Column Shipment Details--%>
-                    <asp:TemplateField HeaderText="XuShipmentDetails">
+
+                    <asp:TemplateField HeaderText="XuFwEdit">
+
+                        <HeaderTemplate>
+                            <asp:Label ID="XuFwEditHeader" runat="server" Text="XuFwEditHeader" meta:resourceKey="XuFwEditHeader" />
+                        </HeaderTemplate>
+
+                        <ItemTemplate>
+                            <asp:LinkButton
+                                ID="XuFwEditItemEvent"
+                                runat="server"
+                                target="_blank"
+                                CausesValidation="false"
+                                CommandName="XcCmd05"
+                                CommandArgument='<%# Eval("Id") %>'>
+                                <span 
+                                    class="glyphicon glyphicon-edit" 
+                                    title='<%# GetLocalResourceObject("XuFwEditEventItem.Text") %>' 
+                                    />
+                            </asp:LinkButton>
+                        </ItemTemplate>
+
+                    </asp:TemplateField>
+
+
+                    <%--Move Customer Pickup--%>
+                    <asp:TemplateField>
+
+                        <HeaderTemplate>
+                            <asp:Label ID="XuFwMoveHeader" runat="server" Text='<%# GetLocalResourceObject("XuFwMoveHeader.Text") %>' />
+                        </HeaderTemplate>
+
+                        <ItemTemplate>
+                            <asp:LinkButton ID="XuFwMoveItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd06" ToolTip='<%# GetLocalResourceObject("XuFwMoveItem.ToolTip") %>   '>
+                                <span 
+                                    class='<%# "glyphicon " + GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".Glyphicon") %>' 
+                                    title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>' 
+                                />
+                            </asp:LinkButton>
+                        </ItemTemplate>
+
+                    </asp:TemplateField>
+
+
+                    <%--Column Customer  Details--%>
+                    <asp:TemplateField HeaderText="XuCustomerDetails">
                         <HeaderTemplate>
                             <asp:Label runat="server" Text="&nbsp;" />
                         </HeaderTemplate>
@@ -255,9 +309,9 @@
 
                                                 <ItemTemplate>
                                                     <%--
-                                Status field contain 
-                                * localized text (default to 
-                                * Action
+                                                        Status field contain 
+                                                        * localized text (default to 
+                                                        * Action
                                                     --%>
                                                     <asp:Label
                                                         ID="XuStatusItem"
@@ -293,16 +347,28 @@
 
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="XuMoveItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd02" ToolTip='<%# GetLocalResourceObject("XuMoveItem.ToolTip") %>   '>
-                                <span 
-                                    class='<%# "glyphicon " + GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".Glyphicon") %>' 
-                                    title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>' 
-                                    />
+                                                    <span 
+                                                        class='<%# "glyphicon " + GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".Glyphicon") %>' 
+                                                        title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>' 
+                                                        />
                                                     </asp:LinkButton>
-
 
                                                 </ItemTemplate>
                                                 <HeaderStyle CssClass="XuMove" />
                                                 <ItemStyle CssClass="XuMove" />
+
+                                            </asp:TemplateField>
+
+
+                                            <%--Column Customer Pickup Select--%>
+                                            <asp:TemplateField HeaderText="XuFwSelect">
+
+                                                <HeaderTemplate>
+                                                    <asp:Label ID="XuFwSelectHeader" runat="server" Text="&nbsp;" meta:resourcekey="XuFwSelectHeader" />
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <input id="XuFwSelectItem" type="checkbox" runat="server" disabled='<%# "ForwSched".Equals( Eval("PickupStatusText")) %>' value='<%# Eval("Id") %>' />
+                                                </ItemTemplate>
 
                                             </asp:TemplateField>
 

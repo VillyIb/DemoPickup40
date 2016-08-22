@@ -68,8 +68,10 @@
     <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\npm.js" />
+    <Content Include="Pages\Pickup\EditForwarderPickup.css" />
     <Content Include="Pages\Pickup\Customer04.aspx" />
     <Content Include="Pages\Pickup\Customer04.css" />
+    <Content Include="Pages\Pickup\EditForwarderPickup.aspx" />
     <Content Include="Pages\Pickup\Forwarder.css" />
     <Content Include="Pages\Pickup\Forwarder.aspx" />
     <Content Include="Pages\Pickup\Customer.aspx" />
@@ -107,6 +109,13 @@
     </Compile>
     <Compile Include="Pages\Pickup\Customer04.aspx.designer.cs">
       <DependentUpon>Customer04.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Pickup\EditForwarderPickup.aspx.cs">
+      <DependentUpon>EditForwarderPickup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Pickup\EditForwarderPickup.aspx.designer.cs">
+      <DependentUpon>EditForwarderPickup.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Pickup\Forwarder.aspx.cs">
       <DependentUpon>Forwarder.aspx</DependentUpon>
@@ -172,6 +181,9 @@
     <Content Include="Pages\Pickup\App_LocalResources\Customer04.aspx.resx">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\Pickup\App_LocalResources\EditForwarderPickup.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

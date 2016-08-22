@@ -1,0 +1,36 @@
+﻿body {
+}
+
+.block {
+    display: table;
+    border: 1px solid black;
+}
+
+.row {
+    display: table-row;
+    width: 500px;
+    border: 5px solid green;
+}
+
+.header {
+    text-align: center;
+}
+
+.col1 {
+    display: table-cell;
+    width: 100px;
+    border: 1px solid black;
+}
+
+.col2 {
+    display: table-cell;
+    width: 200px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.error {
+    color:red;
+}

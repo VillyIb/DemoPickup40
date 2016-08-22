@@ -323,4 +323,19 @@
   <data name="XuFwStatusHeader.Text" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="XuFwEditHeader.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="XuFwEditEventItem.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="XuFwMoveHeader.Text" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="XuFwMoveItem.Tool" xml:space="preserve">
+    <value>Import selected Customer Pickups</value>
+  </data>
+  <data name="XuFwSelectHeader.Text" xml:space="preserve">
+    <value>&amp;nbsp;</value>
+  </data>
 </root>

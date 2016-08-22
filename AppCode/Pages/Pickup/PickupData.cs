@@ -235,7 +235,7 @@ namespace AppCode.Pages.Pickup
                     CustomerPickupList = new List<GuiCustomerPickup>(),
                     Id = CurrentId++,
                     Note = "Flere afhentninger på samme adresse",
-                    PickupDate = new DateTime(2016 - 08 - 19),
+                    PickupDate = new DateTime(2016,08,19),
                     PickupStatusText = "ForwWait",
                     ReadyClose = new TimeSpan(15, 15, 0),
                     ReadyOpen = new TimeSpan(12, 12, 13)

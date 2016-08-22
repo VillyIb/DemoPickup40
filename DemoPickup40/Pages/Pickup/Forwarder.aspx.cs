@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using AppCode.Pages.Pickup;
 // ReSharper disable UseNullPropagation
+// ReSharper disable ArgumentsStyleLiteral
 
 namespace DemoPickup40.Pages.Pickup
 {
@@ -56,8 +58,8 @@ namespace DemoPickup40.Pages.Pickup
                     }
                 }
 
-                var t4 = t3.Distinct().OrderBy(t => t);
-                var t5 = t4.Aggregate((current, next) => current + ", " + next);
+                var t4 = t3.Distinct().OrderBy(t => t).ToList();
+                var t5 = t4.Count>0 ? t4.Aggregate((current, next) => current + ", " + next) : "none";
 
                 forwarder.CarrierNameList = t5;
             }
@@ -220,6 +222,8 @@ namespace DemoPickup40.Pages.Pickup
             return "0" + customerPickupId;
         }
 
+
+
         protected void XuGridCustomerPickup_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             var Argument = e.CommandArgument;
@@ -247,13 +251,218 @@ namespace DemoPickup40.Pages.Pickup
 
         }
 
-        protected void XuGridForwarderPicup_RowCommand(object sender, GridViewCommandEventArgs e)
+        private void XcCmd03(string commandArgument)
         {
-            throw new NotImplementedException();
+            // Expected syntax: int: ForwarderPickup.Id.
+
+            do
+            {
+                int forwarderPickupId;
+                if (int.TryParse(commandArgument, out forwarderPickupId))
+                {
+                    var currentForwarderPickup = XpPrimaryRowList.FirstOrDefault(t => t.Id == forwarderPickupId);
+                    if (currentForwarderPickup == null)
+                    {
+                        continue;
+                    }
+
+                    var open = new TimeSpan(0, 0, 0);
+                    var close = new TimeSpan(23, 59, 59);
+
+                    foreach (var customerPickup in currentForwarderPickup.CustomerPickupList)
+                    {
+                        if (open < customerPickup.ReadyOpen)
+                        {
+                            open = customerPickup.ReadyOpen;
+                        }
+
+                        if (customerPickup.ReadyClose < close)
+                        {
+                            close = customerPickup.ReadyClose;
+                        }
+                    }
+
+                    currentForwarderPickup.ReadyClose = close;
+                    currentForwarderPickup.ReadyOpen = open;
+                }
+            } while (false);
+
+            BindPage();
         }
+
+
+        private void XcCmd04(string commandArgument)
+        {
+            // Expected syntax: int: ForwarderPickup.Id.
+
+            do
+            {
+                int forwarderPickupId;
+                if (int.TryParse(commandArgument, out forwarderPickupId))
+                {
+                    var currentForwarderPickup = XpPrimaryRowList.FirstOrDefault(t => t.Id == forwarderPickupId);
+                    if (currentForwarderPickup == null) { continue; }
+
+                    switch (currentForwarderPickup.PickupStatusText)
+                    {
+                        case "CustWait":
+                            {
+                                currentForwarderPickup.PickupStatusText = "ForwWait";
+                            }
+                            break;
+
+                        case "ForwWait":
+                            {
+                                currentForwarderPickup.PickupStatusText = "CustWait";
+                            }
+                            break;
+
+                    }
+
+                }
+
+            } while (false);
+
+            BindPage();
+        }
+
+        private void XcCmd05(string commandArgument)
+        {
+            // Expected syntax: int: ForwarderPickup.Id.
+
+            do
+            {
+                int forwarderPickupId;
+                if (int.TryParse(commandArgument, out forwarderPickupId))
+                {
+                    var currentForwarderPickup = XpPrimaryRowList.FirstOrDefault(t => t.Id == forwarderPickupId);
+                    if (currentForwarderPickup == null) { continue; }
+
+                    switch (currentForwarderPickup.PickupStatusText)
+                    {
+                        case "CustWait":
+                            {
+                            }
+                            break;
+
+                        case "ForwWait":
+                            {
+                            }
+                            break;
+
+
+                    }
+
+                    var url = string.Format("EditForwarderPickup.aspx?ForwarderPickuId={0}", currentForwarderPickup.Id);
+                    Response.Redirect(url, endResponse: false);
+                }
+
+            } while (false);
+
+            BindPage();
+        }
+
+
+        /// <summary>
+        /// Business Code
+        /// Move list of CustomerPickup to the specified ForwarderPickup.
+        /// Uses identifies not types to bridge between GuiClass and coresponding BackendClas.
+        /// </summary>
+        /// <param name="targetForwarderPickupId"></param>
+        /// <param name="customerPickupIdList"></param>
+        private void XbMoveCustomerPickup(int targetForwarderPickupId, IEnumerable<int> customerPickupIdList)
+        {
+            var target = XpPrimaryRowList.FirstOrDefault(t => t.Id == targetForwarderPickupId);
+            if(target == null) { return; }
+
+            foreach (var customerPickupId in customerPickupIdList)
+            {
+                var source = XpPrimaryRowList.FirstOrDefault(t => t.CustomerPickupList.Any(r=> r.Id == customerPickupId));
+                if(source == null) { continue; }
+
+                var subject = source.CustomerPickupList.FirstOrDefault(r => r.Id == customerPickupId);
+
+                source.CustomerPickupList.Remove(subject);
+                target.CustomerPickupList.Add(subject);
+            }
+        }
+
+
+        private void XcCmd06(string commandArgument, GridView source)
+        {
+            // Expected syntax: int: ForwarderPickup.Id.
+
+            do
+            {
+                int forwarderPickupId;
+                if (int.TryParse(commandArgument, out forwarderPickupId))
+                {
+                    var rowFwCheckboxList = FindSubControl(source, "XuFwSelectItem");
+
+                    var customerPickupIdList = new List<int>();
+
+                    foreach (var row in rowFwCheckboxList)
+                    {
+                        var checkbox = row as HtmlInputCheckBox;
+
+                        if(checkbox == null) { continue; }
+
+                        if(!(checkbox.Checked)) { continue; }
+
+                        int customerPickupId;
+
+
+                        if (int.TryParse(checkbox.Value, out customerPickupId))
+                        {
+                            customerPickupIdList.Add(customerPickupId);
+                        }
+                    }
+
+                    XbMoveCustomerPickup(forwarderPickupId, customerPickupIdList);
+                }
+
+            } while (false);
+
+            BindPage();
+        }
+
+        protected
+            void XuGridForwarderPicup_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "XcCmd03":
+                    {
+                        XcCmd03(e.CommandArgument as string);
+                    }
+                    break;
+
+                case "XcCmd04":
+                    {
+                        // change .. status on forwarder pickup
+                        XcCmd04(e.CommandArgument as string);
+                    }
+                    break;
+
+                case "XcCmd05":
+                    {
+                        // change .. status on forwarder pickup
+                        XcCmd05(e.CommandArgument as string);
+                    }
+                    break;
+
+                case "XcCmd06":
+                    {
+                        // Move Customer Pickup to another Forwarder Pickup
+                        XcCmd06(e.CommandArgument as string, sender as GridView);
+                    }
+                    break;
+
+            }
+
+            BindPage();
+        }
+
+
     }
-
-
-
-
 }

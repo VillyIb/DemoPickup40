@@ -45,8 +45,10 @@
     <Compile Include="Pages\Pickup\GuiForwarderPickup.cs" />
     <Compile Include="Pages\Pickup\GuiShipment.cs" />
     <Compile Include="Pages\Pickup\PickupData.cs" />
+    <Compile Include="Pages\Pickup\PickupStatuForwarder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ConverterExtension.cs" />
+    <Compile Include="Wrapper\IntWrapper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
