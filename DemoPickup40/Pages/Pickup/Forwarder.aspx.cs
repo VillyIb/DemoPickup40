@@ -52,14 +52,16 @@ namespace DemoPickup40.Pages.Pickup
 
                     pickup.CarrierNameList = t2;
 
+                    pickup.PickupStatusForwarder = forwarder.PickupStatusForwarder;
+
                     foreach (var shipment in pickup.Shipmentlist)
                     {
-                        shipment.PickupStatusText = pickup.PickupStatusText;
+                        shipment.PickupStatusCustomer = pickup.PickupStatusCustomer;
                     }
                 }
 
                 var t4 = t3.Distinct().OrderBy(t => t).ToList();
-                var t5 = t4.Count>0 ? t4.Aggregate((current, next) => current + ", " + next) : "none";
+                var t5 = t4.Count > 0 ? t4.Aggregate((current, next) => current + ", " + next) : "none";
 
                 forwarder.CarrierNameList = t5;
             }
@@ -119,13 +121,13 @@ namespace DemoPickup40.Pages.Pickup
                             case "CustCan":
                             case "CustHand":
                                 {
-                                    targetForwarderPickup.PickupStatusText = "ForwWait";
+                                    targetForwarderPickup.PickupStatusCustomer = PickupStatusCustomer.ForwWait;
                                 }
                                 break;
 
                             case "ForwWait":
                                 {
-                                    targetForwarderPickup.PickupStatusText = "CustCan";
+                                    targetForwarderPickup.PickupStatusCustomer = PickupStatusCustomer.CustCan;
                                 }
                                 break;
                         }
@@ -303,17 +305,17 @@ namespace DemoPickup40.Pages.Pickup
                     var currentForwarderPickup = XpPrimaryRowList.FirstOrDefault(t => t.Id == forwarderPickupId);
                     if (currentForwarderPickup == null) { continue; }
 
-                    switch (currentForwarderPickup.PickupStatusText)
+                    switch (currentForwarderPickup.PickupStatusForwarder)
                     {
-                        case "CustWait":
+                        case PickupStatusForwarder.CustWait:
                             {
-                                currentForwarderPickup.PickupStatusText = "ForwWait";
+                                currentForwarderPickup.PickupStatusForwarder = PickupStatusForwarder.ForwWait;
                             }
                             break;
 
-                        case "ForwWait":
+                        case PickupStatusForwarder.ForwWait:
                             {
-                                currentForwarderPickup.PickupStatusText = "CustWait";
+                                currentForwarderPickup.PickupStatusForwarder = PickupStatusForwarder.CustWait;
                             }
                             break;
 
@@ -338,14 +340,14 @@ namespace DemoPickup40.Pages.Pickup
                     var currentForwarderPickup = XpPrimaryRowList.FirstOrDefault(t => t.Id == forwarderPickupId);
                     if (currentForwarderPickup == null) { continue; }
 
-                    switch (currentForwarderPickup.PickupStatusText)
+                    switch (currentForwarderPickup.PickupStatusForwarder)
                     {
-                        case "CustWait":
+                        case PickupStatusForwarder.CustWait:
                             {
                             }
                             break;
 
-                        case "ForwWait":
+                        case PickupStatusForwarder.ForwWait:
                             {
                             }
                             break;
@@ -373,12 +375,12 @@ namespace DemoPickup40.Pages.Pickup
         private void XbMoveCustomerPickup(int targetForwarderPickupId, IEnumerable<int> customerPickupIdList)
         {
             var target = XpPrimaryRowList.FirstOrDefault(t => t.Id == targetForwarderPickupId);
-            if(target == null) { return; }
+            if (target == null) { return; }
 
             foreach (var customerPickupId in customerPickupIdList)
             {
-                var source = XpPrimaryRowList.FirstOrDefault(t => t.CustomerPickupList.Any(r=> r.Id == customerPickupId));
-                if(source == null) { continue; }
+                var source = XpPrimaryRowList.FirstOrDefault(t => t.CustomerPickupList.Any(r => r.Id == customerPickupId));
+                if (source == null) { continue; }
 
                 var subject = source.CustomerPickupList.FirstOrDefault(r => r.Id == customerPickupId);
 
@@ -405,9 +407,9 @@ namespace DemoPickup40.Pages.Pickup
                     {
                         var checkbox = row as HtmlInputCheckBox;
 
-                        if(checkbox == null) { continue; }
+                        if (checkbox == null) { continue; }
 
-                        if(!(checkbox.Checked)) { continue; }
+                        if (!(checkbox.Checked)) { continue; }
 
                         int customerPickupId;
 

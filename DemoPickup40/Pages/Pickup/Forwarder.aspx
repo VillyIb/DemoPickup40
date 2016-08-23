@@ -137,10 +137,7 @@
                             <asp:Label
                                 ID="XuFwStatusItem"
                                 runat="server"
-                                Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusText") + ".Text") %>' />
-
-                            <%--Text='<%# GetLocalResourceObject("XuFwStatus-Text_StatusCode-" + Eval("PickupStatusText") + ".Text") %>'--%>
-                            <%--ToolTip='<%# GetLocalResourceObject("XuFwStatus-Text_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>'--%>
+                                Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusForwarder") + ".Text") %>' />
 
                             <asp:LinkButton
                                 ID="LinkButton12"
@@ -149,8 +146,8 @@
                                 CommandName="XcCmd04"
                                 CommandArgument='<%# Eval("Id") %>'>
                                 <span 
-                                    class='<%# "glyphicon " + GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusText") + ".Glyphicon") %>' 
-                                    title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>' 
+                                    class ='<%# Eval("CssGlyphiconStatus") %>'
+                                    title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".ToolTip") %>' 
                                     />
                             </asp:LinkButton>
 
@@ -193,8 +190,8 @@
                         <ItemTemplate>
                             <asp:LinkButton ID="XuFwMoveItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd06" ToolTip='<%# GetLocalResourceObject("XuFwMoveItem.ToolTip") %>   '>
                                 <span 
-                                    class='<%# "glyphicon " + GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".Glyphicon") %>' 
-                                    title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>' 
+                                    class='<%# Eval("CssGlyphiconMove") %>'
+                                    title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".ToolTip") %>' 
                                 />
                             </asp:LinkButton>
                         </ItemTemplate>
@@ -316,7 +313,7 @@
                                                     <asp:Label
                                                         ID="XuStatusItem"
                                                         runat="server"
-                                                        Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusText") + ".Text") %>' />
+                                                        Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusForwarder") + ".Text") %>' />
 
                                                     <%--Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusText") + ".Text") %>'--%>
                                                     <%--ToolTip='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>'--%>
@@ -326,10 +323,10 @@
                                                         runat="server"
                                                         CausesValidation="false"
                                                         CommandName="XcCmd01"
-                                                        CommandArgument='<%# Eval("PickupStatusText") + "." + Eval("Id") %>'>
+                                                        CommandArgument='<%# Eval("PickupStatusForwarder") + "." + Eval("Id") %>'>
                                 <span 
-                                    class='<%# "glyphicon " + GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusText") + ".Glyphicon") %>' 
-                                    title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>' 
+                                    class='<%# "glyphicon " + GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".Glyphicon") %>' 
+                                    title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".ToolTip") %>' 
                                     />
                                                     </asp:LinkButton>
 
@@ -348,8 +345,8 @@
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="XuMoveItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd02" ToolTip='<%# GetLocalResourceObject("XuMoveItem.ToolTip") %>   '>
                                                     <span 
-                                                        class='<%# "glyphicon " + GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".Glyphicon") %>' 
-                                                        title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>' 
+                                                        class='<%# Eval("CssGlyphiconMove") %>' 
+                                                        title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".ToolTip") %>' 
                                                         />
                                                     </asp:LinkButton>
 
@@ -367,7 +364,7 @@
                                                     <asp:Label ID="XuFwSelectHeader" runat="server" Text="&nbsp;" meta:resourcekey="XuFwSelectHeader" />
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <input id="XuFwSelectItem" type="checkbox" runat="server" disabled='<%# "ForwSched".Equals( Eval("PickupStatusText")) %>' value='<%# Eval("Id") %>' />
+                                                    <input id="XuFwSelectItem" type="checkbox" runat="server" disabled='<%# Eval("CssVisibleCheckbox") %>' value='<%# Eval("Id") %>' />
                                                 </ItemTemplate>
 
                                             </asp:TemplateField>
@@ -460,7 +457,7 @@
                                                                             <asp:Label ID="XuSelectHeader" runat="server" Text="&nbsp;" meta:resourcekey="XuSelectHeader" />
                                                                         </HeaderTemplate>
                                                                         <ItemTemplate>
-                                                                            <input id="XuSelectItem" type="checkbox" runat="server" disabled='<%# "ForwSched".Equals( Eval("PickupStatusText")) %>' value='<%# Eval("Id") %>' />
+                                                                            <input id="XuSelectItem" type="checkbox" runat="server" disabled='<%# Eval("CssVisibleCheckbox") %>' value='<%# Eval("Id") %>' />
                                                                         </ItemTemplate>
 
                                                                         <HeaderStyle CssClass="XuSelect" />

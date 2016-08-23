@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace AppCode.Pages.Pickup
+﻿namespace AppCode.Pages.Pickup
 {
     public class DropDownBoxData
     {
-        public string Key { get; set; }
+        public PickupStatusForwarder Value { get; set; }
 
 
-        public string Value { get; set; }
+        public string Text { get; set; }
 
 
         public string Sorting { get; set; }
@@ -18,7 +13,7 @@ namespace AppCode.Pages.Pickup
 
         public override string ToString()
         {
-            return Value;
+            return Text;
         }
     }
 }

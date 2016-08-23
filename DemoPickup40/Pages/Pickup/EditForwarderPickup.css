@@ -1,60 +1,43 @@
 ﻿body {
 }
 
-.block {
+
+.css-table {
     display: table;
     border: 1px solid black;
-    width:auto;
+    width: 600px;
 }
 
-.div-table{
-    display: table;
-    border: 1px dashed black;
-    width:auto;
-}
-
-.div-row
-{
-    display:table-row;
-    width:auto;
-    clear:both;
-}
-
-div-col-header{
-
-}
-
-div-col{
-
-}
-
-.row {
+.css-tr {
     display: table-row;
-    width: auto;
-    border: 5px solid green;
-    clear:both;
+    width: 100%;
+    clear: both;
+    height: 24px;
 }
 
-.header {
+.css-th {
+    display: table-cell;
     text-align: center;
+    border: 1px solid black;
 }
+
+.css-td {
+    display: table-cell;
+    border: 1px solid black;
+}
+
 
 .col1 {
-    display: table-column;
     width: 100px;
-    background-color:aquamarine;
 }
 
 .col2 {
-    display: table-column;
-    width: 200px;
-    background-color:darksalmon;
+    width: auto;
 }
 
-.col3{
-    display: table-column;
+.col3 {
     width: 50px;
-    background-color: yellow;
+    text-align: center;
 }
 
 .hidden {
@@ -62,5 +45,23 @@ div-col{
 }
 
 .error {
-    color:red;
+    color: red;
 }
+
+
+input[type=text] {
+    width: 99%;
+}
+
+    input[type=text]:focus {
+        width: 120%;
+    }
+
+select {
+    width: 100%;
+}
+
+    select:focus {
+        width: 120%;
+    }
+

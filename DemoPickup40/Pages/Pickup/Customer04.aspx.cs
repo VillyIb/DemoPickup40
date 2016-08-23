@@ -34,7 +34,7 @@ namespace DemoPickup40.Pages.Pickup
 
                 foreach (var shipment in pickup.Shipmentlist)
                 {
-                    shipment.PickupStatusText = pickup.PickupStatusText;
+                    shipment.PickupStatusCustomer = pickup.PickupStatusCustomer;
                 }
             }
 
@@ -97,13 +97,13 @@ namespace DemoPickup40.Pages.Pickup
                             case "CustCan":
                             case "CustHand":
                                 {
-                                    targetCustomer04Pickup.PickupStatusText = "ForwWait";
+                                    targetCustomer04Pickup.PickupStatusCustomer = PickupStatusCustomer.ForwWait;
                                 }
                                 break;
 
                             case "ForwWait":
                                 {
-                                    targetCustomer04Pickup.PickupStatusText = "CustCan";
+                                    targetCustomer04Pickup.PickupStatusCustomer = PickupStatusCustomer.CustCan;
                                 }
                                 break;
                         }

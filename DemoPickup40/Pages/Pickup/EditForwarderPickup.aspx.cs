@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -11,7 +10,7 @@ using AppCode.Pages.Pickup;
 
 namespace DemoPickup40.Pages.Pickup
 {
-    public partial class EditForwarderPickup : System.Web.UI.Page
+    public partial class EditForwarderPickup : Page
     {
         #region P: XpForwarderPickup { get; set; } in Session
         private const string XpForwarderPickupKey = "ForwarderPickup";
@@ -43,38 +42,37 @@ namespace DemoPickup40.Pages.Pickup
                 if (zPickupStatusList == null)
                 {
 
-                    var t1 = Enum.GetValues(typeof(PickupStatuForwarder));
+                    var t1 = Enum.GetValues(typeof(PickupStatusForwarder));
                     //t1.Remove(PickupStatuForwarder.Undefined);
                     //return t1;
 
                     zPickupStatusList = new List<DropDownBoxData>();
 
-                    foreach (PickupStatuForwarder current in t1)
+                    foreach (PickupStatusForwarder current in t1)
                     {
                         switch (current)
                         {
-                            case PickupStatuForwarder.Undefined:
+                            case PickupStatusForwarder.Undefined:
                                 continue;
 
-                            case PickupStatuForwarder.CustWait:
+                            case PickupStatusForwarder.CustWait:
                                 break;
-                            case PickupStatuForwarder.CustHand:
+                            case PickupStatusForwarder.CustHand:
                                 break;
-                            case PickupStatuForwarder.CustCan:
+                            case PickupStatusForwarder.CustCan:
                                 break;
-                            case PickupStatuForwarder.ForwWait:
+                            case PickupStatusForwarder.ForwWait:
                                 break;
-                            case PickupStatuForwarder.ForwSched:
+                            case PickupStatusForwarder.ForwSched:
                                 break;
                         }
 
-                        var key = current.ToString("G");
-                        var localizedText = (GetGlobalResourceObject("PickupStatusForwarder", key) as string) ?? key;
+                        var localizedText = (GetGlobalResourceObject("PickupStatusForwarder", current.ToString("G")) as string) ?? current.ToString("G");
 
                         zPickupStatusList.Add(new DropDownBoxData
                         {
-                            Key = key,
-                            Value = localizedText,
+                            Value = current,
+                            Text = localizedText,
                             Sorting = localizedText.ToLower()
                         });
                     }
@@ -115,18 +113,18 @@ namespace DemoPickup40.Pages.Pickup
         }
 
 
-        private void PopulateXuPickupStatus(string forwarderPickupStatus)
+        private void PopulateXuPickupStatus(PickupStatusForwarder forwarderPickupStatus)
         {
             var control = XuPickupStatus;
 
             control.DataSource = PickupStatusList;
-            control.DataTextField = "Value";
-            control.DataValueField = "Key";
+            control.DataTextField = "Text";
+            control.DataValueField = "Value";
             control.DataBind();
 
             for (var index = 0; index < PickupStatusList.Count; index++)
             {
-                if (forwarderPickupStatus.Equals(PickupStatusList[index].Key))
+                if (forwarderPickupStatus.Equals(PickupStatusList[index].Value))
                 {
                     control.SelectedIndex = index;
                     break;
@@ -157,7 +155,7 @@ namespace DemoPickup40.Pages.Pickup
                 XuNote.Text = XpForwarderPickup.Note;
                 XuPhone.Text = XpForwarderPickup.Address.Phone;
                 XuPickupDate.Text = XpForwarderPickup.PickupDate.ToString("yyyy-MM-dd");
-                PopulateXuPickupStatus(XpForwarderPickup.PickupStatusText);
+                PopulateXuPickupStatus(XpForwarderPickup.PickupStatusForwarder);
                 XuReadyClose.Text = string.Format(@"{0:hh\:mm}", XpForwarderPickup.ReadyClose);
                 XuReadyOpen.Text = string.Format(@"{0:hh\:mm}", XpForwarderPickup.ReadyOpen);
                 XuState.Text = XpForwarderPickup.Address.State;
@@ -255,7 +253,10 @@ namespace DemoPickup40.Pages.Pickup
                     return;
                 }
             }
-            XpForwarderPickup.PickupStatusText = XuPickupStatus.Text;
+            {
+                PickupStatusForwarder t1;
+                XpForwarderPickup.PickupStatusForwarder = Enum.TryParse(XuPickupStatus.Text, out t1) ? t1 : PickupStatusForwarder.CustWait;
+            }
             {
                 TimeSpan t1;
                 if (TryParse(XuReadyOpen.Text, out t1))

@@ -29,9 +29,21 @@ namespace AppCode.Pages.Pickup
         /// Plain text representation of enum:PickupStatus
         /// Used to control GUI elements.
         /// </summary>
-        public string PickupStatusText { get; set; }
+        public PickupStatusForwarder PickupStatusForwarder { get; set; }
 
 
         public List <GuiCustomerPickup> CustomerPickupList { get; set; }
+
+
+        public string CssGlyphiconStatus
+        {
+            get { return PickupUtil.PickupStatusToGlyphiconStatus(PickupStatusForwarder); }
+        }
+
+        public string CssGlyphiconMove
+        {
+            get { return PickupUtil.PickupStatusToGlyphiconMove(PickupStatusForwarder); }
+        }
+
     }
 }

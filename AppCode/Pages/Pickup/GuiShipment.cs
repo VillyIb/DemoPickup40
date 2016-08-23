@@ -25,7 +25,7 @@
         /// Used to control GUI elements.
         /// Replicated from principal GuiCustomerPickup.
         /// </summary>
-        public string PickupStatusText { get; set; }
+        public PickupStatusCustomer PickupStatusCustomer { get; set; }
 
 
         public string Waybillnumber { get; set; }
@@ -34,5 +34,12 @@
         public decimal Weight { get; set; }
 
 
+        public bool CssVisibleCheckbox
+        {
+            get { return PickupUtil.PickupStatusToDisabled(PickupStatusCustomer); }
+        }
+
     }
+
+
 }

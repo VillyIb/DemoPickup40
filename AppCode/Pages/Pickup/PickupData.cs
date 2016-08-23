@@ -91,7 +91,7 @@ namespace AppCode.Pages.Pickup
                     Dimensions = "50 x 40 x 20",
                     Id = CurrentId++,
                     Address = GetAddress(option),
-                    PickupStatusText = "CustWait",
+                    PickupStatusCustomer = PickupStatusCustomer.CustWait,
                     Waybillnumber = "920001012141600",
                     Weight = 0.5m
                 };
@@ -169,7 +169,7 @@ namespace AppCode.Pages.Pickup
                     PickupDate = new DateTime(2016, 8, 19),
                     ReadyClose = new TimeSpan(15, 30, 0),
                     ReadyOpen = new TimeSpan(12, 30, 0),
-                    PickupStatusText = "CustWait",
+                    PickupStatusCustomer = PickupStatusCustomer.CustWait,
                     Shipmentlist = new List<GuiShipment>
                     {
                         GetGuiShipment(option),
@@ -183,31 +183,31 @@ namespace AppCode.Pages.Pickup
             {
                 case 1:
                     {
-                        result.PickupStatusText = "CustHand";
+                        result.PickupStatusCustomer = PickupStatusCustomer.CustHand;
                     }
                     break;
 
                 case 2:
                     {
-                        result.PickupStatusText = "CustWait";
+                        result.PickupStatusCustomer = PickupStatusCustomer.CustWait;
                     }
                     break;
 
                 case 3:
                     {
-                        result.PickupStatusText = "CustCan";
+                        result.PickupStatusCustomer = PickupStatusCustomer.CustCan;
                     }
                     break;
 
                 case 4:
                     {
-                        result.PickupStatusText = "ForwWait";
+                        result.PickupStatusCustomer = PickupStatusCustomer.ForwWait;
                     }
                     break;
 
                 case 5:
                     {
-                        result.PickupStatusText = "ForwSched";
+                        result.PickupStatusCustomer = PickupStatusCustomer.ForwSched;
                     }
                     break;
 
@@ -236,7 +236,7 @@ namespace AppCode.Pages.Pickup
                     Id = CurrentId++,
                     Note = "Flere afhentninger på samme adresse",
                     PickupDate = new DateTime(2016,08,19),
-                    PickupStatusText = "ForwWait",
+                    PickupStatusForwarder = PickupStatusForwarder.ForwWait,
                     ReadyClose = new TimeSpan(15, 15, 0),
                     ReadyOpen = new TimeSpan(12, 12, 13)
                 };
