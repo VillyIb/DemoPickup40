@@ -188,10 +188,10 @@
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:LinkButton ID="XuFwMoveItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd06" ToolTip='<%# GetLocalResourceObject("XuFwMoveItem.ToolTip") %>   '>
+                            <asp:LinkButton ID="XuFwMoveItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd06">
                                 <span 
                                     class='<%# Eval("CssGlyphiconMove") %>'
-                                    title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".ToolTip") %>' 
+                                    title='<%# GetLocalResourceObject("XuFwMove-Icon.Title") %>' 
                                 />
                             </asp:LinkButton>
                         </ItemTemplate>
@@ -233,7 +233,16 @@
 
                                                 <ItemTemplate>
                                                     <%--Switch between glyphicon-triangle-bottom/top--%>
-                                                    <i class="glyphicon glyphicon-triangle-bottom big"></i>
+                                                    <%--<i class="glyphicon glyphicon-triangle-bottom big"></i>--%>
+                                                    
+                                                    <asp:LinkButton ID="XuExpandItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd07">
+                                                        <span 
+                                                            class='<%# Eval("CssGlyphiconExpand") %>'
+                                                            title='<%# GetLocalResourceObject("XuExpand-Icon.Title") %>' 
+                                                        />
+                                                    </asp:LinkButton>
+                                                    
+
                                                 </ItemTemplate>
 
                                             </asp:TemplateField>
@@ -324,10 +333,10 @@
                                                         CausesValidation="false"
                                                         CommandName="XcCmd01"
                                                         CommandArgument='<%# Eval("PickupStatusForwarder") + "." + Eval("Id") %>'>
-                                <span 
-                                    class='<%# "glyphicon " + GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".Glyphicon") %>' 
-                                    title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".ToolTip") %>' 
-                                    />
+                                                        <span 
+                                                            class='<%# "glyphicon " + GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".Glyphicon") %>' 
+                                                            title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".ToolTip") %>' 
+                                                            />
                                                     </asp:LinkButton>
 
                                                 </ItemTemplate>
@@ -343,10 +352,10 @@
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="XuMoveItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd02" ToolTip='<%# GetLocalResourceObject("XuMoveItem.ToolTip") %>   '>
+                                                    <asp:LinkButton ID="XuMoveItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd02">
                                                     <span 
                                                         class='<%# Eval("CssGlyphiconMove") %>' 
-                                                        title='<%# GetLocalResourceObject("XuMove-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".ToolTip") %>' 
+                                                        title='<%# GetLocalResourceObject("XuCuMove-Icon.Title") %>' 
                                                         />
                                                     </asp:LinkButton>
 
@@ -385,7 +394,7 @@
                                                                 runat="server"
                                                                 AutoGenerateColumns="False"
                                                                 DataSource='<%# Bind("Shipmentlist") %>'
-                                                                CssClass="XuShipmentDetails hidden">
+                                                                CssClass='<%# "XuShipmentDetails" + Eval("CssVisibleShipments") %>' >
 
                                                                 <HeaderStyle CssClass="XuShipmentDetailsHead" />
                                                                 <RowStyle CssClass="XuShipmentDetailsRow" />

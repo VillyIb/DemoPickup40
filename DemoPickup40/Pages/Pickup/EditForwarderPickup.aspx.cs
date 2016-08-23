@@ -136,10 +136,14 @@ namespace DemoPickup40.Pages.Pickup
         private void PopuluateCalculatedValues()
         {
             // (from d in dataRows select d.Date).Min();
-            var readyOpenMax = XpForwarderPickup.CustomerPickupList.Max(t => t.ReadyOpen);
+            var readyOpenMax = XpForwarderPickup.CustomerPickupList.Count > 0 
+                ?  XpForwarderPickup.CustomerPickupList.Max(t => t.ReadyOpen) 
+                : new TimeSpan(0,0,0);
             XuReadyOpenCalculated.Text = readyOpenMax.ToString(@"hh\:mm");
 
-            var readyCloseMin = XpForwarderPickup.CustomerPickupList.Min(t => t.ReadyClose);
+            var readyCloseMin = XpForwarderPickup.CustomerPickupList.Count > 0
+                ? XpForwarderPickup.CustomerPickupList.Min(t => t.ReadyClose)
+                : new TimeSpan(23, 59, 0);
             XuReadyCloseCalculated.Text = readyCloseMin.ToString(@"hh\:mm");
         }
 

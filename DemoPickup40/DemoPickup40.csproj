@@ -96,7 +96,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\PickupStatusForwarder.designer.cs">
+    <Compile Include="App_GlobalResources\Pages\Pickup\PickupStatusForwarder.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PickupStatusForwarder.resx</DependentUpon>
@@ -191,7 +191,7 @@
     <Content Include="Pages\Pickup\App_LocalResources\EditForwarderPickup.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\PickupStatusForwarder.resx">
+    <Content Include="App_GlobalResources\Pages\Pickup\PickupStatusForwarder.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>PickupStatusForwarder.designer.cs</LastGenOutput>
     </Content>

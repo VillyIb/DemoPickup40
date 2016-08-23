@@ -61,7 +61,18 @@ namespace AppCode.Pages.Pickup
         {
             get { return PickupUtil.PickupStatusToDisabled(PickupStatusForwarder); }
         }
+        
+        public bool IsExpanded { get; set; }
 
+        public string CssGlyphiconExpand
+        {
+            get { return IsExpanded ? "glyphicon glyphicon-triangle-top big" : "glyphicon glyphicon-triangle-bottom big"; }
+        }
+
+        public string CssVisibleShipments
+        {
+            get { return IsExpanded ? "" : " hidden"; }
+        }
 
     }
 }

@@ -123,24 +123,6 @@
   <data name="XuDimensionHead.Text" xml:space="preserve">
     <value>Dimension</value>
   </data>
-  <data name="XuMove-Icon_StatusCode-CustCan.ToolTip" xml:space="preserve">
-    <value>Move selected Shipments</value>
-  </data>
-  <data name="XuMove-Icon_StatusCode-CustHand.ToolTip" xml:space="preserve">
-    <value>Move selected Shipments</value>
-  </data>
-  <data name="XuMove-Icon_StatusCode-CustWait.ToolTip" xml:space="preserve">
-    <value>Move selected Shipments</value>
-  </data>
-  <data name="XuMove-Icon_StatusCode-ForwSched.ToolTip" xml:space="preserve">
-    <value>Locked</value>
-  </data>
-  <data name="XuMove-Icon_StatusCode-ForwWait.ToolTip" xml:space="preserve">
-    <value>Move selected Shipments</value>
-  </data>
-  <data name="XuMove-Icon_StatusCode-Undefined.ToolTip" xml:space="preserve">
-    <value>None</value>
-  </data>
   <data name="XuMoveHeader.Text" xml:space="preserve">
     <value>Move</value>
   </data>
@@ -241,5 +223,14 @@
   </data>
   <data name="XuFwSelectHeader.Text" xml:space="preserve">
     <value>&amp;nbsp;</value>
+  </data>
+  <data name="XuCuMove-Icon.Title" xml:space="preserve">
+    <value>Move selected Shipments</value>
+  </data>
+  <data name="XuExpand-Icon.Title" xml:space="preserve">
+    <value>Expand/Collapse Shipments</value>
+  </data>
+  <data name="XuFwMove-Icon.Title" xml:space="preserve">
+    <value>Move selected Customer Pickups</value>
   </data>
 </root>
