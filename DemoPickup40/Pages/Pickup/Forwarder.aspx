@@ -33,6 +33,15 @@
                 <RowStyle CssClass="XuForwarderPickupRow" />
 
                 <Columns>
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            &nbsp;
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <i class="glyphicon glyphicon-triangle-bottom big"></i>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
 
                     <%--Column Expand --%>
                     <asp:TemplateField HeaderText="XuFwExpand">
@@ -42,9 +51,18 @@
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <%--Switch between glyphicon-triangle-bottom/top--%>
-                            <%--<i class="glyphicon glyphicon-triangle-top big"></i>--%>
-                            &nbsp;&nbsp;&nbsp;
+                            <asp:LinkButton
+                                ID="LinkButton129"
+                                runat="server"
+                                CausesValidation="false"
+                                CommandName="XcCmd08"
+                                CommandArgument='<%# Eval("Id") %>'>
+                                <span 
+                                    class ='<%# Eval("CssGlyphiconExpandGroup") %>'
+                                    title='<%# GetLocalResourceObject("XuFwEditEventItem.Text") %>' 
+                                    />
+                            </asp:LinkButton>
+
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuFwExpand" />
@@ -223,6 +241,15 @@
                                         <RowStyle CssClass="XuCustomerPickupRow" />
 
                                         <Columns>
+
+                                            <asp:TemplateField>
+                                                <HeaderTemplate>
+                                                    &nbsp;
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    &nbsp;&nbsp;&nbsp;
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
 
                                             <%--Column Expand --%>
                                             <asp:TemplateField HeaderText="XuExpand">

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace AppCode.Pages.Pickup
@@ -32,7 +33,7 @@ namespace AppCode.Pages.Pickup
         public PickupStatusForwarder PickupStatusForwarder { get; set; }
 
 
-        public List <GuiCustomerPickup> CustomerPickupList { get; set; }
+        public List<GuiCustomerPickup> CustomerPickupList { get; set; }
 
 
         public string CssGlyphiconStatus
@@ -43,6 +44,15 @@ namespace AppCode.Pages.Pickup
         public string CssGlyphiconMove
         {
             get { return PickupUtil.PickupStatusToGlyphiconMove(PickupStatusForwarder); }
+        }
+
+        /// <summary>
+        /// Shows Expand if all sub items are collapsed.
+        /// Shows Collapse in any sub item is expanded.
+        /// </summary>
+        public string CssGlyphiconExpandGroup
+        {
+            get { return CustomerPickupList.Any(t => t.IsExpanded) ? "glyphicon glyphicon-triangle-top big" : "glyphicon glyphicon-triangle-bottom big"; }
         }
 
     }

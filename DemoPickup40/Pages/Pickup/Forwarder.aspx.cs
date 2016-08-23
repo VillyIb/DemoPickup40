@@ -460,6 +460,36 @@ namespace DemoPickup40.Pages.Pickup
         }
 
 
+        private void XcCmd08(string commandArgument, GridView source)
+        {
+            // Expected syntax: int: ForwarderPickup.Id.
+
+            do
+            {
+                int forwarderPickupId;
+                if (int.TryParse(commandArgument, out forwarderPickupId))
+                {
+                    var currentForwarderPickup =
+                            (from forwarderPickup in XpPrimaryRowList
+                             where forwarderPickup.Id == forwarderPickupId
+                             select forwarderPickup).First();
+
+                    if(currentForwarderPickup==null) { continue; }
+
+                    var isExpandedGroup = currentForwarderPickup.CustomerPickupList.Any(t => t.IsExpanded);
+
+                    foreach(var currentCustomerPickup in currentForwarderPickup.CustomerPickupList)
+                    {
+                        currentCustomerPickup.IsExpanded = !isExpandedGroup;
+                    }                    
+                }
+
+            } while (false);
+
+            BindPage();
+        }
+
+
         protected
             void XuGridForwarderPicup_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -496,6 +526,12 @@ namespace DemoPickup40.Pages.Pickup
                 {
                     XcCmd07(e.CommandArgument as string, sender as GridView);
                 }
+                    break;
+
+                case "XcCmd08":
+                    {
+                        XcCmd08(e.CommandArgument as string, sender as GridView);
+                    }
                     break;
             }
 
