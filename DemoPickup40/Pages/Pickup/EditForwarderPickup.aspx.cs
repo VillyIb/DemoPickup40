@@ -22,7 +22,7 @@ namespace DemoPickup40.Pages.Pickup
             set { Session[XpForwarderPickupKey] = value; }
         }
         #endregion
-        
+
 
         #region P: XpPrimaryRowList { get; set; } in Session
         private const string XpPrimaryRowListKey = "PrimaryRowList";
@@ -34,26 +34,54 @@ namespace DemoPickup40.Pages.Pickup
         }
         #endregion
 
+        private List<DropDownBoxData> zPickupStatusList;
 
-        public NameValueCollection PickupStatusList
+        public List<DropDownBoxData> PickupStatusList
         {
             get
             {
-                var t1 = Enum.GetNames(typeof(PickupStatuForwarder));
-                //t1.Remove(PickupStatuForwarder.Undefined);
-                //return t1;
-
-                var t2 = new NameValueCollection();
-
-                foreach (var current in t1)
+                if (zPickupStatusList == null)
                 {
-                    var localizedText = (GetLocalResourceObject(current) as string) ?? current;
-                    
-                    t2.Add( current, "Xt" + localizedText); // dur ikke kommer ud som 2 kolonner med current....
+
+                    var t1 = Enum.GetValues(typeof(PickupStatuForwarder));
+                    //t1.Remove(PickupStatuForwarder.Undefined);
+                    //return t1;
+
+                    zPickupStatusList = new List<DropDownBoxData>();
+
+                    foreach (PickupStatuForwarder current in t1)
+                    {
+                        switch (current)
+                        {
+                            case PickupStatuForwarder.Undefined:
+                                continue;
+
+                            case PickupStatuForwarder.CustWait:
+                                break;
+                            case PickupStatuForwarder.CustHand:
+                                break;
+                            case PickupStatuForwarder.CustCan:
+                                break;
+                            case PickupStatuForwarder.ForwWait:
+                                break;
+                            case PickupStatuForwarder.ForwSched:
+                                break;
+                        }
+
+                        var key = current.ToString("G");
+                        var localizedText = (GetGlobalResourceObject("PickupStatusForwarder", key) as string) ?? key;
+
+                        zPickupStatusList.Add(new DropDownBoxData
+                        {
+                            Key = key,
+                            Value = localizedText,
+                            Sorting = localizedText.ToLower()
+                        });
+                    }
+
+                    zPickupStatusList = zPickupStatusList.OrderBy(t => t.Sorting).ToList();
                 }
-
-
-                return t2;
+                return zPickupStatusList;
             }
         }
 
@@ -86,6 +114,38 @@ namespace DemoPickup40.Pages.Pickup
             }
         }
 
+
+        private void PopulateXuPickupStatus(string forwarderPickupStatus)
+        {
+            var control = XuPickupStatus;
+
+            control.DataSource = PickupStatusList;
+            control.DataTextField = "Value";
+            control.DataValueField = "Key";
+            control.DataBind();
+
+            for (var index = 0; index < PickupStatusList.Count; index++)
+            {
+                if (forwarderPickupStatus.Equals(PickupStatusList[index].Key))
+                {
+                    control.SelectedIndex = index;
+                    break;
+                }
+            }
+        }
+
+
+        private void PopuluateCalculatedValues()
+        {
+            // (from d in dataRows select d.Date).Min();
+            var readyOpenMax = XpForwarderPickup.CustomerPickupList.Max(t => t.ReadyOpen);
+            XuReadyOpenCalculated.Text = readyOpenMax.ToString(@"hh\:mm");
+
+            var readyCloseMin = XpForwarderPickup.CustomerPickupList.Min(t => t.ReadyClose);
+            XuReadyCloseCalculated.Text = readyCloseMin.ToString(@"hh\:mm");
+        }
+
+
         private void Populate()
         {
             if (XpForwarderPickup != null)
@@ -97,21 +157,25 @@ namespace DemoPickup40.Pages.Pickup
                 XuNote.Text = XpForwarderPickup.Note;
                 XuPhone.Text = XpForwarderPickup.Address.Phone;
                 XuPickupDate.Text = XpForwarderPickup.PickupDate.ToString("yyyy-MM-dd");
-                XuPickupStatus.Text = XpForwarderPickup.PickupStatusText;
+                PopulateXuPickupStatus(XpForwarderPickup.PickupStatusText);
                 XuReadyClose.Text = string.Format(@"{0:hh\:mm}", XpForwarderPickup.ReadyClose);
                 XuReadyOpen.Text = string.Format(@"{0:hh\:mm}", XpForwarderPickup.ReadyOpen);
                 XuState.Text = XpForwarderPickup.Address.State;
                 XuStreet1.Text = XpForwarderPickup.Address.Street1;
                 XuStreet2.Text = XpForwarderPickup.Address.Street2;
                 XuZip.Text = XpForwarderPickup.Address.Zip;
+
+                PopuluateCalculatedValues();
             }
         }
+
 
         private void ShowError(string key, List<string> argList)
         {
             var format = (GetLocalResourceObject(key) as string) ?? key + " {0}";
             XuError.Text = string.Format(format, argList);
         }
+
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -121,9 +185,6 @@ namespace DemoPickup40.Pages.Pickup
                 LoadForwarderPickup();
                 Populate();
             }
-
-            DropDownList1.DataSource = PickupStatusList;
-            DropDownList1.DataBind();
 
             Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
         }
@@ -139,9 +200,9 @@ namespace DemoPickup40.Pages.Pickup
         }
 
 
-        private static bool TryParse(ITextControl source, out TimeSpan value)
+        private static bool TryParse(string source, out TimeSpan value)
         {
-            var dateString = source.Text;
+            var dateString = source;
 
             var culture = CultureInfo.InvariantCulture;
             const DateTimeStyles styles = DateTimeStyles.AssumeLocal;
@@ -197,7 +258,7 @@ namespace DemoPickup40.Pages.Pickup
             XpForwarderPickup.PickupStatusText = XuPickupStatus.Text;
             {
                 TimeSpan t1;
-                if (TryParse(XuReadyOpen, out t1))
+                if (TryParse(XuReadyOpen.Text, out t1))
                 {
                     XpForwarderPickup.ReadyOpen = t1;
                 }
@@ -210,7 +271,7 @@ namespace DemoPickup40.Pages.Pickup
             }
             {
                 TimeSpan t1;
-                if (TryParse(XuReadyClose, out t1))
+                if (TryParse(XuReadyClose.Text, out t1))
                 {
                     XpForwarderPickup.ReadyClose = t1;
                 }
@@ -231,6 +292,24 @@ namespace DemoPickup40.Pages.Pickup
 
         }
 
+        protected void XuReadyOpenCalculated_Click(object sender, EventArgs e)
+        {
+            TimeSpan t1;
+            if (TryParse(XuReadyOpenCalculated.Text, out t1))
+            {
+                XpForwarderPickup.ReadyOpen = t1;
+            }
+            Populate();
+        }
 
+        protected void XuReadyCloseCalculated_Click(object sender, EventArgs e)
+        {
+            TimeSpan t1;
+            if (TryParse(XuReadyCloseCalculated.Text, out t1))
+            {
+                XpForwarderPickup.ReadyClose = t1;
+            }
+            Populate();
+        }
     }
 }

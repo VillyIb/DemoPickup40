@@ -4,12 +4,35 @@
 .block {
     display: table;
     border: 1px solid black;
+    width:auto;
+}
+
+.div-table{
+    display: table;
+    border: 1px dashed black;
+    width:auto;
+}
+
+.div-row
+{
+    display:table-row;
+    width:auto;
+    clear:both;
+}
+
+div-col-header{
+
+}
+
+div-col{
+
 }
 
 .row {
     display: table-row;
-    width: 500px;
+    width: auto;
     border: 5px solid green;
+    clear:both;
 }
 
 .header {
@@ -17,14 +40,21 @@
 }
 
 .col1 {
-    display: table-cell;
+    display: table-column;
     width: 100px;
-    border: 1px solid black;
+    background-color:aquamarine;
 }
 
 .col2 {
-    display: table-cell;
+    display: table-column;
     width: 200px;
+    background-color:darksalmon;
+}
+
+.col3{
+    display: table-column;
+    width: 50px;
+    background-color: yellow;
 }
 
 .hidden {

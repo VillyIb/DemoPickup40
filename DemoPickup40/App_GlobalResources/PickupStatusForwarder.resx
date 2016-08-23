@@ -117,16 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Error_PickpDate" xml:space="preserve">
-    <value>Illegal format 'PickupDate' please specify as 'yyyy-mm-dd'</value>
+  <data name="CustCan" xml:space="preserve">
+    <value>Cancelled by Customer</value>
   </data>
-  <data name="Error_ReadyClose" xml:space="preserve">
-    <value>Illegal format 'ReadyClose' please specify as 'hh:mm' e.g.:'15:00'</value>
+  <data name="CustHand" xml:space="preserve">
+    <value>No Pickup</value>
   </data>
-  <data name="Error_ReadyOpen" xml:space="preserve">
-    <value>Illegal format 'ReadyOpen' please specify as 'hh:mm' e.g.:'14:30'</value>
-  </data>
-  <data name="XuReadyClose-Text_CustWait.Text" xml:space="preserve">
+  <data name="CustWait" xml:space="preserve">
     <value>Pending on Customer</value>
+  </data>
+  <data name="ForwSched" xml:space="preserve">
+    <value>Scheduled by Forwarder</value>
+  </data>
+  <data name="ForwWait" xml:space="preserve">
+    <value>Pending on Forwarder</value>
   </data>
 </root>

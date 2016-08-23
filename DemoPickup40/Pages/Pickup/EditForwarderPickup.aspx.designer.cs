@@ -229,6 +229,15 @@ namespace DemoPickup40.Pages.Pickup {
         protected global::System.Web.UI.WebControls.TextBox XuReadyOpen;
         
         /// <summary>
+        /// XuReadyOpenCalculated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button XuReadyOpenCalculated;
+        
+        /// <summary>
         /// Label13 control.
         /// </summary>
         /// <remarks>
@@ -247,6 +256,15 @@ namespace DemoPickup40.Pages.Pickup {
         protected global::System.Web.UI.WebControls.TextBox XuReadyClose;
         
         /// <summary>
+        /// XuReadyCloseCalculated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button XuReadyCloseCalculated;
+        
+        /// <summary>
         /// Label14 control.
         /// </summary>
         /// <remarks>
@@ -262,16 +280,7 @@ namespace DemoPickup40.Pages.Pickup {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox XuPickupStatus;
-        
-        /// <summary>
-        /// DropDownList1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList XuPickupStatus;
         
         /// <summary>
         /// XuSubmit control.
