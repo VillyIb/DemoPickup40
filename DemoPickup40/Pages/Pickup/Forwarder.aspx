@@ -70,8 +70,8 @@
                             </asp:LinkButton>
                         </ItemTemplate>
 
-                        <HeaderStyle CssClass="XuFwExpandCustomer ColWidth01" />
-                        <ItemStyle CssClass="XuFwExpandCustomer ColWidth01" />
+                        <HeaderStyle CssClass="XuFwExpandCustomer" />
+                        <ItemStyle CssClass="XuFwExpandCustomer" />
 
                     </asp:TemplateField>
 
@@ -98,8 +98,8 @@
 
                         </ItemTemplate>
 
-                        <HeaderStyle CssClass="XuFwExpand ColWidth02" />
-                        <ItemStyle CssClass="XuFwExpand ColWidth02" />
+                        <HeaderStyle CssClass="XuFwExpand" />
+                        <ItemStyle CssClass="XuFwExpand" />
 
                     </asp:TemplateField>
 
@@ -174,7 +174,7 @@
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuFwCounterItem" runat="server" Text='<%# string.Format("{0} / {1}", Eval("CountCustomers") , Eval("CountShipments") ) %>' />
+                            <asp:Label ID="XuFwCounterItem" runat="server" Text='<%# string.Format("{0} ({1})", Eval("CountCustomers") , Eval("CountShipments") ) %>' />
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuFwCounter" />
@@ -322,8 +322,8 @@
                                                     &nbsp;&nbsp;&nbsp;
                                                 </ItemTemplate>
 
-                                                <HeaderStyle CssClass="XuCuFiller ColWidth01" />
-                                                <ItemStyle CssClass="XuCuFiller ColWidth01" />
+                                                <HeaderStyle CssClass="XuCuFiller" />
+                                                <ItemStyle CssClass="XuCuFiller" />
 
                                             </asp:TemplateField>
 
@@ -345,8 +345,8 @@
 
                                                 </ItemTemplate>
 
-                                                <HeaderStyle CssClass="XuCuExpand ColWidth02" />
-                                                <ItemStyle CssClass="XuCuExpand ColWidth02" />
+                                                <HeaderStyle CssClass="XuCuExpand" />
+                                                <ItemStyle CssClass="XuCuExpand" />
 
                                             </asp:TemplateField>
 
@@ -546,8 +546,8 @@
                                                                             &nbsp;
                                                                         </ItemTemplate>
 
-                                                                        <HeaderStyle CssClass="XuCuFillerA ColWidth01" />
-                                                                        <ItemStyle CssClass="XuCuFillerA ColWidth01" />
+                                                                        <HeaderStyle CssClass="XuCuFillerA" />
+                                                                        <ItemStyle CssClass="XuCuFillerA" />
 
                                                                     </asp:TemplateField>
 
@@ -561,8 +561,8 @@
                                                                             &nbsp;
                                                                         </ItemTemplate>
 
-                                                                        <HeaderStyle CssClass="XuCuFillerB ColWidth02" />
-                                                                        <ItemStyle CssClass="XuCuFillerB ColWidth02" />
+                                                                        <HeaderStyle CssClass="XuCuFillerB" />
+                                                                        <ItemStyle CssClass="XuCuFillerB" />
 
                                                                     </asp:TemplateField>
 

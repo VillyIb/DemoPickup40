@@ -66,32 +66,44 @@
 }
 
 .XuWeight {
-    width: 10%;
+    width: 50px;
 }
 
 .XuDimension {
-    width: 20%;
+    width: auto;
 }
 
 .XuSelect {
     width: 50px;
 }
 
-.XuFwExpand {
-    width: 19px;
+.XuFwExpand, .XuCuExpand {
+    width: 30px;
 }
 
 /* Column Width across multiple tables */
-.ColWidth01 {
+.ColWidth01, .XuFwExpandCustomer {
     width: 30px;
 }
 
-.ColWidth02 {
+.XuCuFiller, .XuCuFiller01 {
+    width: 29px;
+}
+
+.XuCuFillerA {
+    width: 28px;
+}
+
+.XuCuFillerB {
     width: 30px;
 }
 
-.XuFwMove, .XuCuMove, .XuCuSelect, .XuShFiller, .XuShSelect {
+.XuFwMove, .XuCuMove, .XuCuSelect,  .XuShSelect {
     width: 44px;
+}
+
+.XuShFiller {
+    width: 43px;
 }
 
 .XuFwEdit, .XuCuEdit {
@@ -110,8 +122,8 @@
     width: 300px;
 }
 
-.XuFwCounter, .XuCuCounter {
-    width: 30px;
+.XuFwCounter, .XuCuCounter, .XuShWeight {
+    width: 50px;
 }
 
 .XuFwNote, .XuCuNote {
