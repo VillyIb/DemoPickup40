@@ -101,11 +101,11 @@ namespace AppCode.Pages.Pickup
             {
             }
 
-            var t1 = result.Id%5 + 1;
+            var t1 = result.Id % 5 + 1;
 
-            switch(t1)
-            { 
-            case 1:
+            switch (t1)
+            {
+                case 1:
                     {
                         result.CarrierName = "Post Nord";
                     }
@@ -235,7 +235,7 @@ namespace AppCode.Pages.Pickup
                     CustomerPickupList = new List<GuiCustomerPickup>(),
                     Id = CurrentId++,
                     Note = "Flere afhentninger på samme adresse",
-                    PickupDate = new DateTime(2016,08,19),
+                    PickupDate = new DateTime(2016, 08, 19),
                     PickupStatusForwarder = PickupStatusForwarder.ForwWait,
                     ReadyClose = new TimeSpan(15, 15, 0),
                     ReadyOpen = new TimeSpan(12, 12, 13)
@@ -249,6 +249,25 @@ namespace AppCode.Pages.Pickup
             return result;
         }
 
+
+        public static GuiContainer GetGuiContainer(int option)
+        {
+            var result = new GuiContainer
+            {
+                ForwarderPickupList = new List<GuiForwarderPickup>
+                {
+                    GetGuiForwarderPickup(1),
+                    GetGuiForwarderPickup(2),
+                    GetGuiForwarderPickup(3),
+                    GetGuiForwarderPickup(4),
+                    GetGuiForwarderPickup(5)
+                }
+            };
+
+            return result;
+        }
+
+        // -- Class
 
         static PickupData()
         {

@@ -10,13 +10,37 @@
 }
 
 .HeaderStyleLevel2 {
-    
+}
+
+.css-table {
+    display: table;
+}
+
+.css-tr {
+    display: table-row;
+}
+
+.css-th {
+    display: table-cell;
+    text-align: center;
+}
+
+.css-tr {
+    display: table-cell;
+}
+
+.XuForwarderPickup {
+    width: 1440px;
+}
+
+.XuCustomerPickup {
+    width: 100%;
 }
 
 .XuForwarderPickupRow {
     padding-top: 10px;
     background-color: antiquewhite;
-    height:30px;
+    height: 30px;
 }
 
 .XuMove {
@@ -42,11 +66,11 @@
 }
 
 .XuWeight {
-    width:10%
+    width: 10%;
 }
 
 .XuDimension {
-    width:20%;    
+    width: 20%;
 }
 
 .XuSelect {
@@ -56,3 +80,53 @@
 .XuFwExpand {
     width: 19px;
 }
+
+/* Column Width across multiple tables */
+.ColWidth01 {
+    width: 30px;
+}
+
+.ColWidth02 {
+    width: 30px;
+}
+
+.XuFwMove, .XuCuMove, .XuCuSelect, .XuShFiller, .XuShSelect {
+    width: 44px;
+}
+
+.XuFwEdit, .XuCuEdit {
+    width: 44px;
+}
+
+.XuFwAddress, .XuCuAddress {
+    width: 250px;
+}
+
+.XuFwPickup, .XuCuPickup {
+    width: 250px;
+}
+
+.XuFwCarrier, .XuCuCarrier, .XuShCarrier {
+    width: 300px;
+}
+
+.XuFwCounter, .XuCuCounter {
+    width: 30px;
+}
+
+.XuFwNote, .XuCuNote {
+    width: auto;
+}
+
+.XuFwStatus, .XuCuStatus {
+    width: 200px;
+}
+
+.XuShWaybillnumber {
+    width: 500px;
+}
+
+.XuShDimension {
+    width: auto;
+}
+

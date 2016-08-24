@@ -61,7 +61,7 @@ namespace AppCode.Pages.Pickup
         {
             get { return PickupUtil.PickupStatusToDisabled(PickupStatusForwarder); }
         }
-        
+
         public bool IsExpanded { get; set; }
 
         public string CssGlyphiconExpand
@@ -74,5 +74,10 @@ namespace AppCode.Pages.Pickup
             get { return IsExpanded ? "" : " hidden"; }
         }
 
+
+        public int CountShipments
+        {
+            get { return Shipmentlist.Count; }
+        }
     }
 }

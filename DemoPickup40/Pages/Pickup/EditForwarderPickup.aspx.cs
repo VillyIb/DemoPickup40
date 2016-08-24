@@ -24,12 +24,18 @@ namespace DemoPickup40.Pages.Pickup
 
 
         #region P: XpPrimaryRowList { get; set; } in Session
-        private const string XpPrimaryRowListKey = "PrimaryRowList";
+        private const string XpGuiContainerKey = "GuiContainer";
+
+        private GuiContainer XpGuiContainer
+        {
+            get { return Session[XpGuiContainerKey] as GuiContainer; }
+            set { Session[XpGuiContainerKey] = value; }
+        }
+
 
         private List<GuiForwarderPickup> XpPrimaryRowList
         {
-            get { return Session[XpPrimaryRowListKey] as List<GuiForwarderPickup>; }
-            set { Session[XpPrimaryRowListKey] = value; }
+            get { return XpGuiContainer.ForwarderPickupList; }
         }
         #endregion
 

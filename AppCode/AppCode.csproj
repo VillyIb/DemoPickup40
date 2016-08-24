@@ -42,6 +42,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Pages\Pickup\DropDownBoxData.cs" />
     <Compile Include="Pages\Pickup\GuiAddress.cs" />
+    <Compile Include="Pages\Pickup\GuiContainer.cs" />
     <Compile Include="Pages\Pickup\GuiCustomerPickup.cs" />
     <Compile Include="Pages\Pickup\GuiForwarderPickup.cs" />
     <Compile Include="Pages\Pickup\GuiShipment.cs" />

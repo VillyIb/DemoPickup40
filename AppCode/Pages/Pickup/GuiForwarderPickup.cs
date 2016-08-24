@@ -55,5 +55,31 @@ namespace AppCode.Pages.Pickup
             get { return CustomerPickupList.Any(t => t.IsExpanded) ? "glyphicon glyphicon-triangle-top big" : "glyphicon glyphicon-triangle-bottom big"; }
         }
 
+        /// <summary>
+        /// Contols display of Customer Pickup rows below Forwarder Pickup
+        /// </summary>
+        public bool IsExpandedCustomer { get; set; }
+
+
+        public string CssGlyphiconExpandCustomer
+        {
+            get { return IsExpandedCustomer ? "glyphicon glyphicon-triangle-top big" : "glyphicon glyphicon-triangle-bottom big"; }
+        }
+
+        public string CssVisibleCustomer
+        {
+            get { return IsExpandedCustomer ? "" : " hidden"; }
+        }
+
+        public int CountCustomers
+        {
+            get { return CustomerPickupList.Count; }
+        }
+
+        public int CountShipments
+        {
+            get { return CustomerPickupList.Sum(t => t.Shipmentlist.Count); }
+        }
+
     }
 }

@@ -19,6 +19,22 @@
 
         <ContentTemplate>
 
+            <div class="css-table">
+                <div class="css-tr">
+                    <div class="css-td ColWidth01">
+                        <asp:LinkButton
+                            ID="XuContainerCol1"
+                            runat="server"
+                            CausesValidation="false"
+                            CommandName="XcCmd11"
+                            OnClick="XuContainerCol1_Click">
+                            <div id="XuContainerCol1Icon" runat="server"
+                                class="glyphicon glyphicon-triangle-bottom big"
+                                title='<%# GetLocalResourceObject("XuContainerCol1Icon.Text") %>' />
+                        </asp:LinkButton>
+                    </div>
+                </div>
+            </div>
 
             <%--Forwarder Pickup Grid View--%>
             <asp:GridView
@@ -26,47 +42,64 @@
                 runat="server"
                 AutoGenerateColumns="false"
                 ShowHeaderWhenEmpty="true"
-                CssClass=""
+                CssClass="XuForwarderPickup"
                 OnRowCommand="XuGridForwarderPicup_RowCommand">
 
                 <HeaderStyle CssClass="XuForwarderPickupHeader" />
                 <RowStyle CssClass="XuForwarderPickupRow" />
 
                 <Columns>
-                    <asp:TemplateField>
+
+                    <%--Column Expand Customer Pickups below Forwarder Pickup --%>
+                    <asp:TemplateField HeaderText="XuFwExpandCustomer">
                         <HeaderTemplate>
                             &nbsp;
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <i class="glyphicon glyphicon-triangle-bottom big"></i>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-
-
-                    <%--Column Expand --%>
-                    <asp:TemplateField HeaderText="XuFwExpand">
-
-                        <HeaderTemplate>
-                            <asp:Label ID="XuFwExpandHeader" runat="server" Text="&nbsp;" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
                             <asp:LinkButton
-                                ID="LinkButton129"
+                                ID="XuFwExpandCustomerItem"
+                                runat="server"
+                                CausesValidation="false"
+                                CommandName="XcCmd09"
+                                CommandArgument='<%# Eval("Id") %>'>
+                                <span
+                                    class ='<%# Eval("CssGlyphiconExpandCustomer") %>'
+                                    title='<%# GetLocalResourceObject("XuFwExpandCustomerItem.Text") %>' 
+                                    />
+                            </asp:LinkButton>
+                        </ItemTemplate>
+
+                        <HeaderStyle CssClass="XuFwExpandCustomer ColWidth01" />
+                        <ItemStyle CssClass="XuFwExpandCustomer ColWidth01" />
+
+                    </asp:TemplateField>
+
+
+                    <%--Column Expand all Shipments below Customer Pickups below Forwarder Pickup --%>
+                    <asp:TemplateField HeaderText="XuFwExpandShipment">
+
+                        <HeaderTemplate>
+                            <asp:Label ID="XuFwExpandShipmentHeader" runat="server" Text="&nbsp;" />
+                        </HeaderTemplate>
+
+                        <ItemTemplate>
+                            <asp:LinkButton
+                                ID="XuFwExpandShipmentItem"
                                 runat="server"
                                 CausesValidation="false"
                                 CommandName="XcCmd08"
                                 CommandArgument='<%# Eval("Id") %>'>
                                 <span 
                                     class ='<%# Eval("CssGlyphiconExpandGroup") %>'
-                                    title='<%# GetLocalResourceObject("XuFwEditEventItem.Text") %>' 
+                                    title='<%# GetLocalResourceObject("XuFwExpandShipmentItem.Text") %>' 
                                     />
                             </asp:LinkButton>
 
                         </ItemTemplate>
 
-                        <HeaderStyle CssClass="XuFwExpand" />
-                        <ItemStyle CssClass="XuFwExpand" />
+                        <HeaderStyle CssClass="XuFwExpand ColWidth02" />
+                        <ItemStyle CssClass="XuFwExpand ColWidth02" />
 
                     </asp:TemplateField>
 
@@ -82,6 +115,9 @@
                             <asp:Label ID="XuFwAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Bind("Address.Street1") %>' />
                         </ItemTemplate>
 
+                        <HeaderStyle CssClass="XuFwAddress" />
+                        <ItemStyle CssClass="XuFwAddress" />
+
                     </asp:TemplateField>
 
                     <%--Column Pickup Window --%>
@@ -93,7 +129,7 @@
 
                         <ItemTemplate>
                             <%--<asp:Label ID="XuFwPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
-                            <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuPickupItem.Format"), Eval("PickupDate"), Eval("ReadyOpen"), Eval("ReadyClose")) %>'></asp:Label>
+                            <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuFwPickupItem.Format"), Eval("PickupDate"), Eval("ReadyOpen"), Eval("ReadyClose")) %>'></asp:Label>
                             <asp:LinkButton
                                 ID="XuFwdPickupX1"
                                 runat="server"
@@ -106,6 +142,9 @@
                                     />
                             </asp:LinkButton>
                         </ItemTemplate>
+
+                        <HeaderStyle CssClass="XuFwPickup" />
+                        <ItemStyle CssClass="XuFwPickup" />
 
                     </asp:TemplateField>
 
@@ -121,6 +160,26 @@
                             <asp:Label ID="XuFwCarrierItem" runat="server" Text='<%# Bind("CarrierNameList") %>' />
                         </ItemTemplate>
 
+                        <HeaderStyle CssClass="XuFwCarrier" />
+                        <ItemStyle CssClass="XuFwCarrier" />
+
+                    </asp:TemplateField>
+
+
+                    <%--Column Counters--%>
+                    <asp:TemplateField HeaderText="XuFwCounter">
+
+                        <HeaderTemplate>
+                            <asp:Label ID="XuFwCounterHeader" runat="server" Text="XuFwCounterHeader" meta:resourcekey="XuFwCounterHeader" />
+                        </HeaderTemplate>
+
+                        <ItemTemplate>
+                            <asp:Label ID="XuFwCounterItem" runat="server" Text='<%# string.Format("{0} / {1}", Eval("CountCustomers") , Eval("CountShipments") ) %>' />
+                        </ItemTemplate>
+
+                        <HeaderStyle CssClass="XuFwCounter" />
+                        <ItemStyle CssClass="XuFwCounter" />
+
                     </asp:TemplateField>
 
 
@@ -134,6 +193,9 @@
                         <ItemTemplate>
                             <asp:Label ID="XuFwNoteItem" runat="server" Text='<%# Bind("Note") %>' />
                         </ItemTemplate>
+
+                        <HeaderStyle CssClass="XuFwNote" />
+                        <ItemStyle CssClass="XuFwNote" />
 
                     </asp:TemplateField>
 
@@ -171,6 +233,9 @@
 
                         </ItemTemplate>
 
+                        <HeaderStyle CssClass="XuFwStatus" />
+                        <ItemStyle CssClass="XuFwStatus" />
+
                     </asp:TemplateField>
 
 
@@ -195,11 +260,14 @@
                             </asp:LinkButton>
                         </ItemTemplate>
 
+                        <HeaderStyle CssClass="XuFwEdit" />
+                        <ItemStyle CssClass="XuFwEdit" />
+
                     </asp:TemplateField>
 
 
                     <%--Move Customer Pickup--%>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="XuFwMove">
 
                         <HeaderTemplate>
                             <asp:Label ID="XuFwMoveHeader" runat="server" Text='<%# GetLocalResourceObject("XuFwMoveHeader.Text") %>' />
@@ -214,6 +282,9 @@
                             </asp:LinkButton>
                         </ItemTemplate>
 
+                        <HeaderStyle CssClass="XuFwMove" />
+                        <ItemStyle CssClass="XuFwMove" />
+
                     </asp:TemplateField>
 
 
@@ -225,7 +296,7 @@
                         <ItemTemplate>
                             <%--NOTE! this Column is mapped to a new row.--%>
                             <tr>
-                                <td colspan="7">
+                                <td colspan="10">
 
                                     <%--Customer Pickup  GridView--%>
                                     <asp:GridView
@@ -233,7 +304,7 @@
                                         runat="server"
                                         AutoGenerateColumns="False"
                                         ShowHeaderWhenEmpty="True"
-                                        CssClass=""
+                                        CssClass='<%# "XuCustomerPickup" + Eval("CssVisibleCustomer") %>'
                                         DataSource='<%# Bind("CustomerPickupList") %>'
                                         OnRowCommand="XuGridCustomerPickup_RowCommand">
 
@@ -242,102 +313,136 @@
 
                                         <Columns>
 
-                                            <asp:TemplateField>
+                                            <%--Column filler column to allign with parent table--%>
+                                            <asp:TemplateField HeaderText="XuCuFiller">
                                                 <HeaderTemplate>
                                                     &nbsp;
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
                                                     &nbsp;&nbsp;&nbsp;
                                                 </ItemTemplate>
+
+                                                <HeaderStyle CssClass="XuCuFiller ColWidth01" />
+                                                <ItemStyle CssClass="XuCuFiller ColWidth01" />
+
                                             </asp:TemplateField>
 
+
                                             <%--Column Expand --%>
-                                            <asp:TemplateField HeaderText="XuExpand">
+                                            <asp:TemplateField HeaderText="XuCuExpand">
 
                                                 <HeaderTemplate>
-                                                    <asp:Label ID="XuExpandHeader" runat="server" Text="&nbsp;" />
+                                                    <asp:Label ID="XuCuExpandHeader" runat="server" Text="&nbsp;" />
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
-                                                    <%--Switch between glyphicon-triangle-bottom/top--%>
-                                                    <%--<i class="glyphicon glyphicon-triangle-bottom big"></i>--%>
-                                                    
-                                                    <asp:LinkButton ID="XuExpandItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd07">
+                                                    <asp:LinkButton ID="XuCuExpandItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd07">
                                                         <span 
                                                             class='<%# Eval("CssGlyphiconExpand") %>'
-                                                            title='<%# GetLocalResourceObject("XuExpand-Icon.Title") %>' 
+                                                            title='<%# GetLocalResourceObject("XuCuExpand-Icon.Title") %>' 
                                                         />
                                                     </asp:LinkButton>
-                                                    
 
                                                 </ItemTemplate>
+
+                                                <HeaderStyle CssClass="XuCuExpand ColWidth02" />
+                                                <ItemStyle CssClass="XuCuExpand ColWidth02" />
 
                                             </asp:TemplateField>
 
 
                                             <%--Column Address --%>
-                                            <asp:TemplateField HeaderText="XuAddress">
+                                            <asp:TemplateField HeaderText="XuCuAddress">
 
                                                 <HeaderTemplate>
-                                                    <asp:Label ID="XuAddressHeader" runat="server" Text="XuAddressHeader" meta:resourcekey="XuAddressHeader" />
+                                                    <asp:Label ID="XuCuAddressHeader" runat="server" Text="XuCuAddressHeader" meta:resourcekey="XuCuAddressHeader" />
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
-                                                    <asp:Label ID="XuAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Bind("Address.Street1") %>' />
+                                                    <asp:Label ID="XuCuAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Bind("Address.Street1") %>' />
                                                 </ItemTemplate>
+
+                                                <HeaderStyle CssClass="XuCuAddress" />
+                                                <ItemStyle CssClass="XuCuAddress" />
 
                                             </asp:TemplateField>
 
 
                                             <%--Column Pickup Window --%>
-                                            <asp:TemplateField HeaderText="XuPickup">
+                                            <asp:TemplateField HeaderText="XuCuPickup">
 
                                                 <HeaderTemplate>
-                                                    <asp:Label ID="XuPickupHeader" runat="server" Text="XuPickupHeader" meta:resourcekey="XuPickupHeader" />
+                                                    <asp:Label ID="XuCuPickupHeader" runat="server" Text="XuCuPickupHeader" meta:resourcekey="XuCuPickupHeader" />
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
-                                                    <%--<asp:Label ID="XuPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
-                                                    <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuPickupItem.Format"), Eval("PickupDate"), Eval("ReadyOpen"), Eval("ReadyClose")) %>'></asp:Label>
+                                                    <%--<asp:Label ID="XuCuPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
+                                                    <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuCuPickupItem.Format"), Eval("PickupDate"), Eval("ReadyOpen"), Eval("ReadyClose")) %>'></asp:Label>
 
                                                 </ItemTemplate>
+
+                                                <HeaderStyle CssClass="XuCuPickup ColPickup" />
+                                                <ItemStyle CssClass="XuCuPickup ColPickup" />
 
                                             </asp:TemplateField>
 
 
                                             <%--Column Carrier --%>
-                                            <asp:TemplateField HeaderText="XuCarrier">
+                                            <asp:TemplateField HeaderText="XuCuCarrier">
 
                                                 <HeaderTemplate>
-                                                    <asp:Label ID="XuCarrierHeader" runat="server" Text="XuCarrierHeader" meta:resourcekey="XuCarrierHeader" />
+                                                    <asp:Label ID="XuCuCarrierHeader" runat="server" Text="XuCuCarrierHeader" meta:resourcekey="XuCuCarrierHeader" />
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
-                                                    <asp:Label ID="XuCarrierItem" runat="server" Text='<%# Bind("CarrierNameList") %>' />
+                                                    <asp:Label ID="XuCuCarrierItem" runat="server" Text='<%# Bind("CarrierNameList") %>' />
                                                 </ItemTemplate>
+
+                                                <HeaderStyle CssClass="XuCuCarrier ColCarrier" />
+                                                <ItemStyle CssClass="XuCuCarrier ColCarrier" />
+
+                                            </asp:TemplateField>
+
+
+                                            <%--Column Counters--%>
+                                            <asp:TemplateField HeaderText="XuCuCounter">
+
+                                                <HeaderTemplate>
+                                                    <asp:Label ID="XuCuCounterHeader" runat="server" Text="XuCuCounterHeader" meta:resourcekey="XuCuCounterHeader" />
+                                                </HeaderTemplate>
+
+                                                <ItemTemplate>
+                                                    <asp:Label ID="XuCuCounterItem" runat="server" Text='<%# Bind("CountShipments")  %>' />
+                                                </ItemTemplate>
+
+                                                <HeaderStyle CssClass="XuCuCounter ColCounter" />
+                                                <ItemStyle CssClass="XuCuCounter ColCounter" />
 
                                             </asp:TemplateField>
 
 
                                             <%--Column Note --%>
-                                            <asp:TemplateField HeaderText="XuNote">
+                                            <asp:TemplateField HeaderText="XuCuNote">
 
                                                 <HeaderTemplate>
-                                                    <asp:Label ID="XuNoteHeader" runat="server" Text="XuNoteHeader" meta:resourcekey="XuNoteHeader" />
+                                                    <asp:Label ID="XuCuNoteHeader" runat="server" Text="XuCuNoteHeader" meta:resourcekey="XuCuNoteHeader" />
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
-                                                    <asp:Label ID="XuNoteItem" runat="server" Text='<%# Bind("Note") %>' />
+                                                    <asp:Label ID="XuCuNoteItem" runat="server" Text='<%# Bind("Note") %>' />
                                                 </ItemTemplate>
+
+                                                <HeaderStyle CssClass="XuCuNote" />
+                                                <ItemStyle CssClass="XuCuNote" />
 
                                             </asp:TemplateField>
 
 
                                             <%--Column Status --%>
-                                            <asp:TemplateField HeaderText="XuStatus">
+                                            <asp:TemplateField HeaderText="XuCuStatus">
 
                                                 <HeaderTemplate>
-                                                    <asp:Label ID="XuStatusHeader" runat="server" Text="XuStatusHeader" meta:resourcekey="XuStatusHeader" />
+                                                    <asp:Label ID="XuCuStatusHeader" runat="server" Text="XuCuStatusHeader" meta:resourcekey="XuCuStatusHeader" />
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
@@ -347,12 +452,9 @@
                                                         * Action
                                                     --%>
                                                     <asp:Label
-                                                        ID="XuStatusItem"
+                                                        ID="XuCuStatusItem"
                                                         runat="server"
                                                         Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusForwarder") + ".Text") %>' />
-
-                                                    <%--Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusText") + ".Text") %>'--%>
-                                                    <%--ToolTip='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusText") + ".ToolTip") %>'--%>
 
                                                     <asp:LinkButton
                                                         ID="LinkButton12"
@@ -368,18 +470,21 @@
 
                                                 </ItemTemplate>
 
+                                                <HeaderStyle CssClass="XuCuStatus" />
+                                                <ItemStyle CssClass="XuCuStatus" />
+
                                             </asp:TemplateField>
 
 
                                             <%--Column Move --%>
-                                            <asp:TemplateField HeaderText="XuMove">
+                                            <asp:TemplateField HeaderText="XuCuMove">
 
                                                 <HeaderTemplate>
-                                                    <asp:Label ID="XuMoveHeader" runat="server" Text='<%# GetLocalResourceObject("XuMoveHeader.Text") %>' />
+                                                    <asp:Label ID="XuCuMoveHeader" runat="server" meta:resourcekey="XuCuMoveHeader" Text="XuCuMoveHeader" />
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="XuMoveItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd02">
+                                                    <asp:LinkButton ID="XuCuMoveItem" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false" CommandName="XcCmd02">
                                                     <span 
                                                         class='<%# Eval("CssGlyphiconMove") %>' 
                                                         title='<%# GetLocalResourceObject("XuCuMove-Icon.Title") %>' 
@@ -387,21 +492,25 @@
                                                     </asp:LinkButton>
 
                                                 </ItemTemplate>
-                                                <HeaderStyle CssClass="XuMove" />
-                                                <ItemStyle CssClass="XuMove" />
+
+                                                <HeaderStyle CssClass="XuCuMove" />
+                                                <ItemStyle CssClass="XuCuMove" />
 
                                             </asp:TemplateField>
 
 
                                             <%--Column Customer Pickup Select--%>
-                                            <asp:TemplateField HeaderText="XuFwSelect">
+                                            <asp:TemplateField HeaderText="XuCuSelect">
 
                                                 <HeaderTemplate>
-                                                    <asp:Label ID="XuFwSelectHeader" runat="server" Text="&nbsp;" meta:resourcekey="XuFwSelectHeader" />
+                                                    <asp:Label ID="XuCuSelectHeader" runat="server" Text="XuCuSelectHeader" meta:resourcekey="XuCuSelectHeader" />
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <input id="XuFwSelectItem" type="checkbox" runat="server" disabled='<%# Eval("CssVisibleCheckbox") %>' value='<%# Eval("Id") %>' />
+                                                    <input id="XuCuSelectItem" type="checkbox" runat="server" disabled='<%# Eval("CssVisibleCheckbox") %>' value='<%# Eval("Id") %>' />
                                                 </ItemTemplate>
+
+                                                <HeaderStyle CssClass="XuCuSelect" />
+                                                <ItemStyle CssClass="XuCuSelect" />
 
                                             </asp:TemplateField>
 
@@ -414,30 +523,61 @@
                                                 <ItemTemplate>
                                                     <%--NOTE! this Column is mapped to a new row.--%>
                                                     <tr>
-                                                        <td colspan="7">
+                                                        <td colspan="10">
 
                                                             <asp:GridView
                                                                 ID="XuShipmentDetails"
                                                                 runat="server"
                                                                 AutoGenerateColumns="False"
                                                                 DataSource='<%# Bind("Shipmentlist") %>'
-                                                                CssClass='<%# "XuShipmentDetails" + Eval("CssVisibleShipments") %>' >
+                                                                CssClass='<%# "XuShipmentDetails" + Eval("CssVisibleShipments") %>'>
 
                                                                 <HeaderStyle CssClass="XuShipmentDetailsHead" />
                                                                 <RowStyle CssClass="XuShipmentDetailsRow" />
 
                                                                 <Columns>
-                                                                    <%--Column Waybill number --%>
-                                                                    <asp:TemplateField HeaderText="XuWaybillnumber">
+
+                                                                    <%--filler column to allign with parent table--%>
+                                                                    <asp:TemplateField HeaderText="XuCuFillerA">
                                                                         <HeaderTemplate>
-                                                                            <asp:Label ID="XuWaybillnumberHead" runat="server" Text="Waybillnumber" meta:resourcekey="XuWaybillnumberHead" />
+                                                                            &nbsp;
                                                                         </HeaderTemplate>
                                                                         <ItemTemplate>
-                                                                            <asp:Label ID="XuWaybillnumberItem" runat="server" Text='<%# Bind("Waybillnumber") %>' ToolTip='<%# Bind("Address.FullAddress") %>' />
+                                                                            &nbsp;
                                                                         </ItemTemplate>
 
-                                                                        <HeaderStyle CssClass="XuWaybillnumber" />
-                                                                        <ItemStyle CssClass="XuWaybillnumber" />
+                                                                        <HeaderStyle CssClass="XuCuFillerA ColWidth01" />
+                                                                        <ItemStyle CssClass="XuCuFillerA ColWidth01" />
+
+                                                                    </asp:TemplateField>
+
+
+                                                                    <%--filler column to allign with parent table--%>
+                                                                    <asp:TemplateField HeaderText="XuCuFillerB">
+                                                                        <HeaderTemplate>
+                                                                            &nbsp;
+                                                                        </HeaderTemplate>
+                                                                        <ItemTemplate>
+                                                                            &nbsp;
+                                                                        </ItemTemplate>
+
+                                                                        <HeaderStyle CssClass="XuCuFillerB ColWidth02" />
+                                                                        <ItemStyle CssClass="XuCuFillerB ColWidth02" />
+
+                                                                    </asp:TemplateField>
+
+
+                                                                    <%--Column Waybill number --%>
+                                                                    <asp:TemplateField HeaderText="XuShWaybillnumber">
+                                                                        <HeaderTemplate>
+                                                                            <asp:Label ID="XuShWaybillnumberHead" runat="server" Text="XuShWaybillnumberHead" meta:resourcekey="XuShWaybillnumberHead" />
+                                                                        </HeaderTemplate>
+                                                                        <ItemTemplate>
+                                                                            <asp:Label ID="XuShWaybillnumberItem" runat="server" Text='<%# Bind("Waybillnumber") %>' ToolTip='<%# Bind("Address.FullAddress") %>' />
+                                                                        </ItemTemplate>
+
+                                                                        <HeaderStyle CssClass="XuShWaybillnumber" />
+                                                                        <ItemStyle CssClass="XuShWaybillnumber" />
 
                                                                     </asp:TemplateField>
 
@@ -458,49 +598,62 @@
 
 
                                                                     <%--Column Weight --%>
-                                                                    <asp:TemplateField HeaderText="XuWeight">
+                                                                    <asp:TemplateField HeaderText="XuShWeight">
                                                                         <HeaderTemplate>
-                                                                            <asp:Label ID="XuWeightHeader" runat="server" Text="XuWeightHeader" meta:resourcekey="XuWeightHeader" />
+                                                                            <asp:Label ID="XuShWeightHeader" runat="server" Text="XuShWeightHeader" meta:resourcekey="XuShWeightHeader" />
                                                                         </HeaderTemplate>
                                                                         <ItemTemplate>
-                                                                            <asp:Label ID="XuWeightItem" runat="server" Text='<%# Bind("Weight") %>' />
+                                                                            <asp:Label ID="XuShWeightItem" runat="server" Text='<%# Bind("Weight") %>' />
                                                                         </ItemTemplate>
 
-                                                                        <HeaderStyle CssClass="XuWeight" />
-                                                                        <ItemStyle CssClass="XuWeight" />
+                                                                        <HeaderStyle CssClass="XuShWeight" />
+                                                                        <ItemStyle CssClass="XuShWeight" />
 
                                                                     </asp:TemplateField>
 
 
                                                                     <%--Column Dimension --%>
-                                                                    <asp:TemplateField HeaderText="XuDimension">
+                                                                    <asp:TemplateField HeaderText="XuShDimension">
                                                                         <HeaderTemplate>
-                                                                            <asp:Label ID="XuDimensionHead" runat="server" Text="XuDimensionHead" meta:resourcekey="XuDimensionHead" />
+                                                                            <asp:Label ID="XuShDimensionHeader" runat="server" Text="XuShDimensionHeader" meta:resourcekey="XuShDimensionHeader" />
                                                                         </HeaderTemplate>
                                                                         <ItemTemplate>
-                                                                            <asp:Label ID="XuDimensionItem" runat="server" Text='<%# Bind("Dimensions") %>' />
+                                                                            <asp:Label ID="XuShDimensionItem" runat="server" Text='<%# Bind("Dimensions") %>' />
                                                                         </ItemTemplate>
 
-                                                                        <HeaderStyle CssClass="XuDimension" />
-                                                                        <ItemStyle CssClass="XuDimension" />
+                                                                        <HeaderStyle CssClass="XuShDimension" />
+                                                                        <ItemStyle CssClass="XuShDimension" />
 
                                                                     </asp:TemplateField>
 
 
                                                                     <%--Column Select --%>
-                                                                    <asp:TemplateField HeaderText="XuSelect">
+                                                                    <asp:TemplateField HeaderText="XuShSelect">
                                                                         <HeaderTemplate>
-                                                                            <asp:Label ID="XuSelectHeader" runat="server" Text="&nbsp;" meta:resourcekey="XuSelectHeader" />
+                                                                            <asp:Label ID="XuShSelectHeader" runat="server" Text="XuShSelectHeader" meta:resourcekey="XuShSelectHeader" />
                                                                         </HeaderTemplate>
                                                                         <ItemTemplate>
-                                                                            <input id="XuSelectItem" type="checkbox" runat="server" disabled='<%# Eval("CssVisibleCheckbox") %>' value='<%# Eval("Id") %>' />
+                                                                            <input id="XuShSelectItem" type="checkbox" runat="server" disabled='<%# Eval("CssVisibleCheckbox") %>' value='<%# Eval("Id") %>' />
                                                                         </ItemTemplate>
 
-                                                                        <HeaderStyle CssClass="XuSelect" />
-                                                                        <ItemStyle CssClass="XuSelect" />
+                                                                        <HeaderStyle CssClass="XuShSelect" />
+                                                                        <ItemStyle CssClass="XuShSelect" />
 
                                                                     </asp:TemplateField>
 
+                                                                    <%--Column Shipment filler column to allign with parent table --%>
+                                                                    <asp:TemplateField HeaderText="XuShFiller">
+                                                                        <HeaderTemplate>
+                                                                            &nbsp;&nbsp;&nbsp;
+                                                                        </HeaderTemplate>
+                                                                        <InsertItemTemplate>
+                                                                            &nbsp;&nbsp;&nbsp;
+                                                                        </InsertItemTemplate>
+
+                                                                        <HeaderStyle CssClass="XuShFiller" />
+                                                                        <ItemStyle CssClass="XuShFiller" />
+
+                                                                    </asp:TemplateField>
 
                                                                 </Columns>
                                                             </asp:GridView>
@@ -508,8 +661,7 @@
                                                     </tr>
                                                 </ItemTemplate>
 
-
-                                                <%--Do not show this as the last Column--%>
+                                                <%--Do not show this as the last Column of Customer Pickup row--%>
                                                 <HeaderStyle CssClass="hidden" />
                                                 <ItemStyle CssClass="hidden" />
 
@@ -523,6 +675,11 @@
                                 </td>
                             </tr>
                         </ItemTemplate>
+
+                        <%--Do not show this as the last Column of Forwarder Pickup row --%>
+                        <HeaderStyle CssClass="hidden" />
+                        <ItemStyle CssClass="hidden" />
+
                     </asp:TemplateField>
 
                 </Columns>

@@ -31,6 +31,24 @@ namespace DemoPickup40.Pages.Pickup {
         protected global::System.Web.UI.UpdatePanel XuUpdatePanel1;
         
         /// <summary>
+        /// XuContainerCol1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton XuContainerCol1;
+        
+        /// <summary>
+        /// XuContainerCol1Icon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl XuContainerCol1Icon;
+        
+        /// <summary>
         /// XuForwarderPickup control.
         /// </summary>
         /// <remarks>
