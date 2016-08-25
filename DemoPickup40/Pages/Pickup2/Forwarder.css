@@ -1,0 +1,144 @@
+﻿body {
+}
+
+.RowStyleLevel1 {
+    /*display:none;*/
+}
+
+.RowStyleLevel2 {
+    /*display: none;*/
+}
+
+.HeaderStyleLevel2 {
+}
+
+.css-table {
+    display: table;
+}
+
+.css-tr {
+    display: table-row;
+}
+
+.css-th {
+    display: table-cell;
+    text-align: center;
+}
+
+.css-tr {
+    display: table-cell;
+}
+
+.XuForwarderPickup {
+    width: 1440px;
+}
+
+.XuCustomerPickup {
+    width: 100%;
+}
+
+.XuForwarderPickupRow {
+    padding-top: 10px;
+    background-color: antiquewhite;
+    height: 30px;
+}
+
+.XuMove {
+    width: 50px;
+}
+
+/*ROWS*/
+
+.XuShipmentDetails {
+    width: 100%;
+}
+
+.XuShipmentDetailsRow {
+    width: 100%;
+}
+
+.XuWaybillnumber {
+    width: auto;
+}
+
+.XuShCarrier {
+    width: 10%;
+}
+
+.XuWeight {
+    width: 50px;
+}
+
+.XuDimension {
+    width: auto;
+}
+
+.XuSelect {
+    width: 50px;
+}
+
+.XuFwExpand, .XuCuExpand {
+    width: 30px;
+}
+
+/* Column Width across multiple tables */
+.ColWidth01, .XuFwExpandCustomer {
+    width: 30px;
+}
+
+.XuCuFiller, .XuCuFiller01 {
+    width: 29px;
+}
+
+.XuCuFillerA {
+    width: 28px;
+}
+
+.XuCuFillerB {
+    width: 30px;
+}
+
+.XuFwMove, .XuCuMove, .XuCuSelect,  .XuShSelect {
+    width: 44px;
+}
+
+.XuShFiller {
+    width: 43px;
+}
+
+.XuFwEdit, .XuCuEdit {
+    width: 44px;
+}
+
+.XuFwAddress, .XuCuAddress {
+    width: 250px;
+}
+
+.XuFwPickup, .XuCuPickup {
+    width: 250px;
+}
+
+.XuFwCarrier, .XuCuCarrier, .XuShCarrier {
+    width: 300px;
+}
+
+.XuFwCounter, .XuCuCounter, .XuShWeight {
+    width: 50px;
+}
+
+.XuFwNote, .XuCuNote {
+    width: auto;
+}
+
+.XuFwStatus, .XuCuStatus {
+    width: 200px;
+}
+
+.XuShWaybillnumber {
+    width: 500px;
+}
+
+.XuShDimension {
+    width: auto;
+}
+
