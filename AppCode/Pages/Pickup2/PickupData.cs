@@ -63,7 +63,7 @@ namespace AppCode.Pages.Pickup2
             {
                 var guiForwarder = new GuiForwarderPickup();
 
-                fw.Transfer( guiForwarder);
+                ((IForwarderPickup)fw).Transfer( guiForwarder);
                 guiForwarder.Id = fw.Id;
                 guiForwarder.Address = new GuiAddress();
                 fw.Address.Transfer(guiForwarder.Address);
@@ -75,7 +75,7 @@ namespace AppCode.Pages.Pickup2
                     foreach (var customerPickup in customerList)
                     {
                         var guiCustomer = new GuiCustomerPickup();
-                        customerList.Transfer( guiCustomer);
+                        customerPickup.Transfer( guiCustomer);
                         guiCustomer.Id = customerPickup.Id;
                         guiCustomer.Address = new GuiAddress();
                         customerPickup.Address.Transfer(guiCustomer.Address);
