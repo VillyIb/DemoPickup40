@@ -220,22 +220,22 @@ namespace DemoPickup40.Pages.Pickup {
         protected global::System.Web.UI.WebControls.Label Label12;
         
         /// <summary>
-        /// XuReadyOpen control.
+        /// XuTimeReady control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox XuReadyOpen;
+        protected global::System.Web.UI.WebControls.TextBox XuTimeReady;
         
         /// <summary>
-        /// XuReadyOpenCalculated control.
+        /// XuTimeReadyCalculated control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button XuReadyOpenCalculated;
+        protected global::System.Web.UI.WebControls.Button XuTimeReadyCalculated;
         
         /// <summary>
         /// Label13 control.
@@ -247,22 +247,22 @@ namespace DemoPickup40.Pages.Pickup {
         protected global::System.Web.UI.WebControls.Label Label13;
         
         /// <summary>
-        /// XuReadyClose control.
+        /// XuTimeClose control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox XuReadyClose;
+        protected global::System.Web.UI.WebControls.TextBox XuTimeClose;
         
         /// <summary>
-        /// XuReadyCloseCalculated control.
+        /// XuTimeCloseCalculated control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button XuReadyCloseCalculated;
+        protected global::System.Web.UI.WebControls.Button XuTimeCloseCalculated;
         
         /// <summary>
         /// Label14 control.

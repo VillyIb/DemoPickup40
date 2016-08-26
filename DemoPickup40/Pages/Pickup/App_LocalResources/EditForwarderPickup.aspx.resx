@@ -120,13 +120,13 @@
   <data name="Error_PickpDate" xml:space="preserve">
     <value>Illegal format 'PickupDate' please specify as 'yyyy-mm-dd'</value>
   </data>
-  <data name="Error_ReadyClose" xml:space="preserve">
-    <value>Illegal format 'ReadyClose' please specify as 'hh:mm' e.g.:'15:00'</value>
+  <data name="Error_TimeClose" xml:space="preserve">
+    <value>Illegal format 'TimeClose' please specify as 'hh:mm' e.g.:'15:00'</value>
   </data>
-  <data name="Error_ReadyOpen" xml:space="preserve">
-    <value>Illegal format 'ReadyOpen' please specify as 'hh:mm' e.g.:'14:30'</value>
+  <data name="Error_TimeReady" xml:space="preserve">
+    <value>Illegal format 'TimeReady' please specify as 'hh:mm' e.g.:'14:30'</value>
   </data>
-  <data name="XuReadyClose-Text_CustWait.Text" xml:space="preserve">
+  <data name="XuTimeClose-Text_CustWait.Text" xml:space="preserve">
     <value>Pending on Customer</value>
   </data>
 </root>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -224,9 +223,9 @@ namespace DemoPickup40.Pages.Pickup
             BindPage();
         }
 
-        protected string GetPickupText(string format, object picupDate, object readyOpen, object readyClose)
+        protected string GetPickupText(string format, object picupDate, object timeReady, object timeClose)
         {
-            return string.Format(format, picupDate, readyOpen, readyClose);
+            return string.Format(format, picupDate, timeReady, timeClose);
         }
 
         protected string GetPickupText(object customerPickupId)
@@ -238,11 +237,6 @@ namespace DemoPickup40.Pages.Pickup
 
         protected void XuGridCustomerPickup_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            var Argument = e.CommandArgument;
-            var name = e.CommandName;
-            var source = e.CommandSource;
-
-
             switch (e.CommandName)
             {
                 case "XcCmd01":
@@ -256,12 +250,9 @@ namespace DemoPickup40.Pages.Pickup
                         XcCmd02(e.CommandArgument as string, sender as GridView);
                     }
                     break;
-
-                default:
-                    break;
             }
-
         }
+
 
         private void XcCmd03(string commandArgument)
         {
@@ -283,19 +274,19 @@ namespace DemoPickup40.Pages.Pickup
 
                     foreach (var customerPickup in currentForwarderPickup.CustomerPickupList)
                     {
-                        if (open < customerPickup.ReadyOpen)
+                        if (open < customerPickup.TimeReady)
                         {
-                            open = customerPickup.ReadyOpen;
+                            open = customerPickup.TimeReady;
                         }
 
-                        if (customerPickup.ReadyClose < close)
+                        if (customerPickup.TimeClose < close)
                         {
-                            close = customerPickup.ReadyClose;
+                            close = customerPickup.TimeClose;
                         }
                     }
 
-                    currentForwarderPickup.ReadyClose = close;
-                    currentForwarderPickup.ReadyOpen = open;
+                    currentForwarderPickup.TimeClose = close;
+                    currentForwarderPickup.TimeReady = open;
                 }
             } while (false);
 
@@ -444,6 +435,7 @@ namespace DemoPickup40.Pages.Pickup
         }
 
 
+        // ReSharper disable once UnusedParameter.Local
         private void XcCmd07(string commandArgument, GridView source)
         {
             // Expected syntax: int: CustomerPickup.Id.
@@ -473,6 +465,7 @@ namespace DemoPickup40.Pages.Pickup
         /// </summary>
         /// <param name="commandArgument"></param>
         /// <param name="source"></param>
+        // ReSharper disable once UnusedParameter.Local
         private void XcCmd08(string commandArgument, GridView source)
         {
             // Expected syntax: int: ForwarderPickup.Id.
@@ -528,6 +521,7 @@ namespace DemoPickup40.Pages.Pickup
         /// </summary>
         /// <param name="commandArgument"></param>
         /// <param name="source"></param>
+        // ReSharper disable once UnusedParameter.Local
         private void XcCmd09(string commandArgument, GridView source)
         {
             // Expected syntax: int: ForwarderPickup.Id.

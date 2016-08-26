@@ -112,7 +112,7 @@
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuFwAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Bind("Address.Street1") %>' />
+                            <asp:Label ID="XuFwAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Eval("Address.Zip") + ", "+ Eval("Address.Street1") %>' />
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuFwAddress" />
@@ -129,7 +129,7 @@
 
                         <ItemTemplate>
                             <%--<asp:Label ID="XuFwPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
-                            <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuFwPickupItem.Format"), Eval("PickupDate"), Eval("ReadyOpen"), Eval("ReadyClose")) %>'></asp:Label>
+                            <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuFwPickupItem.Format"), Eval("PickupDate"), Eval("TimeReady"), Eval("TimeClose")) %>'></asp:Label>
                             <asp:LinkButton
                                 ID="XuFwdPickupX1"
                                 runat="server"
@@ -359,7 +359,7 @@
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
-                                                    <asp:Label ID="XuCuAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Bind("Address.Street1") %>' />
+                                                    <asp:Label ID="XuCuAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Eval("Address.Street1") +", " +Eval("Address.Name") %>' />
                                                 </ItemTemplate>
 
                                                 <HeaderStyle CssClass="XuCuAddress" />
@@ -377,7 +377,7 @@
 
                                                 <ItemTemplate>
                                                     <%--<asp:Label ID="XuCuPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
-                                                    <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuCuPickupItem.Format"), Eval("PickupDate"), Eval("ReadyOpen"), Eval("ReadyClose")) %>'></asp:Label>
+                                                    <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuCuPickupItem.Format"), Eval("PickupDate"), Eval("TimeReady"), Eval("TimeClose")) %>'></asp:Label>
 
                                                 </ItemTemplate>
 

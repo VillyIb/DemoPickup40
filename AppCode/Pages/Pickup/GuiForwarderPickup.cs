@@ -21,10 +21,10 @@ namespace AppCode.Pages.Pickup
         public DateTime PickupDate { get; set; }
 
 
-        public TimeSpan ReadyOpen { get; set; }
+        public TimeSpan TimeReady { get; set; }
 
 
-        public TimeSpan ReadyClose { get; set; }
+        public TimeSpan TimeClose { get; set; }
 
         /// <summary>
         /// Plain text representation of enum:PickupStatus

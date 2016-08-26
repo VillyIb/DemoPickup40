@@ -98,8 +98,10 @@ namespace AppCode.Pages.Pickup
             }
 
             switch (option)
+#pragma warning disable 1522
             {
             }
+#pragma warning restore 1522
 
             var t1 = result.Id % 5 + 1;
 
@@ -167,8 +169,8 @@ namespace AppCode.Pages.Pickup
                     Id = CurrentId++,
                     Note = "Henvendelse i den gule gård",
                     PickupDate = new DateTime(2016, 8, 19),
-                    ReadyClose = new TimeSpan(15, 30, 0),
-                    ReadyOpen = new TimeSpan(12, 30, 0),
+                    TimeClose = new TimeSpan(15, 30, 0),
+                    TimeReady = new TimeSpan(12, 30, 0),
                     PickupStatusCustomer = PickupStatusCustomer.CustWait,
                     Shipmentlist = new List<GuiShipment>
                     {
@@ -237,8 +239,8 @@ namespace AppCode.Pages.Pickup
                     Note = "Flere afhentninger på samme adresse",
                     PickupDate = new DateTime(2016, 08, 19),
                     PickupStatusForwarder = PickupStatusForwarder.ForwWait,
-                    ReadyClose = new TimeSpan(15, 15, 0),
-                    ReadyOpen = new TimeSpan(12, 12, 13)
+                    TimeClose = new TimeSpan(15, 15, 0),
+                    TimeReady = new TimeSpan(12, 12, 13)
                 };
 
                 result.CustomerPickupList.Add(GetGuiCustomerPickup(option));

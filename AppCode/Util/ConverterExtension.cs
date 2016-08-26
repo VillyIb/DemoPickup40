@@ -34,15 +34,46 @@ namespace AppCode.Util
         private static void Transfer<TSource, TTarget>(this TSource source, TTarget target, bool clearTarget)
         {
             // All destination properties
-            var targetPropertyList = typeof(TTarget).GetProperties().Where(
+            var targetPropertyList = typeof(TTarget).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(
                 t =>
                 t.CanWrite
-                );
+                ).ToList();
+
+            var altTarget = target.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(
+                t =>
+                t.CanWrite
+                ).ToList();
+
+            var sourcePropertyList = typeof(TSource).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(
+                t =>
+                t.CanRead
+                ).ToList();
+
+            var altSource4 = typeof(TSource).GetProperties(BindingFlags.Instance | BindingFlags.Public).ToList();
+            var altSource5 = typeof(TSource).GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(t => t.CanRead).ToList();
+
+            var altSource1 = source.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).ToList();
+            var altSource2 = source.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public).ToList();
+            var altSource3 = source.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(t => t.CanRead).ToList();
+
+            var countTransfer = 0;
 
             foreach (PropertyInfo targetProperty in targetPropertyList)
             {
+                var s1 = altSource3.FirstOrDefault(
+                    t =>
+                        targetProperty.Name.Equals(t.Name, StringComparison.OrdinalIgnoreCase)
+                );
+
+                if (s1 == null) { continue; }
+
+
+                if(!(s1.CanRead)) { continue; }
+
+                if(!(s1.PropertyType == targetProperty.PropertyType)) { continue; }
+
                 // Matching source property
-                var sourceProperty = typeof(TSource).GetProperties().FirstOrDefault(
+                var sourceProperty = altSource3.FirstOrDefault(
                     t =>
                     targetProperty.Name.Equals(t.Name)
                     &&
@@ -51,10 +82,11 @@ namespace AppCode.Util
                     targetProperty.PropertyType == t.PropertyType
                     );
 
-                if (sourceProperty != null)
+                if (s1 != null)
                 {
                     // transfer property value (shallow clone).
-                    targetProperty.SetValue(target, sourceProperty.GetValue(source, null), null); // .NET Framework 4.0 requires 3 parameters
+                    targetProperty.SetValue(target, s1.GetValue(source, null), null); // .NET Framework 4.0 requires 3 parameters
+                    countTransfer++;
                 }
                 else if (clearTarget)
                 {
@@ -62,11 +94,33 @@ namespace AppCode.Util
                     Type targetType = targetProperty.PropertyType;
                     object nullValue = targetType.IsValueType ? null : Activator.CreateInstance(targetType);
                     targetProperty.SetValue(target, nullValue, null); // .NET Framework 4.0 requires 3 parameters
+                    countTransfer++;
                 }
                 else
                 {
                     // ignore target property.
                 }
+            }
+
+            if (countTransfer == 0)
+            {
+                var t1 = targetPropertyList.Select(t => t.Name).OrderBy(t => t);
+                var targetList = t1.Aggregate((current, next) => current + ", " + next);
+
+                var t2 = sourcePropertyList.Select(t => t.Name).OrderBy(t => t);
+                var sourceList = t2.Aggregate((current, next) => current + ", " + next);
+
+                var t3 = altSource3.Select(t => t.Name).OrderBy(t => t);
+                var altSourceList = t3.Aggregate((current, next) => current + ", " + next);
+
+                throw new ApplicationException(
+                    String.Format(
+                        "Incompatible data types {0} {2} dont match {1} {3}"
+                        , typeof(TTarget)
+                        , typeof(TSource)
+                        , targetList
+                        , sourceList
+                ));
             }
         }
 

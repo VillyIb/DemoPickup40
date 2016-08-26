@@ -228,9 +228,9 @@ namespace DemoPickup40.Pages.Pickup2
             BindPage();
         }
 
-        protected string GetPickupText(string format, object picupDate, object readyOpen, object readyClose)
+        protected string GetPickupText(string format, object picupDate, object TimeRedy, object TimeClose)
         {
-            return string.Format(format, picupDate, readyOpen, readyClose);
+            return string.Format(format, picupDate, TimeRedy, TimeClose);
         }
 
         protected string GetPickupText(object customerPickupId)
@@ -287,19 +287,19 @@ namespace DemoPickup40.Pages.Pickup2
 
                     foreach (var customerPickup in currentForwarderPickup.CustomerPickupList)
                     {
-                        if (open < customerPickup.ReadyOpen)
+                        if (open < customerPickup.TimeReady)
                         {
-                            open = customerPickup.ReadyOpen;
+                            open = customerPickup.TimeReady;
                         }
 
-                        if (customerPickup.ReadyClose < close)
+                        if (customerPickup.TimeClose < close)
                         {
-                            close = customerPickup.ReadyClose;
+                            close = customerPickup.TimeClose;
                         }
                     }
 
-                    currentForwarderPickup.ReadyClose = close;
-                    currentForwarderPickup.ReadyOpen = open;
+                    currentForwarderPickup.TimeClose = close;
+                    currentForwarderPickup.TimeReady = open;
                 }
             } while (false);
 

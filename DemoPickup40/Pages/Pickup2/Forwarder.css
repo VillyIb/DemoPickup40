@@ -138,7 +138,11 @@
     width: 500px;
 }
 
-.XuShDimension {
-    width: auto;
+td.XuShDimension {
+    font-family: monospace;
+}
+
+td.XuFwCounter, td.XuCuCounter, td.XuShWeight {
+    text-align:right;
 }
 

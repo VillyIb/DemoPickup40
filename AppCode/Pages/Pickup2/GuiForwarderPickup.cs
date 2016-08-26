@@ -13,6 +13,15 @@ namespace AppCode.Pages.Pickup2
 
 
         public string CarrierNameList { get; set; }
+        
+
+        public List<GuiCustomerPickup> CustomerPickupList { get; set; }
+
+
+        /// <summary>
+        /// Contols display of Customer Pickup rows below Forwarder Pickup
+        /// </summary>
+        public bool IsExpandedCustomer { get; set; }
 
 
         public string Note { get; set; }
@@ -21,19 +30,16 @@ namespace AppCode.Pages.Pickup2
         public DateTime PickupDate { get; set; }
 
 
-        public TimeSpan ReadyOpen { get; set; }
+        public TimeSpan TimeReady { get; set; }
 
 
-        public TimeSpan ReadyClose { get; set; }
+        public TimeSpan TimeClose { get; set; }
 
         /// <summary>
         /// Plain text representation of enum:PickupStatus
         /// Used to control GUI elements.
         /// </summary>
         public PickupStatusForwarder PickupStatusForwarder { get; set; }
-
-
-        public List<GuiCustomerPickup> CustomerPickupList { get; set; }
 
 
         public string CssGlyphiconStatus
@@ -54,11 +60,6 @@ namespace AppCode.Pages.Pickup2
         {
             get { return CustomerPickupList.Any(t => t.IsExpanded) ? "glyphicon glyphicon-triangle-top big" : "glyphicon glyphicon-triangle-bottom big"; }
         }
-
-        /// <summary>
-        /// Contols display of Customer Pickup rows below Forwarder Pickup
-        /// </summary>
-        public bool IsExpandedCustomer { get; set; }
 
 
         public string CssGlyphiconExpandCustomer

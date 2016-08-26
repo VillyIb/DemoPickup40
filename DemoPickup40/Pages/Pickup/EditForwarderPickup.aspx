@@ -88,15 +88,15 @@
         </div>
 
         <div class="css-tr">
-            <asp:Label ID="Label12" class="css-td col1" runat="server" Text="ReadyOpen"></asp:Label>
-            <span class="css-td col2"><asp:TextBox ID="XuReadyOpen" runat="server"></asp:TextBox></span>
-            <span class="css-td col3"><asp:Button ID="XuReadyOpenCalculated" runat="server" Text="12:00" OnClick="XuReadyOpenCalculated_Click"/></span>
+            <asp:Label ID="Label12" class="css-td col1" runat="server" Text="TimeReady"></asp:Label>
+            <span class="css-td col2"><asp:TextBox ID="XuTimeReady" runat="server"></asp:TextBox></span>
+            <span class="css-td col3"><asp:Button ID="XuTimeReadyCalculated" runat="server" Text="12:00" OnClick="XuTimeReadyCalculated_Click"/></span>
         </div>
 
         <div class="css-tr">
-            <asp:Label ID="Label13" class="css-td col1" runat="server" Text="ReadyClose"></asp:Label>
-            <span class="css-td col2"><asp:TextBox ID="XuReadyClose" runat="server"></asp:TextBox></span>
-            <span class="css-td col3"><asp:Button ID="XuReadyCloseCalculated" runat="server" Text="15:00" OnClick="XuReadyCloseCalculated_Click"/></span>
+            <asp:Label ID="Label13" class="css-td col1" runat="server" Text="TimeClose"></asp:Label>
+            <span class="css-td col2"><asp:TextBox ID="XuTimeClose" runat="server"></asp:TextBox></span>
+            <span class="css-td col3"><asp:Button ID="XuTimeCloseCalculated" runat="server" Text="15:00" OnClick="XuTimeCloseCalculated_Click"/></span>
         </div>
 
         <div class="css-tr">

@@ -29,6 +29,7 @@ namespace DemoPickup40.Pages.Pickup
         private GuiContainer XpGuiContainer
         {
             get { return Session[XpGuiContainerKey] as GuiContainer; }
+            // ReSharper disable once UnusedMember.Local
             set { Session[XpGuiContainerKey] = value; }
         }
 
@@ -142,15 +143,15 @@ namespace DemoPickup40.Pages.Pickup
         private void PopuluateCalculatedValues()
         {
             // (from d in dataRows select d.Date).Min();
-            var readyOpenMax = XpForwarderPickup.CustomerPickupList.Count > 0 
-                ?  XpForwarderPickup.CustomerPickupList.Max(t => t.ReadyOpen) 
+            var timeReadyMax = XpForwarderPickup.CustomerPickupList.Count > 0 
+                ?  XpForwarderPickup.CustomerPickupList.Max(t => t.TimeReady) 
                 : new TimeSpan(0,0,0);
-            XuReadyOpenCalculated.Text = readyOpenMax.ToString(@"hh\:mm");
+            XuTimeReadyCalculated.Text = timeReadyMax.ToString(@"hh\:mm");
 
-            var readyCloseMin = XpForwarderPickup.CustomerPickupList.Count > 0
-                ? XpForwarderPickup.CustomerPickupList.Min(t => t.ReadyClose)
+            var timeCloseMin = XpForwarderPickup.CustomerPickupList.Count > 0
+                ? XpForwarderPickup.CustomerPickupList.Min(t => t.TimeClose)
                 : new TimeSpan(23, 59, 0);
-            XuReadyCloseCalculated.Text = readyCloseMin.ToString(@"hh\:mm");
+            XuTimeCloseCalculated.Text = timeCloseMin.ToString(@"hh\:mm");
         }
 
 
@@ -166,8 +167,8 @@ namespace DemoPickup40.Pages.Pickup
                 XuPhone.Text = XpForwarderPickup.Address.Phone;
                 XuPickupDate.Text = XpForwarderPickup.PickupDate.ToString("yyyy-MM-dd");
                 PopulateXuPickupStatus(XpForwarderPickup.PickupStatusForwarder);
-                XuReadyClose.Text = string.Format(@"{0:hh\:mm}", XpForwarderPickup.ReadyClose);
-                XuReadyOpen.Text = string.Format(@"{0:hh\:mm}", XpForwarderPickup.ReadyOpen);
+                XuTimeClose.Text = string.Format(@"{0:hh\:mm}", XpForwarderPickup.TimeClose);
+                XuTimeReady.Text = string.Format(@"{0:hh\:mm}", XpForwarderPickup.TimeReady);
                 XuState.Text = XpForwarderPickup.Address.State;
                 XuStreet1.Text = XpForwarderPickup.Address.Street1;
                 XuStreet2.Text = XpForwarderPickup.Address.Street2;
@@ -269,26 +270,26 @@ namespace DemoPickup40.Pages.Pickup
             }
             {
                 TimeSpan t1;
-                if (TryParse(XuReadyOpen.Text, out t1))
+                if (TryParse(XuTimeReady.Text, out t1))
                 {
-                    XpForwarderPickup.ReadyOpen = t1;
+                    XpForwarderPickup.TimeReady = t1;
                 }
                 else
                 {
-                    ShowError("Error_ReadyOpen", new List<string> { "" });
+                    ShowError("Error_TimeReady", new List<string> { "" });
                     Unhide(XuError);
                     return;
                 }
             }
             {
                 TimeSpan t1;
-                if (TryParse(XuReadyClose.Text, out t1))
+                if (TryParse(XuTimeClose.Text, out t1))
                 {
-                    XpForwarderPickup.ReadyClose = t1;
+                    XpForwarderPickup.TimeClose = t1;
                 }
                 else
                 {
-                    ShowError("Error_ReadyClose", new List<string> { "" });
+                    ShowError("Error_TimeClose", new List<string> { "" });
                     Unhide(XuError);
                     return;
                 }
@@ -303,22 +304,22 @@ namespace DemoPickup40.Pages.Pickup
 
         }
 
-        protected void XuReadyOpenCalculated_Click(object sender, EventArgs e)
+        protected void XuTimeReadyCalculated_Click(object sender, EventArgs e)
         {
             TimeSpan t1;
-            if (TryParse(XuReadyOpenCalculated.Text, out t1))
+            if (TryParse(XuTimeReadyCalculated.Text, out t1))
             {
-                XpForwarderPickup.ReadyOpen = t1;
+                XpForwarderPickup.TimeReady = t1;
             }
             Populate();
         }
 
-        protected void XuReadyCloseCalculated_Click(object sender, EventArgs e)
+        protected void XuTimeCloseCalculated_Click(object sender, EventArgs e)
         {
             TimeSpan t1;
-            if (TryParse(XuReadyCloseCalculated.Text, out t1))
+            if (TryParse(XuTimeCloseCalculated.Text, out t1))
             {
-                XpForwarderPickup.ReadyClose = t1;
+                XpForwarderPickup.TimeClose = t1;
             }
             Populate();
         }

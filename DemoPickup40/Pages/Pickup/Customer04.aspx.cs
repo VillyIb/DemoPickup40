@@ -22,8 +22,6 @@ namespace DemoPickup40.Pages.Pickup
 
         private void BindPage()
         {
-            var carrierNameList = new List<string>();
-
             foreach (var pickup in XpPrimaryRowList)
             {
                 var t1 = pickup.Shipmentlist.Select(t => t.CarrierName).Distinct().OrderBy(t=>t);
@@ -37,8 +35,6 @@ namespace DemoPickup40.Pages.Pickup
                     shipment.PickupStatusCustomer = pickup.PickupStatusCustomer;
                 }
             }
-
-
 
             XuCustomer04Pickup.DataSource = XpPrimaryRowList;
             XuCustomer04Pickup.DataBind();
@@ -190,23 +186,21 @@ namespace DemoPickup40.Pages.Pickup
             BindPage();
         }
 
-        protected string GetPickupText(string format, object picupDate, object readyOpen, object readyClose)
+
+        protected string GetPickupText(string format, object picupDate, object timeReady, object timeClose)
         {
-            return string.Format(format, picupDate, readyOpen, readyClose);
+            return string.Format(format, picupDate, timeReady, timeClose);
         }
+
 
         protected string GetPickupText(object customerPickupId)
         {
             return "0" + customerPickupId;
         }
 
+
         protected void XuGridCustomer04Pickup_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            var Argument = e.CommandArgument;
-            var name = e.CommandName;
-            var source = e.CommandSource;
-
-
             switch (e.CommandName)
             {
                 case "XcCmd01":
@@ -220,12 +214,10 @@ namespace DemoPickup40.Pages.Pickup
                         XcCmd02(e.CommandArgument as string, sender as GridView);
                     }
                     break;
-
-                default:
-                    break;
             }
-
         }
+
+
     }
 
 
