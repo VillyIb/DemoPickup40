@@ -34,16 +34,6 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EU.Iamia.Logging">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\EU.Iamia.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="EU.Iamia.Utility01.Gtx">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\EU.Iamia.Utility01.Gtx.dll</HintPath>
-    </Reference>
     <Reference Include="nu.gtx.Automation.Common">
       <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Automation.Common.dll</HintPath>
     </Reference>
@@ -140,17 +130,8 @@
     <Reference Include="nu.gtx.Utility.PDF">
       <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Utility.PDF.dll</HintPath>
     </Reference>
-    <Reference Include="PdfSharp-WPF">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\PdfSharp-WPF.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />

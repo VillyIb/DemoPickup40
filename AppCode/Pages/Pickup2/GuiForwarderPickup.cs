@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using AppCode.Util;
+using nu.gtx.POCO.Contract.Pickup;
 
 namespace AppCode.Pages.Pickup2
 {
@@ -16,6 +18,9 @@ namespace AppCode.Pages.Pickup2
         
 
         public List<GuiCustomerPickup> CustomerPickupList { get; set; }
+
+
+        public int GroupIndex { get; set; }
 
 
         /// <summary>
@@ -81,6 +86,21 @@ namespace AppCode.Pages.Pickup2
         {
             get { return CustomerPickupList.Sum(t => t.Shipmentlist.Count); }
         }
+
+        public GuiForwarderPickup(IForwarderPickupSortable source)
+        {
+            source.Transfer(this);
+            TimeClose = source.TimeClose ?? new TimeSpan(23, 59, 59);
+            TimeReady = source.TimeReady ?? new TimeSpan(0, 0, 0);
+            Address = new GuiAddress(source.Address);
+            CustomerPickupList = new List<GuiCustomerPickup>();
+
+            foreach (var customer in source.CustomerPickupList)
+            {
+                CustomerPickupList.Add(new GuiCustomerPickup(customer));
+            }
+        }
+
 
     }
 }

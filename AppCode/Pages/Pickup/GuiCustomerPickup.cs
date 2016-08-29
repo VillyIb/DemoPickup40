@@ -21,6 +21,9 @@ namespace AppCode.Pages.Pickup
         public string CarrierNameList { get; set; }
 
 
+        public string GroupIndex { get; set; }
+
+
         /// <summary>
         /// Note is visible on screen
         /// </summary>

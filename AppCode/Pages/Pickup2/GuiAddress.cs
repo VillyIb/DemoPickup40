@@ -1,4 +1,7 @@
-﻿namespace AppCode.Pages.Pickup2
+﻿using AppCode.Util;
+using nu.gtx.POCO.Contract.Pickup;
+
+namespace AppCode.Pages.Pickup2
 {
     public class GuiAddress
     {
@@ -36,6 +39,11 @@
                     City
                 );
             }
+        }
+
+        public GuiAddress(IAddressBase source)
+        {
+            source.Transfer(this);
         }
     }
 }

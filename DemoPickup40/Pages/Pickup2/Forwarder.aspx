@@ -112,7 +112,7 @@
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuFwAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Eval("Address.Zip") + ", "+ Eval("Address.Street1") %>' />
+                            <asp:Label ID="XuFwAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Eval("Address.Zip") + ", "+ Eval("Address.Street1") + ", (" + Eval("GroupIndex") + ")"%>' />
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuFwAddress" />
@@ -359,7 +359,7 @@
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
-                                                    <asp:Label ID="XuCuAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Eval("Address.Street1") +", " +Eval("Address.Name") %>' />
+                                                    <asp:Label ID="XuCuAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Eval("Address.Name") + ", (" + Eval("GroupIndex") + ")" %>' />
                                                 </ItemTemplate>
 
                                                 <HeaderStyle CssClass="XuCuAddress" />

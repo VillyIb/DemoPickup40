@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using AppCode.Util;
+using nu.gtx.POCO.Contract.Pickup;
 
 namespace AppCode.Pages.Pickup2
 {
@@ -19,6 +21,9 @@ namespace AppCode.Pages.Pickup2
 
 
         public string CarrierNameList { get; set; }
+
+
+        public int GroupIndex { get; set; }
 
 
         /// <summary>
@@ -79,5 +84,23 @@ namespace AppCode.Pages.Pickup2
         {
             get { return Shipmentlist.Count; }
         }
+
+
+        public GuiCustomerPickup(ICustomerPickup source)
+        {
+            source.Transfer(this);
+            // ReSharper disable ArrangeThisQualifier
+            this.TimeClose = source.TimeClose ?? new TimeSpan(23, 59, 59);
+            this.TimeReady = source.TimeReady ?? new TimeSpan(0, 0, 0);
+            this.Address = new GuiAddress(source.Address);
+            this.Shipmentlist = new List<GuiShipment>();
+            // ReSharper restore ArrangeThisQualifier
+
+            foreach (var shipment in source.ShipmentList)
+            {
+                this.Shipmentlist.Add(new GuiShipment(shipment));
+            }
+        }
+
     }
 }
