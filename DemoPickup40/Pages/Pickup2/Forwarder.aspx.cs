@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using AppCode.Pages.Pickup2;
 // ReSharper disable UseNullPropagation
 // ReSharper disable ArgumentsStyleLiteral
+
+using nu.gtx.POCO.Contract.Pickup;
+
 
 namespace DemoPickup40.Pages.Pickup2
 {
@@ -27,6 +29,7 @@ namespace DemoPickup40.Pages.Pickup2
             get { return XpGuiContainer.ForwarderPickupList; }
         }
 
+
         private List<GuiCustomerPickup> XpAllCustomerPickupList
         {
             get
@@ -45,31 +48,28 @@ namespace DemoPickup40.Pages.Pickup2
 
         private void BindPage()
         {
-            foreach (var forwarder in XpPrimaryRowList)
+            foreach (var forwarderPickup in XpPrimaryRowList)
             {
                 var t3 = new List<string>();
 
-                foreach (var pickup in forwarder.CustomerPickupList)
+                foreach (var customerPickup in forwarderPickup.CustomerPickupList)
                 {
-                    var t1 = pickup.Shipmentlist.Select(t => t.CarrierName).Distinct().OrderBy(t => t).ToList();
+                    var t1 = customerPickup.Shipmentlist.Select(t => t.CarrierName).Distinct().OrderBy(t => t).ToList();
                     t3.AddRange(t1);
 
-                    var t2 = t1.Count > 0 ? t1.Aggregate((current, next) => current + ", " + next) : "";
 
-                    pickup.CarrierNameList = t2;
+                    customerPickup.PickupStatusForwarder = forwarderPickup.PickupStatusForwarder;
 
-                    pickup.PickupStatusForwarder = forwarder.PickupStatusForwarder;
-
-                    foreach (var shipment in pickup.Shipmentlist)
+                    foreach (var shipment in customerPickup.Shipmentlist)
                     {
-                        shipment.PickupStatusCustomer = pickup.PickupStatusCustomer;
+                        shipment.PickupStatusCustomer = customerPickup.PickupStatusCustomer;
                     }
                 }
 
                 var t4 = t3.Distinct().OrderBy(t => t).ToList();
                 var t5 = t4.Count > 0 ? t4.Aggregate((current, next) => current + ", " + next) : "none";
 
-                forwarder.CarrierNameList = t5;
+                forwarderPickup.CarrierNameList = t5;
             }
 
             XuForwarderPickup.DataSource = XpPrimaryRowList;
@@ -85,7 +85,7 @@ namespace DemoPickup40.Pages.Pickup2
                 {
                     var pickupApi = new PickupData();
 
-                    pickupApi.Init();
+                    //pickupApi.Init();
 
                     XpGuiContainer = pickupApi.GetGuiContainer(0);
                 }
@@ -228,9 +228,9 @@ namespace DemoPickup40.Pages.Pickup2
             BindPage();
         }
 
-        protected string GetPickupText(string format, object picupDate, object TimeRedy, object TimeClose)
+        protected string GetPickupText(string format, object picupDate, object timeReady, object timeClose)
         {
-            return string.Format(format, picupDate, TimeRedy, TimeClose);
+            return string.Format(format, picupDate, timeReady, timeClose);
         }
 
         protected string GetPickupText(object customerPickupId)
@@ -644,7 +644,7 @@ namespace DemoPickup40.Pages.Pickup2
                 {
                     forwarder.IsExpandedCustomer = true;
                 }
-                
+
             }
 
             XuContainerCol1Icon.Attributes["class"] = anyExpandedCustomer

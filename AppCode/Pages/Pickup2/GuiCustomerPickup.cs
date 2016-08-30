@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AppCode.Util;
 using nu.gtx.POCO.Contract.Pickup;
+
 
 namespace AppCode.Pages.Pickup2
 {
@@ -86,17 +88,26 @@ namespace AppCode.Pages.Pickup2
         }
 
 
-        public GuiCustomerPickup(ICustomerPickup source)
+        private void LoadCarrierNameList(ICustomerPickup customerPickup)
         {
-            source.Transfer(this);
-            // ReSharper disable ArrangeThisQualifier
-            this.TimeClose = source.TimeClose ?? new TimeSpan(23, 59, 59);
-            this.TimeReady = source.TimeReady ?? new TimeSpan(0, 0, 0);
-            this.Address = new GuiAddress(source.Address);
-            this.Shipmentlist = new List<GuiShipment>();
-            // ReSharper restore ArrangeThisQualifier
+            var t1 = customerPickup.ShipmentList.Select(t => t.CarrierName).Distinct().OrderBy(t => t).ToList();
+            var t2 = t1.Count > 0 ? t1.Aggregate((current, next) => current + ", " + next) : "";
+            CarrierNameList = t2;
+        }
 
-            foreach (var shipment in source.ShipmentList)
+
+        public GuiCustomerPickup(ICustomerPickup customerPickup)
+        {
+            customerPickup.Transfer(this);
+            TimeClose = customerPickup.TimeClose ?? new TimeSpan(23, 59, 59);
+            TimeReady = customerPickup.TimeReady ?? new TimeSpan(0, 0, 0);
+            Address = new GuiAddress(customerPickup.Address);
+            PickupStatusCustomer = customerPickup.PickupStatus;
+            
+            LoadCarrierNameList(customerPickup);
+
+            Shipmentlist = new List<GuiShipment>();
+            foreach (var shipment in customerPickup.ShipmentList)
             {
                 this.Shipmentlist.Add(new GuiShipment(shipment));
             }

@@ -1,4 +1,6 @@
-﻿namespace AppCode.Pages.Pickup2
+﻿using nu.gtx.POCO.Contract.Pickup;
+
+namespace AppCode.Pages.Pickup2
 {
     public class DropDownBoxData
     {

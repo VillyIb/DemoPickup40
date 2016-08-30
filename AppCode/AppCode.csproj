@@ -142,8 +142,6 @@
     <Compile Include="Pages\Pickup2\GuiForwarderPickup.cs" />
     <Compile Include="Pages\Pickup2\GuiShipment.cs" />
     <Compile Include="Pages\Pickup2\PickupData.cs" />
-    <Compile Include="Pages\Pickup2\PickupStatusCustomer.cs" />
-    <Compile Include="Pages\Pickup2\PickupStatusForwarder.cs" />
     <Compile Include="Pages\Pickup2\PickupUtil.cs" />
     <Compile Include="Pages\Pickup\DropDownBoxData.cs" />
     <Compile Include="Pages\Pickup\GuiAddress.cs" />

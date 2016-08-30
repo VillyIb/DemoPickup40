@@ -56,11 +56,13 @@ namespace AppCode.Util
             var altSource2 = source.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public).ToList();
             var altSource3 = source.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(t => t.CanRead).ToList();
 
+            var useSource = altSource3.Count > altSource5.Count ? altSource3 : altSource5;
+
             var countTransfer = 0;
 
             foreach (PropertyInfo targetProperty in targetPropertyList)
             {
-                var s1 = altSource3.FirstOrDefault(
+                var s1 = useSource.FirstOrDefault(
                     t =>
                         targetProperty.Name.Equals(t.Name, StringComparison.OrdinalIgnoreCase)
                 );
@@ -73,7 +75,7 @@ namespace AppCode.Util
                 if(!(s1.PropertyType == targetProperty.PropertyType)) { continue; }
 
                 // Matching source property
-                var sourceProperty = altSource3.FirstOrDefault(
+                var sourceProperty = useSource.FirstOrDefault(
                     t =>
                     targetProperty.Name.Equals(t.Name)
                     &&
@@ -110,8 +112,8 @@ namespace AppCode.Util
                 var t2 = sourcePropertyList.Select(t => t.Name).OrderBy(t => t);
                 var sourceList = t2.Aggregate((current, next) => current + ", " + next);
 
-                var t3 = altSource3.Select(t => t.Name).OrderBy(t => t);
-                var altSourceList = t3.Aggregate((current, next) => current + ", " + next);
+                var t3 = altSource3.Select(t => t.Name).OrderBy(t => t).ToList();
+                var altSourceList = t3.Count > 0 ? t3.Aggregate((current, next) => current + ", " + next) : "na";
 
                 throw new ApplicationException(
                     String.Format(

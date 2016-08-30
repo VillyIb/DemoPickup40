@@ -1,0 +1,67 @@
+﻿body {
+}
+
+
+.css-table {
+    display: table;
+    border: 1px solid black;
+    width: 600px;
+}
+
+.css-tr {
+    display: table-row;
+    width: 100%;
+    clear: both;
+    height: 24px;
+}
+
+.css-th {
+    display: table-cell;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.css-td {
+    display: table-cell;
+    border: 1px solid black;
+}
+
+
+.col1 {
+    width: 100px;
+}
+
+.col2 {
+    width: auto;
+}
+
+.col3 {
+    width: 50px;
+    text-align: center;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.error {
+    color: red;
+}
+
+
+input[type=text] {
+    width: 99%;
+}
+
+    input[type=text]:focus {
+        width: 120%;
+    }
+
+select {
+    width: 100%;
+}
+
+    select:focus {
+        width: 120%;
+    }
+

@@ -52,10 +52,12 @@ namespace AppCode.Pages.Pickup2
             get { return PickupUtil.PickupStatusToGlyphiconStatus(PickupStatusForwarder); }
         }
 
+
         public string CssGlyphiconMove
         {
             get { return PickupUtil.PickupStatusToGlyphiconMove(PickupStatusForwarder); }
         }
+
 
         /// <summary>
         /// Shows Expand if all sub items are collapsed.
@@ -72,32 +74,51 @@ namespace AppCode.Pages.Pickup2
             get { return IsExpandedCustomer ? "glyphicon glyphicon-triangle-top big" : "glyphicon glyphicon-triangle-bottom big"; }
         }
 
+
         public string CssVisibleCustomer
         {
             get { return IsExpandedCustomer ? "" : " hidden"; }
         }
+
 
         public int CountCustomers
         {
             get { return CustomerPickupList.Count; }
         }
 
+
         public int CountShipments
         {
             get { return CustomerPickupList.Sum(t => t.Shipmentlist.Count); }
         }
 
-        public GuiForwarderPickup(IForwarderPickupSortable source)
-        {
-            source.Transfer(this);
-            TimeClose = source.TimeClose ?? new TimeSpan(23, 59, 59);
-            TimeReady = source.TimeReady ?? new TimeSpan(0, 0, 0);
-            Address = new GuiAddress(source.Address);
-            CustomerPickupList = new List<GuiCustomerPickup>();
 
-            foreach (var customer in source.CustomerPickupList)
+        private void LoadCarrierNameList(IForwarderPickupSortable forwarderPickup)
+        {
+            var t3 = forwarderPickup.CustomerPickupList.SelectMany(t1 => t1.ShipmentList.Select(t2 => t2.CarrierName));
+
+            var t4 = t3.Distinct().ToList();
+
+            var t5 = t4.Count > 0 ? t4.Aggregate((current, next) => current + ", " + next) : "none";
+            CarrierNameList = t5;
+        }
+
+
+        public GuiForwarderPickup(IForwarderPickupSortable forwarderPickup)
+        {
+            forwarderPickup.Transfer(this);
+            TimeClose = forwarderPickup.TimeClose ?? new TimeSpan(23, 59, 59);
+            TimeReady = forwarderPickup.TimeReady ?? new TimeSpan(0, 0, 0);
+            Address = new GuiAddress(forwarderPickup.Address);
+            PickupStatusForwarder = forwarderPickup.PickupStatus;
+
+            LoadCarrierNameList(forwarderPickup);
+
+            CustomerPickupList = new List<GuiCustomerPickup>();
+            foreach (var customer in forwarderPickup.CustomerPickupList)
             {
-                CustomerPickupList.Add(new GuiCustomerPickup(customer));
+                var t1 = new GuiCustomerPickup(customer) {PickupStatusForwarder = PickupStatusForwarder};
+                CustomerPickupList.Add(t1);
             }
         }
 
