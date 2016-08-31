@@ -98,6 +98,13 @@
             <span class="css-td col2"><asp:TextBox ID="XuTimeClose" runat="server"></asp:TextBox></span>
             <span class="css-td col3"><asp:Button ID="XuTimeCloseCalculated" runat="server" Text="15:00" OnClick="XuTimeCloseCalculated_Click"/></span>
         </div>
+        
+        <div class="css-tr">
+            <asp:Label ID="Label15" CssClass="css-td col1" runat ="server" Text="Pickup Operator"></asp:Label>
+            <span class ="css-td col2"><asp:DropDownList ID="XuPickupOperator" runat ="server"></asp:DropDownList></span>
+            <div class="css-td col3">&nbsp;</div>
+
+        </div>
 
         <div class="css-tr">
             <asp:Label ID="Label14" class="css-td col1" runat="server" Text="Status"></asp:Label>

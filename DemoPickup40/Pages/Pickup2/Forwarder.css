@@ -146,3 +146,6 @@ td.XuFwCounter, td.XuCuCounter, td.XuShWeight {
     text-align:right;
 }
 
+.XuCuFillerA, .XuCuFillerB {
+    visibility: hidden;
+}

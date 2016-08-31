@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 //using nu.gtx.Common1.Extensions;
 using nu.gtx.Common1.Utils;
 using nu.gtx.POCO.Contract.Pickup;
@@ -79,16 +80,61 @@ namespace AppCode.Pages.Pickup2
         }
 
 
-        public bool GetForwarderPickup(out IForwarderPickup  forwarderPickup, int forwarderPickupId)
+        public bool Refresh(GuiContainer guiContainer, GuiForwarderPickup forwarderPickup)
+        {
+            if (forwarderPickup == null) { return false; }
+
+            Init();
+            IForwarderPickupSortable t1;
+            if (ControllerForwarder.Refresh(out t1, forwarderPickup.Id))
+            {
+                guiContainer.ForwarderPickupList.Remove(forwarderPickup);
+                var t2 = new GuiForwarderPickup(t1);
+                guiContainer.ForwarderPickupList.Add(t2);
+
+                guiContainer.ForwarderPickupList = guiContainer.ForwarderPickupList
+                    .OrderBy(t => t.PickupDate)
+                    .ThenBy(t => t.Address.CountryCode)
+                    .ThenBy(t => t.Address.State)
+                    //.ThenBy(t => t.City)
+                    .ThenBy(t => t.Address.Zip)
+                    .ThenBy(t => t.Address.Street1)
+                    .ThenBy(t => t.Address.Street2)
+                    .ThenBy(t => t.Address.Name)
+                    .ThenBy(t => t.GroupIndex)
+                    .ToList();
+
+                return true;
+            }
+
+            return false;
+        }
+
+
+        public bool Read(out IForwarderPickup forwarderPickup, int forwarderPickupId)
         {
             Init();
             return RepositoryForwarderPickup.Read(out forwarderPickup, forwarderPickupId);
         }
 
 
+        public bool Read(out IShipment shipment, int shipmentId)
+        {
+            Init();
+            return RepositoryShipment.Read(out shipment, shipmentId);
+        }
+
+
+        public bool Read(out ICustomerPickup customerPickup, int customerPickupId)
+        {
+            Init();
+            return RepositoryCustomerPickup.Read(out customerPickup, customerPickupId);
+        }
+
+
         public void UpdateDatabase()
         {
-            RepositoryForwarderPickup.UpdateDatabase();
+            RepositoryForwarderPickup?.UpdateDatabase();
         }
 
 
@@ -100,6 +146,18 @@ namespace AppCode.Pages.Pickup2
             };
 
             return result;
+        }
+
+        public GuiContainer Update(GuiContainer guiContainer, GuiForwarderPickup forwarderPickup)
+        {
+            var current = guiContainer.ForwarderPickupList.FirstOrDefault(t => t.Id == forwarderPickup.Id);
+            if (current != null)
+            {
+
+            }
+
+
+            return guiContainer;
         }
 
         // -- Class

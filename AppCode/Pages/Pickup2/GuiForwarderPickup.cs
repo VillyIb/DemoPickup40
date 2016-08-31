@@ -40,6 +40,13 @@ namespace AppCode.Pages.Pickup2
 
         public TimeSpan TimeClose { get; set; }
 
+
+        /// <summary>
+        /// ???CarrierId to collect parcels at customer site.
+        /// </summary>
+        public string PickupOperator { get; set; }
+
+
         /// <summary>
         /// Plain text representation of enum:PickupStatus
         /// Used to control GUI elements.

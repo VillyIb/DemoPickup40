@@ -199,6 +199,22 @@
 
                     </asp:TemplateField>
 
+                    
+                    <asp:TemplateField HeaderText="XuFwPickupOperator">
+                        
+                        <HeaderTemplate>
+                            <asp:Label ID="XuFwPickupOperatorHeader" runat="server" Text="XuFwPickupOperatorHeader" meta:resourcekey="XuFwPickupOperatorHeader" />
+                        </HeaderTemplate>
+
+                        <ItemTemplate>
+                            <asp:Label ID="XuFwPickupOperatorItem" runat="server" Text='<%# Bind("PickupOperator") %>' />
+                        </ItemTemplate>
+
+                        <HeaderStyle CssClass="XuFwPickupOperator" />
+                        <ItemStyle CssClass="XuFwPickupOperator" />
+
+
+                    </asp:TemplateField>
 
 
                     <%--Column Status --%>
@@ -296,7 +312,7 @@
                         <ItemTemplate>
                             <%--NOTE! this Column is mapped to a new row.--%>
                             <tr>
-                                <td colspan="10">
+                                <td colspan="99">
 
                                     <%--Customer Pickup  GridView--%>
                                     <asp:GridView

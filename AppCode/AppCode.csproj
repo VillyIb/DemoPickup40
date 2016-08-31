@@ -132,10 +132,14 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Services.Client" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="ExceptionExtentions\ExceptionExtention.cs" />
     <Compile Include="Pages\Pickup2\DropDownBoxData.cs" />
+    <Compile Include="Pages\Pickup2\DropDownBoxDataPickupOperator.cs" />
     <Compile Include="Pages\Pickup2\GuiAddress.cs" />
     <Compile Include="Pages\Pickup2\GuiContainer.cs" />
     <Compile Include="Pages\Pickup2\GuiCustomerPickup.cs" />

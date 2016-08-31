@@ -261,4 +261,7 @@
   <data name="XuShWeightHeader.Text" xml:space="preserve">
     <value>Weight</value>
   </data>
+  <data name="XuFwPickupOperatorHeader.Text" xml:space="preserve">
+    <value>Pickup Operator</value>
+  </data>
 </root>
