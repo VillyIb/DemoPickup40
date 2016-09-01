@@ -19,7 +19,21 @@ namespace AppCode.Pages.Pickup2
             get
             {
                 var anyExpanded = ForwarderPickupList.Any(t => t.IsExpandedCustomer);
-                return anyExpanded ? "glyphicon glyphicon-triangle-top big" : "glyphicon glyphicon-triangle-bottom big";
+                return anyExpanded
+                    ? "glyphicon glyphicon-triangle-top big"
+                    : "glyphicon glyphicon-triangle-bottom big";
+            }
+        }
+
+        public bool IsSettingsVisible { get; set; }
+
+        public string CssGlyphiconExpandSetting
+        {
+            get
+            {
+                return IsSettingsVisible
+                    ? "glyphicon glyphicon-triangle-top big"
+                    : "glyphicon glyphicon-triangle-bottom big";
             }
         }
     }

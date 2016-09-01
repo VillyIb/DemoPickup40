@@ -221,7 +221,7 @@
   <data name="XuFwMove-Icon.Title" xml:space="preserve">
     <value>Move selected Customer Pickups</value>
   </data>
-  <data name="XuContainerCol1Icon.Text" xml:space="preserve">
+  <data name="XuExpandAllIcon.Text" xml:space="preserve">
     <value>Expand/Collaps all Customer Pickups</value>
   </data>
   <data name="XuCuAddressHeader.Text" xml:space="preserve">
@@ -260,5 +260,8 @@
   </data>
   <data name="XuShWeightHeader.Text" xml:space="preserve">
     <value>Weight</value>
+  </data>
+  <data name="XuSettingsIcon.Text" xml:space="preserve">
+    <value>Expand/Collapse Settings</value>
   </data>
 </root>

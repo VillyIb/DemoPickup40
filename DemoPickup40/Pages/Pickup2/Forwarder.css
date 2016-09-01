@@ -14,6 +14,9 @@
 
 .css-table {
     display: table;
+    /*border: solid;*/
+    padding: 2px;
+    margin: 5px;
 }
 
 .css-tr {
@@ -23,10 +26,12 @@
 .css-th {
     display: table-cell;
     text-align: center;
+    border: solid 1px;
 }
 
-.css-tr {
+.css-td {
     display: table-cell;
+    border: solid 1px;
 }
 
 .XuForwarderPickup {
@@ -98,7 +103,7 @@
     width: 30px;
 }
 
-.XuFwMove, .XuCuMove, .XuCuSelect,  .XuShSelect {
+.XuFwMove, .XuCuMove, .XuCuSelect, .XuShSelect {
     width: 44px;
 }
 
@@ -143,9 +148,38 @@ td.XuShDimension {
 }
 
 td.XuFwCounter, td.XuCuCounter, td.XuShWeight {
-    text-align:right;
+    text-align: right;
 }
 
 .XuCuFillerA, .XuCuFillerB {
     visibility: hidden;
+}
+
+.XuFilterPickupStatus {
+    background-color: aliceblue;
+}
+
+#XuSettings.css-table {
+    width: 900px;
+}
+
+#XuSettingsHeader {
+    width: 99%;
+}
+
+   #XuSettingsHeader .css-td {
+       border:none;
+   }
+
+#XuSettingsBody {
+    width: 99%;
+}
+
+    #XuSettingsBody .css-td {
+        width: 200px;
+    }
+
+
+#XuSettings .header {
+    width: 700px;
 }

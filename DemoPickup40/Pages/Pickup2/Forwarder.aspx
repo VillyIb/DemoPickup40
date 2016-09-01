@@ -19,19 +19,108 @@
 
         <ContentTemplate>
 
-            <div class="css-table">
+            <div id="XuSettings" class="css-table">
+
+                <div class="css-tr header">
+                    <div class="css-td header">
+                        <div id="XuSettingsHeader" class="css-table">
+
+                            <div class="css-tr">
+                                <div class="css-td ColWidth01">
+                                    <asp:LinkButton
+                                        ID="LinkButton1"
+                                        runat="server"
+                                        CausesValidation="false"
+                                        OnClick="XuSettingsExpand_Click">
+                                        <div id="XuSettingsIcon" runat="server"
+                                            class="glyphicon glyphicon-triangle-bottom big"
+                                            title='<%# GetLocalResourceObject("XuSettingsIcon.Text") %>' />
+                                    </asp:LinkButton>
+                                </div>
+                                <div class="css-td">
+                                    <h2>Settings</h2>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="XuSettingsRow" runat ="server" class ="css-tr body hidden">
+                    <div class="css-td body">
+                        <div id="XuSettingsBody" class="css-table">
+
+                            <div class="css-tr">
+                                <div class="css-th col1">Subject</div>
+                                <div class="css-th col2">Values</div>
+                                <div class="css-th col3">Notes</div>
+                            </div>
+
+                            <div class="css-tr">
+                                <div class="css-td">Forwarder Pickup Status</div>
+                                <div class="css-td">
+                                    <asp:CheckBoxList runat="server" ID="XuFilterPickupStatus" CssClass="XuFilterPickupStatus">
+                                        <asp:ListItem Value="CustHand">NoPickup</asp:ListItem>
+                                        <asp:ListItem Value="CustWait" Selected="true">Pending on customer</asp:ListItem>
+                                        <asp:ListItem Value="ForwWait" Selected="true">Pending on Forwarder</asp:ListItem>
+                                        <asp:ListItem Value="ForwSched">Scheduled by Forwarder</asp:ListItem>
+                                    </asp:CheckBoxList>
+                                </div>
+                                <div class="css-td">Select none (no filter), one or multiple</div>
+                            </div>
+
+                            <div class="css-tr">
+                                <div class="css-td">Ready Close window</div>
+                                <div class="css-td">
+                                    <asp:TextBox runat="server">12:00</asp:TextBox><asp:TextBox runat="server">17:00</asp:TextBox>
+                                </div>
+                                <div class="css-td">Only valid on single day</div>
+                            </div>
+
+                            <div class="css-tr">
+                                <div class="css-td">Shipment date window</div>
+                                <div class="css-td">
+                                    <asp:TextBox runat="server">2016-08-30</asp:TextBox><asp:TextBox runat="server">2016-09-01</asp:TextBox>
+                                </div>
+                                <div class="css-td">&nbsp;</div>
+                            </div>
+
+                            <div class="css-tr">
+                                <div class="css-td">Number of shipments</div>
+                                <div class="css-td">
+                                    <asp:CheckBoxList runat="server" ID="CheckBoxList1" CssClass="XuFilterPickupStatus">
+                                        <asp:ListItem Value="CustHand">0 (zero)</asp:ListItem>
+                                        <asp:ListItem Value="CustWait" Selected="true">1+ (one or more)</asp:ListItem>
+                                    </asp:CheckBoxList>
+
+                                </div>
+                                <div class="css-td">&nbsp;</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div id="XuExpandAll" class="css-table">
                 <div class="css-tr">
                     <div class="css-td ColWidth01">
                         <asp:LinkButton
                             ID="XuContainerCol1"
                             runat="server"
                             CausesValidation="false"
-                            CommandName="XcCmd11"
-                            OnClick="XuContainerCol1_Click">
+                            OnClick="XuExpandAll_Click">
                             <div id="XuContainerCol1Icon" runat="server"
                                 class="glyphicon glyphicon-triangle-bottom big"
-                                title='<%# GetLocalResourceObject("XuContainerCol1Icon.Text") %>' />
+                                title='<%# GetLocalResourceObject("XuExpandAllIcon.Text") %>' />
                         </asp:LinkButton>
+                    </div>
+                    <div class="css-td ColWidth01">
+                        <asp:Button runat="server" Text="Refresh" />
                     </div>
                 </div>
             </div>
@@ -199,9 +288,9 @@
 
                     </asp:TemplateField>
 
-                    
+
                     <asp:TemplateField HeaderText="XuFwPickupOperator">
-                        
+
                         <HeaderTemplate>
                             <asp:Label ID="XuFwPickupOperatorHeader" runat="server" Text="XuFwPickupOperatorHeader" meta:resourcekey="XuFwPickupOperatorHeader" />
                         </HeaderTemplate>

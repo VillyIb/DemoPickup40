@@ -84,29 +84,29 @@ namespace DemoPickup40.Pages.Pickup2
 
         private void BindPage( )
         {
-            foreach (var forwarderPickup in XpPrimaryRowList)
-            {
-                var t3 = new List<string>();
+            //foreach (var forwarderPickup in XpPrimaryRowList)
+            //{
+            //    var t3 = new List<string>();
 
-                foreach (var customerPickup in forwarderPickup.CustomerPickupList)
-                {
-                    var t1 = customerPickup.Shipmentlist.Select(t => t.CarrierName).Distinct().OrderBy(t => t).ToList();
-                    t3.AddRange(t1);
+            //    foreach (var customerPickup in forwarderPickup.CustomerPickupList)
+            //    {
+            //        var t1 = customerPickup.Shipmentlist.Select(t => t.CarrierName).Distinct().OrderBy(t => t).ToList();
+            //        t3.AddRange(t1);
 
 
-                    customerPickup.PickupStatusForwarder = forwarderPickup.PickupStatusForwarder;
+            //        customerPickup.PickupStatusForwarder = forwarderPickup.PickupStatusForwarder;
 
-                    foreach (var shipment in customerPickup.Shipmentlist)
-                    {
-                        shipment.PickupStatusCustomer = customerPickup.PickupStatusCustomer;
-                    }
-                }
+            //        foreach (var shipment in customerPickup.Shipmentlist)
+            //        {
+            //            shipment.PickupStatusCustomer = customerPickup.PickupStatusCustomer;
+            //        }
+            //    }
 
-                var t4 = t3.Distinct().OrderBy(t => t).ToList();
-                var t5 = t4.Count > 0 ? t4.Aggregate((current, next) => current + ", " + next) : "none";
+            //    var t4 = t3.Distinct().OrderBy(t => t).ToList();
+            //    var t5 = t4.Count > 0 ? t4.Aggregate((current, next) => current + ", " + next) : "none";
 
-                forwarderPickup.CarrierNameList = t5;
-            }
+            //    forwarderPickup.CarrierNameList = t5;
+            //}
 
             XuForwarderPickup.DataSource = XpPrimaryRowList;
             XuForwarderPickup.DataBind();
@@ -727,7 +727,29 @@ namespace DemoPickup40.Pages.Pickup2
             BindPage();
         }
 
-        protected void XuContainerCol1_Click(object sender, EventArgs e)
+
+        /// <summary>
+        /// Expand/Collapse Settings.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void XuSettingsExpand_Click(object sender, EventArgs e)
+        {
+            XpGuiContainer.IsSettingsVisible = !XpGuiContainer.IsSettingsVisible;
+            XuSettingsIcon.Attributes["class"] = XpGuiContainer.CssGlyphiconExpandSetting;
+            
+            XuSettingsRow.Attributes["class"] = XpGuiContainer.IsSettingsVisible
+                ? XuSettingsRow.Attributes["class"].Replace(" hidden", "")
+                : XuSettingsRow.Attributes["class"] + " hidden";
+
+        }
+
+        /// <summary>
+        /// Expand/Collaps all rows ForvarderPickup -> CustomerPickup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void XuExpandAll_Click(object sender, EventArgs e)
         {
             var anyExpandedCustomer = XpPrimaryRowList.Any(t => t.IsExpandedCustomer);
 
