@@ -637,10 +637,6 @@ namespace DemoPickup40.Pages.Pickup
                 
             }
 
-            XuContainerCol1Icon.Attributes["class"] = anyExpandedCustomer
-                ? "glyphicon glyphicon-triangle-top big"
-                : "glyphicon glyphicon-triangle-bottom big";
-
             BindPage();
         }
     }

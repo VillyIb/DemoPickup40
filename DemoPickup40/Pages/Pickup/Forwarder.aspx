@@ -28,9 +28,9 @@
                             CausesValidation="false"
                             CommandName="XcCmd11"
                             OnClick="XuContainerCol1_Click">
-                            <div id="XuContainerCol1Icon" runat="server"
+                            <div id="XuExpandAllIcon" runat="server"
                                 class="glyphicon glyphicon-triangle-bottom big"
-                                title='<%# GetLocalResourceObject("XuContainerCol1Icon.Text") %>' />
+                                title='<%# GetLocalResourceObject("XuExpandAllIcon.Text") %>' />
                         </asp:LinkButton>
                     </div>
                 </div>

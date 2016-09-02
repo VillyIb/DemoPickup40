@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AppCode.Util;
+using nu.gtx.Common1.Utils;
 using nu.gtx.POCO.Contract.Pickup;
 
 
@@ -64,12 +65,9 @@ namespace AppCode.Pages.Pickup2
             get { return PickupUtil.PickupStatusToGlyphiconMove(PickupStatusCustomer); }
         }
 
-        public bool CssVisibleCheckbox
-        {
-            get { return PickupUtil.PickupStatusToDisabled(PickupStatusForwarder); }
-        }
 
         public bool IsExpanded { get; set; }
+
 
         public string CssGlyphiconExpand
         {
@@ -85,6 +83,18 @@ namespace AppCode.Pages.Pickup2
         public int CountShipments
         {
             get { return Shipmentlist.Count; }
+        }
+
+
+        /// <summary>
+        /// Enable move of shipment between CustomerPickups.
+        /// </summary>
+        public bool IsMoveEnabled { get; set; }
+
+
+        public bool CssDisabledCheckbox
+        {
+            get { return !IsMoveEnabled; }
         }
 
 
@@ -106,10 +116,18 @@ namespace AppCode.Pages.Pickup2
             
             LoadCarrierNameList(customerPickup);
 
+            var timeClose = customerPickup.PickupDate.Add(customerPickup.TimeClose ?? new TimeSpan(23,59,00));
+
             Shipmentlist = new List<GuiShipment>();
             foreach (var shipment in customerPickup.ShipmentList)
             {
-                this.Shipmentlist.Add(new GuiShipment(shipment));
+                var t1 = new GuiShipment(shipment)
+                {
+                    PickupStatusCustomer = customerPickup.PickupStatus,
+                    IsMoveEnabled = SystemDateTime.Now < timeClose,  // Move is only enabled until TimeClose is passed. // TODO overrule by setting.
+                };
+
+                Shipmentlist.Add(t1);
             }
         }
 

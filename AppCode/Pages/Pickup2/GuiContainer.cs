@@ -12,18 +12,22 @@ namespace AppCode.Pages.Pickup2
 
 
         /// <summary>
-        /// 
+        /// Icon, Expand/Collaps all 1 level down.
         /// </summary>
         public string CssGlyphiconExpandCustomerHeader
         {
             get
             {
-                var anyExpanded = ForwarderPickupList.Any(t => t.IsExpandedCustomer);
+                var anyExpanded =
+                    ForwarderPickupList.Any(t => t.IsExpandedCustomer);
+
                 return anyExpanded
                     ? "glyphicon glyphicon-triangle-top big"
                     : "glyphicon glyphicon-triangle-bottom big";
             }
         }
+
+        // -- Settings
 
         public bool IsSettingsVisible { get; set; }
 
@@ -35,6 +39,11 @@ namespace AppCode.Pages.Pickup2
                     ? "glyphicon glyphicon-triangle-top big"
                     : "glyphicon glyphicon-triangle-bottom big";
             }
+        }
+
+        public bool IsAnyCustomerExpanded
+        {
+            get { return ForwarderPickupList.Any(t1 => t1.CustomerPickupList.Any(t2 => t2.IsExpanded)); }
         }
     }
 }

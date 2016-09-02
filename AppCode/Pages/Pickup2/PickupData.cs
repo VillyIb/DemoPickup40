@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 //using nu.gtx.Common1.Extensions;
-using nu.gtx.Common1.Utils;
 using nu.gtx.POCO.Contract.Pickup;
 
 namespace AppCode.Pages.Pickup2
@@ -56,6 +55,17 @@ namespace AppCode.Pages.Pickup2
         }
 
 
+        public List<PickupStatusForwarder> FilterPickupStatus { get; set; }
+
+        public int? LookForward { get; set; }
+
+        public int? NumberOfShipments { get; set; }
+
+        public DateTime? DatePickupBegin { get; set; }
+
+        public DateTime? DatePickupEnd { get; set; }
+
+
         private List<GuiForwarderPickup> GetGuiForwarderPickupList()
         {
             Init();
@@ -64,7 +74,8 @@ namespace AppCode.Pages.Pickup2
 
             var currentWebsiteId = new Guid("46F2BD47-4F64-4BE6-8A8A-ABF280DD780B"); // TODO get from local database.
 
-            var forwarderPickupList = ControllerForwarder.GetForwarderPickupList(currentWebsiteId, SystemDateTime.Yesterday.AddDays(-1));
+            //var forwarderPickupList = ControllerForwarder.GetForwarderPickupList(currentWebsiteId, SystemDateTime.Yesterday.AddDays(-1));
+            var forwarderPickupList  = ControllerForwarder.GetForwarderPickupList(currentWebsiteId, DatePickupBegin, DatePickupEnd,FilterPickupStatus, LookForward, NumberOfShipments);
 
             var forwarderPickupListSorted = ControllerForwarder.Sort(forwarderPickupList, nu.gtx.Business.Pickup.Contract_V2B.SortFields.Location);
 

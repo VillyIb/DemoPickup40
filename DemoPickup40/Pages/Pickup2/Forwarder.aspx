@@ -15,7 +15,7 @@
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-    <asp:UpdatePanel ID="XuUpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="XuUpdatePanel1" runat="server" UpdateMode="Always">
 
         <ContentTemplate>
 
@@ -38,7 +38,7 @@
                                     </asp:LinkButton>
                                 </div>
                                 <div class="css-td">
-                                    <h2>Settings</h2>
+                                    <h2>Settings   <asp:Label id="XuTimeOfDay" runat="server"></asp:Label> </h2>
                                 </div>
                             </div>
 
@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div id="XuSettingsRow" runat ="server" class ="css-tr body hidden">
+                <div id="XuSettingsRow" runat="server" class="css-tr body hidden">
                     <div class="css-td body">
                         <div id="XuSettingsBody" class="css-table">
 
@@ -59,7 +59,7 @@
                             <div class="css-tr">
                                 <div class="css-td">Forwarder Pickup Status</div>
                                 <div class="css-td">
-                                    <asp:CheckBoxList runat="server" ID="XuFilterPickupStatus" CssClass="XuFilterPickupStatus">
+                                    <asp:CheckBoxList runat="server" ID="XuStFilterPickupStatus" CssClass="XuFilterPickupStatus">
                                         <asp:ListItem Value="CustHand">NoPickup</asp:ListItem>
                                         <asp:ListItem Value="CustWait" Selected="true">Pending on customer</asp:ListItem>
                                         <asp:ListItem Value="ForwWait" Selected="true">Pending on Forwarder</asp:ListItem>
@@ -70,17 +70,17 @@
                             </div>
 
                             <div class="css-tr">
-                                <div class="css-td">Ready Close window</div>
+                                <div class="css-td">Looking forward</div>
                                 <div class="css-td">
-                                    <asp:TextBox runat="server">12:00</asp:TextBox><asp:TextBox runat="server">17:00</asp:TextBox>
+                                    <asp:TextBox ID="XuStLookForward" runat="server">180</asp:TextBox><asp:CheckBox ID="XuStLookForwardEnabled" runat="server" Text="Enabled" />
                                 </div>
-                                <div class="css-td">Only valid on single day</div>
+                                <div class="css-td">Specify minutes to look forward from current time</div>
                             </div>
 
                             <div class="css-tr">
                                 <div class="css-td">Shipment date window</div>
                                 <div class="css-td">
-                                    <asp:TextBox runat="server">2016-08-30</asp:TextBox><asp:TextBox runat="server">2016-09-01</asp:TextBox>
+                                    <asp:TextBox ID="XuStPickupDateFrom" runat="server">2016-08-30</asp:TextBox><asp:TextBox ID="XuStPickupDateUntil" runat="server">2016-09-01</asp:TextBox>
                                 </div>
                                 <div class="css-td">&nbsp;</div>
                             </div>
@@ -88,13 +88,22 @@
                             <div class="css-tr">
                                 <div class="css-td">Number of shipments</div>
                                 <div class="css-td">
-                                    <asp:CheckBoxList runat="server" ID="CheckBoxList1" CssClass="XuFilterPickupStatus">
-                                        <asp:ListItem Value="CustHand">0 (zero)</asp:ListItem>
-                                        <asp:ListItem Value="CustWait" Selected="true">1+ (one or more)</asp:ListItem>
-                                    </asp:CheckBoxList>
-
+                                    <asp:CheckBox ID="XuStNumberOfShipments0" runat="server" Text="0 (zero)" />
+                                    <asp:CheckBox ID="XuStNumberOfShipments1" runat="server" Text="1+ (one or more)" />
                                 </div>
                                 <div class="css-td">&nbsp;</div>
+                            </div>
+                            
+                            <div class ="css-tr">
+                                <div class="css-td">Specific customer</div>
+                                <div class="css-td"><asp:TextBox ID="XuStSpecificCustomer" runat="server"></asp:TextBox></div>
+                                <div class ="css-td">blank: all, customerId for single customer</div>
+                            </div>
+
+                            <div class ="css-tr">
+                                <div class="css-td">Specific Website</div>
+                                <div class="css-td"><asp:TextBox ID="XuStWebsite" runat="server"></asp:TextBox></div>
+                                <div class ="css-td">blank: all, Guid for specific website</div>
                             </div>
 
                         </div>
@@ -107,6 +116,7 @@
 
 
             <div id="XuExpandAll" class="css-table">
+
                 <div class="css-tr">
                     <div class="css-td ColWidth01">
                         <asp:LinkButton
@@ -114,14 +124,25 @@
                             runat="server"
                             CausesValidation="false"
                             OnClick="XuExpandAll_Click">
-                            <div id="XuContainerCol1Icon" runat="server"
+                            <div id="XuExpandAllIcon" runat="server"
                                 class="glyphicon glyphicon-triangle-bottom big"
-                                title='<%# GetLocalResourceObject("XuExpandAllIcon.Text") %>' />
+                                title="Expand/Collapse all Customer Pickups" />
+                            <%-- Cant get title to execute inline code --%>
+                            <%--title='<%# GetLocalResourceObject("XuExpandAllIcon.Text") %>' --%>
                         </asp:LinkButton>
                     </div>
+
                     <div class="css-td ColWidth01">
-                        <asp:Button runat="server" Text="Refresh" />
+                        <asp:LinkButton
+                            ID="XuExpandAllRefresh"
+                            runat="server"
+                            CausesValidation="false"
+                            OnClick="XuExpandAllRefresh_Click"
+                            Text="Refresh"
+                            ToolTip="Reloads everything from the database">
+                        </asp:LinkButton>
                     </div>
+
                 </div>
             </div>
 
@@ -218,7 +239,7 @@
 
                         <ItemTemplate>
                             <%--<asp:Label ID="XuFwPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
-                            <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuFwPickupItem.Format"), Eval("PickupDate"), Eval("TimeReady"), Eval("TimeClose")) %>'></asp:Label>
+                            <asp:Label ID="Label1" runat="server" Text='<%# XmGetPickupText( (string)GetLocalResourceObject("XuFwPickupItem.Format"), Eval("PickupDate"), Eval("TimeReady"), Eval("TimeClose")) %>'></asp:Label>
                             <asp:LinkButton
                                 ID="XuFwdPickupX1"
                                 runat="server"
@@ -482,7 +503,7 @@
 
                                                 <ItemTemplate>
                                                     <%--<asp:Label ID="XuCuPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
-                                                    <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuCuPickupItem.Format"), Eval("PickupDate"), Eval("TimeReady"), Eval("TimeClose")) %>'></asp:Label>
+                                                    <asp:Label ID="Label1" runat="server" Text='<%# XmGetPickupText( (string)GetLocalResourceObject("XuCuPickupItem.Format"), Eval("PickupDate"), Eval("TimeReady"), Eval("TimeClose")) %>'></asp:Label>
 
                                                 </ItemTemplate>
 
@@ -559,7 +580,7 @@
                                                     <asp:Label
                                                         ID="XuCuStatusItem"
                                                         runat="server"
-                                                        Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusForwarder") + ".Text") %>' />
+                                                        Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusCustomer") + ".Text") %>' />
 
                                                     <asp:LinkButton
                                                         ID="LinkButton12"
@@ -568,8 +589,8 @@
                                                         CommandName="XcCmd01"
                                                         CommandArgument='<%# Eval("PickupStatusForwarder") + "." + Eval("Id") %>'>
                                                         <span 
-                                                            class='<%# "glyphicon " + GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".Glyphicon") %>' 
-                                                            title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".ToolTip") %>' 
+                                                            class='<%# "glyphicon " + GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusCustomer") + ".Glyphicon") %>' 
+                                                            title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusCustomer") + ".ToolTip") %>' 
                                                             />
                                                     </asp:LinkButton>
 
@@ -611,7 +632,7 @@
                                                     <asp:Label ID="XuCuSelectHeader" runat="server" Text="XuCuSelectHeader" meta:resourcekey="XuCuSelectHeader" />
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <input id="XuCuSelectItem" type="checkbox" runat="server" disabled='<%# Eval("CssVisibleCheckbox") %>' value='<%# Eval("Id") %>' />
+                                                    <input id="XuCuSelectItem" type="checkbox" runat="server" disabled='<%# Eval("CssDisabledCheckbox") %>' value='<%# Eval("Id") %>' />
                                                 </ItemTemplate>
 
                                                 <HeaderStyle CssClass="XuCuSelect" />
@@ -738,7 +759,7 @@
                                                                             <asp:Label ID="XuShSelectHeader" runat="server" Text="XuShSelectHeader" meta:resourcekey="XuShSelectHeader" />
                                                                         </HeaderTemplate>
                                                                         <ItemTemplate>
-                                                                            <input id="XuShSelectItem" type="checkbox" runat="server" disabled='<%# Eval("CssVisibleCheckbox") %>' value='<%# Eval("Id") %>' />
+                                                                            <input id="XuShSelectItem" type="checkbox" runat="server" disabled='<%# Eval("CssDisabledCheckbox") %>' value='<%# Eval("Id") %>' />
                                                                         </ItemTemplate>
 
                                                                         <HeaderStyle CssClass="XuShSelect" />

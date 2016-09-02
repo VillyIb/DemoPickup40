@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using AppCode.Util;
+using nu.gtx.Common1.Utils;
 using nu.gtx.POCO.Contract.Pickup;
 
 namespace AppCode.Pages.Pickup2
@@ -124,7 +125,11 @@ namespace AppCode.Pages.Pickup2
             CustomerPickupList = new List<GuiCustomerPickup>();
             foreach (var customer in forwarderPickup.CustomerPickupList)
             {
-                var t1 = new GuiCustomerPickup(customer) {PickupStatusForwarder = PickupStatusForwarder};
+                var t1 = new GuiCustomerPickup(customer)
+                {
+                    PickupStatusForwarder = PickupStatusForwarder,
+                    IsMoveEnabled = customer.PickupDate >= SystemDateTime.Today, // It is not possible to move old pickups. // TODO overrule by setting.
+                };
                 CustomerPickupList.Add(t1);
             }
         }

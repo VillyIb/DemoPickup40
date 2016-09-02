@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using AppCode.Pages.Pickup2;
+using nu.gtx.Common1.Utils;
 // ReSharper disable UseNullPropagation
 // ReSharper disable ArgumentsStyleLiteral
 
@@ -81,52 +84,186 @@ namespace DemoPickup40.Pages.Pickup2
             return false;
         }
 
-
-        private void BindPage( )
+        private void XmPopulatePage()
         {
-            //foreach (var forwarderPickup in XpPrimaryRowList)
-            //{
-            //    var t3 = new List<string>();
+            XuTimeOfDay.Text = SystemDateTime.Now.ToString("yyyy-MM-dd HH:mm");
 
-            //    foreach (var customerPickup in forwarderPickup.CustomerPickupList)
-            //    {
-            //        var t1 = customerPickup.Shipmentlist.Select(t => t.CarrierName).Distinct().OrderBy(t => t).ToList();
-            //        t3.AddRange(t1);
+            // save settings in container
 
+            // calculate aggreagte values sav as container settings
 
-            //        customerPickup.PickupStatusForwarder = forwarderPickup.PickupStatusForwarder;
-
-            //        foreach (var shipment in customerPickup.Shipmentlist)
-            //        {
-            //            shipment.PickupStatusCustomer = customerPickup.PickupStatusCustomer;
-            //        }
-            //    }
-
-            //    var t4 = t3.Distinct().OrderBy(t => t).ToList();
-            //    var t5 = t4.Count > 0 ? t4.Aggregate((current, next) => current + ", " + next) : "none";
-
-            //    forwarderPickup.CarrierNameList = t5;
-            //}
+            // set display settings accordingly to container settings
 
             XuForwarderPickup.DataSource = XpPrimaryRowList;
             XuForwarderPickup.DataBind();
+
+            // -- Icon Expand/Collaps Settings
+            XuSettingsIcon.Attributes["class"] = XpGuiContainer.CssGlyphiconExpandSetting;
+
+            XuSettingsRow.Attributes["class"] = XpGuiContainer.IsSettingsVisible
+                ? XuSettingsRow.Attributes["class"].Replace(" hidden", "")
+                : XuSettingsRow.Attributes["class"] + " hidden";
+
+
+            // -- Separate Icon Expand/Collapse All 
+            XuExpandAllIcon.Attributes["class"] = XpGuiContainer.CssGlyphiconExpandCustomerHeader;
         }
+
+
+        private PickupData zPickupdata;
+
+        private PickupData PickupApi
+        {
+            get { return zPickupdata ?? (zPickupdata = new PickupData()); }
+        }
+
+
+        private bool GuiRead(out DateTime value, ITextControl textBox)
+        {
+            return DateTime.TryParseExact(
+                textBox.Text,
+                "yyyy-MM-dd",
+                CultureInfo.CurrentCulture,
+                DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeLocal, out value
+            );
+        }
+
+        private List<PickupStatusForwarder> GuiReadFilterPickupStatus()
+        {
+            var result = new List<PickupStatusForwarder>();
+
+            foreach (ListItem t1 in XuStFilterPickupStatus.Items)
+            {
+                if (t1.Selected)
+                {
+                    PickupStatusForwarder t5;
+                    if (Enum.TryParse(t1.Value, out t5))
+                    {
+                        result.Add(t5);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// Reads filter for number of shipments.
+        /// null: filter not active (nothing selecte/both selected)
+        /// 0: show only Pickups with 0 shipments
+        /// 1: shop pickups with one or more shipments.
+        /// </summary>
+        /// <returns></returns>
+        private int? GuiReadNumberOfShipments()
+        {
+            if (XuStNumberOfShipments0.Checked)
+            {
+                if (XuStNumberOfShipments1.Checked)
+                {
+                    return null;
+                }
+                return 0;
+            }
+            if (XuStNumberOfShipments1.Checked)
+            {
+                return 1;
+            }
+
+            return null;
+        }
+
+
+        private bool GuiRead(out int value, ITextControl textBox)
+        {
+            return int.TryParse(textBox.Text, out value);
+        }
+
+
+        private bool GuiRead(out bool value, ICheckBoxControl checkBox)
+        {
+            value = checkBox.Checked;
+            return true;
+        }
+
+        private bool GuiRead(out Guid value, ITextControl textBox)
+        {
+            return Guid.TryParse(textBox.Text, out value);
+        }
+
+
+        private GuiSettings GuiSettings { get; set; }
+
+
+        /// <summary>
+        /// Load Settings from Gui.
+        /// </summary>
+        private void GuiReadSettings()
+        {
+            // Pickup Window
+            DateTime t1;
+            GuiSettings.FilterPickupDateFrom= GuiRead(out t1, XuStPickupDateFrom) ? t1 : (DateTime?)null;
+            GuiSettings.FilterPickupDateUntil = GuiRead(out t1, XuStPickupDateUntil) ? t1 : (DateTime?)null;
+
+            // ForwarderPickup.PickupStatus
+            GuiSettings.FilterPickupStatusForwarder = GuiReadFilterPickupStatus();
+
+            // Look ahead limit
+            int t2;
+            GuiSettings.FilterLookAheadMinutes = GuiRead(out t2, XuStLookForward) ? t2 : 3600;
+            bool t3;
+            GuiSettings.FilterLookAheadEabled = GuiRead(out t3, XuStLookForwardEnabled) && t3;
+
+            // Number of shipments
+            GuiSettings.FilterForShipmentCountZero = GuiRead(out t3, XuStNumberOfShipments0) && t3;
+            GuiSettings.FilterForShipmentCountNonZero = GuiRead(out t3, XuStNumberOfShipments1) && t3;
+
+            // Specific Customer
+            GuiSettings.FilterSingleCustomer = XuStSpecificCustomer.Text;
+
+            // Specific Website
+            Guid t4;
+            GuiSettings.FilterSingleWebsiteId = GuiRead(out t4, XuStWebsite) ? t4 : (Guid?)null;
+
+        }
+
+
+        private bool XmGetQueryParameter(out int value, string key)
+        {
+            var qs = HttpContext.Current.Request.QueryString;
+
+            foreach (string current in qs.Keys)
+            {
+                if (key.Equals(current, StringComparison.OrdinalIgnoreCase))
+                {
+                    var t2 = qs[current];
+                    var result = int.TryParse(t2, out value);
+                    return result;
+                }
+            }
+
+            value = 0;
+            return false;
+        }
+
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SystemDateTime.SetTime(new DateTime(2016, 9, 2, 14, 0, 0), 0);
+
+            int t1;
+
             if (!(IsPostBack))
             {
-                if (XpGuiContainer == null || true)
+                GuiReadSettings();
+
+                //if (XpGuiContainer == null)
                 {
-                    var pickupApi = new PickupData();
-
-                    //pickupApi.Init();
-
-                    XpGuiContainer = pickupApi.GetGuiContainer(0);
+                    XpGuiContainer = PickupApi.GetGuiContainer(0);
                 }
 
-                BindPage();
+                XmPopulatePage();
             }
         }
 
@@ -140,7 +277,7 @@ namespace DemoPickup40.Pages.Pickup2
         /// <summary>
         /// Cmd01: Operate on status of Forwarder Pickup
         /// </summary>
-        private void XcCmd01(string commandArgument)
+        private void XmChangePickupStatusCustomer(string commandArgument)
         {
             // Expected CommandArgument Syntax: {StatusCode}{.}{ForwarderPickupId}
 
@@ -174,7 +311,7 @@ namespace DemoPickup40.Pages.Pickup2
                 }
             }
 
-            BindPage();
+            XmPopulatePage();
         }
 
 
@@ -202,7 +339,7 @@ namespace DemoPickup40.Pages.Pickup2
         /// </summary>
         /// <param name="commandArgument"></param>
         /// <param name="source"></param>
-        private void XcCmd02(string commandArgument, GridView source)
+        private void XmMoveShipment(string commandArgument, GridView source)
         {
             // Expected CommandArgument Syntax: {ForwarderPickupId}
 
@@ -281,10 +418,10 @@ namespace DemoPickup40.Pages.Pickup2
                 XpBackendApi.Refresh(XpGuiContainer, currentForwarderPickup);
             }
 
-            BindPage();
+            XmPopulatePage();
         }
 
-        protected string GetPickupText(string format, object picupDate, object timeReady, object timeClose)
+        protected string XmGetPickupText(string format, object picupDate, object timeReady, object timeClose)
         {
             return string.Format(format, picupDate, timeReady, timeClose);
         }
@@ -307,13 +444,13 @@ namespace DemoPickup40.Pages.Pickup2
             {
                 case "XcCmd01":
                     {
-                        XcCmd01(e.CommandArgument as string);
+                        XmChangePickupStatusCustomer(e.CommandArgument as string);
                     }
                     break;
 
                 case "XcCmd02":
                     {
-                        XcCmd02(e.CommandArgument as string, sender as GridView);
+                        XmMoveShipment(e.CommandArgument as string, sender as GridView);
                     }
                     break;
 
@@ -328,12 +465,13 @@ namespace DemoPickup40.Pages.Pickup2
         /// Calculate Smallest pickup window.
         /// </summary>
         /// <param name="commandArgument"></param>
-        private void XcCmd03(string commandArgument)
+        private void XmCalculatePickupWindow(string commandArgument)
         {
             // Expected syntax: int: ForwarderPickup.Id.
 
             do
             {
+                // TODO MOVE BI to backend...
                 int forwarderPickupId;
                 if (int.TryParse(commandArgument, out forwarderPickupId))
                 {
@@ -370,7 +508,7 @@ namespace DemoPickup40.Pages.Pickup2
                 }
             } while (false);
 
-            BindPage();
+            XmPopulatePage();
         }
 
 
@@ -378,12 +516,13 @@ namespace DemoPickup40.Pages.Pickup2
         /// Update ForwarderPickup PickupStatus.
         /// </summary>
         /// <param name="commandArgument"></param>
-        private void XcCmd04(string commandArgument)
+        private void XmChangePickupStausForwarder(string commandArgument)
         {
             // Expected syntax: int: ForwarderPickup.Id.
 
             do
             {
+                // TODO MOVE BI to backend.
                 int forwarderPickupId;
                 if (int.TryParse(commandArgument, out forwarderPickupId))
                 {
@@ -414,7 +553,7 @@ namespace DemoPickup40.Pages.Pickup2
 
             } while (false);
 
-            BindPage();
+            XmPopulatePage();
         }
 
 
@@ -422,12 +561,13 @@ namespace DemoPickup40.Pages.Pickup2
         /// Edit ForwarderPickup.
         /// </summary>
         /// <param name="commandArgument"></param>
-        private void XcCmd05(string commandArgument)
+        private void XmEditForwarderPickup(string commandArgument)
         {
             // Expected syntax: int: ForwarderPickup.Id.
 
             do
             {
+                // TODO Move BI to backend .. CanEndit() ?
                 int forwarderPickupId;
                 if (int.TryParse(commandArgument, out forwarderPickupId))
                 {
@@ -455,7 +595,7 @@ namespace DemoPickup40.Pages.Pickup2
 
             } while (false);
 
-            BindPage();
+            XmPopulatePage();
         }
 
 
@@ -466,15 +606,15 @@ namespace DemoPickup40.Pages.Pickup2
         /// </summary>
         /// <param name="targetForwarderPickupId"></param>
         /// <param name="customerPickupIdList"></param>
-        private void XbMoveCustomerPickup(int targetForwarderPickupId, IEnumerable<int> customerPickupIdList)
+        private void XmMoveCustomerPickup(int targetForwarderPickupId, IEnumerable<int> customerPickupIdList)
         {
             var target = XpPrimaryRowList.FirstOrDefault(t => t.Id == targetForwarderPickupId);
             if (target == null) { return; }
 
             var t1 = XpPrimaryRowList.FirstOrDefault(t => t.Id == targetForwarderPickupId);
-            if(t1==null) { return; }
-            
-            var toUpdateLIst = new List<GuiForwarderPickup> {t1};
+            if (t1 == null) { return; }
+
+            var toUpdateLIst = new List<GuiForwarderPickup> { t1 };
 
             foreach (var customerPickupId in customerPickupIdList)
             {
@@ -507,7 +647,7 @@ namespace DemoPickup40.Pages.Pickup2
         /// </summary>
         /// <param name="commandArgument"></param>
         /// <param name="source"></param>
-        private void XcCmd06(string commandArgument, GridView source)
+        private void XmCmd06(string commandArgument, GridView source)
         {
             // Expected syntax: int: ForwarderPickup.Id.
 
@@ -537,15 +677,15 @@ namespace DemoPickup40.Pages.Pickup2
                         }
                     }
 
-                    XbMoveCustomerPickup(forwarderPickupId, customerPickupIdList);
+                    XmMoveCustomerPickup(forwarderPickupId, customerPickupIdList);
                 }
 
             } while (false);
 
-            BindPage();
+            XmPopulatePage();
 
             // Expand.
-            XcCmd09(commandArgument, source);
+            XmCmd09(commandArgument, source);
         }
 
 
@@ -554,7 +694,7 @@ namespace DemoPickup40.Pages.Pickup2
         /// </summary>
         /// <param name="commandArgument"></param>
         /// <param name="source"></param>
-        private void XcCmd07(string commandArgument, GridView source)
+        private void XmCmd07(string commandArgument, GridView source)
         {
             // Expected syntax: int: CustomerPickup.Id.
 
@@ -574,16 +714,16 @@ namespace DemoPickup40.Pages.Pickup2
 
             } while (false);
 
-            BindPage();
+            XmPopulatePage();
         }
 
 
         /// <summary>
-        /// Expand all levels/Collapse 1 levle of Shipments below Customer below Forwarder
+        /// Expand/Collapse 2 levels.
         /// </summary>
         /// <param name="commandArgument"></param>
         /// <param name="source"></param>
-        private void XcCmd08(string commandArgument, GridView source)
+        private void XmCmd08(string commandArgument, GridView source)
         {
             // Expected syntax: int: ForwarderPickup.Id.
 
@@ -593,43 +733,24 @@ namespace DemoPickup40.Pages.Pickup2
                 if (int.TryParse(commandArgument, out forwarderPickupId))
                 {
                     var currentForwarderPickup =
-                            (from forwarderPickup in XpPrimaryRowList
-                             where forwarderPickup.Id == forwarderPickupId
-                             select forwarderPickup).First();
+                        (from forwarderPickup in XpPrimaryRowList
+                         where forwarderPickup.Id == forwarderPickupId
+                         select forwarderPickup).First();
 
-                    if (currentForwarderPickup == null) { continue; }
+                    if (currentForwarderPickup == null)
+                    {
+                        continue;
+                    }
 
                     var isExpandedGroup = !currentForwarderPickup.CustomerPickupList.Any(t => t.IsExpanded);
 
-                    if (isExpandedGroup)
-                    {
-                        if (bool.Parse("true")) // configuration on behavior
-                        {
-                            // Collapse all (other).
-                            foreach (var forwarder in XpPrimaryRowList)
-                            {
-                                forwarder.IsExpandedCustomer = false;
-
-                                foreach (var customer in forwarder.CustomerPickupList)
-                                {
-                                    customer.IsExpanded = false;
-                                }
-                            }
-                        }
-
-                        // Expand Customers when expanding Shipments
-                        currentForwarderPickup.IsExpandedCustomer = true;
-                    }
-
-                    foreach (var currentCustomerPickup in currentForwarderPickup.CustomerPickupList)
-                    {
-                        currentCustomerPickup.IsExpanded = isExpandedGroup;
-                    }
+                    currentForwarderPickup.IsExpandedCustomer = isExpandedGroup;
+                    currentForwarderPickup.CustomerPickupList.ForEach(t => { t.IsExpanded = isExpandedGroup; });
                 }
 
             } while (false);
 
-            BindPage();
+            XmPopulatePage();
         }
 
 
@@ -638,7 +759,7 @@ namespace DemoPickup40.Pages.Pickup2
         /// </summary>
         /// <param name="commandArgument"></param>
         /// <param name="source"></param>
-        private void XcCmd09(string commandArgument, GridView source)
+        private void XmCmd09(string commandArgument, GridView source)
         {
             // Expected syntax: int: ForwarderPickup.Id.
 
@@ -668,7 +789,7 @@ namespace DemoPickup40.Pages.Pickup2
 
             } while (false);
 
-            BindPage();
+            XmPopulatePage();
         }
 
 
@@ -679,52 +800,67 @@ namespace DemoPickup40.Pages.Pickup2
             {
                 case "XcCmd03":
                     {
-                        XcCmd03(e.CommandArgument as string);
+                        XmCalculatePickupWindow(e.CommandArgument as string);
                     }
                     break;
 
                 case "XcCmd04":
                     {
                         // change .. status on forwarder pickup
-                        XcCmd04(e.CommandArgument as string);
+                        XmChangePickupStausForwarder(e.CommandArgument as string);
                     }
                     break;
 
                 case "XcCmd05":
                     {
                         // change .. status on forwarder pickup
-                        XcCmd05(e.CommandArgument as string);
+                        XmEditForwarderPickup(e.CommandArgument as string);
                     }
                     break;
 
                 case "XcCmd06":
                     {
                         // Move Customer Pickup to another Forwarder Pickup
-                        XcCmd06(e.CommandArgument as string, sender as GridView);
+                        XmCmd06(e.CommandArgument as string, sender as GridView);
                     }
                     break;
 
                 case "XcCmd07":
                     {
-                        XcCmd07(e.CommandArgument as string, sender as GridView);
+                        XmCmd07(e.CommandArgument as string, sender as GridView);
                     }
                     break;
 
                 case "XcCmd08":
                     {
-                        XcCmd08(e.CommandArgument as string, sender as GridView);
+                        XmCmd08(e.CommandArgument as string, sender as GridView);
                     }
                     break;
 
                 case "XcCmd09":
                     {
-                        XcCmd09(e.CommandArgument as string, sender as GridView);
+                        XmCmd09(e.CommandArgument as string, sender as GridView);
                     }
                     break;
 
             }
 
-            BindPage();
+            XmPopulatePage();
+        }
+
+        protected void XuExpandAllRefresh_Click(object sender, EventArgs e)
+        {
+            GuiReadSettings();
+
+            var saved = XpGuiContainer;
+            var start = DateTime.UtcNow;
+            XpGuiContainer = PickupApi.GetGuiContainer(0); // TODO pass on filters.
+            var duration = DateTime.UtcNow.Subtract(start);
+            XpGuiContainer.IsSettingsVisible = false; // saved.IsSettingsVisible;
+
+            XmPopulatePage();
+
+            //XuUpdatePanel1.Update();
         }
 
 
@@ -736,12 +872,8 @@ namespace DemoPickup40.Pages.Pickup2
         protected void XuSettingsExpand_Click(object sender, EventArgs e)
         {
             XpGuiContainer.IsSettingsVisible = !XpGuiContainer.IsSettingsVisible;
-            XuSettingsIcon.Attributes["class"] = XpGuiContainer.CssGlyphiconExpandSetting;
-            
-            XuSettingsRow.Attributes["class"] = XpGuiContainer.IsSettingsVisible
-                ? XuSettingsRow.Attributes["class"].Replace(" hidden", "")
-                : XuSettingsRow.Attributes["class"] + " hidden";
 
+            XmPopulatePage();
         }
 
         /// <summary>
@@ -755,31 +887,53 @@ namespace DemoPickup40.Pages.Pickup2
 
             if (anyExpandedCustomer)
             {
-                // Collapse all iterative
-                foreach (var forwarder in XpPrimaryRowList)
-                {
-                    forwarder.IsExpandedCustomer = false;
-                    foreach (var customer in forwarder.CustomerPickupList)
+                // Collapse two level down: CustomerPickup on all ForwarderPickup, Shipment on all CustomerPickup
+                XpGuiContainer.ForwarderPickupList.ForEach(
+                    t1 =>
                     {
-                        customer.IsExpanded = false;
+                        t1.IsExpandedCustomer = false;
+                        t1.CustomerPickupList.ForEach(
+                            t2 =>
+                            {
+                                t2.IsExpanded = false;
+                            }
+                        );
                     }
-                }
+                );
+
+                //// Collapse all iterative
+                //foreach (var forwarder in XpPrimaryRowList)
+                //{
+                //    forwarder.IsExpandedCustomer = false;
+                //    foreach (var customer in forwarder.CustomerPickupList)
+                //    {
+                //        customer.IsExpanded = false;
+                //    }
+
+                //    forwarder.CustomerPickupList.ForEach(t => { t.IsExpanded = false; });
+
+                //}
             }
             else
             {
-                // Expand Customer Pickup on all Forwarder Pickup
-                foreach (var forwarder in XpPrimaryRowList)
-                {
-                    forwarder.IsExpandedCustomer = true;
-                }
+                // Expand one level down: Customer Pickup on all Forwarder Pickup
+
+                XpGuiContainer.ForwarderPickupList.ForEach(
+                    t1 =>
+                    {
+                        t1.IsExpandedCustomer = true;
+                    }
+                );
+
+                //foreach (var forwarder in XpPrimaryRowList)
+                //{
+                //    forwarder.IsExpandedCustomer = true;
+                //}
 
             }
 
-            XuContainerCol1Icon.Attributes["class"] = anyExpandedCustomer
-                ? "glyphicon glyphicon-triangle-top big"
-                : "glyphicon glyphicon-triangle-bottom big";
 
-            BindPage();
+            XmPopulatePage();
         }
     }
 }

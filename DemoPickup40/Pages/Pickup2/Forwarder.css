@@ -161,6 +161,8 @@ td.XuFwCounter, td.XuCuCounter, td.XuShWeight {
 
 #XuSettings.css-table {
     width: 900px;
+    padding: 0;
+    margin: 4px 4px 4px 0;
 }
 
 #XuSettingsHeader {
@@ -182,4 +184,10 @@ td.XuFwCounter, td.XuCuCounter, td.XuShWeight {
 
 #XuSettings .header {
     width: 700px;
+}
+
+#XuExpandAll.css-table {
+    padding: 0;
+    margin: 4px 4px 4px 0;
+    
 }

@@ -39,9 +39,14 @@ namespace AppCode.Pages.Pickup2
         public decimal Weight { get; set; }
 
 
-        public bool CssVisibleCheckbox
+        /// <summary>
+        /// Enable move of shipment between CustomerPickups.
+        /// </summary>
+        public bool IsMoveEnabled { get; set; }
+
+        public bool CssDisabledCheckbox
         {
-            get { return PickupUtil.PickupStatusToDisabled(PickupStatusCustomer); }
+            get { return !IsMoveEnabled; }
         }
 
 
