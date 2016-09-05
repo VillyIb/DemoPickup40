@@ -63,5 +63,8 @@ namespace AppCode.Pages.Pickup2
         /// </summary>
         public Guid? FilterSingleWebsiteId { get; set; }
 
+
+        public int SortOption { get; set; }
+
     }
 }

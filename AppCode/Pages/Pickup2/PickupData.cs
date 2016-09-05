@@ -20,8 +20,9 @@ namespace AppCode.Pages.Pickup2
 
         private nu.gtx.Business.Pickup.Shared.ControllerForwarderPickup ControllerForwarder { get; set; }
 
-        private nu.gtx.Business.Pickup.Shared.ControllerCustomerPickup ControllerCustomer { get; set; }
+        //private nu.gtx.Business.Pickup.Shared.ControllerCustomerPickup ControllerCustomer { get; set; }
 
+        public GuiSettings GuiSettings { get; set; }
 
         public void Init()
         {
@@ -45,12 +46,12 @@ namespace AppCode.Pages.Pickup2
                     RepositoryParcelDetail
                     );
 
-                ControllerCustomer = new nu.gtx.Business.Pickup.Shared.ControllerCustomerPickup(
-                    RepositoryCustomerPickup,
-                    RepositoryForwarderPickup,
-                    RepositoryShipment,
-                    ControllerForwarder
-                    );
+                //ControllerCustomer = new nu.gtx.Business.Pickup.Shared.ControllerCustomerPickup(
+                //    RepositoryCustomerPickup,
+                //    RepositoryForwarderPickup,
+                //    RepositoryShipment,
+                //    ControllerForwarder
+                //    );
             }
         }
 
@@ -66,6 +67,119 @@ namespace AppCode.Pages.Pickup2
         public DateTime? DatePickupEnd { get; set; }
 
 
+        private bool IncludeGroup(PickupStatusForwarder pickupStatusForwarder)
+        {
+            return GuiSettings.FilterPickupStatusForwarder.Count == 0
+                   || GuiSettings.FilterPickupStatusForwarder.Any(t => t == pickupStatusForwarder);
+        }
+
+
+        public List<IForwarderPickupSortable> SortAndFilter(List<IForwarderPickupSortable> source)
+        {
+            var result = new List<IForwarderPickupSortable>();
+            var empty = new List<IForwarderPickupSortable>(0);
+
+            // 1 Split into groups
+            var custCan1 = source.Where(t => t.PickupStatus == PickupStatusForwarder.CustCan);
+            var custHand1 = source.Where(t => t.PickupStatus == PickupStatusForwarder.CustHand);
+            var custWait1 = source.Where(t => t.PickupStatus == PickupStatusForwarder.CustWait);
+            var forwSched1 = source.Where(t => t.PickupStatus == PickupStatusForwarder.ForwSched);
+            var forwWait1 = source.Where(t => t.PickupStatus == PickupStatusForwarder.ForwWait);
+            var permColl1 = source.Where(t => t.PickupStatus == PickupStatusForwarder.PermColl);
+
+            // 2 sort each group
+            var custCan2 = custCan1.OrderBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
+            var custHand2 = custHand1.OrderBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
+            var custWait2 = custWait1.OrderByDescending(t => t.TimeClose).ThenBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
+            var forwSched2 = forwSched1.OrderBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
+            var forwWait2 = forwWait1.OrderByDescending(t => t.TimeClose).ThenBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
+            var permColl2 = permColl1.OrderBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
+
+            // 3 filter on group
+            var custCan3 = IncludeGroup(PickupStatusForwarder.CustCan) ? custCan2 : empty;
+            var custHand3 = IncludeGroup(PickupStatusForwarder.CustHand) ? custHand2 : empty;
+            var custWait3 = IncludeGroup(PickupStatusForwarder.CustWait) ? custWait2 : empty;
+            var forwSched3 = IncludeGroup(PickupStatusForwarder.ForwSched) ? forwSched2 : empty;
+            var forwWait3 = IncludeGroup(PickupStatusForwarder.ForwWait) ? forwWait2 : empty;
+            var permColl3 = IncludeGroup(PickupStatusForwarder.PermColl) ? permColl2 : empty;
+
+            // 4 filter on number of shipments - only valid for Permanent Collection 
+            var permColl4 = new List<IForwarderPickupSortable>();
+            if (permColl3.Count > 0)
+            {
+                foreach (var forwarderPickup in permColl3)
+                {
+                    var count = forwarderPickup.CustomerPickupList.Sum(t => t.ShipmentList.Count);
+
+                    if (GuiSettings.FilterForShipmentCountNonZero && count > 0 ||
+                        GuiSettings.FilterForShipmentCountZero && count == 0)
+                    {
+                        permColl4.Add(forwarderPickup);
+                    }
+                }
+            }
+
+            // 5 filter on timeClose an number of minutes to look forward - only valid for CustWait and ForwWait
+            var custWait4 = new List<IForwarderPickupSortable>();
+            if (custWait3.Count > 0)
+            {
+                if (GuiSettings.FilterLookAheadEabled)
+                {
+                    var threshold = DateTime.Now.AddMinutes(GuiSettings.FilterLookAheadMinutes).Subtract(DateTime.Now.Date);
+
+                    foreach (var forwarderPickup in custWait3)
+                    {
+                        if (forwarderPickup.TimeClose.HasValue &&
+                            forwarderPickup.TimeClose.Value < threshold)
+                        {
+                            custWait4.Add(forwarderPickup);
+                        }
+                    }
+                }
+                else
+                {
+                    custWait4 = custWait3;
+                }
+            }
+
+            switch (GuiSettings.SortOption)
+            {
+                case 1:
+                    {
+                        // merge together in specific group order
+
+                        result.AddRange(forwWait3); // Pending on Forwarder
+                        result.AddRange(custWait4); // Pending on Customer
+                        result.AddRange(custCan3); // Cancelled by customer
+                        result.AddRange(custHand3); // No Collection (handled by customer)
+                        result.AddRange(permColl4); // Permanent Collection
+                        result.AddRange(forwSched3); // Schecduled by Forwarder
+                    }
+                    break;
+
+                case 2:
+                    {
+                        result.AddRange(forwWait3); // Pending on Forwarder
+                        result.AddRange(custWait3); // Pending on Customer
+                        result.AddRange(custCan3); // Cancelled by customer
+                        result.AddRange(custHand3); // No Collection (handled by customer)
+                        result.AddRange(permColl4); // Permanent Collection
+                        result.AddRange(forwSched3); // Schecduled by Forwarder
+
+                        result = result.OrderBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ThenBy(t => t.Address.Street2).ThenBy(t => t.Address.Name).ToList();
+
+                    }
+                    break;
+
+                default:
+                    result.AddRange(source);
+                    break;
+            }
+
+            return result;
+        }
+
+
         private List<GuiForwarderPickup> GetGuiForwarderPickupList()
         {
             Init();
@@ -75,9 +189,9 @@ namespace AppCode.Pages.Pickup2
             var currentWebsiteId = new Guid("46F2BD47-4F64-4BE6-8A8A-ABF280DD780B"); // TODO get from local database.
 
             //var forwarderPickupList = ControllerForwarder.GetForwarderPickupList(currentWebsiteId, SystemDateTime.Yesterday.AddDays(-1));
-            var forwarderPickupList  = ControllerForwarder.GetForwarderPickupList(currentWebsiteId, DatePickupBegin, DatePickupEnd,FilterPickupStatus, LookForward, NumberOfShipments);
+            var forwarderPickupList = ControllerForwarder.GetForwarderPickupList(currentWebsiteId, DatePickupBegin, DatePickupEnd, FilterPickupStatus, LookForward, NumberOfShipments);
 
-            var forwarderPickupListSorted = ControllerForwarder.Sort(forwarderPickupList, nu.gtx.Business.Pickup.Contract_V2B.SortFields.Location);
+            var forwarderPickupListSorted = SortAndFilter(forwarderPickupList); //       ControllerForwarder.Sort(forwarderPickupList, nu.gtx.Business.Pickup.Contract_V2B.SortFields.Location);
 
 
             foreach (var fw in forwarderPickupListSorted)
@@ -173,9 +287,6 @@ namespace AppCode.Pages.Pickup2
 
         // -- Class
 
-        static PickupData()
-        {
-        }
     }
 
 }

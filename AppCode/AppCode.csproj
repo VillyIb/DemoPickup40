@@ -34,101 +34,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nu.gtx.Automation.Common">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Automation.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Business">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Business.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Business.Pickup">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Business.Pickup.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Business.PNDropPoints">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Business.PNDropPoints.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Business.ShipmentImporter">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Business.ShipmentImporter.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Common1">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Common1.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Common2">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Common2.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.CommonCarrierProperties">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.CommonCarrierProperties.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Communication">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Communication.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Consignor.DMData">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Consignor.DMData.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Consignor.DomainModel">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Consignor.DomainModel.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Consignor.ShipmentImporter">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Consignor.ShipmentImporter.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Contract">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Contract.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.DatabaseAccess">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.DatabaseAccess.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.DbMain.Standard.PM">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.DbMain.Standard.PM.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.DbShared.Consignor.PM">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.DbShared.Consignor.PM.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.DbShared.Standard.PM">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.DbShared.Standard.PM.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.DbShipping.Standard.PM">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.DbShipping.Standard.PM.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.DomainModelBase">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.DomainModelBase.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Gateway.Base">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Gateway.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Gateway.DHL">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Gateway.DHL.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Gateway.Fedex">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Gateway.Fedex.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Gateway.GLS">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Gateway.GLS.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Gateway.PDK">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Gateway.PDK.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Gateway.TNT">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Gateway.TNT.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Gateway.UPS">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Gateway.UPS.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.POCO.Contract">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.POCO.Contract.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Shipping.DomainModel">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Shipping.DomainModel.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Standard.DMData">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Standard.DMData.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Standard.DomainModel">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Standard.DomainModel.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.UPS.PickupGateway">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.UPS.PickupGateway.dll</HintPath>
-    </Reference>
-    <Reference Include="nu.gtx.Utility.PDF">
-      <HintPath>..\..\..\DevBackend\Backend\_dll_GtxBackend\nu.gtx.Utility.PDF.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -165,6 +73,24 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\DevBackend\Backend\nu.gtx.Business.Pickup\nu.gtx.Business.Pickup.csproj">
+      <Project>{8435ca97-249e-46a3-8dac-f8d9df472d88}</Project>
+      <Name>nu.gtx.Business.Pickup</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DevBackend\Backend\nu.gtx.Common1\nu.gtx.Common1.csproj">
+      <Project>{04027a1c-ad75-4e18-a888-28c213d26f28}</Project>
+      <Name>nu.gtx.Common1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DevBackend\Backend\nu.gtx.DatabaseAccess\nu.gtx.DatabaseAccess.csproj">
+      <Project>{775a92f1-cf5b-41bd-afbd-eef54981b1a3}</Project>
+      <Name>nu.gtx.DatabaseAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DevBackend\Backend\nu.gtx.POCO.Contract\nu.gtx.POCO.Contract.csproj">
+      <Project>{8492decb-892e-42aa-a7ca-8121ebc0f38f}</Project>
+      <Name>nu.gtx.POCO.Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

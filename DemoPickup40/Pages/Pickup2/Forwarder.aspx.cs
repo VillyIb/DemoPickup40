@@ -191,6 +191,11 @@ namespace DemoPickup40.Pages.Pickup2
             return Guid.TryParse(textBox.Text, out value);
         }
 
+        private bool GuiRead(out int value, ListControl listControl)
+        {
+            return int.TryParse(listControl.SelectedValue, out value);
+        }
+
 
         private GuiSettings GuiSettings { get; set; }
 
@@ -200,6 +205,8 @@ namespace DemoPickup40.Pages.Pickup2
         /// </summary>
         private void GuiReadSettings()
         {
+            GuiSettings = PickupApi.GuiSettings ?? (PickupApi.GuiSettings = new GuiSettings());
+
             // Pickup Window
             DateTime t1;
             GuiSettings.FilterPickupDateFrom= GuiRead(out t1, XuStPickupDateFrom) ? t1 : (DateTime?)null;
@@ -224,6 +231,8 @@ namespace DemoPickup40.Pages.Pickup2
             // Specific Website
             Guid t4;
             GuiSettings.FilterSingleWebsiteId = GuiRead(out t4, XuStWebsite) ? t4 : (Guid?)null;
+
+            GuiSettings.SortOption = GuiRead(out t2, XuSorting) ? t2 : 1;
 
         }
 
@@ -250,7 +259,7 @@ namespace DemoPickup40.Pages.Pickup2
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SystemDateTime.SetTime(new DateTime(2016, 9, 2, 14, 0, 0), 0);
+            SystemDateTime.SetTime(new DateTime(2016, 9, 5, 14, 0, 0), 0);
 
             int t1;
 

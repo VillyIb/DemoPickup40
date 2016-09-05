@@ -60,10 +60,12 @@
                                 <div class="css-td">Forwarder Pickup Status</div>
                                 <div class="css-td">
                                     <asp:CheckBoxList runat="server" ID="XuStFilterPickupStatus" CssClass="XuFilterPickupStatus">
+                                        <asp:ListItem Value="CustCan">Cancelled by Customer</asp:ListItem>
                                         <asp:ListItem Value="CustHand">NoPickup</asp:ListItem>
                                         <asp:ListItem Value="CustWait" Selected="true">Pending on customer</asp:ListItem>
                                         <asp:ListItem Value="ForwWait" Selected="true">Pending on Forwarder</asp:ListItem>
                                         <asp:ListItem Value="ForwSched">Scheduled by Forwarder</asp:ListItem>
+                                        <asp:ListItem Value="PermColl">Permanent Collection</asp:ListItem>
                                     </asp:CheckBoxList>
                                 </div>
                                 <div class="css-td">Select none (no filter), one or multiple</div>
@@ -103,6 +105,17 @@
                             <div class ="css-tr">
                                 <div class="css-td">Specific Website</div>
                                 <div class="css-td"><asp:TextBox ID="XuStWebsite" runat="server"></asp:TextBox></div>
+                                <div class ="css-td">blank: all, Guid for specific website</div>
+                            </div>
+                            
+                            <div class="css-tr">
+                                <div class="css-td">Sorting</div>
+                                <div class="css-td">
+                                    <asp:RadioButtonList id="XuSorting" runat="server">
+                                        <asp:ListItem Value="1" Selected="True">Sort into groups, timeClose, Address</asp:ListItem>
+                                        <asp:ListItem Value="2">Sort on Address</asp:ListItem>
+                                        <asp:ListItem Value="3">#3</asp:ListItem>
+                                    </asp:RadioButtonList></div>
                                 <div class ="css-td">blank: all, Guid for specific website</div>
                             </div>
 
