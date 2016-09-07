@@ -20,6 +20,18 @@ namespace AppCode.Pages.Pickup2
 
 
         /// <summary>
+        /// FK pointer to [{website}].[dbo].[aspnet_CompanyAccount]
+        /// </summary>
+        public int CustomerAccountId { get; set; }
+
+
+        /// <summary>
+        /// FK on table [{website}].[dbo].[aspnet_CompanyDB]
+        /// </summary>
+        public int CustomerId { get; set; }
+
+
+        /// <summary>
         /// Displayed on screen as a concatenation of Length x Width x Height
         /// </summary>
         public string Dimensions { get; set; }
@@ -44,6 +56,7 @@ namespace AppCode.Pages.Pickup2
         /// </summary>
         public bool IsMoveEnabled { get; set; }
 
+
         public bool CssDisabledCheckbox
         {
             get { return !IsMoveEnabled; }
@@ -53,7 +66,7 @@ namespace AppCode.Pages.Pickup2
         public GuiShipment(IShipment source)
         {
             source.Transfer(this);
-            this.Address = new GuiAddress(source.Address);
+            Address = new GuiAddress(source.Address);
 
             var parcelDetailList = source.ParcelDetailList;
 

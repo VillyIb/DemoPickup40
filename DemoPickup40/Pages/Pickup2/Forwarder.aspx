@@ -727,7 +727,7 @@
                                                                             <asp:Label ID="XuShCarrierHeader" runat="server" Text="XuShCarrierHeader" meta:resourcekey="XuShCarrierHeader" />
                                                                         </HeaderTemplate>
                                                                         <ItemTemplate>
-                                                                            <asp:Label ID="XuShCarrierItem" runat="server" Text='<%# Bind("CarrierName") %>' />
+                                                                            <asp:Label ID="XuShCarrierItem" runat="server" Text='<%# Bind("CarrierName") %>' ToolTip='<%# "Customer/Account" + Eval("CustomerId") + "/" + Eval("CustomerAccountId") %>' />
                                                                         </ItemTemplate>
 
                                                                         <HeaderStyle CssClass="XuShCarrier" />

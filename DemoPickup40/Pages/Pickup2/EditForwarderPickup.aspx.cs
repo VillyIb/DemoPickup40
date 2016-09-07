@@ -145,13 +145,20 @@ namespace DemoPickup40.Pages.Pickup2
                     {
                         Sorting = "96",
                         Text = "Alternativ1",
-                        Value =PickupOperator.Alternative1
+                        Value =PickupOperator.Auto1
                     },
                     new DropDownBoxDataPickupOperator
                     {
                         Sorting = "97",
                         Text = "Alternativ2",
-                        Value =PickupOperator.Alternative2
+                        Value =PickupOperator.Auto2
+                    },
+
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "95",
+                        Text = "Manual",
+                        Value =PickupOperator.Manual
                     },
 
                 };
