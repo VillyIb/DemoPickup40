@@ -109,14 +109,14 @@ namespace AppCode.Pages.Pickup2
         public GuiCustomerPickup(ICustomerPickup customerPickup)
         {
             customerPickup.Transfer(this);
-            TimeClose = customerPickup.TimeClose ?? new TimeSpan(23, 59, 59);
-            TimeReady = customerPickup.TimeReady ?? new TimeSpan(0, 0, 0);
+            TimeClose = customerPickup.TimeClose;
+            TimeReady = customerPickup.TimeReady;
             Address = new GuiAddress(customerPickup.Address);
             PickupStatusCustomer = customerPickup.PickupStatus;
             
             LoadCarrierNameList(customerPickup);
 
-            var timeClose = customerPickup.PickupDate.Add(customerPickup.TimeClose ?? new TimeSpan(23,59,00));
+            var timeClose = customerPickup.PickupDate.Add(customerPickup.TimeClose );
 
             Shipmentlist = new List<GuiShipment>();
             foreach (var shipment in customerPickup.ShipmentList)

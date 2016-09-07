@@ -90,9 +90,9 @@ namespace AppCode.Pages.Pickup2
             // 2 sort each group
             var custCan2 = custCan1.OrderBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
             var custHand2 = custHand1.OrderBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
-            var custWait2 = custWait1.OrderByDescending(t => t.TimeClose).ThenBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
+            var custWait2 = custWait1.OrderBy(t => t.TimeClose).ThenBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
             var forwSched2 = forwSched1.OrderBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
-            var forwWait2 = forwWait1.OrderByDescending(t => t.TimeClose).ThenBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
+            var forwWait2 = forwWait1.OrderBy(t => t.TimeClose).ThenBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
             var permColl2 = permColl1.OrderBy(t => t.Address.CountryCode).ThenBy(t => t.Address.Zip).ThenBy(t => t.Address.Street1).ToList();
 
             // 3 filter on group
@@ -129,8 +129,7 @@ namespace AppCode.Pages.Pickup2
 
                     foreach (var forwarderPickup in custWait3)
                     {
-                        if (forwarderPickup.TimeClose.HasValue &&
-                            forwarderPickup.TimeClose.Value < threshold)
+                        if (forwarderPickup.TimeClose < threshold)
                         {
                             custWait4.Add(forwarderPickup);
                         }

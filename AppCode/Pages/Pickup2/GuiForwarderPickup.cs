@@ -16,7 +16,7 @@ namespace AppCode.Pages.Pickup2
 
 
         public string CarrierNameList { get; set; }
-        
+
 
         public List<GuiCustomerPickup> CustomerPickupList { get; set; }
 
@@ -115,8 +115,8 @@ namespace AppCode.Pages.Pickup2
         public GuiForwarderPickup(IForwarderPickupSortable forwarderPickup)
         {
             forwarderPickup.Transfer(this);
-            TimeClose = forwarderPickup.TimeClose ?? new TimeSpan(23, 59, 59);
-            TimeReady = forwarderPickup.TimeReady ?? new TimeSpan(0, 0, 0);
+            TimeClose = forwarderPickup.TimeClose;
+            TimeReady = forwarderPickup.TimeReady;
             Address = new GuiAddress(forwarderPickup.Address);
             PickupStatusForwarder = forwarderPickup.PickupStatus;
 

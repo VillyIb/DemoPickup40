@@ -259,9 +259,8 @@ namespace DemoPickup40.Pages.Pickup2
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SystemDateTime.SetTime(new DateTime(2016, 9, 5, 14, 0, 0), 0);
+            //SystemDateTime.SetTime(new DateTime(2016, 9, 5, 14, 0, 0), 0);
 
-            int t1;
 
             if (!(IsPostBack))
             {

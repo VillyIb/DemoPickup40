@@ -109,37 +109,49 @@ namespace DemoPickup40.Pages.Pickup2
                     {
                         Sorting = "00",
                         Text = "GLS",
-                        Value ="GLS"
+                        Value = PickupOperator.GLS
                     },
                     new DropDownBoxDataPickupOperator
                     {
                         Sorting = "01",
                         Text = "DHL",
-                        Value ="DHL"
+                        Value =PickupOperator.DHL
                     },
                     new DropDownBoxDataPickupOperator
                     {
                         Sorting = "02",
                         Text = "HS",
-                        Value ="HS"
+                        Value =PickupOperator.HS
                     },
                     new DropDownBoxDataPickupOperator
                     {
                         Sorting = "03",
                         Text = "UPS",
-                        Value ="UPS"
+                        Value =PickupOperator.UPS
                     },
                     new DropDownBoxDataPickupOperator
                     {
                         Sorting = "98",
                         Text = "Anden Afhenter",
-                        Value ="AA"
+                        Value =PickupOperator.AA
                     },
                     new DropDownBoxDataPickupOperator
                     {
                         Sorting = "99",
                         Text = "Udefineret",
-                        Value ="na"
+                        Value =PickupOperator.Undefined
+                    },
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "96",
+                        Text = "Alternativ1",
+                        Value =PickupOperator.Alternative1
+                    },
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "97",
+                        Text = "Alternativ2",
+                        Value =PickupOperator.Alternative2
                     },
 
                 };
@@ -204,7 +216,7 @@ namespace DemoPickup40.Pages.Pickup2
         }
 
 
-        private void XmPopulateXuPickupOperator(string currentPickupOperator)
+        private void XmPopulateXuPickupOperator(PickupOperator currentPickupOperator)
         {
             var control = XuPickupOperator;
 
@@ -230,12 +242,12 @@ namespace DemoPickup40.Pages.Pickup2
             var timeReadyMax = XpForwarderPickup.CustomerPickupList.Count > 0
                 ? XpForwarderPickup.CustomerPickupList.Max(t => t.TimeReady)
                 : new TimeSpan(0, 0, 0);
-            XuTimeReadyCalculated.Text = timeReadyMax.HasValue ? timeReadyMax.Value.ToString(@"hh\:mm") : "na";
+            XuTimeReadyCalculated.Text = timeReadyMax.ToString(@"hh\:mm");
 
             var timeCloseMin = XpForwarderPickup.CustomerPickupList.Count > 0
                 ? XpForwarderPickup.CustomerPickupList.Min(t => t.TimeClose)
                 : new TimeSpan(23, 59, 0);
-            XuTimeCloseCalculated.Text = timeCloseMin.HasValue ? timeCloseMin.Value.ToString(@"hh\:mm") : "na";
+            XuTimeCloseCalculated.Text = timeCloseMin.ToString(@"hh\:mm");
         }
 
 
@@ -357,12 +369,14 @@ namespace DemoPickup40.Pages.Pickup2
             XpForwarderPickup.Address.Zip = XuZip.Text;
 
             XpForwarderPickup.Note = XuNote.Text;
-            XpForwarderPickup.PickupOperator = XuPickupOperator.SelectedValue;
+
+            {
+                PickupOperator t1;
+                XpForwarderPickup.PickupOperator = Enum.TryParse(XuPickupOperator.SelectedValue, out t1) ? t1 : PickupOperator.Undefined;
+            }
             {
                 PickupStatusForwarder t1;
-                XpForwarderPickup.PickupStatus = Enum.TryParse(XuPickupStatus.Text, out t1)
-                    ? t1
-                    : PickupStatusForwarder.CustWait;
+                XpForwarderPickup.PickupStatus = Enum.TryParse(XuPickupStatus.Text, out t1) ? t1 : PickupStatusForwarder.CustWait;
             }
 
             // Possible validation errors.

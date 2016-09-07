@@ -1,11 +1,13 @@
-﻿namespace AppCode.Pages.Pickup2
+﻿using nu.gtx.POCO.Contract.Pickup;
+
+namespace AppCode.Pages.Pickup2
 {
     public class DropDownBoxDataPickupOperator
     {
         /// <summary>
         /// Key returned when selected.
         /// </summary>
-        public string Value { get; set; }
+        public PickupOperator Value { get; set; }
 
         /// <summary>
         /// Visual text.
