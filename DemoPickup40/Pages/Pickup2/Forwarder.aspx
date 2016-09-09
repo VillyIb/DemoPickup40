@@ -38,7 +38,9 @@
                                     </asp:LinkButton>
                                 </div>
                                 <div class="css-td">
-                                    <h2>Settings   <asp:Label id="XuTimeOfDay" runat="server"></asp:Label> </h2>
+                                    <h2>Settings  
+                                        <asp:Label ID="XuTimeOfDay" runat="server"></asp:Label>
+                                    </h2>
                                 </div>
                             </div>
 
@@ -95,28 +97,31 @@
                                 </div>
                                 <div class="css-td">&nbsp;</div>
                             </div>
-                            
-                            <div class ="css-tr">
+
+                            <div class="css-tr">
                                 <div class="css-td">Specific customer</div>
-                                <div class="css-td"><asp:TextBox ID="XuStSpecificCustomer" runat="server"></asp:TextBox></div>
-                                <div class ="css-td">blank: all, customerId for single customer</div>
+                                <div class="css-td">
+                                    <asp:TextBox ID="XuStSpecificCustomer" runat="server"></asp:TextBox></div>
+                                <div class="css-td">blank: all, customerId for single customer</div>
                             </div>
 
-                            <div class ="css-tr">
+                            <div class="css-tr">
                                 <div class="css-td">Specific Website</div>
-                                <div class="css-td"><asp:TextBox ID="XuStWebsite" runat="server"></asp:TextBox></div>
-                                <div class ="css-td">blank: all, Guid for specific website</div>
+                                <div class="css-td">
+                                    <asp:TextBox ID="XuStWebsite" runat="server"></asp:TextBox></div>
+                                <div class="css-td">blank: all, Guid for specific website</div>
                             </div>
-                            
+
                             <div class="css-tr">
                                 <div class="css-td">Sorting</div>
                                 <div class="css-td">
-                                    <asp:RadioButtonList id="XuSorting" runat="server">
+                                    <asp:RadioButtonList ID="XuSorting" runat="server">
                                         <asp:ListItem Value="1" Selected="True">Sort into groups, timeClose, Address</asp:ListItem>
                                         <asp:ListItem Value="2">Sort on Address</asp:ListItem>
                                         <asp:ListItem Value="3">#3</asp:ListItem>
-                                    </asp:RadioButtonList></div>
-                                <div class ="css-td">blank: all, Guid for specific website</div>
+                                    </asp:RadioButtonList>
+                                </div>
+                                <div class="css-td">blank: all, Guid for specific website</div>
                             </div>
 
                         </div>
@@ -235,7 +240,9 @@
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuFwAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Eval("Address.Zip") + ", "+ Eval("Address.Street1") + ", (" + Eval("GroupIndex") + ")"%>' />
+                            <asp:Label ID="XuFwAddressItem" runat="server"
+                                ToolTip='<%# Bind("Address.FullAddress") %>'
+                                Text='<%# 1 < (int)Eval("CountCustomers")  ? "* " + Eval("Address.Zip") + ", " + Eval("Address.Street1") : Eval("Address.HeaderAddress") %>' />
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuFwAddress" />

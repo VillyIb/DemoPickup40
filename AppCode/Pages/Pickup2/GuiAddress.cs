@@ -41,6 +41,22 @@ namespace AppCode.Pages.Pickup2
             }
         }
 
+
+        public string HeaderAddress
+        {
+            get
+            {
+                return string.Format(
+                    "{0}, {1}, {2}, {3}{4}"
+                    , Name
+                    ,Street1
+                    ,Zip
+                    ,City
+                    , "DK".Equals(CountryCode) ? "" : ", " + CountryCode
+                );
+            }
+        }
+
         public GuiAddress(IAddressBase source)
         {
             source.Transfer(this);
