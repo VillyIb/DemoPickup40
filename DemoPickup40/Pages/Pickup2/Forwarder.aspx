@@ -101,7 +101,8 @@
                             <div class="css-tr">
                                 <div class="css-td">Specific customer</div>
                                 <div class="css-td">
-                                    <asp:TextBox ID="XuStSpecificCustomer" runat="server"></asp:TextBox></div>
+                                    <asp:DropDownList Id="XuStSpecificCustomerB"  runat="server" DataTextField="Name" DataValueField="Id" CssClass="XuStSpecificCustomerB" ></asp:DropDownList>
+                                </div>
                                 <div class="css-td">blank: all, customerId for single customer</div>
                             </div>
 

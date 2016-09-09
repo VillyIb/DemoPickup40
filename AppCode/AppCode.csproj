@@ -50,12 +50,13 @@
     <Compile Include="Pages\Pickup2\DropDownBoxDataPickupOperator.cs" />
     <Compile Include="Pages\Pickup2\GuiAddress.cs" />
     <Compile Include="Pages\Pickup2\GuiContainer.cs" />
+    <Compile Include="Pages\Pickup2\GuiCustomer.cs" />
     <Compile Include="Pages\Pickup2\GuiCustomerPickup.cs" />
     <Compile Include="Pages\Pickup2\GuiForwarderPickup.cs" />
     <Compile Include="Pages\Pickup2\GuiSettings.cs" />
     <Compile Include="Pages\Pickup2\GuiShipment.cs" />
     <Compile Include="Pages\Pickup2\PickupData.cs" />
-    <Compile Include="Pages\Pickup2\PickupUtil.cs" />
+    <Compile Include="Wrapper\PickupUtil.cs" />
     <Compile Include="Pages\Pickup\DropDownBoxData.cs" />
     <Compile Include="Pages\Pickup\GuiAddress.cs" />
     <Compile Include="Pages\Pickup\GuiContainer.cs" />

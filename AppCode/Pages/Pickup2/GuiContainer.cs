@@ -11,6 +11,8 @@ namespace AppCode.Pages.Pickup2
         public List<GuiForwarderPickup> ForwarderPickupList { get; set; }
 
 
+        public List<GuiCustomer> CustomerList { get; set; }
+
         /// <summary>
         /// Icon, Expand/Collaps all 1 level down.
         /// </summary>

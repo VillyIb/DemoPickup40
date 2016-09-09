@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using nu.gtx.DatabaseAccess.DbMain;
 //using nu.gtx.Common1.Extensions;
 using nu.gtx.POCO.Contract.Pickup;
 
@@ -10,6 +11,8 @@ namespace AppCode.Pages.Pickup2
     {
         private nu.gtx.DatabaseAccess.DbShared.DbSharedStandard DbSharedStandard { get; set; }
 
+        private nu.gtx.DatabaseAccess.DbMain.DbMainStandard DbMainStandard { get; set; }
+
         private nu.gtx.Business.Pickup.EFShared.RepositoryCustomerPickup RepositoryCustomerPickup { get; set; }
 
         private nu.gtx.Business.Pickup.EFShared.RepositoryForwarderPickup RepositoryForwarderPickup { get; set; }
@@ -17,6 +20,9 @@ namespace AppCode.Pages.Pickup2
         private nu.gtx.Business.Pickup.EFShared.RepositoryShipment RepositoryShipment { get; set; }
 
         private nu.gtx.Business.Pickup.EFShared.RepositoryParcelDetail RepositoryParcelDetail { get; set; }
+
+
+        private nu.gtx.Business.Pickup.EFMain.RepositoryCustomer RepositoryCustomer { get; set; }
 
         private nu.gtx.Business.Pickup.Shared.ControllerForwarderPickup ControllerForwarder { get; set; }
 
@@ -30,6 +36,8 @@ namespace AppCode.Pages.Pickup2
             {
                 DbSharedStandard = new nu.gtx.DatabaseAccess.DbShared.DbSharedStandard();
 
+                DbMainStandard = new nu.gtx.DatabaseAccess.DbMain.DbMainStandard();
+
                 RepositoryShipment = new nu.gtx.Business.Pickup.EFShared.RepositoryShipment(DbSharedStandard);
 
                 RepositoryCustomerPickup = new nu.gtx.Business.Pickup.EFShared.RepositoryCustomerPickup(DbSharedStandard);
@@ -38,6 +46,8 @@ namespace AppCode.Pages.Pickup2
                     new nu.gtx.Business.Pickup.EFShared.RepositoryForwarderPickup(DbSharedStandard);
 
                 RepositoryParcelDetail = new nu.gtx.Business.Pickup.EFShared.RepositoryParcelDetail(DbSharedStandard);
+
+                RepositoryCustomer = new nu.gtx.Business.Pickup.EFMain.RepositoryCustomer(DbMainStandard);
 
                 ControllerForwarder = new nu.gtx.Business.Pickup.Shared.ControllerForwarderPickup(
                     RepositoryCustomerPickup,
@@ -190,6 +200,17 @@ namespace AppCode.Pages.Pickup2
             //var forwarderPickupList = ControllerForwarder.GetForwarderPickupList(currentWebsiteId, SystemDateTime.Yesterday.AddDays(-1));
             var forwarderPickupList = ControllerForwarder.GetForwarderPickupList(currentWebsiteId, DatePickupBegin, DatePickupEnd, FilterPickupStatus, LookForward, NumberOfShipments);
 
+
+            if (!(String.IsNullOrWhiteSpace(GuiSettings.FilterSingleCustomer)) && !("-1".Equals(GuiSettings.FilterSingleCustomer)))
+            {
+                int selectedCustomer;
+                if (int.TryParse(GuiSettings.FilterSingleCustomer, out selectedCustomer))
+                {
+                    // filter is active
+                    forwarderPickupList = forwarderPickupList.Where(t => t.CustomerPickupList.Any(t2 => t2.CustomerId == selectedCustomer)).ToList();
+                }
+            }
+
             var forwarderPickupListSorted = SortAndFilter(forwarderPickupList); //       ControllerForwarder.Sort(forwarderPickupList, nu.gtx.Business.Pickup.Contract_V2B.SortFields.Location);
 
 
@@ -199,6 +220,37 @@ namespace AppCode.Pages.Pickup2
 
                 result.Add(guiForwarder);
             }
+
+            return result;
+        }
+
+
+        private List<GuiCustomer> GetGuiCustomer()
+        {
+            var result = new List<GuiCustomer>();
+
+            List<aspnet_CompanyDB> t1;
+            if (RepositoryCustomer.Read(out t1))
+            {
+                foreach (var customer in t1)
+                {
+                    if (customer.DisabledCompany.HasValue && 1 == customer.DisabledCompany.Value) { continue; }
+
+                    result.Add(
+                        new GuiCustomer(customer)
+                        );
+                }
+            }
+
+            result = result.OrderBy(t => t.Name).ToList();
+            result.Insert(
+                0
+                , new GuiCustomer
+                {
+                    Id = -1
+                    , Name = "Show All Customers"
+                }
+            );
 
             return result;
         }
@@ -267,10 +319,12 @@ namespace AppCode.Pages.Pickup2
             var result = new GuiContainer
             {
                 ForwarderPickupList = GetGuiForwarderPickupList()
+                , CustomerList = GetGuiCustomer()
             };
 
             return result;
         }
+
 
         public GuiContainer Update(GuiContainer guiContainer, GuiForwarderPickup forwarderPickup)
         {

@@ -107,6 +107,9 @@ namespace DemoPickup40.Pages.Pickup2
 
             // -- Separate Icon Expand/Collapse All 
             XuExpandAllIcon.Attributes["class"] = XpGuiContainer.CssGlyphiconExpandCustomerHeader;
+
+            XuStSpecificCustomerB.DataSource = XpGuiContainer.CustomerList;
+            XuStSpecificCustomerB.DataBind();
         }
 
 
@@ -226,7 +229,7 @@ namespace DemoPickup40.Pages.Pickup2
             GuiSettings.FilterForShipmentCountNonZero = GuiRead(out t3, XuStNumberOfShipments1) && t3;
 
             // Specific Customer
-            GuiSettings.FilterSingleCustomer = XuStSpecificCustomer.Text;
+            GuiSettings.FilterSingleCustomer = XuStSpecificCustomerB.SelectedValue;
 
             // Specific Website
             Guid t4;
