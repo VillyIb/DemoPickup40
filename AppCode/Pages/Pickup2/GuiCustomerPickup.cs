@@ -112,6 +112,21 @@ namespace AppCode.Pages.Pickup2
             TimeClose = customerPickup.TimeClose;
             TimeReady = customerPickup.TimeReady;
             Address = new GuiAddress(customerPickup.Address);
+
+            Address.CompareInfo = String.Format(
+                "{0}, {1}, {2}, {3}, {4}, {5}, {6:G}, {7}, {8},  "
+                , Address.Name
+                , Address.Address1
+                , Address.Address2
+                , Address.CountryCode
+                , Address.Zip
+                , customerPickup.CustomerId
+                , customerPickup.PickupOperator
+                , customerPickup.BranchId
+                , Address.State
+                );
+
+
             PickupStatusCustomer = customerPickup.PickupStatus;
             
             LoadCarrierNameList(customerPickup);

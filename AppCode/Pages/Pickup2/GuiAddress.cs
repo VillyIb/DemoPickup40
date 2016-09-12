@@ -19,18 +19,19 @@ namespace AppCode.Pages.Pickup2
         //public int UniqueSequence { get; set; }
         public string Zip { get; set; }
 
+        public string CompareInfo { get; set; }
+
 
         /// <summary>
-        /// Full Address is visible as ToolTip on same field as Address
+        /// Full Address is visible as ToolTip on same field as Address1
         /// It Contains the natural combination of CustomerPickup Address Properties.
         /// </summary>
-        public string FullAddress
+        public string FullAddress1
         {
             get
             {
                 return string.Format(
-                    "{0}, {1}{2}{3}, {4} {5} {6}",
-                    Name,
+                    "{0}{1}{2}, {3} {4} {5}",
                     Street1,
                     string.IsNullOrWhiteSpace(Street2) ? "" : ", " + Street2,
                     string.IsNullOrWhiteSpace(State) ? "" : ", " + State,
@@ -42,20 +43,33 @@ namespace AppCode.Pages.Pickup2
         }
 
 
-        public string HeaderAddress
+        public string Address1
         {
             get
             {
                 return string.Format(
-                    "{0}, {1}, {2}, {3}{4}"
-                    , Name
-                    ,Street1
-                    ,Zip
-                    ,City
-                    , "DK".Equals(CountryCode) ? "" : ", " + CountryCode
+                    "{0}{1}, {2}, {3}"
+                     , "DK".Equals(CountryCode) ? "" :  CountryCode + ", "
+                    , Zip
+                    , Street1
+                    , City
+                     
                 );
             }
         }
+
+
+        public string Address2
+        {
+            get
+            {
+                return string.Format(
+                    "{0}"
+                    , Name
+                );
+            }
+        }
+
 
         public GuiAddress(IAddressBase source)
         {

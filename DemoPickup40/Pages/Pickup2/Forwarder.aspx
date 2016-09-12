@@ -19,6 +19,8 @@
 
         <ContentTemplate>
 
+            <%----------- Settings start -----------%>
+
             <div id="XuSettings" class="css-table">
 
                 <div class="css-tr header">
@@ -101,7 +103,7 @@
                             <div class="css-tr">
                                 <div class="css-td">Specific customer</div>
                                 <div class="css-td">
-                                    <asp:DropDownList Id="XuStSpecificCustomerB"  runat="server" DataTextField="Name" DataValueField="Id" CssClass="XuStSpecificCustomerB" ></asp:DropDownList>
+                                    <asp:DropDownList ID="XuStSpecificCustomerB" runat="server" DataTextField="Name" DataValueField="Id" CssClass="XuStSpecificCustomerB"></asp:DropDownList>
                                 </div>
                                 <div class="css-td">blank: all, customerId for single customer</div>
                             </div>
@@ -109,7 +111,8 @@
                             <div class="css-tr">
                                 <div class="css-td">Specific Website</div>
                                 <div class="css-td">
-                                    <asp:TextBox ID="XuStWebsite" runat="server"></asp:TextBox></div>
+                                    <asp:TextBox ID="XuStWebsite" runat="server"></asp:TextBox>
+                                </div>
                                 <div class="css-td">blank: all, Guid for specific website</div>
                             </div>
 
@@ -131,8 +134,6 @@
                 </div>
 
             </div>
-
-
 
             <div id="XuExpandAll" class="css-table">
 
@@ -165,6 +166,8 @@
                 </div>
             </div>
 
+            <%----------- Settings end ------------%>
+
             <%--Forwarder Pickup Grid View--%>
             <asp:GridView
                 ID="XuForwarderPickup"
@@ -178,6 +181,8 @@
                 <RowStyle CssClass="XuForwarderPickupRow" />
 
                 <Columns>
+
+                    <%------------ Forwarder ------------%>
 
                     <%--Column Expand Customer Pickups below Forwarder Pickup --%>
                     <asp:TemplateField HeaderText="XuFwExpandCustomer">
@@ -234,22 +239,40 @@
 
 
                     <%--Column Address --%>
-                    <asp:TemplateField HeaderText="XuFwAddress">
+                    <asp:TemplateField HeaderText="XuFwAddress1">
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuFwAddressHeader" runat="server" Text="XuFwAddressHeader" meta:resourcekey="XuFwAddressHeader" />
+                            <asp:Label ID="XuFwAddress1Header" runat="server" Text="XuFwAddress1Header" meta:resourcekey="XuFwAddress1Header" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuFwAddressItem" runat="server"
-                                ToolTip='<%# Bind("Address.FullAddress") %>'
-                                Text='<%# 1 < (int)Eval("CountCustomers")  ? "* " + Eval("Address.Zip") + ", " + Eval("Address.Street1") : Eval("Address.HeaderAddress") %>' />
+                            <asp:Label ID="XuFwAddress1Item" runat="server"
+                                ToolTip='<%# Bind("Address.CompareInfo") %>'
+                                Text='<%#  Bind("Address.Address1") %>' />
                         </ItemTemplate>
 
-                        <HeaderStyle CssClass="XuFwAddress" />
-                        <ItemStyle CssClass="XuFwAddress" />
+                        <HeaderStyle CssClass="XuFwAddress1" />
+                        <ItemStyle CssClass="XuFwAddress1" />
 
                     </asp:TemplateField>
+
+
+                    <asp:TemplateField HeaderText="XuFwAddress2">
+
+                        <HeaderTemplate>
+                            <asp:Label ID="XuFwAddress2Header" runat="server" Text="XuFwAddress2Header" meta:resourcekey="XuFwAddress2Header" />
+                        </HeaderTemplate>
+
+                        <ItemTemplate>
+                            <asp:Label ID="XuFwAddress2Item" runat="server"
+                                Text='<%# Bind("Address.Address2") %>' />
+                        </ItemTemplate>
+
+                        <HeaderStyle CssClass="XuFwAddress2" />
+                        <ItemStyle CssClass="XuFwAddress2" />
+
+                    </asp:TemplateField>
+
 
                     <%--Column Pickup Window --%>
                     <asp:TemplateField HeaderText="XuFwPickup">
@@ -435,6 +458,8 @@
                     </asp:TemplateField>
 
 
+                    <%------------ Customer ------------%>
+
                     <%--Column Customer  Details--%>
                     <asp:TemplateField HeaderText="XuCustomerDetails">
                         <HeaderTemplate>
@@ -506,7 +531,7 @@
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
-                                                    <asp:Label ID="XuCuAddressItem" runat="server" ToolTip='<%# Bind("Address.FullAddress") %>' Text='<%# Eval("Address.Name") + ", (" + Eval("GroupIndex") + ")" %>' />
+                                                    <asp:Label ID="XuCuAddressItem" runat="server" ToolTip='<%# Bind("Address.CompareInfo") %>' Text='<%# Eval("Address.CompareInfo") %>' />
                                                 </ItemTemplate>
 
                                                 <HeaderStyle CssClass="XuCuAddress" />
@@ -661,6 +686,7 @@
 
                                             </asp:TemplateField>
 
+                                            <%------------ Shipment Details ------------%>
 
                                             <%--Column Shipment Details--%>
                                             <asp:TemplateField HeaderText="XuShipmentDetails">
@@ -720,7 +746,7 @@
                                                                             <asp:Label ID="XuShWaybillnumberHead" runat="server" Text="XuShWaybillnumberHead" meta:resourcekey="XuShWaybillnumberHead" />
                                                                         </HeaderTemplate>
                                                                         <ItemTemplate>
-                                                                            <asp:Label ID="XuShWaybillnumberItem" runat="server" Text='<%# Bind("Waybillnumber") %>' ToolTip='<%# Bind("Address.FullAddress") %>' />
+                                                                            <asp:Label ID="XuShWaybillnumberItem" runat="server" Text='<%# Bind("Waybillnumber") %>' ToolTip='<%# Bind("Address.CompareInfo") %>' />
                                                                         </ItemTemplate>
 
                                                                         <HeaderStyle CssClass="XuShWaybillnumber" />

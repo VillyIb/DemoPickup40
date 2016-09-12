@@ -68,6 +68,20 @@ namespace AppCode.Pages.Pickup2
             source.Transfer(this);
             Address = new GuiAddress(source.Address);
 
+            Address.CompareInfo = String.Format(
+                "{0:yyyy-MM-dd}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9} "
+                , source.PickupDate
+                , source.CustomerId
+                , source.CustomerAccountId
+                , source.BranchId
+                , Address.Name
+                , Address.Address1
+                , Address.Address2
+                , Address.CountryCode
+                , Address.Zip
+                , Address.State
+                );
+
             var parcelDetailList = source.ParcelDetailList;
 
             if (parcelDetailList.Count == 0)

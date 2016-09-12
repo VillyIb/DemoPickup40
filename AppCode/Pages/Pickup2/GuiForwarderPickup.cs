@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 using AppCode.Util;
 using nu.gtx.Common1.Utils;
 using nu.gtx.POCO.Contract.Pickup;
@@ -118,6 +119,23 @@ namespace AppCode.Pages.Pickup2
             TimeClose = forwarderPickup.TimeClose;
             TimeReady = forwarderPickup.TimeReady;
             Address = new GuiAddress(forwarderPickup.Address);
+            Address.CompareInfo = String.Format(
+                "{0}, {1}, {2}, {3}, {4}, {5}, {6} "
+                , forwarderPickup.PickupDate
+                , forwarderPickup.PickupOperator
+                , Address.Address1
+                , Address.Zip
+                ,Address.CountryCode
+                ,Address.Address2
+                ,Address.State
+                );
+
+            if (forwarderPickup.CustomerPickupList.Any(t => t.Address.Name.Equals(Address.Name,StringComparison.OrdinalIgnoreCase)))
+            {
+                // Same name found on at least one child, remove parent name
+                Address.Name = "";
+            }
+
             PickupStatusForwarder = forwarderPickup.PickupStatus;
 
             LoadCarrierNameList(forwarderPickup);
@@ -125,6 +143,10 @@ namespace AppCode.Pages.Pickup2
             CustomerPickupList = new List<GuiCustomerPickup>();
             foreach (var customer in forwarderPickup.CustomerPickupList)
             {
+                Address.Name = Address.Name.Length > 0
+                    ? String.Format("{0}, <br /> {1}", Address.Name, customer.Address.Name)
+                    : customer.Address.Name;
+
                 var t1 = new GuiCustomerPickup(customer)
                 {
                     PickupStatusForwarder = PickupStatusForwarder,

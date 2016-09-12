@@ -243,7 +243,7 @@
     <value>Expand/Collapse Shipments</value>
   </data>
   <data name="XuFwPickupItem.Format" xml:space="preserve">
-    <value>{0:yyyy-MM-dd} from {1:hh\.mm} until {2:hh\.mm}</value>
+    <value>{0:MMM-dd},  {1:hh\.mm} - {2:hh\.mm}</value>
     <comment>NOTE Special .NET4.0 Syntax see:https://msdn.microsoft.com/en-us/library/ee372287(v=vs.100).aspx</comment>
   </data>
   <data name="XuShDimensionHeader.Text" xml:space="preserve">
@@ -266,5 +266,11 @@
   </data>
   <data name="XuSettingsIcon.Text" xml:space="preserve">
     <value>Expand/Collapse Settings</value>
+  </data>
+  <data name="XuFwAddress2Header.Text" xml:space="preserve">
+    <value>Company Name(s)</value>
+  </data>
+  <data name="XuFwAddress1Header.Text" xml:space="preserve">
+    <value>Zip, Street, City</value>
   </data>
 </root>

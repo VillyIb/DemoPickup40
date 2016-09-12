@@ -35,7 +35,7 @@
 }
 
 .XuForwarderPickup {
-    width: 1440px;
+    width: 1900px;
 }
 
 .XuCustomerPickup {
@@ -115,16 +115,24 @@
     width: 44px;
 }
 
-.XuFwAddress, .XuCuAddress {
-    width: 250px;
+.XuFwAddress1  {
+    width: 300px;
+}
+
+.XuFwAddress2 {
+    width: 300px;
+}
+
+.XuCuAddress {
+    width: 600px;
 }
 
 .XuFwPickup, .XuCuPickup {
-    width: 250px;
+    width: 170px;
 }
 
 .XuFwCarrier, .XuCuCarrier, .XuShCarrier {
-    width: 300px;
+    width: 200px;
 }
 
 .XuFwCounter, .XuCuCounter, .XuShWeight {
@@ -140,7 +148,7 @@
 }
 
 .XuShWaybillnumber {
-    width: 500px;
+    width: 770px;
 }
 
 td.XuShDimension {

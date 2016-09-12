@@ -30,7 +30,7 @@
 }
 
 .XuForwarderPickup {
-    width: 1440px;
+    width: 1900px;
 }
 
 .XuCustomerPickup {
@@ -110,16 +110,20 @@
     width: 44px;
 }
 
-.XuFwAddress, .XuCuAddress {
+.XuFwAddress1, .XuCuAddress1 {
+    width: 250px;
+}
+
+.XuFwAddress2, .XuCuAddress2 {
     width: 250px;
 }
 
 .XuFwPickup, .XuCuPickup {
-    width: 250px;
+    width: 170px;
 }
 
 .XuFwCarrier, .XuCuCarrier, .XuShCarrier {
-    width: 300px;
+    width: 250px;
 }
 
 .XuFwCounter, .XuCuCounter, .XuShWeight {
