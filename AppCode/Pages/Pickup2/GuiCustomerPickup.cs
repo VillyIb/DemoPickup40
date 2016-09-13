@@ -114,16 +114,18 @@ namespace AppCode.Pages.Pickup2
             Address = new GuiAddress(customerPickup.Address);
 
             Address.CompareInfo = String.Format(
-                "{0}, {1}, {2}, {3}, {4}, {5}, {6:G}, {7}, {8},  "
+                "{0}, {1}, {2}, {3}, {4}, {9}, Pickup: {6:G}, Branch: {7}, State: {8}, <br />Customer: {5}, {10}"
                 , Address.Name
-                , Address.Address1
-                , Address.Address2
+                , Address.Street1
+                , Address.Street2
                 , Address.CountryCode
                 , Address.Zip
-                , customerPickup.CustomerId
+                , customerPickup.FK_Customer_Id
                 , customerPickup.PickupOperator
                 , customerPickup.BranchId
                 , Address.State
+                , Address.City
+                , customerPickup.CustomerMainName
                 );
 
 

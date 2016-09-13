@@ -179,7 +179,7 @@
     <value>Weight</value>
   </data>
   <data name="XuCuPickupItem.Format" xml:space="preserve">
-    <value>{0:yyyy-MM-dd} from {1:hh\.mm} until {2:hh\.mm}</value>
+    <value>{0:MMM-dd}, {1:hh\.mm} - {2:hh\.mm}</value>
     <comment>NOTE Special .NET4.0 Syntax see:https://msdn.microsoft.com/en-us/library/ee372287(v=vs.100).aspx</comment>
   </data>
   <data name="XuShCarrierHeader.Text" xml:space="preserve">
@@ -272,5 +272,14 @@
   </data>
   <data name="XuFwAddress1Header.Text" xml:space="preserve">
     <value>Zip, Street, City</value>
+  </data>
+  <data name="XuStatus-Icon_StatusCode-PermColl.ToolTip" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-PermColl.Text" xml:space="preserve">
+    <value>Permanent Collection</value>
+  </data>
+  <data name="XuStatus-Text_StatusCode-PermColl.ToolTip" xml:space="preserve">
+    <value>Cancel</value>
   </data>
 </root>

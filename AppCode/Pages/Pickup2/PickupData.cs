@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using nu.gtx.Common1.Utils;
 using nu.gtx.DatabaseAccess.DbMain;
 //using nu.gtx.Common1.Extensions;
 using nu.gtx.POCO.Contract.Pickup;
@@ -191,6 +192,8 @@ namespace AppCode.Pages.Pickup2
 
         private List<GuiForwarderPickup> GetGuiForwarderPickupList()
         {
+            SystemDateTime.SetTime(new DateTime(2016, 9, 12), 1);
+
             Init();
 
             var result = new List<GuiForwarderPickup>();
@@ -200,6 +203,7 @@ namespace AppCode.Pages.Pickup2
             //var forwarderPickupList = ControllerForwarder.GetForwarderPickupList(currentWebsiteId, SystemDateTime.Yesterday.AddDays(-1));
             var forwarderPickupList = ControllerForwarder.GetForwarderPickupList(currentWebsiteId, DatePickupBegin, DatePickupEnd, FilterPickupStatus, LookForward, NumberOfShipments);
 
+            var useFilterAndSort = true;
 
             if (!(String.IsNullOrWhiteSpace(GuiSettings.FilterSingleCustomer)) && !("-1".Equals(GuiSettings.FilterSingleCustomer)))
             {
@@ -207,12 +211,12 @@ namespace AppCode.Pages.Pickup2
                 if (int.TryParse(GuiSettings.FilterSingleCustomer, out selectedCustomer))
                 {
                     // filter is active
-                    forwarderPickupList = forwarderPickupList.Where(t => t.CustomerPickupList.Any(t2 => t2.CustomerId == selectedCustomer)).ToList();
+                    forwarderPickupList = forwarderPickupList.Where(t => t.CustomerPickupList.Any(t2 => t2.FK_Customer_Id == selectedCustomer)).ToList();
+                    useFilterAndSort = false;
                 }
             }
 
-            var forwarderPickupListSorted = SortAndFilter(forwarderPickupList); //       ControllerForwarder.Sort(forwarderPickupList, nu.gtx.Business.Pickup.Contract_V2B.SortFields.Location);
-
+            var forwarderPickupListSorted = useFilterAndSort ? SortAndFilter(forwarderPickupList) : forwarderPickupList; 
 
             foreach (var fw in forwarderPickupListSorted)
             {

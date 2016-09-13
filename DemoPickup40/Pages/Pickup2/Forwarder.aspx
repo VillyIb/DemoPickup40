@@ -94,10 +94,10 @@
                             <div class="css-tr">
                                 <div class="css-td">Number of shipments</div>
                                 <div class="css-td">
-                                    <asp:CheckBox ID="XuStNumberOfShipments0" runat="server" Text="0 (zero)" />
-                                    <asp:CheckBox ID="XuStNumberOfShipments1" runat="server" Text="1+ (one or more)" />
+                                    <asp:CheckBox ID="XuStNumberOfShipments0" runat="server" Text="0 (zero)" Checked="false" />
+                                    <asp:CheckBox ID="XuStNumberOfShipments1" runat="server" Text="1+ (one or more)" Checked="true" />
                                 </div>
-                                <div class="css-td">&nbsp;</div>
+                                <div class="css-td">Only valid for for Permanent Pickup</div>
                             </div>
 
                             <div class="css-tr">
@@ -387,7 +387,9 @@
                             <asp:Label
                                 ID="XuFwStatusItem"
                                 runat="server"
-                                Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusForwarder") + ".Text") %>' />
+                                Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusForwarder") + ".Text") %>' 
+                                ToolTip='<%# Bind("PickupStatusForwarder") %>'
+                                />
 
                             <asp:LinkButton
                                 ID="LinkButton12"
@@ -531,7 +533,7 @@
                                                 </HeaderTemplate>
 
                                                 <ItemTemplate>
-                                                    <asp:Label ID="XuCuAddressItem" runat="server" ToolTip='<%# Bind("Address.CompareInfo") %>' Text='<%# Eval("Address.CompareInfo") %>' />
+                                                    <asp:Label ID="XuCuAddressItem" runat="server" Text='<%# Eval("Address.CompareInfo") %>' />
                                                 </ItemTemplate>
 
                                                 <HeaderStyle CssClass="XuCuAddress" />

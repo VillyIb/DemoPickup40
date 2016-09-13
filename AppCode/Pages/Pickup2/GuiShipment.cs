@@ -69,17 +69,18 @@ namespace AppCode.Pages.Pickup2
             Address = new GuiAddress(source.Address);
 
             Address.CompareInfo = String.Format(
-                "{0:yyyy-MM-dd}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9} "
-                , source.PickupDate
-                , source.CustomerId
-                , source.CustomerAccountId
-                , source.BranchId
+                "{0}, {1}, {2}, {3}, {4}, {10}, CustomerId/AccountId: {5}/{9},  Branch: {6}, State: {7},  {8:yyyy-MM-dd}"
                 , Address.Name
-                , Address.Address1
-                , Address.Address2
+                , Address.Street1
+                , Address.Street2
                 , Address.CountryCode
                 , Address.Zip
+                , source.CustomerId
+                , source.BranchId
                 , Address.State
+                , source.PickupDate
+                , source.CustomerAccountId
+                , Address.City
                 );
 
             var parcelDetailList = source.ParcelDetailList;

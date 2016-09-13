@@ -119,18 +119,22 @@ namespace AppCode.Pages.Pickup2
             TimeClose = forwarderPickup.TimeClose;
             TimeReady = forwarderPickup.TimeReady;
             Address = new GuiAddress(forwarderPickup.Address);
+
             Address.CompareInfo = String.Format(
-                "{0}, {1}, {2}, {3}, {4}, {5}, {6} "
-                , forwarderPickup.PickupDate
-                , forwarderPickup.PickupOperator
-                , Address.Address1
+                "{0}, {1}, {2}, {3}, {4}, {9}, Pickup: {5}, State: {7},  {8:yyyy-MM-dd}"
+                , Address.Name
+                , Address.Street1
+                , Address.Street2
+                , Address.CountryCode
                 , Address.Zip
-                ,Address.CountryCode
-                ,Address.Address2
-                ,Address.State
+                , forwarderPickup.PickupOperator
+                , ""
+                , Address.State
+                , forwarderPickup.PickupDate
+                , Address.City
                 );
 
-            if (forwarderPickup.CustomerPickupList.Any(t => t.Address.Name.Equals(Address.Name,StringComparison.OrdinalIgnoreCase)))
+            if (forwarderPickup.CustomerPickupList.Any(t => t.Address.Name.Equals(Address.Name, StringComparison.OrdinalIgnoreCase)))
             {
                 // Same name found on at least one child, remove parent name
                 Address.Name = "";

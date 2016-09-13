@@ -160,6 +160,10 @@ namespace AppCode.Pages.Pickup2
                 case PickupStatusForwarder.ForwSched:
                     result += "glyphicon-none"; // invisible
                     break;
+
+                case PickupStatusForwarder.PermColl:
+                    result += "glyphicon-remove red";
+                    break;
             }
 
             return result;

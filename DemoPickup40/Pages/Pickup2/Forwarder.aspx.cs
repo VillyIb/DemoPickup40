@@ -641,7 +641,7 @@ namespace DemoPickup40.Pages.Pickup2
 
                 if (XmLoadSelectedCustomerPickup(customerPickupId))
                 {
-                    XpSelectedCustomerPickup.ForwarderPickpId = targetForwarderPickupId;
+                    XpSelectedCustomerPickup.FK_ForwarderPickup_Id = targetForwarderPickupId;
                 }
             }
             XpBackendApi.UpdateDatabase();
