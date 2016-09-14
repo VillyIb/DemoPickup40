@@ -1,4 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="PermanentPickup.aspx.cs" Inherits="DemoPickup40.Pages.Pickup2.PermanentPickup" %>
+﻿<%@ Page
+    Title=""
+    Language="C#"
+    MasterPageFile="~/Master.Master"
+    AutoEventWireup="True"
+    CodeBehind="PermanentPickup.aspx.cs"
+    Inherits="DemoPickup40.Pages.Pickup2.PermanentPickup" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -22,13 +28,16 @@
 
             <%--Forwarder Pickup Grid View--%>
             <asp:GridView
-                ID="XuForwarderPickup"
+                ID="XuPermanentPickup"
                 runat="server"
                 AutoGenerateColumns="False"
                 ShowHeaderWhenEmpty="True"
                 CssClass="XuForwarderPickup"
-                OnRowCommand="XuGridForwarderPicup_RowCommand">
-        
+                OnRowCommand="XuPermanentPickup_RowCommand" 
+                OnRowEditing="XuPermanentPickup_RowEditing"
+               
+                >
+
                 <HeaderStyle CssClass="XuForwarderPickupHeader" />
                 <RowStyle CssClass="XuForwarderPickupRow" />
 
@@ -40,13 +49,13 @@
                     <asp:TemplateField HeaderText="XuCustomer">
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuCustomerHeader" runat="server" Text="XuCustomerHeader" meta:resourcekey="XuCustomerHeader" />
+                            <asp:Label ID="XuCustomerHeader" runat="server" Text="Customer" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
                             <asp:Label ID="XuCustomerItem" runat="server"
-                                ToolTip='<%# Bind("Address.CompareInfo") %>'
-                                Text='<%#  Bind("Address.Address1") %>' />
+                                ToolTip='<%# Bind("CustomerNameLong") %>'
+                                Text='<%#  Bind("CustomerNameLong") %>' />
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuCustomer" />
@@ -58,12 +67,13 @@
                     <asp:TemplateField HeaderText="XuAccount">
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuAccuntHeader" runat="server" Text="XuAccuntHeader" meta:resourcekey="XuAccuntHeader" />
+                            <asp:Label ID="XuAccuntHeader" runat="server" Text="Account" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
                             <asp:Label ID="XuAccuntItem" runat="server"
-                                Text='<%# Bind("Address.Address2") %>' />
+                                ToolTip='<%# Bind("AccountNameLong") %>'
+                                Text='<%#  Bind("AccountNameLong") %>' />
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuAccunt" />
@@ -80,27 +90,16 @@
                         </EditItemTemplate>
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuFwPickupHeader" runat="server" Text="XuFwPickupHeader" meta:resourcekey="XuFwPickupHeader" />
+                            <asp:Label ID="XuEnabledMasterHeader" runat="server" Text="Master Eanbled" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <%--<asp:Label ID="XuFwPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
-                            <asp:Label ID="Label1" runat="server" Text='<%# XmGetPickupText( (string)GetLocalResourceObject("XuFwPickupItem.Format"), Eval("PickupDate"), Eval("TimeReady"), Eval("TimeClose")) %>'></asp:Label>
-                            <asp:LinkButton
-                                ID="XuFwdPickupX1"
-                                runat="server"
-                                CausesValidation="false"
-                                CommandName="XcCmd03"
-                                CommandArgument='<%# Eval("Id") %>'>
-                                <span
-                                    class="glyphicon glyphicon-refresh"
-                                    title="Recalculate smallest window for Open/Close"
-                                    />
-                            </asp:LinkButton>
+                            <asp:CheckBox ID="XuEnabledMasterItem" runat="server" Enabled="false" Checked='<%# Bind("EnabledMaster") %>' />
+
                         </ItemTemplate>
 
-                        <HeaderStyle CssClass="XuFwPickup" />
-                        <ItemStyle CssClass="XuFwPickup" />
+                        <HeaderStyle CssClass="XuEnabledMaster" />
+                        <ItemStyle CssClass="XuEnabledMaster" />
 
                     </asp:TemplateField>
 
@@ -109,11 +108,11 @@
                     <asp:TemplateField HeaderText="XuEnabledWeekday">
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuEnabledWeekdayHeader" runat="server" Text="XuEnabledWeekdayHeader" meta:resourcekey="XuEnabledWeekdayHeader" />
+                            <asp:Label ID="XuEnabledWeekdayHeader" runat="server" Text="Monday,...,Sunday" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuEnabledWeekdayItem" runat="server" Text='<%# Bind("CarrierNameList") %>' />
+                            <asp:Label ID="XuEnabledWeekdayItem" runat="server" Text='<%#  Bind("EnabledWeek") %>' />
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuEnabledWeekday" />
@@ -126,11 +125,11 @@
                     <asp:TemplateField HeaderText="XuPickpuOperator">
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuPickpuOperatorHeader" runat="server" Text="XuPickpuOperatorHeader" meta:resourcekey="XuPickpuOperatorHeader" />
+                            <asp:Label ID="XuPickpuOperatorHeader" runat="server" Text="PickupOperator" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuPickpuOperatorItem" runat="server" Text='<%# string.Format("{0} ({1})", Eval("CountCustomers") , Eval("CountShipments") ) %>' />
+                            <asp:Label ID="XuPickpuOperatorItem" runat="server" Text='<%#  Bind("PickupOperator") %>' />
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuPickpuOperator" />
@@ -143,11 +142,11 @@
                     <asp:TemplateField HeaderText="XuTimeReady">
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuTimeReadyHeader" runat="server" Text="XuTimeReadyHeader" meta:resourcekey="XuTimeReadyHeader" />
+                            <asp:Label ID="XuTimeReadyHeader" runat="server" Text="TimeReady" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuTimeReadyItem" runat="server" Text='<%# Bind("Note") %>' />
+                            <asp:Label ID="XuTimeReadyItem" runat="server" Text='<%# Bind("TimeReady") %>' />
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuTimeReady" />
@@ -160,11 +159,11 @@
                     <asp:TemplateField HeaderText="XuTimeClose">
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuTimeCloseHeader" runat="server" Text="XuTimeCloseHeader" meta:resourcekey="XuTimeCloseHeader" />
+                            <asp:Label ID="XuTimeCloseHeader" runat="server" Text="TimeClose" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuTimeCloseItem" runat="server" Text='<%# Bind("PickupOperator") %>' />
+                            <asp:Label ID="XuTimeCloseItem" runat="server" Text='<%# Bind("TimeClose") %> ' />
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuTimeClose" />
@@ -178,33 +177,11 @@
                     <asp:TemplateField HeaderText="XuText">
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuTextHeader" runat="server" Text="XuTextHeader" meta:resourcekey="XuTextHeader" />
+                            <asp:Label ID="XuTextHeader" runat="server" Text="Text" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <%--
-                                Status field contain 
-                                * localized text (default to 
-                                * Action
-                            --%>
-                            <asp:Label
-                                ID="XuTextItem"
-                                runat="server"
-                                Text='<%# GetLocalResourceObject("XuStatus-Text_StatusCode-" + Eval("PickupStatusForwarder") + ".Text") %>'
-                                ToolTip='<%# Bind("PickupStatusForwarder") %>' />
-
-                            <asp:LinkButton
-                                ID="LinkButton12"
-                                runat="server"
-                                CausesValidation="false"
-                                CommandName="XcCmd04"
-                                CommandArgument='<%# Eval("Id") %>'>
-                                <span 
-                                    class ='<%# Eval("CssGlyphiconStatus") %>'
-                                    title='<%# GetLocalResourceObject("XuStatus-Icon_StatusCode-" + Eval("PickupStatusForwarder") + ".ToolTip") %>' 
-                                    />
-                            </asp:LinkButton>
-
+                            <asp:Label ID="XuTextItem" runat="server" Text='<%# Bind("Text") %>' />
                         </ItemTemplate>
 
                         <HeaderStyle CssClass="XuText" />
@@ -212,7 +189,25 @@
 
                     </asp:TemplateField>
 
+                    <asp:TemplateField HeaderText="XuYYYY" >
 
+                        <HeaderTemplate>
+                            <asp:Label ID="XuYYYHeader" runat="server" Text="Edit" />
+                        </HeaderTemplate>
+
+                        <ItemTemplate>
+                            <asp:LinkButton
+                                ID="XuYYYYItem"
+                                runat="server"
+                                CausesValidation="false"
+                                CommandName="XuYYYYcmd"
+                                CommandArgument="XuYYYYArg"
+                                >
+                                XXXXXXXXXX
+                            </asp:LinkButton>
+                        </ItemTemplate>
+
+                    </asp:TemplateField>
 
                 </Columns>
 

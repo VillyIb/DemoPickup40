@@ -121,15 +121,15 @@
                     </asp:TemplateField>
 
                     <%--Column Pickup Window --%>
-                    <asp:TemplateField HeaderText="XuFwPickup">
+                    <asp:TemplateField HeaderText="XuEnabledMaster">
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuFwPickupHeader" runat="server" Text="XuFwPickupHeader" meta:resourcekey="XuFwPickupHeader" />
+                            <asp:Label ID="XuEnabledMasterHeader" runat="server" Text="XuEnabledMasterHeader" meta:resourcekey="XuEnabledMasterHeader" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <%--<asp:Label ID="XuFwPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
-                            <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuFwPickupItem.Format"), Eval("PickupDate"), Eval("TimeRedy"), Eval("TimeClose")) %>'></asp:Label>
+                            <%--<asp:Label ID="XuEnabledMasterItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
+                            <asp:Label ID="Label1" runat="server" Text='<%# GetPickupText( (string)GetLocalResourceObject("XuEnabledMasterItem.Format"), Eval("PickupDate"), Eval("TimeRedy"), Eval("TimeClose")) %>'></asp:Label>
                             <asp:LinkButton
                                 ID="XuFwdPickupX1"
                                 runat="server"
@@ -143,8 +143,8 @@
                             </asp:LinkButton>
                         </ItemTemplate>
 
-                        <HeaderStyle CssClass="XuFwPickup" />
-                        <ItemStyle CssClass="XuFwPickup" />
+                        <HeaderStyle CssClass="XuEnabledMaster" />
+                        <ItemStyle CssClass="XuEnabledMaster" />
 
                     </asp:TemplateField>
 

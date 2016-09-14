@@ -54,9 +54,12 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\bootstrap-theme.css" />
@@ -125,15 +128,15 @@
       <DependentUpon>PermanentPickup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Pickup2\PermanentPickup.aspx.designer.cs">
-      <DependentUpon>PermanentPickup.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Pickup2\Forwarder.aspx.cs">
       <DependentUpon>Forwarder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\Pickup2\Forwarder.aspx.designer.cs">
       <DependentUpon>Forwarder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Pickup2\PermanentPickup.aspx.designer.cs">
+      <DependentUpon>PermanentPickup.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Pickup\Customer04.aspx.cs">
       <DependentUpon>Customer04.aspx</DependentUpon>
@@ -192,7 +195,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\Util\" />
+    <Folder Include="Old_App_Code\Util\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pages\Pickup\App_LocalResources\Customer.aspx.resx">
@@ -256,6 +259,9 @@
     <Content Include="Pages\Pickup2\App_LocalResources\PermanentPickup.resx">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\Pickup2\App_LocalResources\EditPermanentPickup.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

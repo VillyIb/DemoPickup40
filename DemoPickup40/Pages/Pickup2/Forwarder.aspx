@@ -1,4 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Forwarder.aspx.cs" Inherits="DemoPickup40.Pages.Pickup2.Forwarder" %>
+﻿<%@ Page 
+    Title="" 
+    Language="C#" 
+    MasterPageFile="~/Master.Master" 
+    AutoEventWireup="true" 
+    CodeBehind="Forwarder.aspx.cs" 
+    Inherits="DemoPickup40.Pages.Pickup2.Forwarder" 
+    %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -43,6 +50,9 @@
                                     <h2>Settings  
                                         <asp:Label ID="XuTimeOfDay" runat="server"></asp:Label>
                                     </h2>
+                                    <h3>
+                                        <asp:Label ID="XuTest" runat="server"></asp:Label>
+                                    </h3>
                                 </div>
                             </div>
 
@@ -275,15 +285,15 @@
 
 
                     <%--Column Pickup Window --%>
-                    <asp:TemplateField HeaderText="XuFwPickup">
+                    <asp:TemplateField HeaderText="XuEnabledMaster">
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuFwPickupHeader" runat="server" Text="XuFwPickupHeader" meta:resourcekey="XuFwPickupHeader" />
+                            <asp:Label ID="XuEnabledMasterHeader" runat="server" Text="XuEnabledMasterHeader" meta:resourcekey="XuEnabledMasterHeader" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <%--<asp:Label ID="XuFwPickupItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
-                            <asp:Label ID="Label1" runat="server" Text='<%# XmGetPickupText( (string)GetLocalResourceObject("XuFwPickupItem.Format"), Eval("PickupDate"), Eval("TimeReady"), Eval("TimeClose")) %>'></asp:Label>
+                            <%--<asp:Label ID="XuEnabledMasterItem" runat="server"  Text='<%# Bind("PickupDate") %>'></asp:Label>--%>
+                            <asp:Label ID="Label1" runat="server" Text='<%# XmGetPickupText( (string)GetLocalResourceObject("XuEnabledMasterItem.Format"), Eval("PickupDate"), Eval("TimeReady"), Eval("TimeClose")) %>'></asp:Label>
                             <asp:LinkButton
                                 ID="XuFwdPickupX1"
                                 runat="server"
@@ -297,8 +307,8 @@
                             </asp:LinkButton>
                         </ItemTemplate>
 
-                        <HeaderStyle CssClass="XuFwPickup" />
-                        <ItemStyle CssClass="XuFwPickup" />
+                        <HeaderStyle CssClass="XuEnabledMaster" />
+                        <ItemStyle CssClass="XuEnabledMaster" />
 
                     </asp:TemplateField>
 
@@ -354,18 +364,18 @@
                     </asp:TemplateField>
 
 
-                    <asp:TemplateField HeaderText="XuFwPickupOperator">
+                    <asp:TemplateField HeaderText="XuEnabledMasterOperator">
 
                         <HeaderTemplate>
-                            <asp:Label ID="XuFwPickupOperatorHeader" runat="server" Text="XuFwPickupOperatorHeader" meta:resourcekey="XuFwPickupOperatorHeader" />
+                            <asp:Label ID="XuEnabledMasterOperatorHeader" runat="server" Text="XuEnabledMasterOperatorHeader" meta:resourcekey="XuEnabledMasterOperatorHeader" />
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <asp:Label ID="XuFwPickupOperatorItem" runat="server" Text='<%# Bind("PickupOperator") %>' />
+                            <asp:Label ID="XuEnabledMasterOperatorItem" runat="server" Text='<%# Bind("PickupOperator") %>' />
                         </ItemTemplate>
 
-                        <HeaderStyle CssClass="XuFwPickupOperator" />
-                        <ItemStyle CssClass="XuFwPickupOperator" />
+                        <HeaderStyle CssClass="XuEnabledMasterOperator" />
+                        <ItemStyle CssClass="XuEnabledMasterOperator" />
 
 
                     </asp:TemplateField>
