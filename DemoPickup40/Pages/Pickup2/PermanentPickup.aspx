@@ -34,16 +34,12 @@
                 ShowHeaderWhenEmpty="True"
                 CssClass="XuForwarderPickup"
                 OnRowCommand="XuPermanentPickup_RowCommand" 
-                OnRowEditing="XuPermanentPickup_RowEditing"
-               
                 >
 
                 <HeaderStyle CssClass="XuForwarderPickupHeader" />
                 <RowStyle CssClass="XuForwarderPickupRow" />
 
                 <Columns>
-
-                    <%------------ Account ------------%>
 
                     <%--Column Customer --%>
                     <asp:TemplateField HeaderText="XuCustomer">

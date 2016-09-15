@@ -78,6 +78,7 @@
     <Content Include="Pages\Pickup2\PermanentPickup.aspx" />
     <Content Include="Pages\Pickup2\Forwarder.aspx" />
     <Content Include="Pages\Pickup2\Forwarder.css" />
+    <Content Include="Pages\Pickup2\PermanentPickupEdit.aspx" />
     <Content Include="Pages\Pickup\EditForwarderPickup.css" />
     <Content Include="Pages\Pickup\Customer04.aspx" />
     <Content Include="Pages\Pickup\Customer04.css" />
@@ -137,6 +138,13 @@
     </Compile>
     <Compile Include="Pages\Pickup2\PermanentPickup.aspx.designer.cs">
       <DependentUpon>PermanentPickup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Pickup2\PermanentPickupEdit.aspx.cs">
+      <DependentUpon>PermanentPickupEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Pickup2\PermanentPickupEdit.aspx.designer.cs">
+      <DependentUpon>PermanentPickupEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Pickup\Customer04.aspx.cs">
       <DependentUpon>Customer04.aspx</DependentUpon>

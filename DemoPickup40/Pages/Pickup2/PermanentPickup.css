@@ -34,6 +34,31 @@
     border: solid 1px;
 }
 
+
+#XuPPEdit.css-table {
+    width: 600px;
+}
+
+#XuPPEdit .div-tr {
+    border: 2px solid;
+}
+
+#XuPPEdit .col1 {
+    width: 200px;
+}
+
+#XuPPEdit .col2 {
+    width: 300px;
+}
+
+#XuPPEdit .col3 {
+    width: 200px;
+}
+
+.timeinput {
+    width: 40px;
+}
+/*----------------*/
 .XuForwarderPickup {
     width: 1900px;
 }
