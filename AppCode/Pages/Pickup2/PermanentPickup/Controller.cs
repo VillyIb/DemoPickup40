@@ -55,7 +55,7 @@ namespace AppCode.Pages.Pickup2.PermanentPickup
             {
                 var account = pp.Account;
                 var customer = pp.Customer;
-                var permanentPickup = pp.PermanentPickup;
+                //var permanentPickup = pp.;
 
                 var guirow = new GuiRow
                 {
@@ -96,36 +96,36 @@ namespace AppCode.Pages.Pickup2.PermanentPickup
                     //PickupOperatorList = new List<PickupOperator>()
                 };
 
-                if (permanentPickup != null)
-                {
-                    var t1 = String.IsNullOrWhiteSpace(permanentPickup.EnabledOnWeekday) &&
-                             permanentPickup.EnabledOnWeekday.Length == 7
-                        ? permanentPickup.EnabledOnWeekday
-                        : "1111100";
+                //if (permanentPickup != null)
+                //{
+                //    var t1 = String.IsNullOrWhiteSpace(permanentPickup.EnabledOnWeekday) &&
+                //             permanentPickup.EnabledOnWeekday.Length == 7
+                //        ? permanentPickup.EnabledOnWeekday
+                //        : "1111100";
 
-                    guirow.EnabledWeek = t1;
+                //    guirow.EnabledWeek = t1;
 
-                    //var t2 = t1.ToCharArray();
+                //    //var t2 = t1.ToCharArray();
 
-                    //guirow.Enabled1 = t2[0] != '0';
-                    //guirow.Enabled2 = t2[1] != '0';
-                    //guirow.Enabled3 = t2[2] != '0';
-                    //guirow.Enabled4 = t2[3] != '0';
-                    //guirow.Enabled5 = t2[4] != '0';
-                    //guirow.Enabled6 = t2[5] != '0';
-                    //guirow.Enabled7 = t2[6] != '0';
+                //    //guirow.Enabled1 = t2[0] != '0';
+                //    //guirow.Enabled2 = t2[1] != '0';
+                //    //guirow.Enabled3 = t2[2] != '0';
+                //    //guirow.Enabled4 = t2[3] != '0';
+                //    //guirow.Enabled5 = t2[4] != '0';
+                //    //guirow.Enabled6 = t2[5] != '0';
+                //    //guirow.Enabled7 = t2[6] != '0';
 
-                    guirow.EnabledMaster = permanentPickup.Enabled;
+                //    guirow.EnabledMaster = permanentPickup.Enabled;
 
-                    guirow.HasPermanentPickupRow = true;
-                    guirow.Id = permanentPickup.Id;
-                    guirow.PickupOperator = permanentPickup.PickupOperator;
+                //    guirow.HasPermanentPickupRow = true;
+                //    guirow.Id = permanentPickup.Id;
+                //    guirow.PickupOperator = permanentPickup.PickupOperator;
 
-                    guirow.Text = permanentPickup.Text;
-                    guirow.TimeClose = permanentPickup.TimeClose;
-                    guirow.TimeReady = permanentPickup.TimeReady;
-                    //guirow.PickupOperatorList = GuiContainer.PickupOperatorList;
-                }
+                //    guirow.Text = permanentPickup.Text;
+                //    guirow.TimeClose = permanentPickup.TimeClose;
+                //    guirow.TimeReady = permanentPickup.TimeReady;
+                //    //guirow.PickupOperatorList = GuiContainer.PickupOperatorList;
+                //}
 
                 GuiContainer.GuiRowList.Add(guirow);
 

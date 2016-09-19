@@ -192,7 +192,7 @@ namespace AppCode.Pages.Pickup2
 
         private List<GuiForwarderPickup> GetGuiForwarderPickupList()
         {
-            SystemDateTime.SetTime(new DateTime(2016, 9, 12), 1);
+            //SystemDateTime.SetTime(new DateTime(2016, 9, 12), 1);
 
             Init();
 

@@ -96,7 +96,7 @@
                             <div class="css-tr">
                                 <div class="css-td">Shipment date window</div>
                                 <div class="css-td">
-                                    <asp:TextBox ID="XuStPickupDateFrom" runat="server">2016-08-30</asp:TextBox><asp:TextBox ID="XuStPickupDateUntil" runat="server">2016-09-01</asp:TextBox>
+                                    <asp:TextBox ID="XuStPickupDateFrom" runat="server">2016-09-15</asp:TextBox><asp:TextBox ID="XuStPickupDateUntil" runat="server">2016-09-15</asp:TextBox>
                                 </div>
                                 <div class="css-td">&nbsp;</div>
                             </div>

@@ -267,10 +267,14 @@ namespace DemoPickup40.Pages.Pickup2
 
             if (!(IsPostBack))
             {
+                XuStPickupDateFrom.Text = SystemDateTime.Today.ToString("yyyy-MM-dd");
+                XuStPickupDateUntil.Text = SystemDateTime.Today.ToString("yyyy-MM-dd");
                 GuiReadSettings();
 
                 //if (XpGuiContainer == null)
                 {
+                    PickupApi.DatePickupBegin = GuiSettings.FilterPickupDateFrom;
+                    PickupApi.DatePickupEnd = GuiSettings.FilterPickupDateUntil;
                     XpGuiContainer = PickupApi.GetGuiContainer(0);
                 }
 
@@ -865,6 +869,8 @@ namespace DemoPickup40.Pages.Pickup2
 
             var saved = XpGuiContainer;
             var start = DateTime.UtcNow;
+            PickupApi.DatePickupBegin = GuiSettings.FilterPickupDateFrom;
+            PickupApi.DatePickupEnd = GuiSettings.FilterPickupDateUntil;
             XpGuiContainer = PickupApi.GetGuiContainer(0); // TODO pass on filters.
             var duration = DateTime.UtcNow.Subtract(start);
             XpGuiContainer.IsSettingsVisible = false; // saved.IsSettingsVisible;
