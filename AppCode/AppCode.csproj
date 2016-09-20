@@ -49,6 +49,8 @@
     <Compile Include="ExceptionExtentions\ExceptionExtention.cs" />
     <Compile Include="Pages\Pickup2\DropDownBoxData.cs" />
     <Compile Include="Pages\Pickup2\DropDownBoxDataPickupOperator.cs" />
+    <Compile Include="Pages\Pickup2\EditLocationSetting\GuiContainer.cs" />
+    <Compile Include="Pages\Pickup2\EditLocationSetting\GuiLocation.cs" />
     <Compile Include="Pages\Pickup2\GuiAddress.cs" />
     <Compile Include="Pages\Pickup2\GuiContainer.cs" />
     <Compile Include="Pages\Pickup2\GuiCustomer.cs" />

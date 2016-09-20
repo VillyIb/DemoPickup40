@@ -74,6 +74,8 @@
     <Content Include="assets\js\npm.js" />
     <Content Include="Pages\Pickup2\EditForwarderPickup.aspx" />
     <Content Include="Pages\Pickup2\EditForwarderPickup.css" />
+    <Content Include="Pages\Pickup2\EditLocationSetting.aspx" />
+    <Content Include="Pages\Pickup2\EditLocationSetting.css" />
     <Content Include="Pages\Pickup2\PermanentPickup.css" />
     <Content Include="Pages\Pickup2\PermanentPickup.aspx" />
     <Content Include="Pages\Pickup2\Forwarder.aspx" />
@@ -124,6 +126,13 @@
     </Compile>
     <Compile Include="Pages\Pickup2\EditForwarderPickup.aspx.designer.cs">
       <DependentUpon>EditForwarderPickup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Pickup2\EditLocationSetting.aspx.cs">
+      <DependentUpon>EditLocationSetting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Pickup2\EditLocationSetting.aspx.designer.cs">
+      <DependentUpon>EditLocationSetting.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Pickup2\PermanentPickup.aspx.cs">
       <DependentUpon>PermanentPickup.aspx</DependentUpon>

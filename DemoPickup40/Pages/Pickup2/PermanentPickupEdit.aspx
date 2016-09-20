@@ -34,26 +34,6 @@
                 </div>
 
                 <div class="css-tr">
-                    <div class="css-td">Customer</div>
-                    <div class="css-td">
-                        <asp:Label ID="XuCustomer" runat="server" Text="GTX"></asp:Label>
-                        <asp:DropDownList ID="XuCustomerSelect" runat="server" CssClass="hidden" OnSelectedIndexChanged="XuCustomerSelect_SelectedIndexChanged" />
-                    </div>
-                    <div class="css-td"><asp:Label ID="XuCustomerAddress" runat="server" Text="GTX, Stavnsholt Gydevang 70, 3460 Birkerød"></asp:Label></div>
-                </div>
-
-                <div class="css-tr">
-                    <div class="css-td">Account</div>
-                    <div class="css-td">
-                        <asp:Label ID="XuAccount" runat="server" Text="Hovedkonto"></asp:Label>
-                        <asp:DropDownList ID="XuAccountSelect" runat="server" CssClass="hidden" OnSelectedIndexChanged="XuAccountSelecxt_SelectedIndexChanged" />
-                    </div>
-                    <div class="css-td">
-                        <asp:Label ID="XuAccountAddress" Text="GTX - Ad Hoc, Stavnsholt Gydevej 70, 3460 Birkerød" runat="server"></asp:Label>
-                    </div>
-                </div>
-
-                <div class="css-tr">
                     <div class="css-td">Permanent Pickup Enabled</div>
                     <div class="css-td">
                         <asp:CheckBox ID="XuEnabledMain" runat="server" Checked="True"></asp:CheckBox>
@@ -87,43 +67,6 @@
                     <div class="css-td">&nbsp;</div>
                 </div>
 
-                <div class="css-tr">
-                    <div class="css-td">Time Ready</div>
-                    <div class="css-td">
-                        <asp:TextBox ID="XuTimeReady" runat="server" MaxLength="5" Text ="12:45" CssClass="timeinput"></asp:TextBox>
-                    </div>
-                    <div class="css-td">hh:mm (00:00 - 23:59)</div>
-                </div>
-
-                <div class="css-tr">
-                    <div class="css-td">Time Close</div>
-                    <div class="css-td">
-                        <asp:TextBox ID="XuTimeClose" runat="server" MaxLength="5" Text="15:30" CssClass="timeinput"></asp:TextBox>
-                    </div>
-                    <div class="css-td">hh:mm (00:00 - 23:59)</div>
-                </div>
-
-                <div class="css-tr">
-                    <div class="css-td">Admin website</div>
-                    <div class="css-td">
-                        <asp:DropDownList runat="server" ID="XuAdminWebsite1" >
-                            <asp:ListItem>GTX</asp:ListItem>
-                            <asp:ListItem>ShipX</asp:ListItem>
-                            <asp:ListItem>GLS</asp:ListItem>
-                            <asp:ListItem>Cool Runner</asp:ListItem> 
-                            <asp:ListItem>Other</asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
-                    <div class="css-td">&nbsp;</div>
-                </div>
-
-                <div class="css-tr">
-                    <div class="css-td">Note</div>
-                    <div class="css-td">
-                        <asp:TextBox ID="XuNote" runat="server" MaxLength="50" Text="GTX, Hovedkonto, GTX, Stavnsholt Gydevang 70, 3460 Birkerød"></asp:TextBox>
-                    </div>
-                    <div class="css-td">&nbsp;</div>
-                </div>
 
                 <div class="css-tr">
                     <div class="css-td">Operation</div>

@@ -1,0 +1,40 @@
+﻿body {
+}
+
+.css-table {
+    display: table;
+    /*border: solid;*/
+    padding: 2px;
+    margin: 5px;
+}
+
+.css-tr {
+    display: table-row;
+}
+
+.css-th {
+    display: table-cell;
+    text-align: center;
+    border: solid 1px;
+}
+
+.css-td {
+    display: table-cell;
+    border: solid 1px;
+}
+
+.col1 {
+    width: 200px;
+}
+
+.col2 {
+    width: 200px;
+}
+
+.col1A {
+    width: 20px;
+}
+
+.col2A {
+    width: 380px;
+}
