@@ -21,7 +21,13 @@
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-    <asp:UpdatePanel ID="XuUpdatePanel1" runat="server" UpdateMode="Always">
+    <asp:UpdatePanel
+        ID="XuUpdatePanel1"
+        runat="server">
+
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="XuLocationList" EventName="SelectedIndexChanged" />
+        </Triggers>
 
         <ContentTemplate>
 
@@ -35,28 +41,64 @@
 
                                 <div class="css-tr">
                                     <div class="css-td col1">
-                                        Customer
+                                        Customer 
                                     </div>
                                     <div class="css-td col2">
-                                        <asp:DropDownList runat="server" ID="XuCustomerList" />
+                                        <asp:DropDownList runat="server" ID="XuCustomerList" DataTextField="Text" AutoPostBack="True" DataValueField="Value" CssClass="XuCustomerList" OnSelectedIndexChanged="XuCustomerList_SelectedIndexChanged" />
                                     </div>
                                 </div>
 
+
+                                <%-- Location List --%>
                                 <div class="css-tr">
-                                    <div class="css-td col1">
-                                        xxxx
+                                    <div class="css-td col1A">
+                                        Locations
                                     </div>
-                                    <div class="css-td col2">
-                                        <asp:TextBox runat="server" ID="DropDownList1" />
+                                    <div class="css-td col2A">
+                                        <asp:GridView
+                                            ID="XuLocationList"
+                                            runat="server"
+                                            AutoGenerateColumns="false"
+                                            ShowHeaderWhenEmpty="true"
+                                            CssClass="XuForwarderPickup"
+                                            OnSelectedIndexChanged="XuLocationList_SelectedIndexChanged"
+                                            EnableViewState="False" OnRowCommand="XuLocationList_RowCommand"
+                                            AutoGenerateSelectButton="true">
+
+                                            <Columns>
+
+                                                <asp:TemplateField HeaderText="X2">
+
+                                                    <HeaderTemplate>Address</HeaderTemplate>
+
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="XuLocText" runat="server" Text='<%# Bind("Displaytext") %>'></asp:Label>
+                                                        <%--<asp:LinkButton ID="XuLocText" runat="server" Text='<%# Bind("Displaytext") %>' />--%>
+                                                    </ItemTemplate>
+
+                                                </asp:TemplateField>
+
+                                                <%--<asp:CommandField ShowSelectButton="true" ButtonType="Link" SelectText="Edit" ShowEditButton="true" ShowInsertButton="true" CancelText="ct" EditText="et" HeaderText="ht" ShowHeader="true" />--%>
+                                            </Columns>
+
+                                            <SelectedRowStyle BackColor="Lime" BorderStyle="Solid" />
+
+                                        </asp:GridView>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="css-td">
+
+                            <div id="XuLocationDetails" runat="server" class="css-table hidden">
 
                                 <div class="css-tr">
                                     <div class="css-td col1">
                                         Forwarder
                                     </div>
                                     <div class="css-td col2">
-                                        <asp:DropDownList runat="server" ID="XuForwarderList" />
+                                        <asp:DropDownList runat="server" ID="XuForwarderList" DataTextField="Text" DataValueField="Value"/>
                                     </div>
                                 </div>
 
@@ -71,25 +113,10 @@
 
                                 <div class="css-tr">
                                     <div class="css-td col1">
-                                        - Week Schedule
-                                    </div>
-                                    <div class="css-td col2">
-                                        <asp:CheckBox runat="server" ID="CheckBox1" />
-                                        <asp:CheckBox runat="server" ID="CheckBox2" />
-                                        <asp:CheckBox runat="server" ID="CheckBox3" />
-                                        <asp:CheckBox runat="server" ID="CheckBox4" />
-                                        <asp:CheckBox runat="server" ID="CheckBox5" />
-                                        <asp:CheckBox runat="server" ID="CheckBox6" />
-                                        <asp:CheckBox runat="server" ID="CheckBox7" />
-                                    </div>
-                                </div>
-
-                                <div class="css-tr">
-                                    <div class="css-td col1">
                                         Loading Gear Description (to Pickup Operator)
                                     </div>
                                     <div class="css-td col2">
-                                        <asp:TextBox runat="server" ID="TextBox2" />
+                                        <asp:TextBox runat="server" ID="XuLoadingGearDetails" />
                                     </div>
                                 </div>
 
@@ -98,7 +125,7 @@
                                         Is feedback visible to Customer
                                     </div>
                                     <div class="css-td col2">
-                                        <asp:CheckBox runat="server" ID="CheckBox8" />
+                                        <asp:CheckBox runat="server" ID="XuCustomerFeedback" />
                                     </div>
                                 </div>
 
@@ -107,7 +134,7 @@
                                         Pickup Operator
                                     </div>
                                     <div class="css-td col2">
-                                        <asp:DropDownList runat="server" ID="DropDownList2" />
+                                        <asp:DropDownList runat="server" ID="XuPickupOperatorList" />
                                     </div>
                                 </div>
 
@@ -116,97 +143,17 @@
                                         Internal Note
                                     </div>
                                     <div class="css-td col2">
-                                        <asp:TextBox runat="server" ID="TextBox1" />
+                                        <asp:TextBox runat="server" ID="XuNote" />
                                     </div>
                                 </div>
 
-                                <%-- Location List --%>
-                                <div class="css-tr">
-                                    <div class="css-td col1A">
-                                        X
-                                    </div>
-                                    <div class="css-td col2A">
-                                        <asp:GridView
-                                            ID="XuLocationList"
-                                            runat="server"
-                                            AutoGenerateColumns="false"
-                                            ShowHeaderWhenEmpty="true"
-                                            CssClass="XuForwarderPickup"
-                                            OnSelectedIndexChanged="XuLocationList_SelectedIndexChanged"
-                                            EnableViewState="False">
-
-                                            <Columns>
-
-                                                <asp:TemplateField HeaderText="X1">
-
-                                                    <HeaderTemplate>xxx</HeaderTemplate>
-
-                                                    <ItemTemplate>
-                                                        <asp:Label runat="server">some accounts </asp:Label>
-                                                    </ItemTemplate>
-
-                                                </asp:TemplateField>
-
-                                                <asp:TemplateField HeaderText="X2">
-
-                                                    <HeaderTemplate>yyy</HeaderTemplate>
-
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="XuLocText" runat="server" Text='<%# Bind("Displaytext") %>'></asp:Label>
-                                                    </ItemTemplate>
-
-                                                </asp:TemplateField>
-
-
-
-                                            </Columns>
-
-                                        </asp:GridView>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-
-                        <div class="css-td">
-
-                            <div class="css-table">
-                                <div class="css-tr">
-                                    <div class="css-td">Location</div>
-                                    <div class="css-td">
-                                        <asp:Label ID="XuLocationAddress1" runat="server"></asp:Label>
-                                        <asp:Label ID="XuLocationAddress2" runat="server"></asp:Label>
-                                        <asp:Label ID="XuLocationAddress3" runat="server"></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="css-tr">
-                                    <div class="css-td">AA</div>
-                                    <div class="css-td">BB</div>
-                                </div>
-                                <div class="css-tr">
-                                    <div class="css-td">AA</div>
-                                    <div class="css-td">BB</div>
-                                </div>
-                                <div class="css-tr">
-                                    <div class="css-td">AA</div>
-                                    <div class="css-td">BB</div>
-                                </div>
-                            </div>
+                            <asp:Button ID="XuSaveLocation" runat="server" Text="Update" OnClick="XuSaveLocation_Click" />
 
                         </div>
 
                     </div>
 
-                    <div class="css-tr">
-
-                        <div class="css-td col">
-                            asfakjslfjæa
-                        </div>
-
-                        <div class="css-td col">
-                            kjldfsjkaælkj
-                        </div>
-
-                    </div>
                 </div>
         </ContentTemplate>
 

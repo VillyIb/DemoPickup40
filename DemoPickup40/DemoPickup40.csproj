@@ -224,6 +224,14 @@
       <Project>{8435ca97-249e-46a3-8dac-f8d9df472d88}</Project>
       <Name>nu.gtx.Business.Pickup</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\DevBackend\Backend\nu.gtx.CodeFirst.DataAccess\nu.gtx.CodeFirst.DataAccess.csproj">
+      <Project>{f65517b2-ed26-41e2-8344-75780336e4c4}</Project>
+      <Name>nu.gtx.CodeFirst.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DevBackend\Backend\nu.gtx.CodeFirst.Model\nu.gtx.CodeFirst.Model.csproj">
+      <Project>{ced1c048-6bd2-419a-9761-bcd70454d842}</Project>
+      <Name>nu.gtx.CodeFirst.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\DevBackend\Backend\nu.gtx.Common1\nu.gtx.Common1.csproj">
       <Project>{04027a1c-ad75-4e18-a888-28c213d26f28}</Project>
       <Name>nu.gtx.Common1</Name>

@@ -7,7 +7,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using AppCode.ExceptionExtentions;
 using AppCode.Pages.Pickup2;
-using nu.gtx.Common1.ErrorCodes;
 using nu.gtx.POCO.Contract.Pickup;
 
 // ReSharper disable UnusedMember.Local

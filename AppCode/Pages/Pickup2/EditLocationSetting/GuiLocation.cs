@@ -8,5 +8,11 @@ namespace AppCode.Pages.Pickup2.EditLocationSetting
     public class GuiLocation
     {
         public string Displaytext { get; set; }
+
+
+        /// <summary>
+        /// PK
+        /// </summary>
+        public int Id { get; set; }
     }
 }

@@ -8,10 +8,22 @@ namespace AppCode.Pages.Pickup2.EditLocationSetting
     {
         public List<GuiRow> GuiRowList { get; set; }
 
+
         public List<PickupOperator> PickupOperatorList { get; set; }
+
 
         public List<GuiLocation> GuiLocationList { get; set; }
 
 
+        public List<GuiCustomer> GuiCustomerList { get; set; }
+
+
+        public int CurrentCustomerId { get; set; }
+
+
+        public int CurrentLocationId { get; set; }
+
+
+        public List<GuiWebsite> ForwarderList { get; set; }
     }
 }
