@@ -31,12 +31,17 @@
 
         <ContentTemplate>
 
+
             <div id="XuTable1" class="css-table">
+
                 <div class="css-tr">
 
                     <div class="css-tr">
 
                         <div class="css-td ">
+
+                            <h2>Customers</h2>
+
                             <div id="XuTable11" class="css-table">
 
                                 <div class="css-tr">
@@ -92,13 +97,15 @@
                         <div class="css-td">
 
                             <div id="XuLocationDetails" runat="server" class="css-table hidden">
+                                
+                                <h2>Location Settings</h2>
 
                                 <div class="css-tr">
                                     <div class="css-td col1">
                                         Forwarder
                                     </div>
                                     <div class="css-td col2">
-                                        <asp:DropDownList runat="server" ID="XuForwarderList" DataTextField="Text" DataValueField="Value"/>
+                                        <asp:DropDownList runat="server" ID="XuForwarderList" DataTextField="Text" DataValueField="Value" />
                                     </div>
                                 </div>
 
@@ -131,7 +138,7 @@
 
                                 <div class="css-tr">
                                     <div class="css-td col1">
-                                        Pickup Operator
+                                        Default Pickup Operator
                                     </div>
                                     <div class="css-td col2">
                                         <asp:DropDownList runat="server" ID="XuPickupOperatorList" />
@@ -147,8 +154,57 @@
                                     </div>
                                 </div>
 
+                                <div class="css-tr">
+                                    <div class="css-td col1">
+                                        
+                                    </div>
+                                    <div class="css-td col2">
+                                        <asp:Button ID="XuSaveLocation" runat="server" Text="Update" OnClick="XuSaveLocation_Click" />
+                                    </div>
+                                </div>
+
                             </div>
-                            <asp:Button ID="XuSaveLocation" runat="server" Text="Update" OnClick="XuSaveLocation_Click" />
+
+                            <div id="XuPermanentCollection" runat="server" class="css-table">
+                                <br />
+                                <h2>Permanent Collection</h2>
+                                
+                                <div class="css-tr">
+                                    <div class="css-td col1">
+                                        Permanent Pickup Enabled
+                                    </div>
+                                    <div class="css-td col2">
+                                        <asp:CheckBox ID ="XuPermCollEnabled" runat="server"/>
+                                    </div>
+                                </div>
+
+                                <div class="css-tr">
+                                    <div class="css-td col1">
+                                        Pickup Schedule
+                                    </div>
+                                    <div class="css-td col2">
+                                        <asp:CheckBox ID ="CheckBox1" runat="server" Checked="true" Text="monday"/><br />
+                                        <asp:CheckBox ID ="CheckBox2" runat="server" Checked="true" Text="tuesday"/><br />
+                                        <asp:CheckBox ID ="CheckBox3" runat="server" Checked="true" Text="wedensday"/><br />
+                                        <asp:CheckBox ID ="CheckBox4" runat="server" Checked="true" Text="thursday"/><br />
+                                        <asp:CheckBox ID ="CheckBox5" runat="server" Checked="true" Text="friday"/><br />
+                                        <asp:CheckBox ID ="CheckBox12" runat="server" Checked="false" Text="saturday"/><br />
+                                        <asp:CheckBox ID ="CheckBox13" runat="server" Checked="false" Text="sunday"/><br />
+                                    </div>
+                                </div>
+
+                                <div class="css-tr">
+                                    <div class="css-td col1">
+                                        <asp:Button ID="XuCreate" runat="server" Text="Create" />
+                                        <asp:Button ID="Button2" runat="server" Text="Delete" />
+                                    </div>
+                                    <div class="css-td col2">
+                                        <asp:Button ID="Button1" runat="server" Text="Update" />
+                                    </div>
+                                </div>
+
+                                
+                            </div>
 
                         </div>
 
