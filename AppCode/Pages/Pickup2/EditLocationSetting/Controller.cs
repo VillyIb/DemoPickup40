@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using nu.gtx.CodeFirst.DataAccess.Context;
 using nu.gtx.CodeFirst.Model.Pickup;
 using nu.gtx.DatabaseAccess.DbMain;
@@ -94,7 +94,7 @@ namespace AppCode.Pages.Pickup2.EditLocationSetting
 
         public void LoadLocation(int locationId)
         {
-            LocationSetting = ContextMainPickup.LocationSettings.FirstOrDefault(t => t.Id == locationId);
+            LocationSetting = ContextMainPickup.LocationSettings.Include(t => t.PermanentCollectionList).FirstOrDefault(t => t.Id == locationId);
         }
 
 

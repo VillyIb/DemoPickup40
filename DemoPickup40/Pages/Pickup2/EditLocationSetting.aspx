@@ -25,12 +25,11 @@
         ID="XuUpdatePanel1"
         runat="server">
 
-        <Triggers>
+        <%--        <Triggers>
             <asp:AsyncPostBackTrigger ControlID="XuLocationList" EventName="SelectedIndexChanged" />
-        </Triggers>
+        </Triggers>--%>
 
         <ContentTemplate>
-
 
             <div id="XuTable1" class="css-table">
 
@@ -38,6 +37,7 @@
 
                     <div class="css-tr">
 
+                        <%-- Main Left Column --%>
                         <div class="css-td ">
 
                             <h2>Customers</h2>
@@ -94,10 +94,11 @@
                             </div>
                         </div>
 
+                        <%-- Main Right Column --%>
                         <div class="css-td">
 
-                            <div id="XuLocationDetails" runat="server" class="css-table hidden">
-                                
+                            <div id="XuLocationDetails" runat="server" class="css-table">
+
                                 <h2>Location Settings</h2>
 
                                 <div class="css-tr">
@@ -156,7 +157,6 @@
 
                                 <div class="css-tr">
                                     <div class="css-td col1">
-                                        
                                     </div>
                                     <div class="css-td col2">
                                         <asp:Button ID="XuSaveLocation" runat="server" Text="Update" OnClick="XuSaveLocation_Click" />
@@ -168,13 +168,13 @@
                             <div id="XuPermanentCollection" runat="server" class="css-table">
                                 <br />
                                 <h2>Permanent Collection</h2>
-                                
+
                                 <div class="css-tr">
                                     <div class="css-td col1">
                                         Permanent Pickup Enabled
                                     </div>
                                     <div class="css-td col2">
-                                        <asp:CheckBox ID ="XuPermCollEnabled" runat="server"/>
+                                        <asp:CheckBox ID="XuPermCollEnabled" runat="server" />
                                     </div>
                                 </div>
 
@@ -183,13 +183,13 @@
                                         Pickup Schedule
                                     </div>
                                     <div class="css-td col2">
-                                        <asp:CheckBox ID ="CheckBox1" runat="server" Checked="true" Text="monday"/><br />
-                                        <asp:CheckBox ID ="CheckBox2" runat="server" Checked="true" Text="tuesday"/><br />
-                                        <asp:CheckBox ID ="CheckBox3" runat="server" Checked="true" Text="wedensday"/><br />
-                                        <asp:CheckBox ID ="CheckBox4" runat="server" Checked="true" Text="thursday"/><br />
-                                        <asp:CheckBox ID ="CheckBox5" runat="server" Checked="true" Text="friday"/><br />
-                                        <asp:CheckBox ID ="CheckBox12" runat="server" Checked="false" Text="saturday"/><br />
-                                        <asp:CheckBox ID ="CheckBox13" runat="server" Checked="false" Text="sunday"/><br />
+                                        <asp:CheckBox ID="CheckBox1" runat="server" Checked="true" Text="monday" /><br />
+                                        <asp:CheckBox ID="CheckBox2" runat="server" Checked="true" Text="tuesday" /><br />
+                                        <asp:CheckBox ID="CheckBox3" runat="server" Checked="true" Text="wedensday" /><br />
+                                        <asp:CheckBox ID="CheckBox4" runat="server" Checked="true" Text="thursday" /><br />
+                                        <asp:CheckBox ID="CheckBox5" runat="server" Checked="true" Text="friday" /><br />
+                                        <asp:CheckBox ID="CheckBox12" runat="server" Checked="false" Text="saturday" /><br />
+                                        <asp:CheckBox ID="CheckBox13" runat="server" Checked="false" Text="sunday" /><br />
                                     </div>
                                 </div>
 
@@ -203,7 +203,7 @@
                                     </div>
                                 </div>
 
-                                
+
                             </div>
 
                         </div>
@@ -211,6 +211,8 @@
                     </div>
 
                 </div>
+
+            </div>
         </ContentTemplate>
 
     </asp:UpdatePanel>

@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Pages\Pickup2\PermanentPickup\GuiRow.cs" />
     <Compile Include="Pages\Pickup2\PermanentPickup\GuiWebsite.cs" />
     <Compile Include="Pages\Pickup2\PickupData.cs" />
+    <Compile Include="Util\CssUtil.cs" />
     <Compile Include="Wrapper\PickupUtil.cs" />
     <Compile Include="Pages\Pickup\DropDownBoxData.cs" />
     <Compile Include="Pages\Pickup\GuiAddress.cs" />

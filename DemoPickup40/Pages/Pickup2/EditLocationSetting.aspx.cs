@@ -10,6 +10,7 @@ using AppCode.Pages.Pickup2.EditLocationSetting;
 using nu.gtx.DatabaseAccess.DbMain;
 using nu.gtx.CodeFirst.DataAccess.Context;
 using nu.gtx.DatabaseAccess.DbShared;
+using AppCode.Util;
 
 namespace DemoPickup40.Pages.Pickup2
 {
@@ -91,8 +92,7 @@ namespace DemoPickup40.Pages.Pickup2
             return true;
         }
 
-
-        private void XmPopulatePage()
+        private void XmPopulateLeftColumn()
         {
             XuLocationList.DataSource = GuiContainer.GuiLocationList;
             XuLocationList.DataBind();
@@ -101,10 +101,13 @@ namespace DemoPickup40.Pages.Pickup2
             XuCustomerList.DataSource = GuiContainer.GuiCustomerList;
             XuCustomerList.DataBind();
             XuCustomerList.SelectedIndex = GuiContainer.GuiCustomerList.FindIndex(t => t.Value == GuiContainer.CurrentCustomerId);
+        }
 
+        private void XmPopulateLocation()
+        {
             if (GuiContainer.CurrentLocationId >= 0)
             {
-                XuLocationDetails.Attributes["class"] = XuLocationDetails.Attributes["class"].Replace("hidden", "");
+                XuLocationDetails.CssRemove("hidden");
                 Controller.LoadLocation(GuiContainer.CurrentLocationId);
                 if (Controller.LocationSetting != null)
                 {
@@ -128,8 +131,31 @@ namespace DemoPickup40.Pages.Pickup2
             }
             else
             {
-                XuLocationDetails.Attributes["class"] = XuLocationDetails.Attributes["class"].Replace("hidden", "") + " hidden";
+                XuLocationDetails.CssAdd("hidden");
             }
+        }
+
+
+        private void XmPopulatePermanentCollection()
+        {
+            if (GuiContainer.CurrentLocationId >= 0 && Controller.LocationSetting.PermanentCollectionList.Count > 0)
+            {
+                XuPermanentCollection.CssRemove("hidden");
+            }
+            else
+            {
+                XuPermanentCollection.CssAdd("hidden");
+            }
+
+        }
+
+
+        private void XmPopulatePage()
+        {
+            XmPopulateLeftColumn();
+            XmPopulateLocation();
+            XmPopulatePermanentCollection();
+
 
         }
 
