@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using AppCode.Pages.Pickup2.EditLocationSetting;
 using nu.gtx.DatabaseAccess.DbMain;
 using nu.gtx.CodeFirst.DataAccess.Context;
 using nu.gtx.DatabaseAccess.DbShared;
-using AppCode.Util;
+//using AppCode.Util;
+using nu.gtx.Common1.Extensions;
+using nu.gtx.POCO.Contract.Pickup;
 
 namespace DemoPickup40.Pages.Pickup2
 {
@@ -33,9 +32,8 @@ namespace DemoPickup40.Pages.Pickup2
                     {
                         GuiCustomerList = new List<GuiCustomer>(),
                         GuiLocationList = new List<GuiLocation>(),
-                        PickupOperatorList = new List<nu.gtx.POCO.Contract.Pickup.PickupOperator>(),
-                        GuiRowList = new List<AppCode.Pages.Pickup2.PermanentPickup.GuiRow>(),
-                        ForwarderList = new List<GuiWebsite>(),                       
+                        GuiPickupOperatorList = new List<nu.gtx.POCO.Contract.Pickup.PickupOperator>(),
+                        GuiForwarderList = new List<GuiWebsite>(),                       
                     };
                     Session[ZGuiContainerKey] = result;
                 }
@@ -68,7 +66,7 @@ namespace DemoPickup40.Pages.Pickup2
         {
             if (IsPostBack) { return false; }
 
-            GuiContainer.CurrentLocationId = -1;
+            GuiContainer.CurrentLocationSettingsId = -1;
 
             foreach (string key in Request.QueryString.Keys)
             {
@@ -79,15 +77,15 @@ namespace DemoPickup40.Pages.Pickup2
                 }
             }
 
-            Controller.LoadCustomerList();
+            Controller.LoadGuiCustomerList();
             if (GuiContainer.CurrentCustomerId >= 0)
             {
                 Controller.LoadLocationList(GuiContainer.CurrentCustomerId);
             }
 
-            Controller.LoadPickupOperatorList();
+            Controller.GuiLoadPickupOperatorList();
 
-            Controller.LoadForwarderList();
+            Controller.GuiLoadForwarderList();
 
             return true;
         }
@@ -96,7 +94,7 @@ namespace DemoPickup40.Pages.Pickup2
         {
             XuLocationList.DataSource = GuiContainer.GuiLocationList;
             XuLocationList.DataBind();
-            XuLocationList.SelectedIndex = GuiContainer.GuiLocationList.FindIndex(t => t.Id == GuiContainer.CurrentLocationId);
+            XuLocationList.SelectedIndex = GuiContainer.GuiLocationList.FindIndex(t => t.Id == GuiContainer.CurrentLocationSettingsId);
 
             XuCustomerList.DataSource = GuiContainer.GuiCustomerList;
             XuCustomerList.DataBind();
@@ -105,26 +103,26 @@ namespace DemoPickup40.Pages.Pickup2
 
         private void XmPopulateLocation()
         {
-            if (GuiContainer.CurrentLocationId >= 0)
+            if (GuiContainer.CurrentLocationSettingsId >= 0)
             {
                 XuLocationDetails.CssRemove("hidden");
-                Controller.LoadLocation(GuiContainer.CurrentLocationId);
-                if (Controller.LocationSetting != null)
+                Controller.LoadLocation(GuiContainer.CurrentLocationSettingsId);
+                if (Controller.CurrentLocationSettings != null)
                 {
-                    var location = Controller.LocationSetting;
+                    var location = Controller.CurrentLocationSettings;
 
-                    XuForwarderList.DataSource = GuiContainer.ForwarderList;
+                    XuForwarderList.DataSource = GuiContainer.GuiForwarderList;
                     XuForwarderList.DataBind();
-                    XuForwarderList.SelectedIndex = GuiContainer.ForwarderList.FindIndex(t => t.Value.Equals(location.ForwarderWebsiteId));
+                    XuForwarderList.SelectedIndex = GuiContainer.GuiForwarderList.FindIndex(t => t.Value.Equals(location.ForwarderWebsiteId));
 
                     XuHasLoadingGear.Checked = location.HasLoadingGear;
                     XuLoadingGearDetails.Text = location.LoadingGearDetails;
                     XuCustomerFeedback.Checked = location.IsFeedbackVisible;
                     XuNote.Text = location.Text;
 
-                    XuPickupOperatorList.DataSource = GuiContainer.PickupOperatorList;
+                    XuPickupOperatorList.DataSource = GuiContainer.GuiPickupOperatorList;
                     XuPickupOperatorList.DataBind();
-                    XuPickupOperatorList.SelectedIndex = GuiContainer.PickupOperatorList.FindIndex(t => t == location.PickupOperator);
+                    XuPickupOperatorList.SelectedIndex = GuiContainer.GuiPickupOperatorList.FindIndex(t => t == location.PickupOperator);
 
 
                 }
@@ -138,9 +136,39 @@ namespace DemoPickup40.Pages.Pickup2
 
         private void XmPopulatePermanentCollection()
         {
-            if (GuiContainer.CurrentLocationId >= 0 && Controller.LocationSetting.PermanentCollectionList.Count > 0)
+            if (GuiContainer.CurrentLocationSettingsId >= 0)
+            {
+                XuPermanentCollectionOuterTop.CssRemove("hidden");
+                if (Controller.CurrentLocationSettings.PermanentCollectionList.Count > 0)
+                {
+                    XuPermanentCollectionOuterBottom.CssAdd("hidden");
+                }
+                else
+                {
+                    XuPermanentCollectionOuterBottom.CssRemove("hidden");
+                }
+            }
+            else
+            {
+                XuPermanentCollectionOuterTop.CssAdd("hidden");
+                XuPermanentCollectionOuterBottom.CssAdd("hidden");
+            }
+
+
+            if (GuiContainer.CurrentLocationSettingsId >= 0 && Controller.CurrentLocationSettings.PermanentCollectionList.Count > 0)
             {
                 XuPermanentCollection.CssRemove("hidden");
+
+                var pc = Controller.CurrentLocationSettings.PermanentCollectionList[0];
+
+                XuPermCollEnabled.Checked = pc.HasPermanentPickup;
+                XuScheduleFruiday.Checked = pc.HasFriday;
+                XuScheduleMonday.Checked = pc.HasMonday;
+                XuScheduleSaturday.Checked = pc.HasSaturday;
+                XuScheduleSunday.Checked = pc.HasSunday;
+                XuScheduleThursday.Checked = pc.HasThursday;
+                XuScheduleTuesday.Checked = pc.HasTuesday;
+                XuScheduleWedensday.Checked = pc.HasWedensday;
             }
             else
             {
@@ -155,9 +183,8 @@ namespace DemoPickup40.Pages.Pickup2
             XmPopulateLeftColumn();
             XmPopulateLocation();
             XmPopulatePermanentCollection();
-
-
         }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -175,7 +202,7 @@ namespace DemoPickup40.Pages.Pickup2
 
             var index = gw.SelectedIndex;
 
-            GuiContainer.CurrentLocationId = GuiContainer.GuiLocationList[index].Id;
+            GuiContainer.CurrentLocationSettingsId = GuiContainer.GuiLocationList[index].Id;
 
             XmPopulatePage();
         }
@@ -186,7 +213,7 @@ namespace DemoPickup40.Pages.Pickup2
             GuiContainer.CurrentCustomerId = int.TryParse(((DropDownList)sender).SelectedValue, out t1) ? t1 : 0;
 
             Controller.LoadLocationList(GuiContainer.CurrentCustomerId);
-            GuiContainer.CurrentLocationId = GuiContainer.GuiLocationList.Count > 0
+            GuiContainer.CurrentLocationSettingsId = GuiContainer.GuiLocationList.Count > 0
                 ? GuiContainer.GuiLocationList[0].Id
                 : -1;
             XmPopulatePage();
@@ -199,16 +226,16 @@ namespace DemoPickup40.Pages.Pickup2
 
         private void ReadGuiLocation()
         {
-            Controller.LoadLocation(GuiContainer.CurrentLocationId);
-            var location = Controller.LocationSetting;
+            Controller.LoadLocation(GuiContainer.CurrentLocationSettingsId);
+            var location = Controller.CurrentLocationSettings;
 
             //location.ForwarderWebsiteId = 
             location.HasLoadingGear = XuHasLoadingGear.Checked;
             location.IsFeedbackVisible = XuCustomerFeedback.Checked;
             location.LoadingGearDetails = XuLoadingGearDetails.Text.Trim();
-            location.PickupOperator = GuiContainer.PickupOperatorList[XuPickupOperatorList.SelectedIndex];
+            location.PickupOperator = GuiContainer.GuiPickupOperatorList[XuPickupOperatorList.SelectedIndex];
             location.Text = XuNote.Text;
-            location.ForwarderWebsiteId = GuiContainer.ForwarderList[XuForwarderList.SelectedIndex].Value;
+            location.ForwarderWebsiteId = GuiContainer.GuiForwarderList[XuForwarderList.SelectedIndex].Value;
         }
 
 
@@ -216,6 +243,52 @@ namespace DemoPickup40.Pages.Pickup2
         {
             ReadGuiLocation();
             Controller.SaveChages();
+            XmPopulatePage();
+        }
+
+
+        protected void XuPermCollDelete_Click(object sender, EventArgs e)
+        {
+            Controller.LoadLocation(GuiContainer.CurrentLocationSettingsId);
+            Controller.PermCollDelete();
+            XmPopulatePage();
+        }
+
+
+        protected void XuPermCollUpdate_Click(object sender, EventArgs e)
+        {
+            Controller.LoadLocation(GuiContainer.CurrentLocationSettingsId);
+
+            if (Controller.CurrentLocationSettings.PermanentCollectionList.Count > 0)
+            {
+                var pc = Controller.CurrentLocationSettings.PermanentCollectionList[0];
+
+                pc.HasFriday = XuScheduleFruiday.Checked;
+                pc.HasMonday = XuScheduleMonday.Checked;
+                pc.HasPermanentPickup = XuPermCollEnabled.Checked;
+                pc.HasSaturday = XuScheduleSaturday.Checked;
+                pc.HasSunday = XuScheduleSunday.Checked;
+                pc.HasThursday = XuScheduleThursday.Checked;
+                pc.HasTuesday = XuScheduleTuesday.Checked;
+                pc.HasWedensday = XuScheduleWedensday.Checked;
+
+                // Note from Location Setting section.
+                PickupOperator t1;
+                pc.PickupOperator = Enum.TryParse(XuPickupOperatorList.SelectedValue, out t1)
+                    ? t1
+                    : PickupOperator.Undefined;
+            }
+
+            Controller.PermCollUpdate();
+            XmPopulatePage();
+
+        }
+
+
+        protected void XuPermCollCreate_Click(object sender, EventArgs e)
+        {
+            Controller.LoadLocation(GuiContainer.CurrentLocationSettingsId);
+            Controller.PermCollCreate();
             XmPopulatePage();
         }
     }

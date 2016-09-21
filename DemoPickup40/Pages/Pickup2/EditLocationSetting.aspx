@@ -136,7 +136,8 @@
                                         <asp:CheckBox runat="server" ID="XuCustomerFeedback" />
                                     </div>
                                 </div>
-
+                                
+                                <%--TODO Bør muligvis flyttes til Permanent Collection--%>
                                 <div class="css-tr">
                                     <div class="css-td col1">
                                         Default Pickup Operator
@@ -165,9 +166,13 @@
 
                             </div>
 
+
+                            <div id="XuPermanentCollectionOuterTop" runat="server" class="">
+                                <h2>Permanent Collection</h2>
+                            </div>
+
                             <div id="XuPermanentCollection" runat="server" class="css-table">
                                 <br />
-                                <h2>Permanent Collection</h2>
 
                                 <div class="css-tr">
                                     <div class="css-td col1">
@@ -183,28 +188,32 @@
                                         Pickup Schedule
                                     </div>
                                     <div class="css-td col2">
-                                        <asp:CheckBox ID="CheckBox1" runat="server" Checked="true" Text="monday" /><br />
-                                        <asp:CheckBox ID="CheckBox2" runat="server" Checked="true" Text="tuesday" /><br />
-                                        <asp:CheckBox ID="CheckBox3" runat="server" Checked="true" Text="wedensday" /><br />
-                                        <asp:CheckBox ID="CheckBox4" runat="server" Checked="true" Text="thursday" /><br />
-                                        <asp:CheckBox ID="CheckBox5" runat="server" Checked="true" Text="friday" /><br />
-                                        <asp:CheckBox ID="CheckBox12" runat="server" Checked="false" Text="saturday" /><br />
-                                        <asp:CheckBox ID="CheckBox13" runat="server" Checked="false" Text="sunday" /><br />
+                                        <asp:CheckBox ID="XuScheduleMonday" runat="server" Checked="true" Text="monday" /><br />
+                                        <asp:CheckBox ID="XuScheduleTuesday" runat="server" Checked="true" Text="tuesday" /><br />
+                                        <asp:CheckBox ID="XuScheduleWedensday" runat="server" Checked="true" Text="wedensday" /><br />
+                                        <asp:CheckBox ID="XuScheduleThursday" runat="server" Checked="true" Text="thursday" /><br />
+                                        <asp:CheckBox ID="XuScheduleFruiday" runat="server" Checked="true" Text="friday" /><br />
+                                        <asp:CheckBox ID="XuScheduleSaturday" runat="server" Checked="false" Text="saturday" /><br />
+                                        <asp:CheckBox ID="XuScheduleSunday" runat="server" Checked="false" Text="sunday" /><br />
                                     </div>
                                 </div>
 
                                 <div class="css-tr">
                                     <div class="css-td col1">
-                                        <asp:Button ID="XuCreate" runat="server" Text="Create" />
-                                        <asp:Button ID="Button2" runat="server" Text="Delete" />
+                                        <asp:Button ID="XuPermCollDelete" runat="server" Text="Delete" OnClick="XuPermCollDelete_Click" />
                                     </div>
                                     <div class="css-td col2">
-                                        <asp:Button ID="Button1" runat="server" Text="Update" />
+                                        <asp:Button ID="XuPermCollUpdate" runat="server" Text="Update" OnClick="XuPermCollUpdate_Click" />
                                     </div>
                                 </div>
 
-
                             </div>
+
+                            <div id="XuPermanentCollectionOuterBottom" runat="server" class="">
+                                <asp:Button ID="XuPermCollCreate" runat="server" Text="Create" OnClick="XuPermCollCreate_Click" />
+                            </div>
+
+
 
                         </div>
 

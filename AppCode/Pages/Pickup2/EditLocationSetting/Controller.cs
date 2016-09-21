@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using nu.gtx.CodeFirst.DataAccess.Context;
 using nu.gtx.CodeFirst.Model.Pickup;
@@ -14,16 +15,22 @@ namespace AppCode.Pages.Pickup2.EditLocationSetting
     {
         private readonly DbMainStandard DbMainStandard;
 
+
         private readonly ContextMainPickup ContextMainPickup;
+
 
         private readonly DbSharedStandard DbSharedStandard;
 
-        public LocationSettings LocationSetting { get; set; }
+
+        public LocationSettings CurrentLocationSettings { get; set; }
 
 
         public GuiContainer GuiContainer { get; set; }
 
-        public void LoadCustomerList()
+
+        #region Customers
+
+        public void LoadGuiCustomerList()
         {
             var guiCustomerList = new List<GuiCustomer>();
 
@@ -36,20 +43,30 @@ namespace AppCode.Pages.Pickup2.EditLocationSetting
 
             // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (var customer in customersWithEnabledAccount)
+
+
             {
                 var name = customer.Company_Name.Trim().Replace("  ", " ");
                 var id = customer.CompanyID.ToString();
-                var filler = "".PadLeft(60 - (name.Length + id.Length), '\u00A0');
+                var locationCountInt = ContextMainPickup.LocationSettings.Count(t => t.FK_Customer_Id == customer.CompanyID);
+                var locationCount = locationCountInt > 1 ? String.Format("({0})", locationCountInt) : "";
+                var hasPermanentCollection =
+                    ContextMainPickup.LocationSettings.Where(t => t.FK_Customer_Id == customer.CompanyID)
+                        .SelectMany(t => t.PermanentCollectionList)
+                        .Any(t2 => t2.HasPermanentPickup)
+                        ? "PC"
+                        : "";
 
                 guiCustomerList.Add(new GuiCustomer
                 {
                     Sorting = name,
                     Text = String.Format(
-                        "{0} {1} {2}"
+                        "{0,-55} {1,2} {2,4} {3,5}"
                         , name
-                        , filler
+                        , hasPermanentCollection
+                        , locationCount
                         , id
-                        ),
+                        ).Replace(' ', '\u00A0'),  // Appear as nice columns when used together with monospace font.
                     Value = customer.CompanyID
                 });
 
@@ -61,6 +78,10 @@ namespace AppCode.Pages.Pickup2.EditLocationSetting
         }
 
 
+        /// <summary>
+        /// Load Locations for the Current Customer.
+        /// </summary>
+        /// <param name="customerId"></param>
         public void LoadLocationList(int customerId)
         {
             var locations = ContextMainPickup.LocationSettings.Where(t => t.FK_Customer_Id == customerId).ToList();
@@ -89,39 +110,108 @@ namespace AppCode.Pages.Pickup2.EditLocationSetting
             }
 
             GuiContainer.GuiLocationList = GuiContainer.GuiLocationList.OrderBy(t => t.Displaytext).ToList();
+
+            GuiContainer.CurrentLocationSettingsId = GuiContainer.GuiLocationList.Count > 0
+                ? GuiContainer.GuiLocationList[0].Id
+                : -1;
+
+            LoadLocation(GuiContainer.CurrentLocationSettingsId);
         }
 
+        #endregion Customers
+
+
+        #region Location Settings
 
         public void LoadLocation(int locationId)
         {
-            LocationSetting = ContextMainPickup.LocationSettings.Include(t => t.PermanentCollectionList).FirstOrDefault(t => t.Id == locationId);
+            CurrentLocationSettings = locationId >= 0 ? ContextMainPickup.LocationSettings.Include(t => t.PermanentCollectionList).FirstOrDefault(t => t.Id == locationId) : null;
         }
 
 
-        public void LoadPickupOperatorList()
+        public void GuiLoadPickupOperatorList()
         {
-            GuiContainer.PickupOperatorList.Clear();
+            GuiContainer.GuiPickupOperatorList.Clear();
 
             var t1 = Enum.GetValues(typeof(PickupOperator));
 
             foreach (PickupOperator t2 in t1)
             {
-                GuiContainer.PickupOperatorList.Add(t2);
+                GuiContainer.GuiPickupOperatorList.Add(t2);
             }
         }
 
-        public void LoadForwarderList()
-        {
-            GuiContainer.ForwarderList.Clear();
 
-            GuiContainer.ForwarderList = DbSharedStandard.WebSites.Where(t => !t.IsDisabled ?? false).Select(t1 => new GuiWebsite
+        public void GuiLoadForwarderList()
+        {
+            GuiContainer.GuiForwarderList.Clear();
+
+            GuiContainer.GuiForwarderList = DbSharedStandard.WebSites.Where(t => !t.IsDisabled ?? false).Select(t1 => new GuiWebsite
             {
                 Sorting = t1.siteName,
                 Text = t1.siteName,
                 Value = t1.WebsiteID
             }
-            ).OrderBy(t=>t.Sorting).ToList();
+            ).OrderBy(t => t.Sorting).ToList();
         }
+
+        #endregion
+
+
+        #region Permanent Collection
+
+        public void PermCollCreate()
+        {
+            if (CurrentLocationSettings.PermanentCollectionList.Count == 0)
+            {
+                CurrentLocationSettings.PermanentCollectionList.Add(new PermanentCollection
+                {
+                    HasFriday = true,
+                    HasMonday = true,
+                    HasSaturday = false,
+                    HasSunday = false,
+                    HasThursday = true,
+                    HasPermanentPickup = true,
+                    HasTuesday = true,
+                    HasWedensday = true,
+                    PickupOperator = CurrentLocationSettings.PickupOperator
+                });
+                ContextMainPickup.SaveChanges();
+
+                LoadGuiCustomerList();
+            }
+        }
+
+
+        public void PermCollUpdate()
+        {
+            ContextMainPickup.SaveChanges();
+
+            LoadGuiCustomerList();
+        }
+
+
+        public void PermCollDelete()
+        {
+            if (CurrentLocationSettings.PermanentCollectionList.Count > 0)
+            {
+                var t1 = CurrentLocationSettings.PermanentCollectionList.ToList();
+
+                foreach (var t2 in t1)
+                {
+                    ContextMainPickup.PermanentCollections.Remove(t2);
+                }
+
+                ContextMainPickup.SaveChanges();
+
+                Debug.Assert(ContextMainPickup.PermanentCollections.Count(t => t.FK_LocationSetting_Id == CurrentLocationSettings.Id) == 0);
+            }
+
+            LoadGuiCustomerList();
+        }
+
+
+        #endregion
 
 
         public void SaveChages()

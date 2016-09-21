@@ -121,6 +121,15 @@ namespace DemoPickup40.Pages.Pickup2 {
         protected global::System.Web.UI.WebControls.Button XuSaveLocation;
         
         /// <summary>
+        /// XuPermanentCollectionOuterTop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl XuPermanentCollectionOuterTop;
+        
+        /// <summary>
         /// XuPermanentCollection control.
         /// </summary>
         /// <remarks>
@@ -139,93 +148,102 @@ namespace DemoPickup40.Pages.Pickup2 {
         protected global::System.Web.UI.WebControls.CheckBox XuPermCollEnabled;
         
         /// <summary>
-        /// CheckBox1 control.
+        /// XuScheduleMonday control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox1;
+        protected global::System.Web.UI.WebControls.CheckBox XuScheduleMonday;
         
         /// <summary>
-        /// CheckBox2 control.
+        /// XuScheduleTuesday control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox2;
+        protected global::System.Web.UI.WebControls.CheckBox XuScheduleTuesday;
         
         /// <summary>
-        /// CheckBox3 control.
+        /// XuScheduleWedensday control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox3;
+        protected global::System.Web.UI.WebControls.CheckBox XuScheduleWedensday;
         
         /// <summary>
-        /// CheckBox4 control.
+        /// XuScheduleThursday control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox4;
+        protected global::System.Web.UI.WebControls.CheckBox XuScheduleThursday;
         
         /// <summary>
-        /// CheckBox5 control.
+        /// XuScheduleFruiday control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox5;
+        protected global::System.Web.UI.WebControls.CheckBox XuScheduleFruiday;
         
         /// <summary>
-        /// CheckBox12 control.
+        /// XuScheduleSaturday control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox12;
+        protected global::System.Web.UI.WebControls.CheckBox XuScheduleSaturday;
         
         /// <summary>
-        /// CheckBox13 control.
+        /// XuScheduleSunday control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox13;
+        protected global::System.Web.UI.WebControls.CheckBox XuScheduleSunday;
         
         /// <summary>
-        /// XuCreate control.
+        /// XuPermCollDelete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button XuCreate;
+        protected global::System.Web.UI.WebControls.Button XuPermCollDelete;
         
         /// <summary>
-        /// Button2 control.
+        /// XuPermCollUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button XuPermCollUpdate;
         
         /// <summary>
-        /// Button1 control.
+        /// XuPermanentCollectionOuterBottom control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl XuPermanentCollectionOuterBottom;
+        
+        /// <summary>
+        /// XuPermCollCreate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button XuPermCollCreate;
     }
 }

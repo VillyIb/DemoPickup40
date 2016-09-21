@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
-using AppCode.Pages.Pickup2.PermanentPickup;
 using nu.gtx.POCO.Contract.Pickup;
 
 namespace AppCode.Pages.Pickup2.EditLocationSetting
 {
+    /// <summary>
+    /// The GuiContainer is saved in the Session.
+    /// </summary>
     public class GuiContainer
     {
-        public List<GuiRow> GuiRowList { get; set; }
-
-
-        public List<PickupOperator> PickupOperatorList { get; set; }
+        public List<PickupOperator> GuiPickupOperatorList { get; set; }
 
 
         public List<GuiLocation> GuiLocationList { get; set; }
@@ -21,9 +20,9 @@ namespace AppCode.Pages.Pickup2.EditLocationSetting
         public int CurrentCustomerId { get; set; }
 
 
-        public int CurrentLocationId { get; set; }
+        public int CurrentLocationSettingsId { get; set; }
 
 
-        public List<GuiWebsite> ForwarderList { get; set; }
+        public List<GuiWebsite> GuiForwarderList { get; set; }
     }
 }
