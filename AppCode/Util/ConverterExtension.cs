@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+// ReSharper disable UnusedVariable
+// ReSharper disable ConditionIsAlwaysTrueOrFalse
 
 namespace AppCode.Util
 {
@@ -90,6 +92,7 @@ namespace AppCode.Util
                     targetProperty.SetValue(target, s1.GetValue(source, null), null); // .NET Framework 4.0 requires 3 parameters
                     countTransfer++;
                 }
+                // ReSharper disable once HeuristicUnreachableCode
                 else if (clearTarget)
                 {
                     // clear target property.

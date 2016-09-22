@@ -72,25 +72,15 @@
     <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\npm.js" />
-    <Content Include="Pages\Pickup2\EditForwarderPickup.aspx" />
-    <Content Include="Pages\Pickup2\EditForwarderPickup.css" />
-    <Content Include="Pages\Pickup2\EditLocationSetting.aspx" />
-    <Content Include="Pages\Pickup2\EditLocationSetting.css" />
-    <Content Include="Pages\Pickup2\PermanentPickup.css" />
-    <Content Include="Pages\Pickup2\PermanentPickup.aspx" />
-    <Content Include="Pages\Pickup2\Forwarder.aspx" />
-    <Content Include="Pages\Pickup2\Forwarder.css" />
-    <Content Include="Pages\Pickup2\PermanentPickupEdit.aspx" />
-    <Content Include="Pages\Pickup\EditForwarderPickup.css" />
-    <Content Include="Pages\Pickup\Customer04.aspx" />
-    <Content Include="Pages\Pickup\Customer04.css" />
+    <Content Include="Pages\Pickup\App_LocalResources\Forwarder.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Pages\Pickup\EditForwarderPickup.aspx" />
-    <Content Include="Pages\Pickup\Forwarder.css" />
+    <Content Include="Pages\Pickup\EditForwarderPickup.css" />
+    <Content Include="Pages\Pickup\EditLocationSetting.aspx" />
+    <Content Include="Pages\Pickup\EditLocationSetting.css" />
     <Content Include="Pages\Pickup\Forwarder.aspx" />
-    <Content Include="Pages\Pickup\Customer.aspx" />
-    <Content Include="Pages\Pickup\Customer.css" />
-    <Content Include="Pages\Pickup\Customer02.aspx" />
-    <Content Include="Pages\Pickup\Customer02.css" />
+    <Content Include="Pages\Pickup\Forwarder.css" />
     <Content Include="assets\css\bootstrap-theme.css.map" />
     <Content Include="assets\css\bootstrap-theme.min.css.map" />
     <Content Include="assets\css\bootstrap.css.map" />
@@ -99,7 +89,6 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Pages\Pickup\Customer03.aspx" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
@@ -120,48 +109,6 @@
     <Compile Include="Master.Master.designer.cs">
       <DependentUpon>Master.Master</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Pickup2\EditForwarderPickup.aspx.cs">
-      <DependentUpon>EditForwarderPickup.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Pickup2\EditForwarderPickup.aspx.designer.cs">
-      <DependentUpon>EditForwarderPickup.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Pickup2\EditLocationSetting.aspx.cs">
-      <DependentUpon>EditLocationSetting.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Pickup2\EditLocationSetting.aspx.designer.cs">
-      <DependentUpon>EditLocationSetting.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Pickup2\PermanentPickup.aspx.cs">
-      <DependentUpon>PermanentPickup.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Pickup2\Forwarder.aspx.cs">
-      <DependentUpon>Forwarder.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Pickup2\Forwarder.aspx.designer.cs">
-      <DependentUpon>Forwarder.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Pickup2\PermanentPickup.aspx.designer.cs">
-      <DependentUpon>PermanentPickup.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Pickup2\PermanentPickupEdit.aspx.cs">
-      <DependentUpon>PermanentPickupEdit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Pickup2\PermanentPickupEdit.aspx.designer.cs">
-      <DependentUpon>PermanentPickupEdit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Pickup\Customer04.aspx.cs">
-      <DependentUpon>Customer04.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Pickup\Customer04.aspx.designer.cs">
-      <DependentUpon>Customer04.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Pickup\EditForwarderPickup.aspx.cs">
       <DependentUpon>EditForwarderPickup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -169,33 +116,19 @@
     <Compile Include="Pages\Pickup\EditForwarderPickup.aspx.designer.cs">
       <DependentUpon>EditForwarderPickup.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Pickup\EditLocationSetting.aspx.cs">
+      <DependentUpon>EditLocationSetting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Pickup\EditLocationSetting.aspx.designer.cs">
+      <DependentUpon>EditLocationSetting.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Pickup\Forwarder.aspx.cs">
       <DependentUpon>Forwarder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\Pickup\Forwarder.aspx.designer.cs">
       <DependentUpon>Forwarder.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Pickup\Customer.aspx.cs">
-      <DependentUpon>Customer.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Pickup\Customer.aspx.designer.cs">
-      <DependentUpon>Customer.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Pickup\Customer02.aspx.cs">
-      <DependentUpon>Customer02.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Pickup\Customer02.aspx.designer.cs">
-      <DependentUpon>Customer02.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Pickup\Customer03.aspx.cs">
-      <DependentUpon>Customer03.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Pickup\Customer03.aspx.designer.cs">
-      <DependentUpon>Customer03.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -211,14 +144,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Old_App_Code\Util\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\Pickup\App_LocalResources\Customer.aspx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\DevBackend\Backend\nu.gtx.Business.Pickup\nu.gtx.Business.Pickup.csproj">
       <Project>{8435ca97-249e-46a3-8dac-f8d9df472d88}</Project>
@@ -250,43 +176,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pages\Pickup\App_LocalResources\Forwarder.aspx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\Pickup\App_LocalResources\Customer04.aspx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\Pickup\App_LocalResources\EditForwarderPickup.aspx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="App_GlobalResources\Pages\Pickup\PickupStatusForwarder.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>PickupStatusForwarder.designer.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\Pickup2\App_LocalResources\Forwarder.aspx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\Pickup2\App_LocalResources\EditForwarderPickup.aspx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\Pickup2\App_LocalResources\PermanentPickup.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\Pickup2\App_LocalResources\EditPermanentPickup.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

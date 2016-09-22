@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
-using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 namespace AppCode.ExceptionExtentions
 {
     public class ExceptionExtention
     {
-        private StringBuilder Logger { get; set; }
+        private StringBuilder Logger { get; }
 
         private void Log(DbValidationError value)
         {
@@ -68,12 +66,9 @@ namespace AppCode.ExceptionExtentions
         /// <summary>
         /// Log the specified SqlException.
         /// </summary>
-        /// <param name="logger"></param>
         /// <param name="ex"></param>
         private void Log(SqlException ex)
         {
-            var errors = new StringBuilder();
-
             foreach (SqlError error in ex.Errors)
             {
                 Log(error);
@@ -125,8 +120,6 @@ namespace AppCode.ExceptionExtentions
 
         private void LogDispatch(Exception ex)
         {
-            var exceptionType = ex.GetType().ToString();
-
             var t1 = ex as DbEntityValidationException;
             var t2 = ex as SqlException;
             var t3 = ex as DbUpdateException;
@@ -155,7 +148,6 @@ namespace AppCode.ExceptionExtentions
                 LogAny(ex);
             }
 
-            var tx = exceptionType;
         }
 
         public void LogException(Exception ex)

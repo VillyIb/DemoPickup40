@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace AppCode.Wrapper
+﻿namespace AppCode.Wrapper
 {
     public class IntWrapper
     {
@@ -36,7 +31,6 @@ namespace AppCode.Wrapper
         {
             IntWrapper t1 = (IntWrapper)10;
 
-            int t2 = t1;
 
             X(t1);
 

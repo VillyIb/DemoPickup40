@@ -14,9 +14,6 @@
 
 .css-table {
     display: table;
-    /*border: solid;*/
-    padding: 2px;
-    margin: 5px;
 }
 
 .css-tr {
@@ -26,16 +23,14 @@
 .css-th {
     display: table-cell;
     text-align: center;
-    border: solid 1px;
 }
 
-.css-td {
+.css-tr {
     display: table-cell;
-    border: solid 1px;
 }
 
 .XuForwarderPickup {
-    width: 1700px;
+    width: 1900px;
 }
 
 .XuCustomerPickup {
@@ -103,7 +98,7 @@
     width: 30px;
 }
 
-.XuFwMove, .XuCuMove, .XuCuSelect, .XuShSelect {
+.XuFwMove, .XuCuMove, .XuCuSelect,  .XuShSelect {
     width: 44px;
 }
 
@@ -115,16 +110,12 @@
     width: 44px;
 }
 
-.XuFwAddress1  {
-    width: 300px;
+.XuFwAddress1, .XuCuAddress1 {
+    width: 250px;
 }
 
-.XuFwAddress2 {
-    width: 300px;
-}
-
-.XuCuAddress {
-    width: 600px;
+.XuFwAddress2, .XuCuAddress2 {
+    width: 250px;
 }
 
 .XuEnabledMaster, .XuCuPickup {
@@ -132,7 +123,7 @@
 }
 
 .XuFwCarrier, .XuCuCarrier, .XuShCarrier {
-    width: 200px;
+    width: 250px;
 }
 
 .XuFwCounter, .XuCuCounter, .XuShWeight {
@@ -148,56 +139,10 @@
 }
 
 .XuShWaybillnumber {
-    width: 770px;
+    width: 500px;
 }
 
-td.XuShDimension {
-    font-family: monospace;
+.XuShDimension {
+    width: auto;
 }
 
-td.XuFwCounter, td.XuCuCounter, td.XuShWeight {
-    text-align: right;
-}
-
-.XuCuFillerA, .XuCuFillerB {
-    visibility: hidden;
-}
-
-.XuFilterPickupStatus {
-    background-color: aliceblue;
-}
-
-#XuSettings.css-table {
-    width: 900px;
-    padding: 0;
-    margin: 4px 4px 4px 0;
-}
-
-#XuSettingsHeader {
-    width: 99%;
-}
-
-    #XuSettingsHeader .css-td {
-        border: none;
-    }
-
-#XuSettingsBody {
-    width: 99%;
-}
-
-    #XuSettingsBody .css-td {
-        width: 200px;
-    }
-
-
-#XuSettings .header {
-    width: 700px;
-}
-
-#XuExpandAll.css-table {
-    padding: 0;
-    margin: 4px 4px 4px 0;
-}
-
-.XuStSpecificCustomerB {
-}

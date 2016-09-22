@@ -5,31 +5,32 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AppCode.Pages.Pickup;
+
+using AppCode.ExceptionExtentions;
+using AppCode.Pages.Pickup.EditForwarderPickup;
+
+using nu.gtx.POCO.Contract.Pickup;
+using PickupStatusForwarder = nu.gtx.POCO.Contract.Pickup.PickupStatusForwarder;
+
+// ReSharper disable UnusedMember.Local
+
 // ReSharper disable ArgumentsStyleLiteral
 
 namespace DemoPickup40.Pages.Pickup
 {
     public partial class EditForwarderPickup : Page
     {
-        #region P: XpForwarderPickup { get; set; } in Session
-        private const string XpForwarderPickupKey = "ForwarderPickup";
 
-        private GuiForwarderPickup XpForwarderPickup
-        {
-            get { return Session[XpForwarderPickupKey] as GuiForwarderPickup; }
-            set { Session[XpForwarderPickupKey] = value; }
-        }
-        #endregion
-
-
-        #region P: XpPrimaryRowList { get; set; } in Session
         private const string XpGuiContainerKey = "GuiContainer";
 
         private GuiContainer XpGuiContainer
         {
-            get { return Session[XpGuiContainerKey] as GuiContainer; }
-            // ReSharper disable once UnusedMember.Local
+            get
+            {
+                var t1 = Session[XpGuiContainerKey];
+                var t2 = t1 as GuiContainer;
+                return t2;
+            }
             set { Session[XpGuiContainerKey] = value; }
         }
 
@@ -38,11 +39,21 @@ namespace DemoPickup40.Pages.Pickup
         {
             get { return XpGuiContainer.ForwarderPickupList; }
         }
-        #endregion
+
+
+        private const string XpCurrentForwarderPickupIdKey = "CurrentForwarderPickupId";
+
+
+        private int XpCurrentForwarderPickupId
+        {
+            get { return (int)(Session[XpCurrentForwarderPickupIdKey] ?? 0); }
+            set { Session[XpCurrentForwarderPickupIdKey] = value; }
+        }
+
 
         private List<DropDownBoxData> zPickupStatusList;
 
-        public List<DropDownBoxData> PickupStatusList
+        public List<DropDownBoxData> XpPickupStatusList
         {
             get
             {
@@ -90,8 +101,75 @@ namespace DemoPickup40.Pages.Pickup
             }
         }
 
+        public List<DropDownBoxDataPickupOperator> XpPickupOperatorList
+        {
+            get
+            {
+                var result = new List<DropDownBoxDataPickupOperator>
+                {
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "00",
+                        Text = "GLS",
+                        Value = PickupOperator.GLS
+                    },
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "01",
+                        Text = "DHL",
+                        Value =PickupOperator.DHL
+                    },
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "02",
+                        Text = "HS",
+                        Value =PickupOperator.HS
+                    },
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "03",
+                        Text = "UPS",
+                        Value =PickupOperator.UPS
+                    },
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "98",
+                        Text = "Anden Afhenter",
+                        Value =PickupOperator.AA
+                    },
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "99",
+                        Text = "Udefineret",
+                        Value =PickupOperator.Undefined
+                    },
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "96",
+                        Text = "Alternativ1",
+                        Value =PickupOperator.Auto1
+                    },
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "97",
+                        Text = "Alternativ2",
+                        Value =PickupOperator.Auto2
+                    },
 
-        private bool GetQueryParameter(out int value, string key)
+                    new DropDownBoxDataPickupOperator
+                    {
+                        Sorting = "95",
+                        Text = "Manual",
+                        Value =PickupOperator.Manual
+                    },
+
+                };
+
+                return result;
+            }
+        }
+
+        private bool XmGetQueryParameter(out int value, string key)
         {
             var qs = HttpContext.Current.Request.QueryString;
 
@@ -109,29 +187,36 @@ namespace DemoPickup40.Pages.Pickup
             return false;
         }
 
+        private IForwarderPickup XpForwarderPickup { get; set; }
 
-        private void LoadForwarderPickup()
+        private PickupData XpBackendApi { get; set; }
+
+        private bool XmLoadForwarderPickup(int forwarderPickupId)
         {
-            int forwarderPickupId;
-            if (GetQueryParameter(out forwarderPickupId, "ForwarderPickuId"))
+            IForwarderPickup t1;
+            if (XpBackendApi.Read(out t1, forwarderPickupId))
             {
-                XpForwarderPickup = XpPrimaryRowList.FirstOrDefault(t => t.Id == forwarderPickupId);
+                XpForwarderPickup = t1;
+                return true;
             }
+
+            XpForwarderPickup = null;
+            return false;
         }
 
 
-        private void PopulateXuPickupStatus(PickupStatusForwarder forwarderPickupStatus)
+        private void XmPopulateXuPickupStatus(PickupStatusForwarder forwarderPickupStatus)
         {
             var control = XuPickupStatus;
 
-            control.DataSource = PickupStatusList;
+            control.DataSource = XpPickupStatusList;
             control.DataTextField = "Text";
             control.DataValueField = "Value";
             control.DataBind();
 
-            for (var index = 0; index < PickupStatusList.Count; index++)
+            for (var index = 0; index < XpPickupStatusList.Count; index++)
             {
-                if (forwarderPickupStatus.Equals(PickupStatusList[index].Value))
+                if (forwarderPickupStatus.Equals(XpPickupStatusList[index].Value))
                 {
                     control.SelectedIndex = index;
                     break;
@@ -140,12 +225,32 @@ namespace DemoPickup40.Pages.Pickup
         }
 
 
-        private void PopuluateCalculatedValues()
+        private void XmPopulateXuPickupOperator(PickupOperator currentPickupOperator)
+        {
+            var control = XuPickupOperator;
+
+            control.DataSource = XpPickupOperatorList;
+            control.DataTextField = "Text";
+            control.DataValueField = "Value";
+            control.DataBind();
+
+            for (var index = 0; index < XpPickupOperatorList.Count; index++)
+            {
+                if (currentPickupOperator.Equals(XpPickupOperatorList[index].Value))
+                {
+                    control.SelectedIndex = index;
+                    break;
+                }
+            }
+        }
+
+
+        private void XmPopuluateCalculatedValues()
         {
             // (from d in dataRows select d.Date).Min();
-            var timeReadyMax = XpForwarderPickup.CustomerPickupList.Count > 0 
-                ?  XpForwarderPickup.CustomerPickupList.Max(t => t.TimeReady) 
-                : new TimeSpan(0,0,0);
+            var timeReadyMax = XpForwarderPickup.CustomerPickupList.Count > 0
+                ? XpForwarderPickup.CustomerPickupList.Max(t => t.TimeReady)
+                : new TimeSpan(0, 0, 0);
             XuTimeReadyCalculated.Text = timeReadyMax.ToString(@"hh\:mm");
 
             var timeCloseMin = XpForwarderPickup.CustomerPickupList.Count > 0
@@ -155,7 +260,7 @@ namespace DemoPickup40.Pages.Pickup
         }
 
 
-        private void Populate()
+        private void XmPopulate()
         {
             if (XpForwarderPickup != null)
             {
@@ -166,7 +271,8 @@ namespace DemoPickup40.Pages.Pickup
                 XuNote.Text = XpForwarderPickup.Note;
                 XuPhone.Text = XpForwarderPickup.Address.Phone;
                 XuPickupDate.Text = XpForwarderPickup.PickupDate.ToString("yyyy-MM-dd");
-                PopulateXuPickupStatus(XpForwarderPickup.PickupStatusForwarder);
+                XmPopulateXuPickupStatus(XpForwarderPickup.PickupStatus);
+                XmPopulateXuPickupOperator(XpForwarderPickup.PickupOperator);
                 XuTimeClose.Text = string.Format(@"{0:hh\:mm}", XpForwarderPickup.TimeClose);
                 XuTimeReady.Text = string.Format(@"{0:hh\:mm}", XpForwarderPickup.TimeReady);
                 XuState.Text = XpForwarderPickup.Address.State;
@@ -174,25 +280,37 @@ namespace DemoPickup40.Pages.Pickup
                 XuStreet2.Text = XpForwarderPickup.Address.Street2;
                 XuZip.Text = XpForwarderPickup.Address.Zip;
 
-                PopuluateCalculatedValues();
+                XmPopuluateCalculatedValues();
             }
         }
 
 
-        private void ShowError(string key, List<string> argList)
+        private void XmShowError(string key, List<string> argList)
         {
             var format = (GetLocalResourceObject(key) as string) ?? key + " {0}";
-            XuError.Text = string.Format(format, argList);
+            XuError.Text = string.Format(format, argList.ToArray());
         }
 
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            XpBackendApi = new PickupData();
+
             if (!(IsPostBack))
             {
-                LoadForwarderPickup();
-                Populate();
+                int forwarderPickupId;
+                if (XmGetQueryParameter(out forwarderPickupId, "ForwarderPickuId"))
+                {
+                    XpCurrentForwarderPickupId = forwarderPickupId;
+                    XmLoadForwarderPickup(forwarderPickupId);
+                }
+
+                XmPopulate();
+            }
+            else
+            {
+                XmLoadForwarderPickup(XpCurrentForwarderPickupId);
             }
 
             Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
@@ -241,16 +359,54 @@ namespace DemoPickup40.Pages.Pickup
         }
 
 
-        protected void XuSubmit_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Reads fields from the GUI
+        /// A Return value of true indicate an error.
+        /// </summary>
+        /// <returns></returns>
+        // ReSharper disable once InconsistentNaming
+        private bool XmReadFieldsFromGUI()
         {
             Hide(XuError);
 
             XpForwarderPickup.Address.Attention = XuAttention.Text;
-            XpForwarderPickup.Address.CountryCode = XuCountryCode.Text;
-            XpForwarderPickup.Address.CountryCode = XuEmail.Text;
+            XpForwarderPickup.Address.Email = XuEmail.Text;
             XpForwarderPickup.Address.Name = XuName.Text;
-            XpForwarderPickup.Note = XuNote.Text;
             XpForwarderPickup.Address.Phone = XuPhone.Text;
+            XpForwarderPickup.Address.Street1 = XuStreet1.Text;
+            XpForwarderPickup.Address.Street2 = XuStreet2.Text;
+            XpForwarderPickup.Address.Zip = XuZip.Text;
+
+            XpForwarderPickup.Note = XuNote.Text;
+
+            {
+                PickupOperator t1;
+                XpForwarderPickup.PickupOperator = Enum.TryParse(XuPickupOperator.SelectedValue, out t1) ? t1 : PickupOperator.Undefined;
+            }
+            {
+                PickupStatusForwarder t1;
+                XpForwarderPickup.PickupStatus = Enum.TryParse(XuPickupStatus.Text, out t1) ? t1 : PickupStatusForwarder.CustWait;
+            }
+
+            // Possible validation errors.
+            {
+                if (XuCountryCode.Text.Trim().Length > 2)
+                {
+                    XmShowError("Error_Country", new List<string> { "Max length 2" });
+                    Unhide(XuError);
+                    return true;
+                }
+                XpForwarderPickup.Address.CountryCode = XuCountryCode.Text.Trim();
+            }
+            {
+                if (XuState.Text.Trim().Length > 2)
+                {
+                    XmShowError("Error_State", new List<string> { "Max length 2" });
+                    Unhide(XuError);
+                    return true;
+                }
+                XpForwarderPickup.Address.State = XuState.Text.Trim();
+            }
             {
                 DateTime t1;
                 if (TryParse(XuPickupDate, out t1))
@@ -259,14 +415,10 @@ namespace DemoPickup40.Pages.Pickup
                 }
                 else
                 {
-                    ShowError("Error_PickpDate", new List<string> { "" });
+                    XmShowError("Error_PickpDate", new List<string> { "" });
                     Unhide(XuError);
-                    return;
+                    return true;
                 }
-            }
-            {
-                PickupStatusForwarder t1;
-                XpForwarderPickup.PickupStatusForwarder = Enum.TryParse(XuPickupStatus.Text, out t1) ? t1 : PickupStatusForwarder.CustWait;
             }
             {
                 TimeSpan t1;
@@ -276,9 +428,9 @@ namespace DemoPickup40.Pages.Pickup
                 }
                 else
                 {
-                    ShowError("Error_TimeReady", new List<string> { "" });
+                    XmShowError("Error_TimeReady", new List<string> { "" });
                     Unhide(XuError);
-                    return;
+                    return true;
                 }
             }
             {
@@ -289,19 +441,35 @@ namespace DemoPickup40.Pages.Pickup
                 }
                 else
                 {
-                    ShowError("Error_TimeClose", new List<string> { "" });
+                    XmShowError("Error_TimeClose", new List<string> { "" });
                     Unhide(XuError);
-                    return;
+                    return true;
                 }
             }
-            XpForwarderPickup.Address.State = XuState.Text;
-            XpForwarderPickup.Address.Street1 = XuStreet1.Text;
-            XpForwarderPickup.Address.Street2 = XuStreet2.Text;
-            XpForwarderPickup.Address.Zip = XuZip.Text;
 
-            var url = string.Format("Forwarder.aspx?ForwarderPickuId={0}", XpForwarderPickup.Id);
-            Response.Redirect(url, endResponse: false);
+            return false; // no error
+        }
 
+        protected void XuSubmit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (XmReadFieldsFromGUI())
+                {
+                    return;
+                }
+
+                XpBackendApi.UpdateDatabase();
+
+                var url = string.Format("Forwarder.aspx?ForwarderPickuId={0}", XpForwarderPickup.Id);
+                Response.Redirect(url, endResponse: false);
+            }
+            catch (Exception ex)
+            {
+                var msg = ExceptionExtention.Analyze(ex);
+                XmShowError("Exception", new List<string> { msg });
+                Unhide(XuError);
+            }
         }
 
         protected void XuTimeReadyCalculated_Click(object sender, EventArgs e)
@@ -309,9 +477,10 @@ namespace DemoPickup40.Pages.Pickup
             TimeSpan t1;
             if (TryParse(XuTimeReadyCalculated.Text, out t1))
             {
-                XpForwarderPickup.TimeReady = t1;
+                XuTimeReady.Text = string.Format(@"{0:hh\:mm}", t1);
             }
-            Populate();
+            XmReadFieldsFromGUI();
+            XmPopulate();
         }
 
         protected void XuTimeCloseCalculated_Click(object sender, EventArgs e)
@@ -319,9 +488,10 @@ namespace DemoPickup40.Pages.Pickup
             TimeSpan t1;
             if (TryParse(XuTimeCloseCalculated.Text, out t1))
             {
-                XpForwarderPickup.TimeClose = t1;
+                XuTimeClose.Text = string.Format(@"{0:hh\:mm}", t1);
             }
-            Populate();
+            XmReadFieldsFromGUI();
+            XmPopulate();
         }
     }
 }

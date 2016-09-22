@@ -1,6 +1,6 @@
 ﻿using nu.gtx.POCO.Contract.Pickup;
 
-namespace AppCode.Pages.Pickup
+namespace AppCode.Pages.zPickup
 {
     public static class PickupUtil
     {
@@ -159,10 +159,6 @@ namespace AppCode.Pages.Pickup
 
                 case PickupStatusForwarder.ForwSched:
                     result += "glyphicon-none"; // invisible
-                    break;
-
-                case PickupStatusForwarder.PermColl:
-                    result += "glyphicon-remove red";
                     break;
             }
 

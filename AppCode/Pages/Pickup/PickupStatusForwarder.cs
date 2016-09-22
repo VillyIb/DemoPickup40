@@ -1,6 +1,6 @@
 ﻿namespace AppCode.Pages.Pickup
 {
-public enum PickupStatusForwarder
+    public enum PickupStatusForwarder
     {
         // NB max 20 character names due to database coloumn size.
 

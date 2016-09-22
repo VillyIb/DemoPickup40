@@ -1,6 +1,6 @@
 ﻿namespace AppCode.Pages.Pickup
 {
-public enum PickupStatusCustomer
+    public enum PickupStatusCustomer
     {
         // NB max 20 character names due to database coloumn size.
 

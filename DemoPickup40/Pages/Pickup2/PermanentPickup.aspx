@@ -4,7 +4,7 @@
     MasterPageFile="~/Master.Master"
     AutoEventWireup="True"
     CodeBehind="PermanentPickup.aspx.cs"
-    Inherits="DemoPickup40.Pages.Pickup2.PermanentPickup" %>
+    Inherits="DemoPickup40.Pages.Pickup.PermanentPickup" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

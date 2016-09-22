@@ -179,7 +179,7 @@
     <value>Weight</value>
   </data>
   <data name="XuCuPickupItem.Format" xml:space="preserve">
-    <value>{0:MMM-dd}, {1:hh\.mm} - {2:hh\.mm}</value>
+    <value>{0:yyyy-MM-dd} from {1:hh\.mm} until {2:hh\.mm}</value>
     <comment>NOTE Special .NET4.0 Syntax see:https://msdn.microsoft.com/en-us/library/ee372287(v=vs.100).aspx</comment>
   </data>
   <data name="XuShCarrierHeader.Text" xml:space="preserve">
@@ -221,6 +221,9 @@
   <data name="XuFwMove-Icon.Title" xml:space="preserve">
     <value>Move selected Customer Pickups</value>
   </data>
+  <data name="XuExpandAllIcon.Text" xml:space="preserve">
+    <value>Expand/Collaps all Customer Pickups</value>
+  </data>
   <data name="XuCuAddressHeader.Text" xml:space="preserve">
     <value>Address</value>
   </data>
@@ -243,7 +246,7 @@
     <value>Expand/Collapse Shipments</value>
   </data>
   <data name="XuEnabledMasterItem.Format" xml:space="preserve">
-    <value>{0:MMM-dd},  {1:hh\.mm} - {2:hh\.mm}</value>
+    <value>{0:yyyy-MM-dd} from {1:hh\.mm} until {2:hh\.mm}</value>
     <comment>NOTE Special .NET4.0 Syntax see:https://msdn.microsoft.com/en-us/library/ee372287(v=vs.100).aspx</comment>
   </data>
   <data name="XuShDimensionHeader.Text" xml:space="preserve">
@@ -258,28 +261,7 @@
   <data name="XuShWeightHeader.Text" xml:space="preserve">
     <value>Weight</value>
   </data>
-  <data name="XuEnabledMasterOperatorHeader.Text" xml:space="preserve">
-    <value>Pickup Operator</value>
-  </data>
-  <data name="XuExpandAllIcon.Text" xml:space="preserve">
-    <value>Expand/Collapse all Customer Pickup rows</value>
-  </data>
   <data name="XuSettingsIcon.Text" xml:space="preserve">
     <value>Expand/Collapse Settings</value>
-  </data>
-  <data name="XuFwAddress2Header.Text" xml:space="preserve">
-    <value>Company Name(s)</value>
-  </data>
-  <data name="XuFwAddress1Header.Text" xml:space="preserve">
-    <value>Zip, Street, City</value>
-  </data>
-  <data name="XuStatus-Icon_StatusCode-PermColl.ToolTip" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="XuStatus-Text_StatusCode-PermColl.Text" xml:space="preserve">
-    <value>Permanent Collection</value>
-  </data>
-  <data name="XuStatus-Text_StatusCode-PermColl.ToolTip" xml:space="preserve">
-    <value>Cancel</value>
   </data>
 </root>
