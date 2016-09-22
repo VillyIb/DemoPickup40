@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="css-td col2">
                                     <asp:CheckBox runat="server" ID="XuCustomerFeedback" />
-                                </div>
+                                    &nbsp;</div>
                             </div>
 
                             <%--TODO Bør muligvis flyttes til Permanent Collection--%>
