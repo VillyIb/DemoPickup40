@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+
+
 using nu.gtx.Common1.Utils;
+using AppCode.Services.Automation.V3.PickupLoadShipments;
 
 namespace DemoPickup40.Services.Automation.V3
 {
@@ -26,7 +29,7 @@ namespace DemoPickup40.Services.Automation.V3
         }
 
 
-        [WebMethod(Description ="Load Shipments for Pickup processing")]
+        [WebMethod(Description = "Load Shipments for Pickup processing")]
         //[TraceExtension]
         public String Execute()
         {
@@ -35,9 +38,7 @@ namespace DemoPickup40.Services.Automation.V3
 
             try
             {
-
-
-                return "";
+                return new Controller().Execute();
             }
 
             catch (Exception ex)
@@ -51,5 +52,32 @@ namespace DemoPickup40.Services.Automation.V3
                 //Logger.DebugFormat("-Exit, duration: {0} ms ", stopwatch.Stop());
             }
         }
+
+
+        [WebMethod(Description = "Load Shipments for Pickup processing")]
+        //[TraceExtension]
+        public String ExecuteWindow(DateTime dateShipmentBeginInclusive, DateTime dateShipmentEndInclusive)
+        {
+            //Logger.Debug();
+            var stopwatch = EasyStopwatch.StartMs();
+
+            try
+            {
+                return new Controller().Execute(dateShipmentBeginInclusive, dateShipmentEndInclusive);
+            }
+
+            catch (Exception ex)
+            {
+                //ExceptionLogging.Log(Logger, ex);
+                return ex.Message;
+            }
+
+            finally
+            {
+                //Logger.DebugFormat("-Exit, duration: {0} ms ", stopwatch.Stop());
+            }
+        }
+
+
     }
 }
