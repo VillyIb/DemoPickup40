@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 using AppCode.Util;
-
+using nu.gtx.Business.Pickup.Shared;
 using nu.gtx.Common1.Utils;
 using nu.gtx.POCO.Contract.Pickup;
 
@@ -88,7 +88,7 @@ namespace AppCode.Pages.Pickup.EditForwarderPickup
         }
 
 
-        private void LoadCarrierNameList(IForwarderPickupSortable forwarderPickup)
+        private void LoadCarrierNameList(ForwarderPickupSortable forwarderPickup)
         {
             var t3 = forwarderPickup.CustomerPickupList.SelectMany(t1 => t1.ShipmentList.Select(t2 => t2.CarrierName));
 
@@ -99,7 +99,7 @@ namespace AppCode.Pages.Pickup.EditForwarderPickup
         }
 
 
-        public GuiForwarderPickup(IForwarderPickupSortable forwarderPickup)
+        public GuiForwarderPickup(ForwarderPickupSortable forwarderPickup)
         {
             forwarderPickup.Transfer(this);
             TimeClose = forwarderPickup.TimeClose;

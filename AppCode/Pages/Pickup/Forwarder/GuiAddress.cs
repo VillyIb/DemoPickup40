@@ -1,5 +1,5 @@
 ﻿using AppCode.Util;
-using nu.gtx.POCO.Contract.Pickup;
+using nu.gtx.CodeFirst.Model.Pickup;
 
 namespace AppCode.Pages.Pickup.Forwarder
 {
@@ -53,7 +53,7 @@ namespace AppCode.Pages.Pickup.Forwarder
             );
 
 
-        public GuiAddress(IAddressBase source)
+        public GuiAddress(Address source)
         {
             source.Transfer(this);
         }

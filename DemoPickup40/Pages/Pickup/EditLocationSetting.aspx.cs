@@ -6,11 +6,11 @@ using System.Web.UI.WebControls;
 
 using AppCode.Pages.Pickup.EditLocationSettings;
 
-using nu.gtx.DatabaseAccess.DbMain;
 using nu.gtx.CodeFirst.DataAccess.Context;
-using nu.gtx.DatabaseAccess.DbShared;
 using nu.gtx.Common1.Extensions;
-using nu.gtx.POCO.Contract.Pickup;
+using nu.gtx.DbMain.Standard.PM;
+using nu.gtx.DbShared.Standard.PM;
+using nu.gtx.POCO.Contract.Pickup.Constants;
 
 namespace DemoPickup40.Pages.Pickup
 {
@@ -33,7 +33,7 @@ namespace DemoPickup40.Pages.Pickup
                     {
                         GuiCustomerList = new List<GuiCustomer>(),
                         GuiLocationList = new List<GuiLocation>(),
-                        GuiPickupOperatorList = new List<nu.gtx.POCO.Contract.Pickup.PickupOperator>(),
+                        GuiPickupOperatorList = new List<PickupOperator>(),
                         GuiForwarderList = new List<GuiWebsite>(),                       
                     };
                     Session[ZGuiContainerKey] = result;
@@ -200,6 +200,7 @@ namespace DemoPickup40.Pages.Pickup
         protected void XuLocationList_SelectedIndexChanged(object sender, EventArgs e)
         {
             var gw = sender as GridView;
+            if(gw==null) throw new ArgumentNullException("sender");
 
             var index = gw.SelectedIndex;
 

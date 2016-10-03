@@ -2,53 +2,51 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using nu.gtx.Business.Pickup.Contract_V2B.Shared;
-using nu.gtx.Business.Pickup.Contract_V2B.SiteSpecific;
-using nu.gtx.Business.Pickup.Contract_V2B.SiteSpecificShipment;
+
 using nu.gtx.Business.Pickup.EFMain;
 using nu.gtx.Business.Pickup.EFShared;
+using nu.gtx.Business.Pickup.Main;
 using nu.gtx.Business.Pickup.Main.Import;
 using nu.gtx.Business.Pickup.Shared;
-using nu.gtx.Business.Pickup.SiteSpecific;
 using nu.gtx.CodeFirst.DataAccess.Context;
 using nu.gtx.Common1.Utils;
-using nu.gtx.DatabaseAccess.DbMain;
-using nu.gtx.DatabaseAccess.DbShared;
+using nu.gtx.DbMain.Standard.PM;
+using nu.gtx.DbShared.Standard.PM;
 
 namespace AppCode.Services.Automation.V3.PickupLoadShipments
 {
     public class Controller
     {
+        private ContextSharedPickup ContextSharedPickup { get; set; }
+
         private RepositoryCustomer RepositoryCustomer { get; set; }
 
-        private IRepositoryCustomerPickup RepositoryCustomerPickup { get; set; }
+        private RepositoryCustomerPickup RepositoryCustomerPickup { get; set; }
 
-        private IRepositoryDispositionSettings RepositoryDispositionSettings { get; set; }
+        private RepositoryDispositionSettingsV2 RepositoryDispositionSettings { get; set; }
 
-        private IRepositoryForwarderPickup RepositoryForwarderPickup { get; set; }
+        private RepositoryForwarderPickup RepositoryForwarderPickup { get; set; }
 
-        private IRepositoryLegacyPickup RepositoryLegacyPickup { get; set; }
+        private RepositoryLegacyPickup RepositoryLegacyPickup { get; set; }
 
-        private IRepositoryParcelDetail RepositoryParcelDetail { get; set; }
+        private RepositoryParcelDetail RepositoryParcelDetail { get; set; }
 
-        private IRepositoryShipment RepositoryShipment { get; set; }
+        private RepositoryShipment RepositoryShipment { get; set; }
 
-        private IRepositorySourceParcelDetail RepositorySourceParcelDetail { get; set; }
+        private RepositorySourceParcelDetail RepositorySourceParcelDetail { get; set; }
 
-        private IRepositorySourceShipment RepositorySourceShipment { get; set; }
+        private RepositorySourceShipment RepositorySourceShipment { get; set; }
 
-        private IRepositoryTransportProductMetadata RepositoryTransportProductMetadata { get; set; }
+        private RepositoryTransportProductMetadata RepositoryTransportProductMetadata { get; set; }
 
 
-        private IControllerCustomerPickup ControllerCustomerPickup { get; set; }
+        private ControllerCustomerPickup ControllerCustomerPickup { get; set; }
 
-        private IControllerDispositionSetting ControllerDispositionSetting { get; set; }
+        private ControllerDispositionSetting ControllerDispositionSetting { get; set; }
 
-        private IControllerShipment ControllerShipment { get; set; }
+        private ControllerShipment ControllerShipment { get; set; }
 
-        private IControllerForwarderPickup ControllerForwarderPickup { get; set; }
+        private ControllerForwarderPickup ControllerForwarderPickup { get; set; }
 
 
 
@@ -61,24 +59,27 @@ namespace AppCode.Services.Automation.V3.PickupLoadShipments
             var dbSharedStandard = new DbSharedStandard();
 
             var connectionStringMain = ConfigurationManager.ConnectionStrings["EF_CodeFirst_Test"]; // TODO Change to live
-
             var connectionBuilderMain = new SqlConnectionStringBuilder(connectionStringMain.ConnectionString);
             var contextMainPickup = new ContextMainPickup(connectionBuilderMain);
-            
+
+            var connectionStringShared = ConfigurationManager.ConnectionStrings["EF_CodeFirst_Test"]; // TODO Change to live
+            var connectionBuilderShared = new SqlConnectionStringBuilder(connectionStringShared.ConnectionString);
+            var contextSharedPickup = new ContextSharedPickup(connectionBuilderShared);
+
 
             RepositoryCustomer = new RepositoryCustomer(dbMainStandard);
 
-            RepositoryCustomerPickup = new RepositoryCustomerPickup(dbSharedStandard);
+            RepositoryCustomerPickup = new RepositoryCustomerPickup(contextSharedPickup);
 
             RepositoryDispositionSettings = new RepositoryDispositionSettingsV2(contextMainPickup);
 
-            RepositoryForwarderPickup = new RepositoryForwarderPickup(dbSharedStandard);
+            RepositoryForwarderPickup = new RepositoryForwarderPickup(contextSharedPickup);
 
             RepositoryLegacyPickup = new RepositoryLegacyPickup(dbMainStandard);
 
-            RepositoryParcelDetail = new RepositoryParcelDetail(dbSharedStandard);
+            RepositoryParcelDetail = new RepositoryParcelDetail(contextSharedPickup);
 
-            RepositoryShipment = new RepositoryShipment(dbSharedStandard);
+            RepositoryShipment = new RepositoryShipment(contextSharedPickup);
 
             RepositorySourceParcelDetail = new RepositorySourceParcelDetail(dbMainStandard);
 
@@ -99,7 +100,8 @@ namespace AppCode.Services.Automation.V3.PickupLoadShipments
                 );
 
             ControllerCustomerPickup = new ControllerCustomerPickup(
-                RepositoryCustomerPickup
+                ContextSharedPickup
+                , RepositoryCustomerPickup
                 , RepositoryForwarderPickup
                 , RepositoryShipment
                 , ControllerForwarderPickup
@@ -159,7 +161,7 @@ namespace AppCode.Services.Automation.V3.PickupLoadShipments
             {
                 Setup();
 
-                List<RepositorySourceShipment.ShipmentHeader> list;
+                List<SourceShipmentHeader> list;
                 if (RepositorySourceShipment.Read(out list, dateShipmentBegin, dateShipmentEnd))
                 {
                     foreach (var shipment in list)

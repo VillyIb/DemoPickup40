@@ -1,4 +1,4 @@
-﻿using nu.gtx.POCO.Contract.Pickup;
+﻿using nu.gtx.POCO.Contract.Pickup.Constants;
 
 namespace AppCode.Pages.Pickup.EditForwarderPickup
 {

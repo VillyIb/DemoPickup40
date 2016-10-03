@@ -1,6 +1,6 @@
 ﻿using System;
 
-using nu.gtx.DatabaseAccess.DbMain;
+using nu.gtx.DbMain.Standard.PM;
 
 namespace AppCode.Pages.Pickup.EditForwarderPickup
 {

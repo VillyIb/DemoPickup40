@@ -8,9 +8,9 @@ using System.Web.UI.WebControls;
 
 using AppCode.ExceptionExtentions;
 using AppCode.Pages.Pickup.EditForwarderPickup;
-
+using nu.gtx.CodeFirst.Model.Pickup;
 using nu.gtx.POCO.Contract.Pickup;
-using PickupStatusForwarder = nu.gtx.POCO.Contract.Pickup.PickupStatusForwarder;
+using nu.gtx.POCO.Contract.Pickup.Constants;
 
 // ReSharper disable UnusedMember.Local
 
@@ -187,13 +187,13 @@ namespace DemoPickup40.Pages.Pickup
             return false;
         }
 
-        private IForwarderPickup XpForwarderPickup { get; set; }
+        private ForwarderPickup XpForwarderPickup { get; set; }
 
         private PickupData XpBackendApi { get; set; }
 
         private bool XmLoadForwarderPickup(int forwarderPickupId)
         {
-            IForwarderPickup t1;
+            ForwarderPickup t1;
             if (XpBackendApi.Read(out t1, forwarderPickupId))
             {
                 XpForwarderPickup = t1;
