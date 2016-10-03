@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+
 using AppCode.Util;
+
 using nu.gtx.Business.Pickup.Shared;
 using nu.gtx.Common1.Utils;
 using nu.gtx.POCO.Contract.Pickup;
 
-namespace AppCode.Pages.Pickup.Forwarder
+namespace AppCode.Pages.Pickup.PageForwarder
 {
     public class GuiForwarderPickup
     {

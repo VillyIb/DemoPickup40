@@ -2,7 +2,7 @@
 
 using nu.gtx.DbMain.Standard.PM;
 
-namespace AppCode.Pages.Pickup.Forwarder
+namespace AppCode.Pages.Pickup.PageForwarder
 {
     public class GuiCustomer
     {
@@ -24,9 +24,7 @@ namespace AppCode.Pages.Pickup.Forwarder
         }
 
 
-        //public override string ToString()
-        //{
-        //    return Name;
-        //}
     }
+
+
 }

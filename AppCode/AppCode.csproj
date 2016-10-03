@@ -55,11 +55,11 @@
   <ItemGroup>
     <Compile Include="ExceptionExtentions\ExceptionExtention.cs" />
     <Compile Include="Pages\Pickup\EditForwarderPickup\DropDownBoxDataPickupOperator.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiAddress.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiContainer.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiCustomer.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiCustomerPickup.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiForwarderPickup.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiAddress.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiContainer.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiCustomer.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiCustomerPickup.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiForwarderPickup.cs" />
     <Compile Include="Pages\Pickup\EditForwarderPickup\PickupData.cs" />
     <Compile Include="Pages\Pickup\EditForwarderPickup\GuiAddress.cs" />
     <Compile Include="Pages\Pickup\EditForwarderPickup\GuiContainer.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Pages\Pickup\EditLocationSettings\GuiCustomer.cs" />
     <Compile Include="Pages\Pickup\EditLocationSettings\GuiLocation.cs" />
     <Compile Include="Pages\Pickup\EditLocationSettings\GuiWebsite.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiShipment.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiShipment.cs" />
     <Compile Include="Pages\Pickup\PickupUtil.cs" />
     <Compile Include="Pages\Pickup\EditForwarderPickup\DropDownBoxData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

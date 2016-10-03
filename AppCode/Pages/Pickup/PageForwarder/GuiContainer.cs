@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace AppCode.Pages.Pickup.Forwarder
+namespace AppCode.Pages.Pickup.PageForwarder
 {
     /// <summary>
     /// Data Container for WebForm.
@@ -13,15 +13,15 @@ namespace AppCode.Pages.Pickup.Forwarder
 
         public List<GuiCustomer> CustomerList { get; set; }
 
+
         /// <summary>
-        /// Icon, Expand/Collaps all 1 level down.
+        /// Returns CSS type defining icon for Expand/Collaps depending 
         /// </summary>
         public string CssGlyphiconExpandCustomerHeader
         {
             get
             {
-                var anyExpanded =
-                    ForwarderPickupList.Any(t => t.IsExpandedCustomer);
+                var anyExpanded = ForwarderPickupList.Any(t => t.IsExpandedCustomer);
 
                 return anyExpanded
                     ? "glyphicon glyphicon-triangle-top big"
@@ -29,14 +29,23 @@ namespace AppCode.Pages.Pickup.Forwarder
             }
         }
 
+
         // -- Settings
 
         public bool IsSettingsVisible { get; set; }
 
+
+        /// <summary>
+        /// Returns CSS type defining icon for Expand/Collapse depending on "IsSettingsVisible".
+        /// </summary>
         public string CssGlyphiconExpandSetting => IsSettingsVisible
             ? "glyphicon glyphicon-triangle-top big"
             : "glyphicon glyphicon-triangle-bottom big";
 
+
+        /// <summary>
+        /// Returns true if any child CustomerPickup is expanded (shipments folded out).
+        /// </summary>
         public bool IsAnyCustomerExpanded
         {
             get { return ForwarderPickupList.Any(t1 => t1.CustomerPickupList.Any(t2 => t2.IsExpanded)); }

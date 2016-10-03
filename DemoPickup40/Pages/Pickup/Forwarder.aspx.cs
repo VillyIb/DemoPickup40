@@ -914,19 +914,6 @@ namespace DemoPickup40.Pages.Pickup
                         );
                     }
                 );
-
-                //// Collapse all iterative
-                //foreach (var forwarder in XpPrimaryRowList)
-                //{
-                //    forwarder.IsExpandedCustomer = false;
-                //    foreach (var customer in forwarder.CustomerPickupList)
-                //    {
-                //        customer.IsExpanded = false;
-                //    }
-
-                //    forwarder.CustomerPickupList.ForEach(t => { t.IsExpanded = false; });
-
-                //}
             }
             else
             {
@@ -938,14 +925,7 @@ namespace DemoPickup40.Pages.Pickup
                         t1.IsExpandedCustomer = true;
                     }
                 );
-
-                //foreach (var forwarder in XpPrimaryRowList)
-                //{
-                //    forwarder.IsExpandedCustomer = true;
-                //}
-
             }
-
 
             XmPopulatePage();
         }

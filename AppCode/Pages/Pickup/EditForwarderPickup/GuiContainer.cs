@@ -31,11 +31,17 @@ namespace AppCode.Pages.Pickup.EditForwarderPickup
 
         // -- Settings
 
+        /// <summary>
+        /// Settings Box in top of page flipped from GUI.
+        /// </summary>
         public bool IsSettingsVisible { get; set; }
+
 
         public string CssGlyphiconExpandSetting => IsSettingsVisible
             ? "glyphicon glyphicon-triangle-top big"
             : "glyphicon glyphicon-triangle-bottom big";
+
+
 
         public bool IsAnyCustomerExpanded
         {

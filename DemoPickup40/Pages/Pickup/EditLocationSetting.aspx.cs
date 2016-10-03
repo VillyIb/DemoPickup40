@@ -43,6 +43,10 @@ namespace DemoPickup40.Pages.Pickup
             }
         }
 
+
+        /// <summary>
+        /// Setup Controller with GuiContainer
+        /// </summary>
         private void XmInit()
         {
             var dbMainStandard = new DbMainStandard();
@@ -209,29 +213,29 @@ namespace DemoPickup40.Pages.Pickup
             XmPopulatePage();
         }
 
+
         protected void XuCustomerList_SelectedIndexChanged(object sender, EventArgs e)
         {
             int t1;
             GuiContainer.CurrentCustomerId = int.TryParse(((DropDownList)sender).SelectedValue, out t1) ? t1 : 0;
 
             Controller.LoadLocationList(GuiContainer.CurrentCustomerId);
-            GuiContainer.CurrentLocationSettingsId = GuiContainer.GuiLocationList.Count > 0
-                ? GuiContainer.GuiLocationList[0].Id
-                : -1;
+
             XmPopulatePage();
         }
+
 
         protected void XuLocationList_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
         }
 
-        private void ReadGuiLocation()
+
+        private void XmReadGuiLocation()
         {
             Controller.LoadLocation(GuiContainer.CurrentLocationSettingsId);
             var location = Controller.CurrentLocationSettings;
 
-            //location.ForwarderWebsiteId = 
             location.HasLoadingGear = XuHasLoadingGear.Checked;
             location.IsFeedbackVisible = XuCustomerFeedback.Checked;
             location.LoadingGearDetails = XuLoadingGearDetails.Text.Trim();
@@ -243,7 +247,7 @@ namespace DemoPickup40.Pages.Pickup
 
         protected void XuSaveLocation_Click(object sender, EventArgs e)
         {
-            ReadGuiLocation();
+            XmReadGuiLocation();
             Controller.SaveChages();
             XmPopulatePage();
         }
