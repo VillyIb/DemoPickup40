@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
-
 using AppCode.Util;
-
+using nu.gtx.CodeFirst.Model.Pickup;
 using nu.gtx.POCO.Contract.Pickup;
 
 namespace Pages.Pickup.PageEditForwarderPickup
@@ -62,7 +61,7 @@ namespace Pages.Pickup.PageEditForwarderPickup
         public bool CssDisabledCheckbox => !IsMoveEnabled;
 
 
-        public GuiShipment(IShipment source)
+        public GuiShipment(Shipment source)
         {
             source.Transfer(this);
             Address = new GuiAddress(source.Address);
@@ -82,7 +81,7 @@ namespace Pages.Pickup.PageEditForwarderPickup
                 , Address.City
                 );
 
-            var parcelDetailList = source.ParcelDetailList;
+            var parcelDetailList = source.ParcelDetailsList;
 
             if (parcelDetailList.Count == 0)
             {

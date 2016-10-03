@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using AppCode.Util;
-
+using nu.gtx.CodeFirst.Model.Pickup;
 using nu.gtx.Common1.Utils;
 using nu.gtx.POCO.Contract.Pickup;
 
@@ -82,7 +82,7 @@ namespace Pages.Pickup.PageEditForwarderPickup
         public bool CssDisabledCheckbox => !IsMoveEnabled;
 
 
-        private void LoadCarrierNameList(ICustomerPickup customerPickup)
+        private void LoadCarrierNameList(CustomerPickup customerPickup)
         {
             var t1 = customerPickup.ShipmentList.Select(t => t.CarrierName).Distinct().OrderBy(t => t).ToList();
             var t2 = t1.Count > 0 ? t1.Aggregate((current, next) => current + ", " + next) : "";
@@ -90,7 +90,7 @@ namespace Pages.Pickup.PageEditForwarderPickup
         }
 
 
-        public GuiCustomerPickup(ICustomerPickup customerPickup)
+        public GuiCustomerPickup(CustomerPickup customerPickup)
         {
             customerPickup.Transfer(this);
             TimeClose = customerPickup.TimeClose;
