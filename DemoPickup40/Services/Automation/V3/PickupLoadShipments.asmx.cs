@@ -22,13 +22,6 @@ namespace DemoPickup40.Services.Automation.V3
     {
         //private static readonly ILog Logger = LogManager.GetLogger("nu.gtx.Services.Automation.V3.PickupLoadShipments");
 
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
-
-
         [WebMethod(Description = "Load Shipments for Pickup processing")]
         //[TraceExtension]
         public String Execute()

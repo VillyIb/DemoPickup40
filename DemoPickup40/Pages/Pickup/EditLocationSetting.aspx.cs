@@ -6,11 +6,11 @@ using System.Web.UI.WebControls;
 
 using AppCode.Pages.Pickup.EditLocationSettings;
 
-using nu.gtx.DatabaseAccess.DbMain;
 using nu.gtx.CodeFirst.DataAccess.Context;
-using nu.gtx.DatabaseAccess.DbShared;
 using nu.gtx.Common1.Extensions;
-using nu.gtx.POCO.Contract.Pickup;
+using nu.gtx.DbMain.Standard.PM;
+using nu.gtx.DbShared.Standard.PM;
+using nu.gtx.POCO.Contract.Pickup.Constants;
 
 namespace DemoPickup40.Pages.Pickup
 {
@@ -33,7 +33,7 @@ namespace DemoPickup40.Pages.Pickup
                     {
                         GuiCustomerList = new List<GuiCustomer>(),
                         GuiLocationList = new List<GuiLocation>(),
-                        GuiPickupOperatorList = new List<nu.gtx.POCO.Contract.Pickup.PickupOperator>(),
+                        GuiPickupOperatorList = new List<PickupOperator>(),
                         GuiForwarderList = new List<GuiWebsite>(),                       
                     };
                     Session[ZGuiContainerKey] = result;
@@ -48,7 +48,7 @@ namespace DemoPickup40.Pages.Pickup
             var dbMainStandard = new DbMainStandard();
             var dbSharedStandard = new DbSharedStandard();
 
-            var connectionStringMain = ConfigurationManager.ConnectionStrings["EF_CodeFirst_Test"];
+            var connectionStringMain = ConfigurationManager.ConnectionStrings["ASPNETDBConnectionString"];
             var connectionBuilderMain = new SqlConnectionStringBuilder(connectionStringMain.ConnectionString);
             var contextMainPickup = new ContextMainPickup(connectionBuilderMain);
 

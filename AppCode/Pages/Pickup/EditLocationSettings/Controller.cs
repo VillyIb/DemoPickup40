@@ -6,9 +6,9 @@ using System.Linq;
 
 using nu.gtx.CodeFirst.DataAccess.Context;
 using nu.gtx.CodeFirst.Model.Pickup;
-using nu.gtx.DatabaseAccess.DbMain;
-using nu.gtx.DatabaseAccess.DbShared;
-using nu.gtx.POCO.Contract.Pickup;
+using nu.gtx.DbMain.Standard.PM;
+using nu.gtx.DbShared.Standard.PM;
+using nu.gtx.POCO.Contract.Pickup.Constants;
 
 namespace AppCode.Pages.Pickup.EditLocationSettings
 {
@@ -34,6 +34,20 @@ namespace AppCode.Pages.Pickup.EditLocationSettings
         public void LoadGuiCustomerList()
         {
             var guiCustomerList = new List<GuiCustomer>();
+
+            try
+            {
+                var t4 = DbSharedStandard.Carrier.ToList();
+            }
+            catch (Exception ex)
+            {
+                var t5 = ex.ToString();
+                var t6 = t5;
+            }
+            var t1 = DbMainStandard.aspnet_CompanyDB.ToList();
+
+            var t3 = DbMainStandard.aspnet_CompanyAccount.ToList();
+
 
             var customersWithEnabledAccount =
                 (from item1 in DbMainStandard.aspnet_CompanyDB

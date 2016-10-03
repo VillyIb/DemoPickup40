@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
-using nu.gtx.DatabaseAccess.DbMain;
-//using nu.gtx.Common1.Extensions;
+
+using nu.gtx.CodeFirst.DataAccess.Context;
+using nu.gtx.DbMain.Standard.PM;
+using nu.gtx.DbShared.Standard.PM;
 using nu.gtx.POCO.Contract.Pickup;
 
-namespace AppCode.Pages.Pickup.EditForwarderPickup
+namespace Pages.Pickup.PageEditForwarderPickup
 {
     public class PickupData
     {
-        private nu.gtx.DatabaseAccess.DbShared.DbSharedStandard DbSharedStandard { get; set; }
+        private DbSharedStandard  DbSharedStandard { get; set; }
 
         private DbMainStandard DbMainStandard { get; set; }
+
+        private ContextSharedPickup ContextSharedPickup { get; set; }
+
+        //private ContextMainPickup ContextMainPickup { get; set; }
 
         private nu.gtx.Business.Pickup.EFShared.RepositoryCustomerPickup RepositoryCustomerPickup { get; set; }
 
@@ -34,18 +42,26 @@ namespace AppCode.Pages.Pickup.EditForwarderPickup
         {
             if (DbSharedStandard == null)
             {
-                DbSharedStandard = new nu.gtx.DatabaseAccess.DbShared.DbSharedStandard();
+                DbSharedStandard = new DbSharedStandard();
 
                 DbMainStandard = new DbMainStandard();
 
-                RepositoryShipment = new nu.gtx.Business.Pickup.EFShared.RepositoryShipment(DbSharedStandard);
+                var connectionStringSharedPickup = ConfigurationManager.ConnectionStrings["SharedConnectingString"];
+                var connectionBuilderSharedPickup = new SqlConnectionStringBuilder(connectionStringSharedPickup.ConnectionString);
+                ContextSharedPickup = new ContextSharedPickup(connectionBuilderSharedPickup);
 
-                RepositoryCustomerPickup = new nu.gtx.Business.Pickup.EFShared.RepositoryCustomerPickup(DbSharedStandard);
+                //var connectionStringMainPickup = ConfigurationManager.ConnectionStrings["ASPNETDBConnectionString"];
+                //var connectionBuilderMainPickup = new SqlConnectionStringBuilder(connectionStringMainPickup.ConnectionString);
+                //ContextMainPickup = new ContextMainPickup(connectionBuilderMainPickup);
+
+                RepositoryShipment = new nu.gtx.Business.Pickup.EFShared.RepositoryShipment(ContextSharedPickup);
+
+                RepositoryCustomerPickup = new nu.gtx.Business.Pickup.EFShared.RepositoryCustomerPickup(ContextSharedPickup);
 
                 RepositoryForwarderPickup =
-                    new nu.gtx.Business.Pickup.EFShared.RepositoryForwarderPickup(DbSharedStandard);
+                    new nu.gtx.Business.Pickup.EFShared.RepositoryForwarderPickup(ContextSharedPickup);
 
-                RepositoryParcelDetail = new nu.gtx.Business.Pickup.EFShared.RepositoryParcelDetail(DbSharedStandard);
+                RepositoryParcelDetail = new nu.gtx.Business.Pickup.EFShared.RepositoryParcelDetail(ContextSharedPickup);
 
                 RepositoryCustomer = new nu.gtx.Business.Pickup.EFMain.RepositoryCustomer(DbMainStandard);
 

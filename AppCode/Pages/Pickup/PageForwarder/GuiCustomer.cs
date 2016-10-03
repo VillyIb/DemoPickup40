@@ -1,7 +1,8 @@
 ﻿using System;
-using nu.gtx.DatabaseAccess.DbMain;
 
-namespace AppCode.Pages.Pickup.Forwarder
+using nu.gtx.DbMain.Standard.PM;
+
+namespace Pages.Pickup.PageForwarder
 {
     public class GuiCustomer
     {

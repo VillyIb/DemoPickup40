@@ -1,6 +1,6 @@
 ﻿using nu.gtx.POCO.Contract.Pickup;
 
-namespace AppCode.Pages.Pickup
+namespace Pages.Pickup
 {
     public static class PickupUtil
     {

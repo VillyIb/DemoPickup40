@@ -5,7 +5,7 @@ using AppCode.Util;
 
 using nu.gtx.POCO.Contract.Pickup;
 
-namespace AppCode.Pages.Pickup.EditForwarderPickup
+namespace Pages.Pickup.PageEditForwarderPickup
 {
     public class GuiShipment
     {

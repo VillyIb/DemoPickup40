@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace AppCode.Pages.Pickup.EditForwarderPickup
+namespace Pages.Pickup.PageEditForwarderPickup
 {
     /// <summary>
     /// Data Container for WebForm.

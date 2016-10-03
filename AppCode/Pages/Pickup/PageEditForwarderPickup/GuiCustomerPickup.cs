@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using AppCode.Util;
+
 using nu.gtx.Common1.Utils;
 using nu.gtx.POCO.Contract.Pickup;
 
 
-namespace AppCode.Pages.Pickup.Forwarder
+namespace Pages.Pickup.PageEditForwarderPickup
 {
     public class GuiCustomerPickup
     {
@@ -112,10 +114,10 @@ namespace AppCode.Pages.Pickup.Forwarder
 
 
             PickupStatusCustomer = customerPickup.PickupStatus;
-
+            
             LoadCarrierNameList(customerPickup);
 
-            var timeClose = customerPickup.PickupDate.Add(customerPickup.TimeClose);
+            var timeClose = customerPickup.PickupDate.Add(customerPickup.TimeClose );
 
             Shipmentlist = new List<GuiShipment>();
             foreach (var shipment in customerPickup.ShipmentList)

@@ -1,7 +1,7 @@
 ﻿using AppCode.Util;
 using nu.gtx.POCO.Contract.Pickup;
 
-namespace AppCode.Pages.Pickup.Forwarder
+namespace Pages.Pickup.PageForwarder
 {
     public class GuiAddress
     {

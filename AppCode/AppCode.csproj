@@ -39,6 +39,12 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nu.gtx.DbMain.Standard.PM">
+      <HintPath>..\..\..\DevBackend\Backend\nu.gtx.DbMain.Standard.PM\bin\Debug\nu.gtx.DbMain.Standard.PM.dll</HintPath>
+    </Reference>
+    <Reference Include="nu.gtx.DbShared.Standard.PM">
+      <HintPath>..\..\..\DevBackend\Backend\nu.gtx.DbShared.Standard.PM\bin\Debug\nu.gtx.DbShared.Standard.PM.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -48,28 +54,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExceptionExtentions\ExceptionExtention.cs" />
-    <Compile Include="Pages\Pickup\EditForwarderPickup\DropDownBoxDataPickupOperator.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiAddress.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiContainer.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiCustomer.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiCustomerPickup.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiForwarderPickup.cs" />
-    <Compile Include="Pages\Pickup\EditForwarderPickup\PickupData.cs" />
-    <Compile Include="Pages\Pickup\EditForwarderPickup\GuiAddress.cs" />
-    <Compile Include="Pages\Pickup\EditForwarderPickup\GuiContainer.cs" />
-    <Compile Include="Pages\Pickup\EditForwarderPickup\GuiCustomer.cs" />
-    <Compile Include="Pages\Pickup\EditForwarderPickup\GuiCustomerPickup.cs" />
-    <Compile Include="Pages\Pickup\EditForwarderPickup\GuiForwarderPickup.cs" />
-    <Compile Include="Pages\Pickup\EditForwarderPickup\GuiSettings.cs" />
-    <Compile Include="Pages\Pickup\EditForwarderPickup\GuiShipment.cs" />
+    <Compile Include="Pages\Pickup\PageEditForwarderPickup\DropDownBoxDataPickupOperator.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiAddress.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiContainer.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiCustomer.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiCustomerPickup.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiForwarderPickup.cs" />
+    <Compile Include="Pages\Pickup\PageEditForwarderPickup\PickupData.cs" />
+    <Compile Include="Pages\Pickup\PageEditForwarderPickup\GuiAddress.cs" />
+    <Compile Include="Pages\Pickup\PageEditForwarderPickup\GuiContainer.cs" />
+    <Compile Include="Pages\Pickup\PageEditForwarderPickup\GuiCustomer.cs" />
+    <Compile Include="Pages\Pickup\PageEditForwarderPickup\GuiCustomerPickup.cs" />
+    <Compile Include="Pages\Pickup\PageEditForwarderPickup\GuiForwarderPickup.cs" />
+    <Compile Include="Pages\Pickup\PageEditForwarderPickup\GuiSettings.cs" />
+    <Compile Include="Pages\Pickup\PageEditForwarderPickup\GuiShipment.cs" />
     <Compile Include="Pages\Pickup\EditLocationSettings\Controller.cs" />
     <Compile Include="Pages\Pickup\EditLocationSettings\GuiContainer.cs" />
     <Compile Include="Pages\Pickup\EditLocationSettings\GuiCustomer.cs" />
     <Compile Include="Pages\Pickup\EditLocationSettings\GuiLocation.cs" />
     <Compile Include="Pages\Pickup\EditLocationSettings\GuiWebsite.cs" />
-    <Compile Include="Pages\Pickup\Forwarder\GuiShipment.cs" />
+    <Compile Include="Pages\Pickup\PageForwarder\GuiShipment.cs" />
     <Compile Include="Pages\Pickup\PickupUtil.cs" />
-    <Compile Include="Pages\Pickup\EditForwarderPickup\DropDownBoxData.cs" />
+    <Compile Include="Pages\Pickup\PageEditForwarderPickup\DropDownBoxData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Automation\V3\PickupLoadShipments\Controller.cs" />
     <Compile Include="Util\ConverterExtension.cs" />

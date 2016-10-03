@@ -52,6 +52,12 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nu.gtx.DbMain.Standard.PM">
+      <HintPath>..\..\..\DevBackend\Backend\nu.gtx.DbMain.Standard.PM\bin\Debug\nu.gtx.DbMain.Standard.PM.dll</HintPath>
+    </Reference>
+    <Reference Include="nu.gtx.DbShared.Standard.PM">
+      <HintPath>..\..\..\DevBackend\Backend\nu.gtx.DbShared.Standard.PM\bin\Debug\nu.gtx.DbShared.Standard.PM.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
