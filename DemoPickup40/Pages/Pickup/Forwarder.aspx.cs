@@ -52,8 +52,8 @@ namespace DemoPickup40.Pages.Pickup
             }
         }
 
-        private PickupData zXpBackendApi;
-        private PickupData XpBackendApi => zXpBackendApi ?? (zXpBackendApi = new PickupData());
+        private Controller zXpBackendApi;
+        private Controller XpBackendApi => zXpBackendApi ?? (zXpBackendApi = new Controller());
 
 
         private ForwarderPickup XpSelectedForwarderPickup { get; set; }
@@ -117,9 +117,9 @@ namespace DemoPickup40.Pages.Pickup
         }
 
 
-        private PickupData zPickupdata;
+        private Controller zPickupdata;
 
-        private PickupData PickupApi => zPickupdata ?? (zPickupdata = new PickupData());
+        private Controller PickupApi => zPickupdata ?? (zPickupdata = new Controller());
 
 
         private bool GuiRead(out DateTime value, ITextControl textBox)
