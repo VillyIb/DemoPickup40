@@ -4,7 +4,9 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 
+using nu.gtx.Business.Pickup.Shared;
 using nu.gtx.CodeFirst.DataAccess.Context;
+using nu.gtx.CodeFirst.Model.Pickup;
 using nu.gtx.DbMain.Standard.PM;
 using nu.gtx.DbShared.Standard.PM;
 using nu.gtx.POCO.Contract.Pickup;
@@ -100,10 +102,10 @@ namespace Pages.Pickup.PageEditForwarderPickup
         }
 
 
-        public List<IForwarderPickupSortable> SortAndFilter(List<IForwarderPickupSortable> source)
+        public List<ForwarderPickupSortable> SortAndFilter(List<ForwarderPickupSortable> source)
         {
-            var result = new List<IForwarderPickupSortable>();
-            var empty = new List<IForwarderPickupSortable>(0);
+            var result = new List<ForwarderPickupSortable>();
+            var empty = new List<ForwarderPickupSortable>(0);
 
             // 1 Split into groups
             var custCan1 = source.Where(t => t.PickupStatus == PickupStatusForwarder.CustCan);
@@ -130,7 +132,7 @@ namespace Pages.Pickup.PageEditForwarderPickup
             var permColl3 = IncludeGroup(PickupStatusForwarder.PermColl) ? permColl2 : empty;
 
             // 4 filter on number of shipments - only valid for Permanent Collection 
-            var permColl4 = new List<IForwarderPickupSortable>();
+            var permColl4 = new List<ForwarderPickupSortable>();
             if (permColl3.Count > 0)
             {
                 // ReSharper disable once LoopCanBeConvertedToQuery
@@ -147,7 +149,7 @@ namespace Pages.Pickup.PageEditForwarderPickup
             }
 
             // 5 filter on timeClose an number of minutes to look forward - only valid for CustWait and ForwWait
-            var custWait4 = new List<IForwarderPickupSortable>();
+            var custWait4 = new List<ForwarderPickupSortable>();
             if (custWait3.Count > 0)
             {
                 if (GuiSettings.FilterLookAheadEabled)
@@ -284,7 +286,7 @@ namespace Pages.Pickup.PageEditForwarderPickup
             if (forwarderPickup == null) { return false; }
 
             Init();
-            IForwarderPickupSortable t1;
+            ForwarderPickupSortable t1;
             if (ControllerForwarder.Refresh(out t1, forwarderPickup.Id))
             {
                 guiContainer.ForwarderPickupList.Remove(forwarderPickup);
@@ -310,21 +312,21 @@ namespace Pages.Pickup.PageEditForwarderPickup
         }
 
 
-        public bool Read(out IForwarderPickup forwarderPickup, int forwarderPickupId)
+        public bool Read(out ForwarderPickup forwarderPickup, int forwarderPickupId)
         {
             Init();
             return RepositoryForwarderPickup.Read(out forwarderPickup, forwarderPickupId);
         }
 
 
-        public bool Read(out IShipment shipment, int shipmentId)
+        public bool Read(out Shipment shipment, int shipmentId)
         {
             Init();
             return RepositoryShipment.Read(out shipment, shipmentId);
         }
 
 
-        public bool Read(out ICustomerPickup customerPickup, int customerPickupId)
+        public bool Read(out CustomerPickup customerPickup, int customerPickupId)
         {
             Init();
             return RepositoryCustomerPickup.Read(out customerPickup, customerPickupId);

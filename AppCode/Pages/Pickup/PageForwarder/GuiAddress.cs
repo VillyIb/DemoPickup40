@@ -1,5 +1,6 @@
 ﻿using AppCode.Util;
-using nu.gtx.POCO.Contract.Pickup;
+
+using nu.gtx.CodeFirst.Model.Pickup;
 
 namespace Pages.Pickup.PageForwarder
 {
@@ -39,11 +40,11 @@ namespace Pages.Pickup.PageForwarder
 
         public string Address1 => string.Format(
             "{0}{1}, {2}, {3}"
-            , "DK".Equals(CountryCode) ? "" :  CountryCode + ", "
+            , "DK".Equals(CountryCode) ? "" : CountryCode + ", "
             , Zip
             , Street1
             , City
-                     
+
             );
 
 
@@ -53,7 +54,7 @@ namespace Pages.Pickup.PageForwarder
             );
 
 
-        public GuiAddress(IAddressBase source)
+        public GuiAddress(Address source)
         {
             source.Transfer(this);
         }

@@ -6,10 +6,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-
-using Pages.Pickup.PageForwarder;
-
+using nu.gtx.CodeFirst.Model.Pickup;
 using nu.gtx.Common1.Utils;
+using Pages.Pickup.PageEditForwarderPickup;
+using Pages.Pickup.PageForwarder;
+using GuiContainer = Pages.Pickup.PageForwarder.GuiContainer;
+using GuiCustomerPickup = Pages.Pickup.PageForwarder.GuiCustomerPickup;
+using GuiForwarderPickup = Pages.Pickup.PageForwarder.GuiForwarderPickup;
 // ReSharper disable UseNullPropagation
 // ReSharper disable ArgumentsStyleLiteral
 
@@ -53,12 +56,12 @@ namespace DemoPickup40.Pages.Pickup
         private PickupData XpBackendApi => zXpBackendApi ?? (zXpBackendApi = new PickupData());
 
 
-        private IForwarderPickup XpSelectedForwarderPickup { get; set; }
+        private ForwarderPickup XpSelectedForwarderPickup { get; set; }
 
 
         private bool XmLoadSelectedForwarderPickup(int forwarderPickupId)
         {
-            IForwarderPickup t1;
+            ForwarderPickup t1;
             if (XpBackendApi.Read(out t1, forwarderPickupId))
             {
                 XpSelectedForwarderPickup = t1;
@@ -70,11 +73,11 @@ namespace DemoPickup40.Pages.Pickup
         }
 
 
-        private ICustomerPickup XpSelectedCustomerPickup { get; set; }
+        private CustomerPickup XpSelectedCustomerPickup { get; set; }
 
         private bool XmLoadSelectedCustomerPickup(int customerPickupId)
         {
-            ICustomerPickup t1;
+            CustomerPickup t1;
             if (XpBackendApi.Read(out t1, customerPickupId))
             {
                 XpSelectedCustomerPickup = t1;
