@@ -13,30 +13,37 @@ using nu.gtx.POCO.Contract.Pickup;
 
 namespace AppCode.Pages.Pickup.EditForwarderPickup
 {
-    public class PickupData
+    public class Controller
     {
         private  DbSharedStandard DbSharedStandard { get; set; }
 
+
         private DbMainStandard DbMainStandard { get; set; }
+
 
         private ContextSharedPickup ContextSharedPickup { get; set; }
 
+
         private nu.gtx.Business.Pickup.EFShared.RepositoryCustomerPickup RepositoryCustomerPickup { get; set; }
+
 
         private nu.gtx.Business.Pickup.EFShared.RepositoryForwarderPickup RepositoryForwarderPickup { get; set; }
 
+
         private nu.gtx.Business.Pickup.EFShared.RepositoryShipment RepositoryShipment { get; set; }
+
 
         private nu.gtx.Business.Pickup.EFShared.RepositoryParcelDetail RepositoryParcelDetail { get; set; }
 
 
         private nu.gtx.Business.Pickup.EFMain.RepositoryCustomer RepositoryCustomer { get; set; }
 
+
         private nu.gtx.Business.Pickup.Shared.ControllerForwarderPickup ControllerForwarder { get; set; }
 
-        //private nu.gtx.Business.Pickup.Shared.ControllerCustomerPickup ControllerCustomer { get; set; }
 
         public GuiSettings GuiSettings { get; set; }
+
 
         public void Init()
         {
@@ -78,11 +85,15 @@ namespace AppCode.Pages.Pickup.EditForwarderPickup
 
         public List<PickupStatusForwarder> FilterPickupStatus { get; set; }
 
+
         public int? LookForward { get; set; }
+
 
         public int? NumberOfShipments { get; set; }
 
+
         public DateTime? DatePickupBegin { get; set; }
+
 
         public DateTime? DatePickupEnd { get; set; }
 
@@ -304,6 +315,12 @@ namespace AppCode.Pages.Pickup.EditForwarderPickup
         }
 
 
+        /// <summary>
+        /// used
+        /// </summary>
+        /// <param name="forwarderPickup"></param>
+        /// <param name="forwarderPickupId"></param>
+        /// <returns></returns>
         public bool Read(out ForwarderPickup forwarderPickup, int forwarderPickupId)
         {
             Init();
@@ -325,6 +342,9 @@ namespace AppCode.Pages.Pickup.EditForwarderPickup
         }
 
 
+        /// <summary>
+        /// used
+        /// </summary>
         public void UpdateDatabase()
         {
             RepositoryForwarderPickup?.UpdateDatabase();

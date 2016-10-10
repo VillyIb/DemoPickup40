@@ -60,7 +60,7 @@
     <Compile Include="Pages\Pickup\PageForwarder\GuiCustomer.cs" />
     <Compile Include="Pages\Pickup\PageForwarder\GuiCustomerPickup.cs" />
     <Compile Include="Pages\Pickup\PageForwarder\GuiForwarderPickup.cs" />
-    <Compile Include="Pages\Pickup\EditForwarderPickup\PickupData.cs" />
+    <Compile Include="Pages\Pickup\EditForwarderPickup\Controller.cs" />
     <Compile Include="Pages\Pickup\EditForwarderPickup\GuiAddress.cs" />
     <Compile Include="Pages\Pickup\EditForwarderPickup\GuiContainer.cs" />
     <Compile Include="Pages\Pickup\EditForwarderPickup\GuiCustomer.cs" />

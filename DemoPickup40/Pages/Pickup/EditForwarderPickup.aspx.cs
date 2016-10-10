@@ -21,6 +21,8 @@ namespace DemoPickup40.Pages.Pickup
     public partial class EditForwarderPickup : Page
     {
 
+        #region Properties
+
         private const string XpGuiContainerKey = "GuiContainer";
 
         private GuiContainer XpGuiContainer
@@ -49,6 +51,13 @@ namespace DemoPickup40.Pages.Pickup
             get { return (int)(Session[XpCurrentForwarderPickupIdKey] ?? 0); }
             set { Session[XpCurrentForwarderPickupIdKey] = value; }
         }
+
+
+        private ForwarderPickup XpForwarderPickup { get; set; }
+
+
+        private Controller XpBackendApi { get; set; }
+
 
 
         private List<DropDownBoxData> zPickupStatusList;
@@ -169,6 +178,11 @@ namespace DemoPickup40.Pages.Pickup
             }
         }
 
+        #endregion
+
+
+        #region Xm
+
         private bool XmGetQueryParameter(out int value, string key)
         {
             var qs = HttpContext.Current.Request.QueryString;
@@ -187,21 +201,17 @@ namespace DemoPickup40.Pages.Pickup
             return false;
         }
 
-        private ForwarderPickup XpForwarderPickup { get; set; }
+#endregion
 
-        private PickupData XpBackendApi { get; set; }
-
-        private bool XmLoadForwarderPickup(int forwarderPickupId)
+        private void XmLoadForwarderPickup(int forwarderPickupId)
         {
             ForwarderPickup t1;
             if (XpBackendApi.Read(out t1, forwarderPickupId))
             {
                 XpForwarderPickup = t1;
-                return true;
             }
 
             XpForwarderPickup = null;
-            return false;
         }
 
 
@@ -288,14 +298,14 @@ namespace DemoPickup40.Pages.Pickup
         private void XmShowError(string key, List<string> argList)
         {
             var format = (GetLocalResourceObject(key) as string) ?? key + " {0}";
-            XuError.Text = string.Format(format, argList.ToArray());
+            // ReSharper disable once RedundantCast
+            if (argList != null) XuError.Text = string.Format(format, (string[])argList.ToArray());
         }
-
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            XpBackendApi = new PickupData();
+            XpBackendApi = new Controller();
 
             if (!(IsPostBack))
             {
